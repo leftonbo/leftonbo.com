@@ -1,0 +1,31 @@
+# デフォルトの改行設定を Auto に設定
+* text=auto
+
+# 各種テキストファイルの改行コードを LF に統一
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.cursorignore text eol=lf
+.editorconfig text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+
+# バイナリデータを Git LFS で管理
+*.png binary filter=lfs diff=lfs merge=lfs
+*.jpg binary filter=lfs diff=lfs merge=lfs
+*.jpeg binary filter=lfs diff=lfs merge=lfs
+*.gif binary filter=lfs diff=lfs merge=lfs
+*.webp binary filter=lfs diff=lfs merge=lfs
+*.wav binary filter=lfs diff=lfs merge=lfs
+*.mp3 binary filter=lfs diff=lfs merge=lfs
+*.ogg binary filter=lfs diff=lfs merge=lfs
+*.mp4 binary filter=lfs diff=lfs merge=lfs
+*.avi binary filter=lfs diff=lfs merge=lfs
+*.mov binary filter=lfs diff=lfs merge=lfs
