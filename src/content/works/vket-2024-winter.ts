@@ -5,13 +5,21 @@ export default {
   id: 'vket-2024-winter',
   slug: 'vket-2024-winter',
   title: 'Virtual Market 2024 Winter 出展',
-  description: 'TonboWorkshop名義でVirtual Market 2024 Winterへ出展した記録。',
+  description:
+    '「がぶがぶスペクター」を展示し、「TonboBattlefield」シリーズと「かわいい子たちとお家を建てるゲーム」の紹介ムービーを展示。内容は2024 Summerとほぼ同じだが、出展ワールドの雰囲気に合わせてブースを細かく変更した。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
   period: '2024 Winter',
-  firstPublishedAt: null,
-  media: [],
+  firstPublishedAt: '2024-12-07',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/vket-2024-winter/hero.webp',
+      alt: 'Virtual Market 2024 Winterに設置したがぶがぶスペクターとゲーム作品の展示ブース',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://x.com/LefTonbo/status/1865275992589373950',
   sources: [
@@ -24,14 +32,6 @@ export default {
   ],
   verifiedAt: CONTENT_VERIFIED_AT,
   factsPending: [
-    {
-      field: 'first-published-at',
-      note: '出展情報の初公開日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な出展画像は未確認。',
-    },
     {
       field: 'link-availability',
       note: '本人告知の公開状態をサイト公開前に再確認する。',

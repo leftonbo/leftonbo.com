@@ -5,13 +5,21 @@ export default {
   id: 'vket-2020',
   slug: 'vket-2020',
   title: 'Vket 5 出展',
-  description: 'TonboWorkshop名義でVket 5へ出展した記録。',
+  description:
+    '「メテコレプカ - キギステルトフ」で「サジャクサハギン」を展示した、初めてのVket出展。初のアバター頒布でもある記念すべき第一ブースで、このときは旧グループ名「カクレ家ホウモツコ」を使用していた。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
   period: 'Vket 5（2020）',
-  firstPublishedAt: null,
-  media: [],
+  firstPublishedAt: '2020-12-18',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/vket-2020/hero.webp',
+      alt: 'Vket 5のメテコレプカ - キギステルトフに設置したサジャクサハギン展示ブース',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://x.com/LefTonbo/status/1340158760346505217',
   sources: [
@@ -24,14 +32,6 @@ export default {
   ],
   verifiedAt: CONTENT_VERIFIED_AT,
   factsPending: [
-    {
-      field: 'first-published-at',
-      note: '出展情報の初公開日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な出展画像は未確認。',
-    },
     {
       field: 'link-availability',
       note: '本人告知の公開状態をサイト公開前に再確認する。',

@@ -5,13 +5,21 @@ export default {
   id: 'vket-2023-winter',
   slug: 'vket-2023-winter',
   title: 'Virtual Market 2023 Winter 出展',
-  description: 'TonboWorkshop名義でVirtual Market 2023 Winterへ出展した記録。',
+  description:
+    '初の有料販売アバター「がぶがぶスペクター」を展示し、「TonboBattlefield」シリーズと、当時開発中だった「かわいい子たちとお家を建てるゲーム」（かわうち）を紹介。このとき作ったブース展示モデルは後の雛形となり、その後しばらくブース制作のベースに使用した。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
   period: '2023 Winter',
-  firstPublishedAt: null,
-  media: [],
+  firstPublishedAt: '2023-12-02',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/vket-2023-winter/hero.webp',
+      alt: 'Virtual Market 2023 Winterに設置したがぶがぶスペクターの展示ブース',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://x.com/LefTonbo/status/1730542256560419126',
   sources: [
@@ -24,14 +32,6 @@ export default {
   ],
   verifiedAt: CONTENT_VERIFIED_AT,
   factsPending: [
-    {
-      field: 'first-published-at',
-      note: '出展情報の初公開日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な出展画像は未確認。',
-    },
     {
       field: 'link-availability',
       note: '本人告知の公開状態をサイト公開前に再確認する。',

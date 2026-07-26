@@ -5,13 +5,21 @@ export default {
   id: 'vket-2026-summer',
   slug: 'vket-2026-summer',
   title: 'Virtual Market 2026 Summer 出展',
-  description: 'TonboWorkshop名義でVirtual Market 2026 Summerへ出展した記録。',
+  description:
+    '「TonboBattlefield」シリーズ、「いただき！お菓子パーティ」（いた菓子）、「がぶがぶスペクター」、「クソでっけぇプッシャーゲーム」を紹介。Antimatter Dimensions風の短編インクリメンタルゲームを遊べる構成とし、進行に合わせて各作品を紹介した。ブースの雰囲気は過去のVketから大きく変えている。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
   period: '2026 Summer',
-  firstPublishedAt: null,
-  media: [],
+  firstPublishedAt: '2026-07-11',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/vket-2026-summer/hero.webp',
+      alt: 'Virtual Market 2026 Summerに設置した短編インクリメンタルゲームで遊べるTonboWorkshopブース',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://vket.com/2026Summer/exhibitor/1779',
   sources: [
@@ -30,14 +38,6 @@ export default {
   ],
   verifiedAt: CONTENT_VERIFIED_AT,
   factsPending: [
-    {
-      field: 'first-published-at',
-      note: '出展情報の初公開日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な出展画像は未確認。',
-    },
     {
       field: 'link-availability',
       note: 'カタログと本人告知の公開状態をサイト公開前に再確認する。',

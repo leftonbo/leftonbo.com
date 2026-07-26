@@ -5,13 +5,21 @@ export default {
   id: 'vket-2025-summer',
   slug: 'vket-2025-summer',
   title: 'Virtual Market 2025 Summer 出展',
-  description: 'TonboWorkshop名義でVirtual Market 2025 Summerへ出展した記録。',
+  description:
+    '「がぶがぶスペクター」を展示し、「TonboBattlefield」シリーズ、「かわいい子たちとお家を建てるゲーム」の紹介ムービー、「クソでっけぇプッシャーゲーム」を紹介した。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
   period: '2025 Summer',
-  firstPublishedAt: null,
-  media: [],
+  firstPublishedAt: '2025-07-12',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/vket-2025-summer/hero.webp',
+      alt: 'Virtual Market 2025 Summerに設置したTonboWorkshopの展示ブース',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://vket.com/2025Summer/exhibitor/310',
   sources: [
@@ -30,14 +38,6 @@ export default {
   ],
   verifiedAt: CONTENT_VERIFIED_AT,
   factsPending: [
-    {
-      field: 'first-published-at',
-      note: '出展情報の初公開日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な出展画像は未確認。',
-    },
     {
       field: 'link-availability',
       note: 'カタログと本人告知の公開状態をサイト公開前に再確認する。',

@@ -227,6 +227,63 @@ describe('canonical content', () => {
     )
   })
 
+  it('publishes the approved Vket dates, descriptions and booth images', () => {
+    const approvedVketWorks = {
+      'vket-2020': {
+        firstPublishedAt: '2020-12-18',
+        descriptionFragment: 'カクレ家ホウモツコ',
+      },
+      'vket-2022-summer': {
+        firstPublishedAt: '2022-08-13',
+        descriptionFragment: "Poppin' Jump - Lemon Squash",
+      },
+      'vket-2023-winter': {
+        firstPublishedAt: '2023-12-02',
+        descriptionFragment: '雛形',
+      },
+      'vket-2024-summer': {
+        firstPublishedAt: '2024-07-20',
+        descriptionFragment: '紹介ムービー',
+      },
+      'vket-2024-winter': {
+        firstPublishedAt: '2024-12-07',
+        descriptionFragment: '出展ワールドの雰囲気',
+      },
+      'vket-2025-summer': {
+        firstPublishedAt: '2025-07-12',
+        descriptionFragment: 'クソでっけぇプッシャーゲーム',
+      },
+      'vket-2026-summer': {
+        firstPublishedAt: '2026-07-11',
+        descriptionFragment: 'Antimatter Dimensions',
+      },
+    } as const
+
+    expect(works.filter((work) => work.category === 'vket')).toHaveLength(7)
+
+    for (const [id, approved] of Object.entries(approvedVketWorks)) {
+      const work = works.find((candidate) => candidate.id === id)
+
+      expect(work).toEqual(
+        expect.objectContaining({
+          firstPublishedAt: approved.firstPublishedAt,
+          media: [
+            expect.objectContaining({
+              url: `/images/works/${id}/hero.webp`,
+            }),
+          ],
+        }),
+      )
+      expect(work?.description).toContain(approved.descriptionFragment)
+      expect(work?.factsPending).not.toEqual(
+        expect.arrayContaining([expect.objectContaining({ field: 'first-published-at' })]),
+      )
+      expect(work?.factsPending).not.toEqual(
+        expect.arrayContaining([expect.objectContaining({ field: 'media' })]),
+      )
+    }
+  })
+
   it('splits the former old-game collection and integrates Vket records into works', () => {
     expect(works.some((work) => work.id === 'older-games')).toBe(false)
     expect(works).toEqual(
