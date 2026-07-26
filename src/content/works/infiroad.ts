@@ -10,7 +10,7 @@ export default {
   status: 'stopped-with-public-record',
   role: 'self-produced',
   period: '2015',
-  firstPublishedAt: null,
+  firstPublishedAt: '2015-12-09',
   gameDetails: {
     genre: 'クリッカー',
     developmentTool: 'Unity 5.x',
@@ -62,10 +62,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

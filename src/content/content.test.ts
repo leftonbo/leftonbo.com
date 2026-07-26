@@ -188,8 +188,32 @@ describe('canonical content', () => {
     expect(works.find((work) => work.id === 'tonbo-battlefield-shadow-valley')?.period).toBe('2022')
     expect(works.find((work) => work.id === 'tonbo-werewolf')?.firstPublishedAt).toBe('2020-09-24')
     expect(works.find((work) => work.id === 'light-trail')?.firstPublishedAt).toBe('2018-04-29')
-    expect(works.find((work) => work.id === 'infiroad')).toEqual(
-      expect.objectContaining({ period: '2015', firstPublishedAt: null }),
+    const salvagedPublicationDates = {
+      infiroad: '2015-12-09',
+      'rocket-lunch-iyaa': '2015-02-24',
+      'elem-shot': '2013-09-30',
+      dorofune: '2013-11-22',
+      'pipe-4-run': '2014-06-17',
+      'block-break': '2013-03-25',
+      'battle-viewer': '2008-05-21',
+      'go-and-battle': '2008-02-21',
+      'ball-maze-2': '2006-05-07',
+      'ball-maze': '2006-03-17',
+      'super-block-break': '2004-07-18',
+    } as const
+
+    for (const [id, firstPublishedAt] of Object.entries(salvagedPublicationDates)) {
+      const work = works.find((candidate) => candidate.id === id)
+
+      expect(work).toEqual(
+        expect.objectContaining({ period: firstPublishedAt.slice(0, 4), firstPublishedAt }),
+      )
+      expect(work?.factsPending).not.toEqual(
+        expect.arrayContaining([expect.objectContaining({ field: 'first-published-at' })]),
+      )
+    }
+    expect(works.find((work) => work.id === 'dorofune')?.gameDetails?.introduction).toEqual(
+      expect.arrayContaining([expect.stringContaining('2014年11月20日にネット上で再公開')]),
     )
     expect(works.find((work) => work.id === 'gabugabu-specter')?.firstPublishedAt).toBe('2023-12-02')
     expect(works.find((work) => work.id === 'kawauchi-board-game-world')?.period).toBe('2024')

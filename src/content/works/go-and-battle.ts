@@ -8,8 +8,8 @@ export default {
   category: 'game',
   status: 'archived',
   role: 'self-produced',
-  period: '2009',
-  firstPublishedAt: null,
+  period: '2008',
+  firstPublishedAt: '2008-02-21',
   gameDetails: {
     genre: 'すごろくRPG',
     developmentTool: 'Tonyu System',
@@ -58,10 +58,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

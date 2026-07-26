@@ -8,8 +8,8 @@ export default {
   category: 'game',
   status: 'archived',
   role: 'self-produced',
-  period: '2014',
-  firstPublishedAt: null,
+  period: '2013',
+  firstPublishedAt: '2013-09-30',
   gameDetails: {
     genre: 'シューティング',
     developmentTool: 'DXライブラリ',
@@ -52,10 +52,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

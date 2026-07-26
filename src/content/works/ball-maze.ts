@@ -9,7 +9,7 @@ export default {
   status: 'archived',
   role: 'self-produced',
   period: '2006',
-  firstPublishedAt: null,
+  firstPublishedAt: '2006-03-17',
   gameDetails: {
     genre: '擬似3D迷路',
     developmentTool: 'Tonyu System',
@@ -34,10 +34,6 @@ export default {
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
     {
       field: 'media',
       note: '公開ページに再掲載できる画像は見つかっていない。',

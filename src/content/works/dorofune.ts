@@ -9,13 +9,14 @@ export default {
   category: 'game',
   status: 'archived',
   role: 'self-produced',
-  period: '2014',
-  firstPublishedAt: null,
+  period: '2013',
+  firstPublishedAt: '2013-11-22',
   gameDetails: {
     genre: '避けゲー',
     developmentTool: 'DXライブラリ',
     introduction: [
       '海を目指す「人」を乗せた泥船は自動で進むが、やがて沈んでしまう。そこで残った「悔しさ」が、新しい泥船を加速させる。',
+      '2013年に大学サークルの展示作品として公開したもの。',
     ],
   },
   media: [
@@ -43,10 +44,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

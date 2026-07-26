@@ -9,7 +9,7 @@ export default {
   status: 'archived',
   role: 'self-produced',
   period: '2015',
-  firstPublishedAt: null,
+  firstPublishedAt: '2015-02-24',
   gameDetails: {
     genre: 'FPS',
     developmentTool: 'Unity 4.x',
@@ -40,10 +40,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

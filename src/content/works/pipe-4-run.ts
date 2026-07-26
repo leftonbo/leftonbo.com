@@ -10,7 +10,7 @@ export default {
   status: 'archived',
   role: 'self-produced',
   period: '2014',
-  firstPublishedAt: null,
+  firstPublishedAt: '2014-06-17',
   gameDetails: {
     genre: '対戦パズル',
     developmentTool: null,
@@ -43,10 +43,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'first-published-at',
-      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

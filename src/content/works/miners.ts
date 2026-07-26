@@ -8,14 +8,15 @@ export default {
   category: 'game',
   status: 'published',
   role: 'self-produced',
-  period: '2015',
-  firstPublishedAt: '2015-03-13',
+  period: '2014',
+  firstPublishedAt: '2014-11-22',
   gameDetails: {
     genre: '採掘アクション',
     developmentTool: 'DXライブラリ',
     introduction: [
       'ほかのプレイヤーと協力し、鉱石を掘って強くなりながら2000m先にある世界の果てを目指す。',
       '復活、爆弾、ダイヤモンドの3種類のアイテムを使い、深度とともに上がる危険度へ挑む。オンラインでは最大8人で協力できる。',
+      '2014年に大学サークルの展示作品として公開され、その後ネット上でオンライン対応して公開。'
     ],
   },
   media: [
