@@ -1,11 +1,21 @@
+# Node modules and artifacts
 node_modules/
 dist/
 coverage/
-.playwright-cli/
+logs/
 
+# Agent CI artifacts
+.playwright-cli/
+output/
+
+# System files
 *.local
 *.log
 *.tsbuildinfo
 .DS_Store
 
-output/
+# Serena MCP
+.serena/
+
+# Working memories that should not be commited
+.working/
