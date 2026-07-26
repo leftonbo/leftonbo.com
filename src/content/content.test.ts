@@ -239,23 +239,23 @@ describe('canonical content', () => {
       },
       'vket-2023-winter': {
         firstPublishedAt: '2023-12-02',
-        descriptionFragment: '雛形',
+        descriptionFragment: '龍の背中 - ウンバルスカイ',
       },
       'vket-2024-summer': {
         firstPublishedAt: '2024-07-20',
-        descriptionFragment: '紹介ムービー',
+        descriptionFragment: '魔女の森ノクトール - MIRAGE',
       },
       'vket-2024-winter': {
         firstPublishedAt: '2024-12-07',
-        descriptionFragment: '出展ワールドの雰囲気',
+        descriptionFragment: 'ガチャットピア - ミスティックカプセル',
       },
       'vket-2025-summer': {
         firstPublishedAt: '2025-07-12',
-        descriptionFragment: 'クソでっけぇプッシャーゲーム',
+        descriptionFragment: '森聖街 ヤポプエト - 中願の秋夜',
       },
       'vket-2026-summer': {
         firstPublishedAt: '2026-07-11',
-        descriptionFragment: 'Antimatter Dimensions',
+        descriptionFragment: 'VOLTAGER - EX-Volcano',
       },
     } as const
 

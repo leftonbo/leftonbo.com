@@ -6,7 +6,7 @@ export default {
   slug: 'vket-2026-summer',
   title: 'Virtual Market 2026 Summer 出展',
   description:
-    '「TonboBattlefield」シリーズ、「いただき！お菓子パーティ」（いた菓子）、「がぶがぶスペクター」、「クソでっけぇプッシャーゲーム」を紹介。Antimatter Dimensions風の短編インクリメンタルゲームを遊べる構成とし、進行に合わせて各作品を紹介した。ブースの雰囲気は過去のVketから大きく変えている。',
+    '展示ワールド「VOLTAGER - EX-Volcano」に出展し、「TonboBattlefield」シリーズ、「いただき！お菓子パーティ」（いた菓子）、「がぶがぶスペクター」、「クソでっけぇプッシャーゲーム」を紹介。Antimatter Dimensions風の短編インクリメンタルゲームを遊べる構成とし、進行に合わせて各作品を紹介した。ブースの雰囲気は過去のVketから大きく変えている。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',

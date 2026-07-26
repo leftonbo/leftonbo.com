@@ -6,7 +6,7 @@ export default {
   slug: 'vket-2024-winter',
   title: 'Virtual Market 2024 Winter 出展',
   description:
-    '「がぶがぶスペクター」を展示し、「TonboBattlefield」シリーズと「かわいい子たちとお家を建てるゲーム」の紹介ムービーを展示。内容は2024 Summerとほぼ同じだが、出展ワールドの雰囲気に合わせてブースを細かく変更した。',
+    '展示ワールド「ガチャットピア - ミスティックカプセル」に出展し、「がぶがぶスペクター」を展示。「TonboBattlefield」シリーズと「かわいい子たちとお家を建てるゲーム」の紹介ムービーも展示した。内容は2024 Summerとほぼ同じだが、出展ワールドの雰囲気に合わせてブースを細かく変更した。',
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
