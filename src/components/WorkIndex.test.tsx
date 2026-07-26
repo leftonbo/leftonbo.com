@@ -4,6 +4,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { works } from '../content/works'
 import { WorkIndex } from './WorkIndex'
 
+const avatar3dCount = works.filter((work) => work.category === 'avatar-3d').length
+const pastGameCount = works.filter((work) => work.category === 'past-game').length
+const vrchatWorldCount = works.filter((work) => work.category === 'vrchat-world').length
+
 describe('WorkIndex', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/works/')
@@ -15,18 +19,19 @@ describe('WorkIndex', () => {
 
   it('renders every work in the no-filter baseline', () => {
     render(<WorkIndex works={works} />)
-    expect(screen.getAllByRole('article')).toHaveLength(30)
-    expect(screen.getByText('30', { selector: '.work-index__count strong' })).toBeInTheDocument()
+    expect(screen.getAllByRole('article')).toHaveLength(works.length)
+    expect(screen.getByText(String(works.length), { selector: '.work-index__count strong' })).toBeInTheDocument()
   })
 
   it('filters by category and writes the state to the URL', async () => {
     const user = userEvent.setup()
     render(<WorkIndex works={works} />)
 
-    await user.click(screen.getByRole('button', { name: /アバター／3D\s*2/ }))
+    const avatar3dButtonName = new RegExp(`アバター／3D\\s*${avatar3dCount}`)
+    await user.click(screen.getByRole('button', { name: avatar3dButtonName }))
 
-    expect(screen.getAllByRole('article')).toHaveLength(2)
-    expect(screen.getByRole('button', { name: /アバター／3D\s*2/ })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getAllByRole('article')).toHaveLength(avatar3dCount)
+    expect(screen.getByRole('button', { name: avatar3dButtonName })).toHaveAttribute('aria-pressed', 'true')
     expect(window.location.search).toBe('?category=avatar-3d')
     expect(screen.getByRole('heading', { name: 'サジャクサハギン v3.0' })).toBeInTheDocument()
   })
@@ -36,14 +41,16 @@ describe('WorkIndex', () => {
     render(<WorkIndex works={works} />)
 
     await user.tab()
-    expect(screen.getByRole('button', { name: /すべて\s*30/ })).toHaveFocus()
+    expect(screen.getByRole('button', { name: new RegExp(`すべて\\s*${works.length}`) })).toHaveFocus()
     await user.tab()
-    const worldButton = screen.getByRole('button', { name: /VRChatワールド\s*8/ })
+    const worldButton = screen.getByRole('button', {
+      name: new RegExp(`VRChatワールド\\s*${vrchatWorldCount}`),
+    })
     expect(worldButton).toHaveFocus()
     await user.keyboard('{Enter}')
 
     expect(worldButton).toHaveAttribute('aria-pressed', 'true')
-    expect(screen.getAllByRole('article')).toHaveLength(8)
+    expect(screen.getAllByRole('article')).toHaveLength(vrchatWorldCount)
   })
 
   it('restores filter state from direct URLs and popstate', async () => {
@@ -51,7 +58,7 @@ describe('WorkIndex', () => {
     render(<WorkIndex works={works} />)
 
     await waitFor(() => {
-      expect(screen.getAllByRole('article')).toHaveLength(14)
+      expect(screen.getAllByRole('article')).toHaveLength(pastGameCount)
     })
 
     window.history.pushState({}, '', '/works/?category=avatar-3d#work-index')
@@ -59,7 +66,7 @@ describe('WorkIndex', () => {
 
     await waitFor(() => {
       const results = screen.getByRole('list', { name: '' })
-      expect(within(results).getAllByRole('article')).toHaveLength(2)
+      expect(within(results).getAllByRole('article')).toHaveLength(avatar3dCount)
     })
   })
 
@@ -70,15 +77,17 @@ describe('WorkIndex', () => {
     await waitFor(() => {
       expect(window.location.search).toBe('')
     })
-    expect(screen.getAllByRole('article')).toHaveLength(30)
-    expect(screen.getByRole('button', { name: /すべて\s*30/ })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getAllByRole('article')).toHaveLength(works.length)
+    expect(screen.getByRole('button', { name: new RegExp(`すべて\\s*${works.length}`) })).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('does not add duplicate history entries for the active category', async () => {
     const user = userEvent.setup()
     const pushState = vi.spyOn(window.history, 'pushState')
     render(<WorkIndex works={works} />)
-    const worldButton = screen.getByRole('button', { name: /VRChatワールド\s*8/ })
+    const worldButton = screen.getByRole('button', {
+      name: new RegExp(`VRChatワールド\\s*${vrchatWorldCount}`),
+    })
 
     await user.click(worldButton)
     await user.click(worldButton)

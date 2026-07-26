@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const ballMaze2 = {
+export default {
   id: 'ball-maze-2',
   slug: 'ball-maze-2',
   title: 'Ball Maze II',

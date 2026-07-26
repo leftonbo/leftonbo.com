@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const rocketLunchIyaa = {
+export default {
   id: 'rocket-lunch-iyaa',
   slug: 'rocket-lunch-iyaa',
   title: 'RocketLunch嫌ぁ～',

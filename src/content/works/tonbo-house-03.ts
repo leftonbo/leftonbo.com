@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const tonboHouse03 = {
+export default {
   id: 'tonbo-house-03',
   slug: 'tonbo-house-03',
   title: 'TonboHouse03',

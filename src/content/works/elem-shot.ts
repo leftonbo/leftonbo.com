@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const elemShot = {
+export default {
   id: 'elem-shot',
   slug: 'elem-shot',
   title: 'ElemShot',

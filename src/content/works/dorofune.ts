@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const dorofune = {
+export default {
   id: 'dorofune',
   slug: 'dorofune',
   title: 'どろふね',

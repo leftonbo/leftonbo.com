@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const gabugabuSpecter = {
+export default {
   id: 'gabugabu-specter',
   slug: 'gabugabu-specter',
   title: 'がぶがぶスペクター',

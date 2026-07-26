@@ -9,48 +9,6 @@ import type {
   WorkMedia,
 } from "./types";
 
-export const EXPECTED_WORK_COUNT = 30;
-
-export const EXPECTED_WORK_IDS = [
-  "tonbo-werewolf",
-  "tonbo-battlefield-classic-remake",
-  "tonbo-battlefield-2-the-two-bases",
-  "tonbo-battlefield-shadow-valley",
-  "tonbo-house-03",
-  "kawauchi-board-game-world",
-  "ita-gashi-board-game-world",
-  "kuso-dekke-pusher-game",
-  "sajak-sahagin-v3",
-  "gabugabu-specter",
-  "light-trail",
-  "heroad",
-  "infiroad",
-  "miners",
-  'rocket-lunch-iyaa',
-  'elem-shot',
-  'dorofune',
-  'pipe-4-run',
-  'block-break',
-  'battle-viewer',
-  'go-and-battle',
-  'ball-maze-2',
-  'ball-maze',
-  'super-block-break',
-  'vket-2026-summer',
-  'vket-2025-summer',
-  'vket-2024-winter',
-  'vket-2024-summer',
-  'vket-2023-winter',
-  'vket-2020',
-] as const;
-
-export const EXPECTED_WORK_COUNT_BY_CATEGORY = {
-  "vrchat-world": 8,
-  "avatar-3d": 2,
-  "past-game": 14,
-  vket: 6,
-} as const satisfies Record<WorkCategory, number>;
-
 const canonicalContent = {
   profile: siteProfile,
   links: externalLinks,
@@ -73,7 +31,12 @@ const pendingFactFields = new Set([
   "version",
   "link-availability",
 ]);
-const workCategories = new Set(Object.keys(EXPECTED_WORK_COUNT_BY_CATEGORY));
+const workCategories = new Set<WorkCategory>([
+  "vrchat-world",
+  "avatar-3d",
+  "past-game",
+  "vket",
+]);
 const workStatuses = new Set([
   "published",
   "recent-evidence",
@@ -317,13 +280,6 @@ export function collectContentValidationIssues(
     validatePendingFacts(issues, `${path}.factsPending`, area.factsPending);
   });
 
-  if (content.works.length !== EXPECTED_WORK_COUNT) {
-    issues.push({
-      path: "works",
-      message: `掲載対象は${EXPECTED_WORK_COUNT}件である必要があります。現在は${content.works.length}件です。`,
-    });
-  }
-
   addDuplicateIssues(
     issues,
     "works.id",
@@ -334,39 +290,6 @@ export function collectContentValidationIssues(
     "works.slug",
     content.works.map((work) => work.slug),
   );
-
-  const actualWorkIds = new Set(content.works.map((work) => work.id));
-  const expectedWorkIds = new Set<string>(EXPECTED_WORK_IDS);
-  for (const expectedId of EXPECTED_WORK_IDS) {
-    if (!actualWorkIds.has(expectedId)) {
-      issues.push({
-        path: "works.id",
-        message: `掲載対象が不足しています: ${expectedId}`,
-      });
-    }
-  }
-  for (const actualId of actualWorkIds) {
-    if (!expectedWorkIds.has(actualId)) {
-      issues.push({
-        path: "works.id",
-        message: `掲載対象外の項目が含まれています: ${actualId}`,
-      });
-    }
-  }
-
-  for (const [category, expectedCount] of Object.entries(
-    EXPECTED_WORK_COUNT_BY_CATEGORY,
-  )) {
-    const actualCount = content.works.filter(
-      (work) => work.category === category,
-    ).length;
-    if (actualCount !== expectedCount) {
-      issues.push({
-        path: "works.category",
-        message: `${category}は${expectedCount}件必要です。現在は${actualCount}件です。`,
-      });
-    }
-  }
 
   content.works.forEach((work, index) => {
     const path = `works[${index}]`;

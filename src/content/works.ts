@@ -1,64 +1,30 @@
-import { ballMaze } from './works/ball-maze'
-import { ballMaze2 } from './works/ball-maze-2'
-import { battleViewer } from './works/battle-viewer'
-import { blockBreak } from './works/block-break'
-import { dorofune } from './works/dorofune'
-import { elemShot } from './works/elem-shot'
-import { gabugabuSpecter } from './works/gabugabu-specter'
-import { goAndBattle } from './works/go-and-battle'
-import { heroad } from './works/heroad'
-import { infiroad } from './works/infiroad'
-import { itaGashiBoardGameWorld } from './works/ita-gashi-board-game-world'
-import { kawauchiBoardGameWorld } from './works/kawauchi-board-game-world'
-import { kusoDekkePusherGame } from './works/kuso-dekke-pusher-game'
-import { lightTrail } from './works/light-trail'
-import { miners } from './works/miners'
-import { pipe4Run } from './works/pipe-4-run'
-import { rocketLunchIyaa } from './works/rocket-lunch-iyaa'
-import { sajakSahaginV3 } from './works/sajak-sahagin-v3'
-import { superBlockBreak } from './works/super-block-break'
-import { tonboBattlefield2TheTwoBases } from './works/tonbo-battlefield-2-the-two-bases'
-import { tonboBattlefieldClassicRemake } from './works/tonbo-battlefield-classic-remake'
-import { tonboBattlefieldShadowValley } from './works/tonbo-battlefield-shadow-valley'
-import { tonboHouse03 } from './works/tonbo-house-03'
-import { tonboWerewolf } from './works/tonbo-werewolf'
-import { vket2023Winter } from './works/vket-2023-winter'
-import { vket2024Summer } from './works/vket-2024-summer'
-import { vket2024Winter } from './works/vket-2024-winter'
-import { vket2025Summer } from './works/vket-2025-summer'
-import { vket2026Summer } from './works/vket-2026-summer'
-import { vket2020 } from './works/vket-2020'
 import type { Work } from './types'
 
-export const works = [
-  tonboWerewolf,
-  tonboBattlefieldClassicRemake,
-  tonboBattlefield2TheTwoBases,
-  tonboBattlefieldShadowValley,
-  tonboHouse03,
-  kawauchiBoardGameWorld,
-  itaGashiBoardGameWorld,
-  kusoDekkePusherGame,
-  sajakSahaginV3,
-  gabugabuSpecter,
-  lightTrail,
-  heroad,
-  infiroad,
-  miners,
-  rocketLunchIyaa,
-  elemShot,
-  dorofune,
-  pipe4Run,
-  blockBreak,
-  battleViewer,
-  goAndBattle,
-  ballMaze2,
-  ballMaze,
-  superBlockBreak,
-  vket2026Summer,
-  vket2025Summer,
-  vket2024Winter,
-  vket2024Summer,
-  vket2023Winter,
-  vket2020,
-] satisfies readonly Work[]
+const yearPattern = /\d{4}/
+
+const workModules = import.meta.glob<Work>(['./works/*.ts', '!./works/*.test.ts'], {
+  eager: true,
+  import: 'default',
+})
+
+function getSortYear(work: Work): number {
+  const firstPublishedYear = work.firstPublishedAt?.match(yearPattern)?.[0]
+  if (firstPublishedYear) return Number(firstPublishedYear)
+
+  const periodYear = work.period?.match(yearPattern)?.[0]
+  return periodYear ? Number(periodYear) : 0
+}
+
+function compareByPublishedDate(left: Work, right: Work): number {
+  const yearDifference = getSortYear(right) - getSortYear(left)
+  if (yearDifference !== 0) return yearDifference
+
+  const dateDifference = (right.firstPublishedAt ?? '').localeCompare(left.firstPublishedAt ?? '')
+  if (dateDifference !== 0) return dateDifference
+
+  if (left.slug < right.slug) return -1
+  if (left.slug > right.slug) return 1
+  return 0
+}
+
+export const works: readonly Work[] = [...Object.values(workModules)].sort(compareByPublishedDate)

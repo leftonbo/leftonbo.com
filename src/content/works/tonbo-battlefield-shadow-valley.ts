@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const tonboBattlefieldShadowValley = {
+export default {
   id: 'tonbo-battlefield-shadow-valley',
   slug: 'tonbo-battlefield-shadow-valley',
   title: 'TonboBattlefield: Shadow Valley',

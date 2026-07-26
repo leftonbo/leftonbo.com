@@ -7,14 +7,19 @@ import {
   profilePageJsonLd,
   worksCollectionJsonLd,
 } from '../machine-readable'
-import { externalLinks, siteProfile } from './site'
-import { collectContentValidationIssues, EXPECTED_WORK_COUNT_BY_CATEGORY } from './validate'
+import { activityAreas, externalLinks, siteProfile } from './site'
+import type { Work } from './types'
+import { collectContentValidationIssues } from './validate'
 import { works } from './works'
 
+const workArticles = import.meta.glob<Work>(['./works/*.ts', '!./works/*.test.ts'], {
+  eager: true,
+  import: 'default',
+})
+
 describe('canonical content', () => {
-  it('passes the runtime schema and publication allowlist', () => {
+  it('passes the runtime schema and keeps the renamed identifiers', () => {
     expect(collectContentValidationIssues()).toEqual([])
-    expect(works).toHaveLength(30)
     expect(works).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ id: 'ball-maze-2', slug: 'ball-maze-2', title: 'Ball Maze II' }),
@@ -24,10 +29,68 @@ describe('canonical content', () => {
     expect(works.some((work) => work.id === 'ball-maze-ii' || work.id === 'vket-5-2020')).toBe(false)
   })
 
-  it('contains exactly the approved category counts', () => {
-    for (const [category, expectedCount] of Object.entries(EXPECTED_WORK_COUNT_BY_CATEGORY)) {
-      expect(works.filter((work) => work.category === category)).toHaveLength(expectedCount)
+  it('automatically aggregates every work article', () => {
+    expect(works).toHaveLength(Object.keys(workArticles).length)
+    expect(new Set(works.map((work) => work.id))).toEqual(
+      new Set(Object.values(workArticles).map((work) => work.id)),
+    )
+  })
+
+  it('accepts a new valid work without an allowlist or count update', () => {
+    const sourceWork = works[0]
+    if (!sourceWork) throw new Error('検証元の制作記事がありません。')
+
+    const addedWork: Work = {
+      ...sourceWork,
+      id: 'new-valid-work',
+      slug: 'new-valid-work',
+      title: '新しい制作',
     }
+
+    expect(
+      collectContentValidationIssues({
+        profile: siteProfile,
+        links: externalLinks,
+        activityAreas,
+        works: [...works, addedWork],
+      }),
+    ).toEqual([])
+  })
+
+  it('keeps required and duplicate work ID validation', () => {
+    const sourceWork = works[0]
+    if (!sourceWork) throw new Error('検証元の制作記事がありません。')
+
+    const issues = collectContentValidationIssues({
+      profile: siteProfile,
+      links: externalLinks,
+      activityAreas,
+      works: [
+        ...works,
+        { ...sourceWork, id: '', slug: 'empty-id-work', title: 'IDなし' },
+        { ...sourceWork, id: 'ball-maze-2', slug: 'duplicate-id-work', title: 'ID重複' },
+      ],
+    })
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        { path: `works[${works.length}].id`, message: '必須の文字列が空です。' },
+        { path: 'works.id', message: '重複しています: ball-maze-2' },
+      ]),
+    )
+  })
+
+  it('sorts all works by confirmed date, period year and slug', () => {
+    const ids = works.map((work) => work.id)
+    const indexOf = (id: string) => ids.indexOf(id)
+
+    expect(indexOf('vket-2026-summer')).toBeLessThan(indexOf('gabugabu-specter'))
+    expect(indexOf('gabugabu-specter')).toBeLessThan(indexOf('tonbo-house-03'))
+    expect(indexOf('tonbo-house-03')).toBeLessThan(indexOf('sajak-sahagin-v3'))
+    expect(indexOf('vket-2020')).toBeLessThan(indexOf('light-trail'))
+    expect(indexOf('dorofune')).toBeLessThan(indexOf('elem-shot'))
+    expect(indexOf('super-block-break')).toBeLessThan(indexOf('ita-gashi-board-game-world'))
+    expect(indexOf('ita-gashi-board-game-world')).toBeLessThan(indexOf('kuso-dekke-pusher-game'))
   })
 
   it('describes the portfolio without asserting current activity', () => {
@@ -62,8 +125,6 @@ describe('canonical content', () => {
 
   it('splits the former old-game collection and integrates Vket records into works', () => {
     expect(works.some((work) => work.id === 'older-games')).toBe(false)
-    expect(works.filter((work) => work.category === 'past-game')).toHaveLength(14)
-    expect(works.filter((work) => work.category === 'vket')).toHaveLength(6)
     expect(works).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ id: 'rocket-lunch-iyaa' }),

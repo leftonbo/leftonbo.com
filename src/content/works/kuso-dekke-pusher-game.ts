@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const kusoDekkePusherGame = {
+export default {
   id: 'kuso-dekke-pusher-game',
   slug: 'kuso-dekke-pusher-game',
   title: 'クソでっけぇプッシャーゲーム',

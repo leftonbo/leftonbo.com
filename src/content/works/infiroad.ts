@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const infiroad = {
+export default {
   id: 'infiroad',
   slug: 'infiroad',
   title: 'Infiroad',

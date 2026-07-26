@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const goAndBattle = {
+export default {
   id: 'go-and-battle',
   slug: 'go-and-battle',
   title: 'Go and Battle!',

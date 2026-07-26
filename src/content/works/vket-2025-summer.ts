@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const vket2025Summer = {
+export default {
   id: 'vket-2025-summer',
   slug: 'vket-2025-summer',
   title: 'Virtual Market 2025 Summer 出展',

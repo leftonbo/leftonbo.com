@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const tonboWerewolf = {
+export default {
   id: 'tonbo-werewolf',
   slug: 'tonbo-werewolf',
   title: 'トンボ人狼（TonboWerewolf）',

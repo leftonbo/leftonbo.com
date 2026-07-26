@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const lightTrail = {
+export default {
   id: 'light-trail',
   slug: 'light-trail',
   title: 'Light Trail',

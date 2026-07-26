@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const pipe4Run = {
+export default {
   id: 'pipe-4-run',
   slug: 'pipe-4-run',
   title: 'Pipe 4 Run',

@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const miners = {
+export default {
   id: 'miners',
   slug: 'miners',
   title: 'Miners',

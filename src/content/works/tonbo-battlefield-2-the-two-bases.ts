@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const tonboBattlefield2TheTwoBases = {
+export default {
   id: 'tonbo-battlefield-2-the-two-bases',
   slug: 'tonbo-battlefield-2-the-two-bases',
   title: 'TonboBattlefield 2: The Two Bases',

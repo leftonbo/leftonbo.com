@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const battleViewer = {
+export default {
   id: 'battle-viewer',
   slug: 'battle-viewer',
   title: 'ばとるびゅ～わ',

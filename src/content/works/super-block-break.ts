@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const superBlockBreak = {
+export default {
   id: 'super-block-break',
   slug: 'super-block-break',
   title: 'スーパーブロック崩し',

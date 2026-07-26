@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const tonboBattlefieldClassicRemake = {
+export default {
   id: 'tonbo-battlefield-classic-remake',
   slug: 'tonbo-battlefield-classic-remake',
   title: 'TonboBattlefield Classic（トンバト クラシック）',

@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const sajakSahaginV3 = {
+export default {
   id: 'sajak-sahagin-v3',
   slug: 'sajak-sahagin-v3',
   title: 'サジャクサハギン v3.0',

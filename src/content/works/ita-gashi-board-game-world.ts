@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const itaGashiBoardGameWorld = {
+export default {
   id: 'ita-gashi-board-game-world',
   slug: 'ita-gashi-board-game-world',
   title: '『いた菓子』ボードゲームワールド',

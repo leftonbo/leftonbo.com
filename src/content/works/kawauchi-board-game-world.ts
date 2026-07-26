@@ -1,7 +1,7 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const kawauchiBoardGameWorld = {
+export default {
   id: 'kawauchi-board-game-world',
   slug: 'kawauchi-board-game-world',
   title: '『かわうち』ボードゲームワールド',

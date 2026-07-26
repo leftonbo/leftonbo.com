@@ -1,6 +1,6 @@
 import type { Work } from '../types'
 
-export const blockBreak = {
+export default {
   id: 'block-break',
   slug: 'block-break',
   title: 'Block Break',
