@@ -1,9 +1,9 @@
 import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
-export const vket52020 = {
-  id: 'vket-5-2020',
-  slug: 'vket-5-2020',
+export const vket2020 = {
+  id: 'vket-2020',
+  slug: 'vket-2020',
   title: 'Vket 5 出展',
   description: 'TonboWorkshop名義でVket 5へ出展した記録。',
   category: 'vket',

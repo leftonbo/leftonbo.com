@@ -15,6 +15,13 @@ describe('canonical content', () => {
   it('passes the runtime schema and publication allowlist', () => {
     expect(collectContentValidationIssues()).toEqual([])
     expect(works).toHaveLength(30)
+    expect(works).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 'ball-maze-2', slug: 'ball-maze-2', title: 'Ball Maze II' }),
+        expect.objectContaining({ id: 'vket-2020', slug: 'vket-2020', title: 'Vket 5 出展' }),
+      ]),
+    )
+    expect(works.some((work) => work.id === 'ball-maze-ii' || work.id === 'vket-5-2020')).toBe(false)
   })
 
   it('contains exactly the approved category counts', () => {
@@ -88,6 +95,10 @@ describe('canonical content', () => {
     const routes = getStaticRoutePaths(works)
     expect(routes).toHaveLength(works.length + 5)
     expect(routes).toContain('/404.html')
+    expect(routes).toContain('/works/ball-maze-2/')
+    expect(routes).toContain('/works/vket-2020/')
+    expect(routes).not.toContain('/works/ball-maze-ii/')
+    expect(routes).not.toContain('/works/vket-5-2020/')
     for (const work of works) {
       expect(routes).toContain(`/works/${work.slug}/`)
     }

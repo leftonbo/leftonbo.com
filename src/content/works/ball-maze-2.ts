@@ -1,8 +1,8 @@
 import type { Work } from '../types'
 
-export const ballMazeII = {
-  id: 'ball-maze-ii',
-  slug: 'ball-maze-ii',
+export const ballMaze2 = {
+  id: 'ball-maze-2',
+  slug: 'ball-maze-2',
   title: 'Ball Maze II',
   description: 'ビー玉転がし風の迷路ゲーム第2作。高さの概念とステージエディット機能を加えた。',
   category: 'past-game',

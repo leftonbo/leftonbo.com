@@ -33,7 +33,7 @@ export const EXPECTED_WORK_IDS = [
   'block-break',
   'battle-viewer',
   'go-and-battle',
-  'ball-maze-ii',
+  'ball-maze-2',
   'ball-maze',
   'super-block-break',
   'vket-2026-summer',
@@ -41,7 +41,7 @@ export const EXPECTED_WORK_IDS = [
   'vket-2024-winter',
   'vket-2024-summer',
   'vket-2023-winter',
-  'vket-5-2020',
+  'vket-2020',
 ] as const;
 
 export const EXPECTED_WORK_COUNT_BY_CATEGORY = {

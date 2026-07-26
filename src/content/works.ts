@@ -1,5 +1,5 @@
 import { ballMaze } from './works/ball-maze'
-import { ballMazeII } from './works/ball-maze-ii'
+import { ballMaze2 } from './works/ball-maze-2'
 import { battleViewer } from './works/battle-viewer'
 import { blockBreak } from './works/block-break'
 import { dorofune } from './works/dorofune'
@@ -27,7 +27,7 @@ import { vket2024Summer } from './works/vket-2024-summer'
 import { vket2024Winter } from './works/vket-2024-winter'
 import { vket2025Summer } from './works/vket-2025-summer'
 import { vket2026Summer } from './works/vket-2026-summer'
-import { vket52020 } from './works/vket-5-2020'
+import { vket2020 } from './works/vket-2020'
 import type { Work } from './types'
 
 export const works = [
@@ -52,7 +52,7 @@ export const works = [
   blockBreak,
   battleViewer,
   goAndBattle,
-  ballMazeII,
+  ballMaze2,
   ballMaze,
   superBlockBreak,
   vket2026Summer,
@@ -60,5 +60,5 @@ export const works = [
   vket2024Winter,
   vket2024Summer,
   vket2023Winter,
-  vket52020,
+  vket2020,
 ] satisfies readonly Work[]
