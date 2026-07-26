@@ -1,0 +1,161 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 6rem;
+}
+
+:where([id]) {
+  scroll-margin-top: 6rem;
+}
+
+body {
+  margin: 0;
+  overflow-wrap: anywhere;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.8;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--color-flight);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: #15585b;
+}
+
+:where(a, button, summary, [tabindex]):focus-visible {
+  border-radius: 0.2rem;
+  outline: 0.18rem solid var(--color-wing);
+  outline-offset: 0.22rem;
+  box-shadow: var(--focus-ring);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: rgb(214 103 67 / 20%);
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+h3 {
+  margin-block-start: 0;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+main {
+  display: block;
+}
+
+.site-main {
+  min-height: 60vh;
+}
+
+.content-measure {
+  max-width: 44rem;
+}
+
+.section-shell {
+  padding-block: var(--space-7);
+}
+
+.section-shell--surface {
+  background: var(--color-surface);
+  border-block: 1px solid var(--color-line);
+}
+
+.section-kicker {
+  margin-block-end: var(--space-2);
+  color: var(--color-flight);
+  font-family: var(--font-data);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.section-title {
+  max-width: 15ch;
+  margin-block-end: var(--space-3);
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: -0.045em;
+}
+
+.section-lead {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+}
+
+.data-label {
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  font-size: 0.78rem;
+  letter-spacing: 0.035em;
+}
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 767.98px) {
+  .section-shell {
+    padding-block: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline-color: Highlight;
+  }
+}
