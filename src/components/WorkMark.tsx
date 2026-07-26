@@ -3,7 +3,7 @@ import type { WorkCategory } from '../content/types'
 const markLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'WORLD',
   'avatar-3d': '3D',
-  'past-game': 'GAME',
+  game: 'GAME',
   vket: 'VKET',
 }
 

@@ -69,8 +69,29 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                   </dd>
                 </div>
               ) : null}
+              {work.gameDetails ? (
+                <div>
+                  <dt>ジャンル</dt>
+                  <dd>{work.gameDetails.genre}</dd>
+                </div>
+              ) : null}
+              {work.gameDetails?.developmentTool ? (
+                <div>
+                  <dt>制作ツール</dt>
+                  <dd>{work.gameDetails.developmentTool}</dd>
+                </div>
+              ) : null}
             </dl>
           </section>
+          {work.gameDetails ? (
+            <section className="work-detail__introduction" aria-labelledby="game-introduction-title">
+              <p className="section-kicker">Introduction</p>
+              <h2 id="game-introduction-title">ゲーム紹介</h2>
+              {work.gameDetails.introduction.map((paragraph, index) => (
+                <p key={`${work.id}-introduction-${index}`}>{paragraph}</p>
+              ))}
+            </section>
+          ) : null}
         </div>
 
         {work.media.length > 0 ? (

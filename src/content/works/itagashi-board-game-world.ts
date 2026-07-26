@@ -2,8 +2,8 @@ import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
 export default {
-  id: 'ita-gashi-board-game-world',
-  slug: 'ita-gashi-board-game-world',
+  id: 'itagashi-board-game-world',
+  slug: 'itagashi-board-game-world',
   title: '『いた菓子』ボードゲームワールド',
   description: '委託・共同制作のボードゲームワールド。',
   category: 'vrchat-world',

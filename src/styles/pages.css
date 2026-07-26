@@ -515,7 +515,18 @@
 .work-detail__content {
   display: grid;
   grid-template-columns: minmax(0, 48rem);
+  gap: var(--space-6);
   padding-block: var(--space-6);
+}
+
+.work-detail__introduction p:not(.section-kicker) {
+  margin: 0;
+  color: var(--color-ink-muted);
+  line-height: 1.85;
+}
+
+.work-detail__introduction p:not(.section-kicker) + p {
+  margin-block-start: var(--space-3);
 }
 
 .work-detail__content h2,

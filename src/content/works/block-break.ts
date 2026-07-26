@@ -5,11 +5,16 @@ export default {
   slug: 'block-break',
   title: 'Block Break',
   description: '過去に制作していたブロック崩しを、公開できる形に整えた作品。',
-  category: 'past-game',
+  category: 'game',
   status: 'archived',
   role: 'self-produced',
   period: '2013',
   firstPublishedAt: null,
+  gameDetails: {
+    genre: 'ブロック崩し',
+    developmentTool: 'Tonyu System',
+    introduction: ['過去に制作していたブロック崩しを、公開できる形に整えた作品。'],
+  },
   media: [
     {
       kind: 'image',
@@ -39,12 +44,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: Block Break',
+      url: 'https://www.houmotsuko.net/game/old/brobre/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
     {
       field: 'first-published-at',
-      note: 'Notionでは公開年のみ確認でき、月日は未確認。',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
     },
   ],
 } satisfies Work

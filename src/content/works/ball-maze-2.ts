@@ -5,11 +5,18 @@ export default {
   slug: 'ball-maze-2',
   title: 'Ball Maze II',
   description: 'ビー玉転がし風の迷路ゲーム第2作。高さの概念とステージエディット機能を加えた。',
-  category: 'past-game',
+  category: 'game',
   status: 'archived',
   role: 'self-produced',
   period: '2006',
   firstPublishedAt: null,
+  gameDetails: {
+    genre: '擬似3D迷路',
+    developmentTool: 'Tonyu System',
+    introduction: [
+      'ビー玉転がし風の迷路ゲーム「Ball Maze」の続編。高さの概念とステージエディット機能を加えた。',
+    ],
+  },
   media: [],
   featured: false,
   url: 'https://tonbonotion01.notion.site/1848538c8ca0807bb0b6d177ce583026',
@@ -20,12 +27,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: Ball Maze II',
+      url: 'https://www.houmotsuko.net/game/old/bmaze2/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
     {
       field: 'first-published-at',
-      note: 'Notionでは公開年のみ確認でき、月日は未確認。',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
     },
     {
       field: 'media',

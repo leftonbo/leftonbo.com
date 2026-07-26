@@ -6,11 +6,19 @@ export default {
   title: 'HeRoad',
   description:
     'WOLF RPG Editor製の「サクサク爽快RPG」。WOLF RPGエディターコンテスト第8回で総合14位、熱中度部門8位、遊びやすさ部門3位に入った。',
-  category: 'past-game',
+  category: 'game',
   status: 'published',
   role: 'self-produced',
   period: '2016',
   firstPublishedAt: '2016-07-24',
+  gameDetails: {
+    genre: 'RPG',
+    developmentTool: 'WOLF RPGエディター',
+    introduction: [
+      'Infiroadのスピンオフとして制作したRPG。魔王討伐の使命を受けた勇者を、全7種類の仲間が支える。',
+      '仲間が持つ個性豊かなスキルを使い分け、ボスを攻略しながらテンポよく進む。',
+    ],
+  },
   media: [
     {
       kind: 'image',
@@ -43,6 +51,12 @@ export default {
     {
       label: 'TonboNotion01: HeRoad',
       url: 'https://tonbonotion01.notion.site/game-heroad',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
+    {
+      label: 'カクレ家ホウモツコ: HeRoad',
+      url: 'https://www.houmotsuko.net/game/heroad/index',
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },

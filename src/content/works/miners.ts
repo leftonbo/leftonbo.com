@@ -5,11 +5,19 @@ export default {
   slug: 'miners',
   title: 'Miners',
   description: 'DX Library製の協力採掘アクションゲーム。ほかのプレイヤーと協力し、2000m先にある世界の果てを目指す。',
-  category: 'past-game',
+  category: 'game',
   status: 'published',
   role: 'self-produced',
   period: '2015',
   firstPublishedAt: '2015-03-13',
+  gameDetails: {
+    genre: '採掘アクション',
+    developmentTool: 'DXライブラリ',
+    introduction: [
+      'ほかのプレイヤーと協力し、鉱石を掘って強くなりながら2000m先にある世界の果てを目指す。',
+      '復活、爆弾、ダイヤモンドの3種類のアイテムを使い、深度とともに上がる危険度へ挑む。オンラインでは最大8人で協力できる。',
+    ],
+  },
   media: [
     {
       kind: 'image',
@@ -48,6 +56,12 @@ export default {
     {
       label: 'TonboNotion01: Miners',
       url: 'https://tonbonotion01.notion.site/game-miners',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
+    {
+      label: 'カクレ家ホウモツコ: Miners',
+      url: 'https://www.houmotsuko.net/game/miners/index',
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },

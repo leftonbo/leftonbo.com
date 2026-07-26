@@ -3,14 +3,14 @@ import type { ExternalLinkCategory, WorkCategory, WorkRole } from '../content/ty
 export const categoryLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'VRChatワールド',
   'avatar-3d': 'アバター／3D',
-  'past-game': '過去のゲーム制作',
+  game: 'ゲーム制作',
   vket: 'Vket出展',
 }
 
 export const categoryShortLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'World',
   'avatar-3d': 'Avatar / 3D',
-  'past-game': 'Game',
+  game: 'Game',
   vket: 'Vket',
 }
 
@@ -38,7 +38,7 @@ export const linkCategoryLabels: Record<ExternalLinkCategory, string> = {
 export const workCategoryOrder: readonly WorkCategory[] = [
   'vrchat-world',
   'avatar-3d',
-  'past-game',
+  'game',
   'vket',
 ]
 

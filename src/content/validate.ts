@@ -5,6 +5,7 @@ import type {
   ContentSource,
   ContentValidationIssue,
   PendingFact,
+  Work,
   WorkCategory,
   WorkMedia,
 } from "./types";
@@ -34,7 +35,7 @@ const pendingFactFields = new Set([
 const workCategories = new Set<WorkCategory>([
   "vrchat-world",
   "avatar-3d",
-  "past-game",
+  "game",
   "vket",
 ]);
 const workStatuses = new Set([
@@ -213,6 +214,39 @@ function validateWorkMedia(
   });
 }
 
+function validateGameDetails(
+  issues: ContentValidationIssue[],
+  path: string,
+  work: Work,
+): void {
+  if (work.category !== 'game') {
+    if (work.gameDetails !== undefined) {
+      issues.push({ path, message: 'ゲーム作品以外にはgameDetailsを指定できません。' })
+    }
+    return
+  }
+
+  const gameDetails = work.gameDetails
+  if (gameDetails === undefined) {
+    issues.push({ path, message: 'ゲーム作品にはgameDetailsが必要です。' })
+    return
+  }
+
+  addRequiredTextIssue(issues, `${path}.genre`, gameDetails.genre)
+  if (gameDetails.developmentTool !== null) {
+    addRequiredTextIssue(issues, `${path}.developmentTool`, gameDetails.developmentTool)
+  }
+
+  if (!Array.isArray(gameDetails.introduction) || gameDetails.introduction.length === 0) {
+    issues.push({ path: `${path}.introduction`, message: '紹介文が1段落以上必要です。' })
+    return
+  }
+
+  gameDetails.introduction.forEach((paragraph, index) => {
+    addRequiredTextIssue(issues, `${path}.introduction[${index}]`, paragraph)
+  })
+}
+
 export function collectContentValidationIssues(
   content: CanonicalContent = canonicalContent,
 ): ContentValidationIssue[] {
@@ -312,6 +346,7 @@ export function collectContentValidationIssues(
     if (work.firstPublishedAt !== null) {
       addDateIssue(issues, `${path}.firstPublishedAt`, work.firstPublishedAt)
     }
+    validateGameDetails(issues, `${path}.gameDetails`, work)
     validateWorkMedia(issues, `${path}.media`, work.media);
     if (typeof work.featured !== "boolean") {
       issues.push({ path: `${path}.featured`, message: "booleanではありません。" });

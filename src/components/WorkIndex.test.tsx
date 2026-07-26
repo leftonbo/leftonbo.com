@@ -5,7 +5,7 @@ import { works } from '../content/works'
 import { WorkIndex } from './WorkIndex'
 
 const avatar3dCount = works.filter((work) => work.category === 'avatar-3d').length
-const pastGameCount = works.filter((work) => work.category === 'past-game').length
+const gameCount = works.filter((work) => work.category === 'game').length
 const vrchatWorldCount = works.filter((work) => work.category === 'vrchat-world').length
 
 describe('WorkIndex', () => {
@@ -54,11 +54,11 @@ describe('WorkIndex', () => {
   })
 
   it('restores filter state from direct URLs and popstate', async () => {
-    window.history.replaceState({}, '', '/works/?category=past-game#work-index')
+    window.history.replaceState({}, '', '/works/?category=game#work-index')
     render(<WorkIndex works={works} />)
 
     await waitFor(() => {
-      expect(screen.getAllByRole('article')).toHaveLength(pastGameCount)
+      expect(screen.getAllByRole('article')).toHaveLength(gameCount)
     })
 
     window.history.pushState({}, '', '/works/?category=avatar-3d#work-index')
@@ -70,8 +70,8 @@ describe('WorkIndex', () => {
     })
   })
 
-  it('normalizes an unknown category without hiding works', async () => {
-    window.history.replaceState({}, '', '/works/?category=unknown#work-index')
+  it('normalizes the former game category as an unknown value without hiding works', async () => {
+    window.history.replaceState({}, '', '/works/?category=past-game#work-index')
     render(<WorkIndex works={works} />)
 
     await waitFor(() => {

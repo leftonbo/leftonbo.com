@@ -2,8 +2,8 @@ import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
 export default {
-  id: 'tonbo-battlefield-2-the-two-bases',
-  slug: 'tonbo-battlefield-2-the-two-bases',
+  id: 'tonbo-battlefield-the-two-bases',
+  slug: 'tonbo-battlefield-the-two-bases',
   title: 'TonboBattlefield 2: The Two Bases',
   description:
     '前作を発展させたFPS風対戦ワールド。20種類の武器、両手持ち武器、初心者向けの説明スクリーン、優勝者の表彰式を備える。',
@@ -15,25 +15,25 @@ export default {
   media: [
     {
       kind: 'image',
-      url: '/images/works/tonbo-battlefield-2-the-two-bases/hero.webp',
+      url: '/images/works/tonbo-battlefield-the-two-bases/hero.webp',
       alt: 'TonboBattlefield 2のメインサムネイル',
       credit: null,
     },
     {
       kind: 'image',
-      url: '/images/works/tonbo-battlefield-2-the-two-bases/gallery-02.webp',
+      url: '/images/works/tonbo-battlefield-the-two-bases/gallery-02.webp',
       alt: 'TonboBattlefield 2の紹介ポスター',
       credit: null,
     },
     {
       kind: 'image',
-      url: '/images/works/tonbo-battlefield-2-the-two-bases/gallery-03.webp',
+      url: '/images/works/tonbo-battlefield-the-two-bases/gallery-03.webp',
       alt: 'TonboBattlefield 2の過去サムネイル',
       credit: null,
     },
     {
       kind: 'image',
-      url: '/images/works/tonbo-battlefield-2-the-two-bases/gallery-04.webp',
+      url: '/images/works/tonbo-battlefield-the-two-bases/gallery-04.webp',
       alt: 'TonboBattlefield 2の初期サムネイル',
       credit: null,
     },

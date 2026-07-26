@@ -5,11 +5,16 @@ export default {
   slug: 'rocket-lunch-iyaa',
   title: 'RocketLunch嫌ぁ～',
   description: '身内の企画に合わせ、1日で制作したUnity 4.x製のバカゲーFPS。',
-  category: 'past-game',
+  category: 'game',
   status: 'archived',
   role: 'self-produced',
   period: '2015',
   firstPublishedAt: null,
+  gameDetails: {
+    genre: 'FPS',
+    developmentTool: 'Unity 4.x',
+    introduction: ['身内の企画に合わせ、1日で制作したUnity 4.x製のFPS。'],
+  },
   media: [
     {
       kind: 'image',
@@ -27,12 +32,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: RocketLunch嫌ぁ～',
+      url: 'https://www.houmotsuko.net/game/old/rokiya/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
     {
       field: 'first-published-at',
-      note: 'Notionでは公開年のみ確認でき、月日は未確認。',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
     },
   ],
 } satisfies Work

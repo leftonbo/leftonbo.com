@@ -5,11 +5,16 @@ export default {
   slug: 'go-and-battle',
   title: 'Go and Battle!',
   description: 'すごろくにRPG風の戦闘を組み合わせたゲーム。ボスやライバルを倒しながらゴールを目指す。',
-  category: 'past-game',
+  category: 'game',
   status: 'archived',
   role: 'self-produced',
   period: '2009',
   firstPublishedAt: null,
+  gameDetails: {
+    genre: 'すごろくRPG',
+    developmentTool: 'Tonyu System',
+    introduction: ['すごろくにRPG風の戦闘を組み合わせ、ボスやライバルを倒しながらゴールを目指す。'],
+  },
   media: [
     {
       kind: 'image',
@@ -45,12 +50,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: Go and Battle!',
+      url: 'https://www.houmotsuko.net/game/old/goaba/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
     {
       field: 'first-published-at',
-      note: 'Notionでは公開年のみ確認でき、月日は未確認。',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
     },
   ],
 } satisfies Work

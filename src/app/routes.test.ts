@@ -8,7 +8,7 @@ describe('route matching', () => {
     expect(normalizePathname('/index.html')).toBe('/')
     expect(normalizePathname('/profile/index.html')).toBe('/profile/')
     expect(normalizePathname('/works/light-trail/index.html')).toBe('/works/light-trail/')
-    expect(normalizePathname('/works/?category=past-game')).toBe('/works/')
+    expect(normalizePathname('/works/?category=game')).toBe('/works/')
   })
 
   it('matches a directly linked work detail', () => {
@@ -17,10 +17,15 @@ describe('route matching', () => {
     if (route.kind === 'work-detail') {
       expect(route.work.title).toBe('Light Trail')
     }
+
+    expect(matchRoute('/works/itagashi-board-game-world/', works).kind).toBe('work-detail')
+    expect(matchRoute('/works/tonbo-battlefield-the-two-bases/', works).kind).toBe('work-detail')
   })
 
   it('returns the recovery page for an invalid detail URL', () => {
     expect(matchRoute('/works/not-a-real-work/', works).kind).toBe('not-found')
+    expect(matchRoute('/works/ita-gashi-board-game-world/', works).kind).toBe('not-found')
+    expect(matchRoute('/works/tonbo-battlefield-2-the-two-bases/', works).kind).toBe('not-found')
     expect(matchRoute('/somewhere-else/', works).kind).toBe('not-found')
   })
 })

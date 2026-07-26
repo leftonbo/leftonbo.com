@@ -5,11 +5,16 @@ export default {
   slug: 'elem-shot',
   title: 'ElemShot',
   description: '3種類のショットを使い分けて進むシューティングゲーム。',
-  category: 'past-game',
+  category: 'game',
   status: 'archived',
   role: 'self-produced',
   period: '2014',
   firstPublishedAt: null,
+  gameDetails: {
+    genre: 'シューティング',
+    developmentTool: 'DXライブラリ',
+    introduction: ['3種類のショットを使い分けて進むシューティングゲーム。'],
+  },
   media: [
     {
       kind: 'image',
@@ -39,12 +44,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: ElemShot',
+      url: 'https://www.houmotsuko.net/game/old/elemshot/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
     {
       field: 'first-published-at',
-      note: 'Notionでは公開年のみ確認でき、月日は未確認。',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
     },
   ],
 } satisfies Work

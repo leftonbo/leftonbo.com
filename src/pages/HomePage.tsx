@@ -195,7 +195,7 @@ function createFlightStops(activityAreas: readonly ActivityArea[]): readonly Fli
   const candidates = [
     { area: findArea('vrchat-worlds'), href: '/works/?category=vrchat-world#work-index' },
     { area: findArea('avatar-3d'), href: '/works/?category=avatar-3d#work-index' },
-    { area: findArea('games'), href: '/works/?category=past-game#work-index' },
+    { area: findArea('games'), href: '/works/?category=game#work-index' },
     { area: findArea('original-characters'), href: findArea('original-characters')?.url ?? '/links/#creation', external: true },
   ]
 
@@ -207,7 +207,7 @@ function createFlightStops(activityAreas: readonly ActivityArea[]): readonly Fli
 function getActivityHref(area: ActivityArea): { href: string; external: boolean } | undefined {
   if (area.id === 'vrchat-worlds') return { href: '/works/?category=vrchat-world#work-index', external: false }
   if (area.id === 'avatar-3d') return { href: '/works/?category=avatar-3d#work-index', external: false }
-  if (area.id === 'games') return { href: '/works/?category=past-game#work-index', external: false }
+  if (area.id === 'games') return { href: '/works/?category=game#work-index', external: false }
   if (area.url) return { href: area.url, external: true }
   return undefined
 }

@@ -34,7 +34,7 @@ export function getMachineReadableFiles(): Record<string, string> {
     })),
   }
   const worksPayload = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     siteUpdatedAt: siteProfile.updatedAt,
     count: works.length,
     works: works.map((work) => ({
@@ -46,6 +46,7 @@ export function getMachineReadableFiles(): Record<string, string> {
       role: work.role === 'pending-confirmation' ? null : work.role,
       period: work.period,
       firstPublishedAt: work.firstPublishedAt,
+      gameDetails: work.gameDetails ?? null,
       media: work.media,
       featured: work.featured,
       url: work.url,
@@ -98,7 +99,7 @@ export function worksCollectionJsonLd() {
     '@id': `${SITE_ORIGIN}/works/#page`,
     url: `${SITE_ORIGIN}/works/`,
     name: `${siteProfile.name}の制作`,
-    description: 'VRChatワールド、アバター／3D、過去のゲーム制作の掲載一覧。',
+    description: 'VRChatワールド、アバター／3D、ゲーム制作の掲載一覧。',
     dateModified: siteProfile.updatedAt,
     inLanguage: 'ja',
     mainEntity: {
@@ -130,7 +131,7 @@ export function creativeWorkJsonLd(work: Work) {
     sameAs: work.url,
     name: work.title,
     description: work.description,
-    genre: categoryLabels[work.category],
+    genre: work.gameDetails?.genre ?? categoryLabels[work.category],
     inLanguage: 'ja',
     ...(work.firstPublishedAt ? { datePublished: work.firstPublishedAt } : {}),
     ...involvement,
@@ -157,9 +158,16 @@ function createWorksMarkdown(): string {
           ...(work.role === 'pending-confirmation' ? [] : [`- 関わり方: ${roleLabels[work.role]}`]),
           ...(work.period ? [`- 制作時期: ${work.period}`] : []),
           ...(work.firstPublishedAt ? [`- 初公開日: ${work.firstPublishedAt}`] : []),
+          ...(work.gameDetails ? [`- ジャンル: ${work.gameDetails.genre}`] : []),
+          ...(work.gameDetails?.developmentTool
+            ? [`- 制作ツール: ${work.gameDetails.developmentTool}`]
+            : []),
           `- 公開先: ${work.url}`,
         ].join('\n')
-        return `### [${work.title}](${SITE_ORIGIN}/works/${work.slug}/)\n\n${work.description}\n\n${details}`
+        const introduction = work.gameDetails
+          ? `\n\n#### ゲーム紹介\n\n${work.gameDetails.introduction.join('\n\n')}`
+          : ''
+        return `### [${work.title}](${SITE_ORIGIN}/works/${work.slug}/)\n\n${work.description}\n\n${details}${introduction}`
       })
       .join('\n\n')
     return `## ${categoryLabels[category]}\n\n${entries}`

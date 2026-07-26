@@ -6,11 +6,19 @@ export default {
   title: 'Infiroad',
   description:
     'Unity製のクリッカーゲーム。分身を召喚する魔道書と一本の白剣を手に、勇者が魔物を倒しながら無限回廊を進んで世界を取り戻す。',
-  category: 'past-game',
+  category: 'game',
   status: 'stopped-with-public-record',
   role: 'self-produced',
-  period: '2016',
-  firstPublishedAt: '2016-03-10',
+  period: '2015',
+  firstPublishedAt: null,
+  gameDetails: {
+    genre: 'クリッカー',
+    developmentTool: 'Unity 5.x',
+    introduction: [
+      '魔物に支配された世界を取り戻すため、勇者が分身を召喚する魔道書と一本の白剣を手に無限回廊を進む。',
+      '勇者を召喚して戦い、最大20種類の仲間を雇って自動的に出現させられる。仲間ごとの能力に加え、レリックとミスリルによる強化要素を備える。',
+    ],
+  },
   media: [
     {
       kind: 'image',
@@ -46,7 +54,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: Infiroad',
+      url: 'https://www.houmotsuko.net/game/infiroad/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [],
+  factsPending: [
+    {
+      field: 'first-published-at',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
+    },
+  ],
 } satisfies Work

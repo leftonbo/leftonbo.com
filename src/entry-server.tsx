@@ -55,7 +55,7 @@ export function renderPage(route: string): RenderedPage {
       html,
       head: {
         title: `制作 | ${siteProfile.name}`,
-        description: 'VRChatワールド、アバター／3D、過去のゲーム制作を紹介します。',
+        description: 'VRChatワールド、アバター／3D、ゲーム制作を紹介します。',
         canonical: canonicalUrl('/works/'),
         ogType: 'website',
       },

@@ -167,6 +167,12 @@ export const activityAreas = [
         kind: "first-party-public",
         verifiedAt: CONTENT_VERIFIED_AT,
       },
+      {
+        label: "カクレ家ホウモツコ: ゲーム一覧",
+        url: "https://www.houmotsuko.net/game/index",
+        kind: "first-party-public",
+        verifiedAt: "2026-07-26",
+      },
     ],
     verifiedAt: CONTENT_VERIFIED_AT,
     factsPending: [],

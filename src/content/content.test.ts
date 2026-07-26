@@ -23,10 +23,27 @@ describe('canonical content', () => {
     expect(works).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ id: 'ball-maze-2', slug: 'ball-maze-2', title: 'Ball Maze II' }),
+        expect.objectContaining({
+          id: 'itagashi-board-game-world',
+          slug: 'itagashi-board-game-world',
+        }),
+        expect.objectContaining({
+          id: 'tonbo-battlefield-the-two-bases',
+          slug: 'tonbo-battlefield-the-two-bases',
+        }),
         expect.objectContaining({ id: 'vket-2020', slug: 'vket-2020', title: 'Vket 5 出展' }),
       ]),
     )
-    expect(works.some((work) => work.id === 'ball-maze-ii' || work.id === 'vket-5-2020')).toBe(false)
+    expect(
+      works.some((work) =>
+        [
+          'ball-maze-ii',
+          'ita-gashi-board-game-world',
+          'tonbo-battlefield-2-the-two-bases',
+          'vket-5-2020',
+        ].includes(work.id),
+      ),
+    ).toBe(false)
   })
 
   it('automatically aggregates every work article', () => {
@@ -80,6 +97,66 @@ describe('canonical content', () => {
     )
   })
 
+  it('requires complete game details only for game works', () => {
+    const gameWork = works.find((work) => work.category === 'game')
+    const nonGameWork = works.find((work) => work.category !== 'game')
+    if (!gameWork?.gameDetails || !nonGameWork) throw new Error('検証元の制作記事がありません。')
+
+    const issues = collectContentValidationIssues({
+      profile: siteProfile,
+      links: externalLinks,
+      activityAreas,
+      works: [
+        ...works,
+        {
+          ...gameWork,
+          id: 'game-without-details',
+          slug: 'game-without-details',
+          gameDetails: undefined,
+        },
+        {
+          ...gameWork,
+          id: 'game-with-empty-genre',
+          slug: 'game-with-empty-genre',
+          gameDetails: { ...gameWork.gameDetails, genre: ' ' },
+        },
+        {
+          ...gameWork,
+          id: 'game-with-empty-introduction',
+          slug: 'game-with-empty-introduction',
+          gameDetails: { ...gameWork.gameDetails, introduction: [''] },
+        },
+        {
+          ...nonGameWork,
+          id: 'non-game-with-details',
+          slug: 'non-game-with-details',
+          gameDetails: gameWork.gameDetails,
+        },
+      ],
+    })
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        {
+          path: `works[${works.length}].gameDetails`,
+          message: 'ゲーム作品にはgameDetailsが必要です。',
+        },
+        {
+          path: `works[${works.length + 1}].gameDetails.genre`,
+          message: '必須の文字列が空です。',
+        },
+        {
+          path: `works[${works.length + 2}].gameDetails.introduction[0]`,
+          message: '必須の文字列が空です。',
+        },
+        {
+          path: `works[${works.length + 3}].gameDetails`,
+          message: 'ゲーム作品以外にはgameDetailsを指定できません。',
+        },
+      ]),
+    )
+  })
+
   it('sorts all works by confirmed date, period year and slug', () => {
     const ids = works.map((work) => work.id)
     const indexOf = (id: string) => ids.indexOf(id)
@@ -89,8 +166,8 @@ describe('canonical content', () => {
     expect(indexOf('tonbo-house-03')).toBeLessThan(indexOf('sajak-sahagin-v3'))
     expect(indexOf('vket-2020')).toBeLessThan(indexOf('light-trail'))
     expect(indexOf('dorofune')).toBeLessThan(indexOf('elem-shot'))
-    expect(indexOf('super-block-break')).toBeLessThan(indexOf('ita-gashi-board-game-world'))
-    expect(indexOf('ita-gashi-board-game-world')).toBeLessThan(indexOf('kuso-dekke-pusher-game'))
+    expect(indexOf('super-block-break')).toBeLessThan(indexOf('itagashi-board-game-world'))
+    expect(indexOf('itagashi-board-game-world')).toBeLessThan(indexOf('kuso-dekke-pusher-game'))
   })
 
   it('describes the portfolio without asserting current activity', () => {
@@ -110,7 +187,10 @@ describe('canonical content', () => {
 
     expect(works.find((work) => work.id === 'tonbo-battlefield-shadow-valley')?.period).toBe('2022')
     expect(works.find((work) => work.id === 'tonbo-werewolf')?.firstPublishedAt).toBe('2020-09-24')
-    expect(works.find((work) => work.id === 'light-trail')?.firstPublishedAt).toBe('2018-05-29')
+    expect(works.find((work) => work.id === 'light-trail')?.firstPublishedAt).toBe('2018-04-29')
+    expect(works.find((work) => work.id === 'infiroad')).toEqual(
+      expect.objectContaining({ period: '2015', firstPublishedAt: null }),
+    )
     expect(works.find((work) => work.id === 'gabugabu-specter')?.firstPublishedAt).toBe('2023-12-02')
     expect(works.find((work) => work.id === 'kawauchi-board-game-world')?.period).toBe('2024')
     expect(works.find((work) => work.id === 'sajak-sahagin-v3')?.period).toBe('2023')
@@ -134,11 +214,32 @@ describe('canonical content', () => {
     )
   })
 
-  it('keeps old sites and non-approved works out of public data', () => {
+  it('integrates the approved old game sources without adding unrelated works', () => {
+    const gameWorks = works.filter((work) => work.category === 'game')
     const serialized = JSON.stringify({ works, externalLinks })
-    expect(serialized).not.toContain('houmotsuko.net')
+    expect(gameWorks).toHaveLength(14)
+    expect(
+      gameWorks.every(
+        (work) =>
+          work.gameDetails !== undefined &&
+          work.sources.some(
+            (source) =>
+              source.kind === 'first-party-public' && source.url.startsWith('https://www.houmotsuko.net/game/'),
+          ),
+      ),
+    ).toBe(true)
+    expect(
+      gameWorks.filter((work) => work.gameDetails?.developmentTool === null).map((work) => work.id),
+    ).toEqual(['pipe-4-run'])
+    expect(
+      activityAreas
+        .find((area) => area.id === 'games')
+        ?.sources.some((source) => source.url === 'https://www.houmotsuko.net/game/index'),
+    ).toBe(true)
+    expect(gameWorks.every((work) => work.url.startsWith('https://tonbonotion01.notion.site/'))).toBe(true)
     expect(serialized).not.toContain('TorchBreath')
     expect(serialized).not.toContain('eel-rpg-game')
+    expect(serialized).not.toContain('Drawing Catch')
   })
 
   it('uses valid HTTPS URLs for every external destination', () => {
@@ -157,8 +258,12 @@ describe('canonical content', () => {
     expect(routes).toHaveLength(works.length + 5)
     expect(routes).toContain('/404.html')
     expect(routes).toContain('/works/ball-maze-2/')
+    expect(routes).toContain('/works/itagashi-board-game-world/')
+    expect(routes).toContain('/works/tonbo-battlefield-the-two-bases/')
     expect(routes).toContain('/works/vket-2020/')
     expect(routes).not.toContain('/works/ball-maze-ii/')
+    expect(routes).not.toContain('/works/ita-gashi-board-game-world/')
+    expect(routes).not.toContain('/works/tonbo-battlefield-2-the-two-bases/')
     expect(routes).not.toContain('/works/vket-5-2020/')
     for (const work of works) {
       expect(routes).toContain(`/works/${work.slug}/`)
@@ -179,10 +284,21 @@ describe('canonical content', () => {
       ]),
     )
     const worksJson = JSON.parse(files['data/works.json'] ?? '{}') as {
+      schemaVersion?: number
       count?: number
       siteUpdatedAt?: string
-      works?: Array<{ firstPublishedAt?: string | null; period?: string | null; media?: unknown[] }>
+      works?: Array<{
+        id?: string
+        category?: string
+        firstPublishedAt?: string | null
+        period?: string | null
+        gameDetails?: { genre?: string; developmentTool?: string | null; introduction?: string[] } | null
+        media?: unknown[]
+      }>
     }
+    const profileJson = JSON.parse(files['data/profile.json'] ?? '{}') as { schemaVersion?: number }
+    expect(profileJson.schemaVersion).toBe(3)
+    expect(worksJson.schemaVersion).toBe(4)
     expect(worksJson.count).toBe(works.length)
     expect(worksJson.siteUpdatedAt).toBe(siteProfile.updatedAt)
     expect(
@@ -190,6 +306,19 @@ describe('canonical content', () => {
         (work) => 'firstPublishedAt' in work && 'period' in work && Array.isArray(work.media),
       ),
     ).toBe(true)
+    expect(
+      worksJson.works
+        ?.filter((work) => work.category === 'game')
+        .every((work) => work.gameDetails?.genre && work.gameDetails.introduction?.length),
+    ).toBe(true)
+    expect(
+      worksJson.works?.find((work) => work.id === 'pipe-4-run')?.gameDetails?.developmentTool,
+    ).toBeNull()
+    expect(files['works.md']).toContain('- ジャンル: RPG')
+    expect(files['works.md']).toContain('- 制作ツール: RPGツクールMV')
+    expect(files['works.md']).toContain('#### ゲーム紹介')
+    expect(creativeWorkJsonLd(works.find((work) => work.id === 'light-trail')!).genre).toBe('RPG')
+    expect(`${files['data/works.json']}\n${files['works.md']}`).not.toMatch(/最終更新|更新履歴/)
     expect(files['sitemap.xml']).toContain('/works/tonbo-werewolf/')
     expect(files['sitemap.xml']).toContain('/works/super-block-break/')
     expect(files['sitemap.xml']).toContain('/works/vket-2026-summer/')

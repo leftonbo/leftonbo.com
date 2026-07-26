@@ -29,7 +29,7 @@ export interface PendingFact {
   readonly note: string;
 }
 
-export type WorkCategory = 'vrchat-world' | 'avatar-3d' | 'past-game' | 'vket'
+export type WorkCategory = 'vrchat-world' | 'avatar-3d' | 'game' | 'vket'
 
 export type WorkStatus =
   | "published"
@@ -55,6 +55,12 @@ export interface WorkMedia {
   readonly credit: string | null;
 }
 
+export interface GameDetails {
+  readonly genre: string
+  readonly developmentTool: string | null
+  readonly introduction: readonly string[]
+}
+
 export interface Work {
   readonly id: string;
   readonly slug: string;
@@ -65,6 +71,7 @@ export interface Work {
   readonly role: WorkRole;
   readonly period: string | null;
   readonly firstPublishedAt: ISODate | null
+  readonly gameDetails?: GameDetails
   readonly media: readonly WorkMedia[];
   readonly featured: boolean;
   readonly url: string;

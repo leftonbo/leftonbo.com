@@ -5,11 +5,16 @@ export default {
   slug: 'super-block-break',
   title: 'スーパーブロック崩し',
   description: '公開情報で確認できる、最も古い制作ゲーム。',
-  category: 'past-game',
+  category: 'game',
   status: 'archived',
   role: 'self-produced',
   period: '2004',
   firstPublishedAt: null,
+  gameDetails: {
+    genre: 'ブロック崩し',
+    developmentTool: 'Tonyu System',
+    introduction: ['Tonyu Systemを使って制作した、公開情報で確認できる範囲では最も古いゲーム。'],
+  },
   media: [
     {
       kind: 'image',
@@ -27,12 +32,18 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
+    {
+      label: 'カクレ家ホウモツコ: スーパーブロック崩し',
+      url: 'https://www.houmotsuko.net/game/old/spblock/index',
+      kind: 'first-party-public',
+      verifiedAt: '2026-07-26',
+    },
   ],
   verifiedAt: '2026-07-26',
   factsPending: [
     {
       field: 'first-published-at',
-      note: 'Notionでは公開年のみ確認でき、月日は未確認。',
+      note: 'Notionと旧サイトでは初公開年のみ確認でき、月日は未確認。',
     },
   ],
 } satisfies Work
