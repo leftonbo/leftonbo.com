@@ -15,8 +15,8 @@ describe('WorkIndex', () => {
 
   it('renders every work in the no-filter baseline', () => {
     render(<WorkIndex works={works} />)
-    expect(screen.getAllByRole('article')).toHaveLength(15)
-    expect(screen.getByText('15', { selector: '.work-index__count strong' })).toBeInTheDocument()
+    expect(screen.getAllByRole('article')).toHaveLength(30)
+    expect(screen.getByText('30', { selector: '.work-index__count strong' })).toBeInTheDocument()
   })
 
   it('filters by category and writes the state to the URL', async () => {
@@ -36,7 +36,7 @@ describe('WorkIndex', () => {
     render(<WorkIndex works={works} />)
 
     await user.tab()
-    expect(screen.getByRole('button', { name: /すべて\s*15/ })).toHaveFocus()
+    expect(screen.getByRole('button', { name: /すべて\s*30/ })).toHaveFocus()
     await user.tab()
     const worldButton = screen.getByRole('button', { name: /VRChatワールド\s*8/ })
     expect(worldButton).toHaveFocus()
@@ -51,7 +51,7 @@ describe('WorkIndex', () => {
     render(<WorkIndex works={works} />)
 
     await waitFor(() => {
-      expect(screen.getAllByRole('article')).toHaveLength(5)
+      expect(screen.getAllByRole('article')).toHaveLength(14)
     })
 
     window.history.pushState({}, '', '/works/?category=avatar-3d#work-index')
@@ -70,8 +70,8 @@ describe('WorkIndex', () => {
     await waitFor(() => {
       expect(window.location.search).toBe('')
     })
-    expect(screen.getAllByRole('article')).toHaveLength(15)
-    expect(screen.getByRole('button', { name: /すべて\s*15/ })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getAllByRole('article')).toHaveLength(30)
+    expect(screen.getByRole('button', { name: /すべて\s*30/ })).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('does not add duplicate history entries for the active category', async () => {

@@ -12,7 +12,7 @@ export function WorksPage({ works }: WorksPageProps) {
       <PageIntro
         kicker="Works"
         title="制作をたどる"
-        description="VRChatワールド、アバター／3D、過去のゲーム制作をまとめています。"
+        description="VRChatワールド、アバター／3D、過去のゲーム制作、Vket出展をまとめています。"
       />
       <WorkIndex works={works} />
     </>

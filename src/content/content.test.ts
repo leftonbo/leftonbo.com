@@ -14,7 +14,7 @@ import { works } from './works'
 describe('canonical content', () => {
   it('passes the runtime schema and publication allowlist', () => {
     expect(collectContentValidationIssues()).toEqual([])
-    expect(works).toHaveLength(15)
+    expect(works).toHaveLength(30)
   })
 
   it('contains exactly the approved category counts', () => {
@@ -28,21 +28,42 @@ describe('canonical content', () => {
     expect(siteProfile.summary).not.toMatch(/活動中|取り組んでいます/)
   })
 
-  it('keeps explicit periods and media arrays without inventing missing facts', () => {
+  it('publishes Notion-backed dates and WebP media without inventing missing facts', () => {
     for (const work of works) {
       expect(work).toHaveProperty('period')
+      expect(work).toHaveProperty('firstPublishedAt')
       expect(Array.isArray(work.media)).toBe(true)
+      for (const media of work.media) {
+        expect(media.url).toMatch(/^\/images\/works\/.+\.webp$/)
+      }
     }
 
     expect(works.find((work) => work.id === 'tonbo-battlefield-shadow-valley')?.period).toBe('2022')
+    expect(works.find((work) => work.id === 'tonbo-werewolf')?.firstPublishedAt).toBe('2020-09-24')
+    expect(works.find((work) => work.id === 'light-trail')?.firstPublishedAt).toBe('2018-05-29')
+    expect(works.find((work) => work.id === 'gabugabu-specter')?.firstPublishedAt).toBe('2023-12-02')
     expect(works.find((work) => work.id === 'kawauchi-board-game-world')?.period).toBe('2024')
     expect(works.find((work) => work.id === 'sajak-sahagin-v3')?.period).toBe('2023')
     expect(works.find((work) => work.id === 'light-trail')?.period).toBe('2018')
-    expect(works.find((work) => work.id === 'tonbo-werewolf')?.period).toBeNull()
-    expect(works.every((work) => work.media.length === 0)).toBe(true)
-    expect(
-      works.every((work) => work.factsPending.some((fact) => fact.field === 'media')),
-    ).toBe(true)
+    expect(works.find((work) => work.id === 'tonbo-werewolf')?.media).toHaveLength(2)
+    expect(works.find((work) => work.id === 'light-trail')?.media).toHaveLength(5)
+    expect(works.find((work) => work.id === 'ball-maze')?.media).toHaveLength(0)
+    expect(works.find((work) => work.id === 'ball-maze')?.factsPending).toEqual(
+      expect.arrayContaining([expect.objectContaining({ field: 'media' })]),
+    )
+  })
+
+  it('splits the former old-game collection and integrates Vket records into works', () => {
+    expect(works.some((work) => work.id === 'older-games')).toBe(false)
+    expect(works.filter((work) => work.category === 'past-game')).toHaveLength(14)
+    expect(works.filter((work) => work.category === 'vket')).toHaveLength(6)
+    expect(works).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ id: 'rocket-lunch-iyaa' }),
+        expect.objectContaining({ id: 'super-block-break' }),
+        expect.objectContaining({ id: 'vket-2026-summer' }),
+      ]),
+    )
   })
 
   it('keeps old sites and non-approved works out of public data', () => {
@@ -88,12 +109,18 @@ describe('canonical content', () => {
     const worksJson = JSON.parse(files['data/works.json'] ?? '{}') as {
       count?: number
       siteUpdatedAt?: string
-      works?: Array<{ period?: string | null; media?: unknown[] }>
+      works?: Array<{ firstPublishedAt?: string | null; period?: string | null; media?: unknown[] }>
     }
     expect(worksJson.count).toBe(works.length)
     expect(worksJson.siteUpdatedAt).toBe(siteProfile.updatedAt)
-    expect(worksJson.works?.every((work) => 'period' in work && Array.isArray(work.media))).toBe(true)
+    expect(
+      worksJson.works?.every(
+        (work) => 'firstPublishedAt' in work && 'period' in work && Array.isArray(work.media),
+      ),
+    ).toBe(true)
     expect(files['sitemap.xml']).toContain('/works/tonbo-werewolf/')
+    expect(files['sitemap.xml']).toContain('/works/super-block-break/')
+    expect(files['sitemap.xml']).toContain('/works/vket-2026-summer/')
     expect(files['llms.txt']).toContain('/data/profile.json')
     expect(files['profile.md']).toContain('[GitHub]')
     expect(`${files['profile.md']}\n${files['works.md']}\n${files['llms.txt']}`).not.toMatch(

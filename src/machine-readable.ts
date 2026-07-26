@@ -1,6 +1,5 @@
 import { categoryLabels, roleLabels, workCategoryOrder } from './app/presentation'
 import { getStaticRoutePaths } from './app/routes'
-import { history } from './content/history'
 import { activityAreas, externalLinks, siteProfile } from './content/site'
 import type { Work } from './content/types'
 import { works } from './content/works'
@@ -11,7 +10,7 @@ const identityLinkIds = new Set(['tonbo-notion', 'github', 'x', 'vrchat'])
 export function getMachineReadableFiles(): Record<string, string> {
   const publicRoutes = getStaticRoutePaths(works).filter((route) => route !== '/404.html')
   const profilePayload = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     profile: {
       name: siteProfile.name,
       reading: siteProfile.reading,
@@ -33,16 +32,9 @@ export function getMachineReadableFiles(): Record<string, string> {
       url: link.url,
       category: link.category,
     })),
-    history: history.map((entry) => ({
-      id: entry.id,
-      period: entry.period,
-      title: entry.title,
-      category: entry.category,
-      groupName: entry.groupName,
-    })),
   }
   const worksPayload = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     siteUpdatedAt: siteProfile.updatedAt,
     count: works.length,
     works: works.map((work) => ({
@@ -53,6 +45,7 @@ export function getMachineReadableFiles(): Record<string, string> {
       category: work.category,
       role: work.role === 'pending-confirmation' ? null : work.role,
       period: work.period,
+      firstPublishedAt: work.firstPublishedAt,
       media: work.media,
       featured: work.featured,
       url: work.url,
@@ -139,6 +132,7 @@ export function creativeWorkJsonLd(work: Work) {
     description: work.description,
     genre: categoryLabels[work.category],
     inLanguage: 'ja',
+    ...(work.firstPublishedAt ? { datePublished: work.firstPublishedAt } : {}),
     ...involvement,
   }
 }
@@ -162,6 +156,7 @@ function createWorksMarkdown(): string {
         const details = [
           ...(work.role === 'pending-confirmation' ? [] : [`- 関わり方: ${roleLabels[work.role]}`]),
           ...(work.period ? [`- 制作時期: ${work.period}`] : []),
+          ...(work.firstPublishedAt ? [`- 初公開日: ${work.firstPublishedAt}`] : []),
           `- 公開先: ${work.url}`,
         ].join('\n')
         return `### [${work.title}](${SITE_ORIGIN}/works/${work.slug}/)\n\n${work.description}\n\n${details}`

@@ -1,5 +1,4 @@
 import { SiteShell } from '../components/SiteShell'
-import { history } from '../content/history'
 import { activityAreas, externalLinks, siteProfile } from '../content/site'
 import { works } from '../content/works'
 import { HomePage } from '../pages/HomePage'
@@ -29,7 +28,6 @@ export function App({ pathname }: AppProps) {
           profile={siteProfile}
           activityAreas={activityAreas}
           works={works}
-          history={history}
           externalLinks={externalLinks}
         />
       ) : null}

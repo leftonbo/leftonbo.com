@@ -1,13 +1,14 @@
-export type MarkCategory = 'vrchat-world' | 'avatar-3d' | 'past-game'
+import type { WorkCategory } from '../content/types'
 
-const markLabels: Record<MarkCategory, string> = {
+const markLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'WORLD',
   'avatar-3d': '3D',
   'past-game': 'GAME',
+  vket: 'VKET',
 }
 
 interface WorkMarkProps {
-  category: MarkCategory
+  category: WorkCategory
 }
 
 export function WorkMark({ category }: WorkMarkProps) {

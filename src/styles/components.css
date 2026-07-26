@@ -231,6 +231,13 @@
   border-radius: 36% 26% 54% 24%;
 }
 
+.work-mark--vket {
+  background: var(--color-surface);
+  border-style: dashed;
+  border-radius: 50% 30% 50% 30%;
+  color: var(--color-wing);
+}
+
 .flight-map {
   padding: clamp(1.25rem, 3vw, 2rem);
   background: var(--color-surface);

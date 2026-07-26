@@ -4,12 +4,14 @@ export const categoryLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'VRChatワールド',
   'avatar-3d': 'アバター／3D',
   'past-game': '過去のゲーム制作',
+  vket: 'Vket出展',
 }
 
 export const categoryShortLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'World',
   'avatar-3d': 'Avatar / 3D',
   'past-game': 'Game',
+  vket: 'Vket',
 }
 
 export const roleLabels: Record<WorkRole, string> = {
@@ -18,6 +20,7 @@ export const roleLabels: Record<WorkRole, string> = {
   collaborator: '委託・共同制作',
   'programming-support': 'Programming Support',
   'pending-confirmation': '担当範囲を確認中',
+  exhibitor: '出展',
 }
 
 export const linkCategoryLabels: Record<ExternalLinkCategory, string> = {
@@ -32,7 +35,12 @@ export const linkCategoryLabels: Record<ExternalLinkCategory, string> = {
   community: 'コミュニティ',
 }
 
-export const workCategoryOrder: readonly WorkCategory[] = ['vrchat-world', 'avatar-3d', 'past-game']
+export const workCategoryOrder: readonly WorkCategory[] = [
+  'vrchat-world',
+  'avatar-3d',
+  'past-game',
+  'vket',
+]
 
 export const editorialEntranceWorkIds = [
   'tonbo-werewolf',

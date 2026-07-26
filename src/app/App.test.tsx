@@ -19,6 +19,13 @@ describe('App routes', () => {
       'https://tonbonotion01.notion.site/game-lighttrail',
     )
     expect(screen.getByRole('heading', { level: 2, name: '作品情報' })).toBeInTheDocument()
+    expect(screen.getByText('2018年5月29日')).toHaveAttribute('datetime', '2018-05-29')
+    expect(screen.getByRole('heading', { level: 2, name: '作品画像' })).toBeInTheDocument()
+    expect(screen.getAllByRole('img')).toHaveLength(5)
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
+      'src',
+      '/images/works/light-trail/hero.webp',
+    )
     expect(screen.queryByText('出典と公式導線')).not.toBeInTheDocument()
   })
 

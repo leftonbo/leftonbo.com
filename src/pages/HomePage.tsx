@@ -3,21 +3,21 @@ import { ExternalLink } from '../components/ExternalLink'
 import { FlightMap } from '../components/FlightMap'
 import type { FlightStop } from '../components/FlightMap'
 import { WorkMark } from '../components/WorkMark'
-import type { ActivityArea, ExternalLink as ExternalLinkData, HistoryEntry, SiteProfile, Work } from '../content/types'
+import type { ActivityArea, ExternalLink as ExternalLinkData, SiteProfile, Work } from '../content/types'
 
 interface HomePageProps {
   profile: SiteProfile
   activityAreas: readonly ActivityArea[]
   works: readonly Work[]
-  history: readonly HistoryEntry[]
   externalLinks: readonly ExternalLinkData[]
 }
 
-export function HomePage({ profile, activityAreas, works, history, externalLinks }: HomePageProps) {
+export function HomePage({ profile, activityAreas, works, externalLinks }: HomePageProps) {
   const entranceWorks = editorialEntranceWorkIds
     .map((id) => works.find((work) => work.id === id || work.slug === id))
     .filter((work): work is Work => work !== undefined)
   const flightStops = createFlightStops(activityAreas)
+  const exhibitionWorks = works.filter((work) => work.category === 'vket')
   const primaryLinks = ['tonbo-notion', 'vrchat', 'booth', 'github']
     .map((id) => externalLinks.find((link) => link.id === id))
     .filter((link): link is ExternalLinkData => link !== undefined)
@@ -141,16 +141,21 @@ export function HomePage({ profile, activityAreas, works, history, externalLinks
               出展の記録
             </h2>
             <p className="section-lead">
-              Vketへの出展を年代順にまとめています。
+              Vketへの出展も制作物として一覧へ統合し、各回の記録を個別ページからたどれるようにしました。
             </p>
+            <a className="text-link-arrow" href="/works/?category=vket#work-index">
+              Vket出展をすべて見る <span aria-hidden="true">→</span>
+            </a>
           </div>
           <ol className="history-list">
-            {history.map((entry) => (
-              <li key={entry.id}>
-                <span>{entry.period}</span>
+            {exhibitionWorks.map((work) => (
+              <li key={work.id}>
+                <span>{work.period}</span>
                 <div>
-                  <h3>{entry.title}</h3>
-                  <p>{entry.groupName}</p>
+                  <h3>
+                    <a href={`/works/${work.slug}/`}>{work.title}</a>
+                  </h3>
+                  <p>TonboWorkshop</p>
                 </div>
               </li>
             ))}

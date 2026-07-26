@@ -1,4 +1,3 @@
-import { history } from "./history";
 import { activityAreas, externalLinks, siteProfile } from "./site";
 import { works } from "./works";
 import type {
@@ -10,7 +9,7 @@ import type {
   WorkMedia,
 } from "./types";
 
-export const EXPECTED_WORK_COUNT = 15;
+export const EXPECTED_WORK_COUNT = 30;
 
 export const EXPECTED_WORK_IDS = [
   "tonbo-werewolf",
@@ -27,13 +26,29 @@ export const EXPECTED_WORK_IDS = [
   "heroad",
   "infiroad",
   "miners",
-  "older-games",
+  'rocket-lunch-iyaa',
+  'elem-shot',
+  'dorofune',
+  'pipe-4-run',
+  'block-break',
+  'battle-viewer',
+  'go-and-battle',
+  'ball-maze-ii',
+  'ball-maze',
+  'super-block-break',
+  'vket-2026-summer',
+  'vket-2025-summer',
+  'vket-2024-winter',
+  'vket-2024-summer',
+  'vket-2023-winter',
+  'vket-5-2020',
 ] as const;
 
 export const EXPECTED_WORK_COUNT_BY_CATEGORY = {
   "vrchat-world": 8,
   "avatar-3d": 2,
-  "past-game": 5,
+  "past-game": 14,
+  vket: 6,
 } as const satisfies Record<WorkCategory, number>;
 
 const canonicalContent = {
@@ -41,7 +56,6 @@ const canonicalContent = {
   links: externalLinks,
   activityAreas,
   works,
-  history,
 } satisfies CanonicalContent;
 
 const sourceKinds = new Set([
@@ -67,6 +81,7 @@ const workStatuses = new Set([
   "unverified",
   "stopped-with-public-record",
   "archived",
+  'confirmed-record',
 ]);
 const workRoles = new Set([
   "self-produced",
@@ -74,6 +89,7 @@ const workRoles = new Set([
   "collaborator",
   "programming-support",
   "pending-confirmation",
+  'exhibitor',
 ]);
 const workMediaKinds = new Set(["image"]);
 const externalLinkCategories = new Set([
@@ -220,7 +236,13 @@ function validateWorkMedia(
   media.forEach((item, index) => {
     const mediaPath = `${path}[${index}]`;
     addEnumIssue(issues, `${mediaPath}.kind`, item.kind, workMediaKinds);
-    addUrlIssue(issues, `${mediaPath}.url`, item.url);
+    if (typeof item.url === 'string' && item.url.startsWith('/')) {
+      if (!/^\/[a-zA-Z0-9._/-]+$/.test(item.url) || item.url.startsWith('//')) {
+        issues.push({ path: `${mediaPath}.url`, message: '不正なサイト内URLです。' })
+      }
+    } else {
+      addUrlIssue(issues, `${mediaPath}.url`, item.url);
+    }
     addRequiredTextIssue(issues, `${mediaPath}.alt`, item.alt);
     if (item.credit !== null) {
       addRequiredTextIssue(issues, `${mediaPath}.credit`, item.credit);
@@ -364,6 +386,9 @@ export function collectContentValidationIssues(
     if (work.period !== null) {
       addRequiredTextIssue(issues, `${path}.period`, work.period);
     }
+    if (work.firstPublishedAt !== null) {
+      addDateIssue(issues, `${path}.firstPublishedAt`, work.firstPublishedAt)
+    }
     validateWorkMedia(issues, `${path}.media`, work.media);
     if (typeof work.featured !== "boolean") {
       issues.push({ path: `${path}.featured`, message: "booleanではありません。" });
@@ -372,29 +397,6 @@ export function collectContentValidationIssues(
     addDateIssue(issues, `${path}.verifiedAt`, work.verifiedAt);
     validateSources(issues, `${path}.sources`, work.sources);
     validatePendingFacts(issues, `${path}.factsPending`, work.factsPending);
-  });
-
-  addDuplicateIssues(
-    issues,
-    "history.id",
-    content.history.map((entry) => entry.id),
-  );
-  content.history.forEach((entry, index) => {
-    const path = `history[${index}]`;
-    addRequiredTextIssue(issues, `${path}.id`, entry.id);
-    addRequiredTextIssue(issues, `${path}.period`, entry.period);
-    addRequiredTextIssue(issues, `${path}.title`, entry.title);
-    addRequiredTextIssue(issues, `${path}.groupName`, entry.groupName);
-    addEnumIssue(issues, `${path}.category`, entry.category, new Set(["vket"]));
-    addEnumIssue(
-      issues,
-      `${path}.status`,
-      entry.status,
-      new Set(["confirmed-record"]),
-    );
-    addDateIssue(issues, `${path}.verifiedAt`, entry.verifiedAt);
-    validateSources(issues, `${path}.sources`, entry.sources);
-    validatePendingFacts(issues, `${path}.factsPending`, entry.factsPending);
   });
 
   return issues;

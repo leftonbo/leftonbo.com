@@ -29,7 +29,7 @@ export interface PendingFact {
   readonly note: string;
 }
 
-export type WorkCategory = "vrchat-world" | "avatar-3d" | "past-game";
+export type WorkCategory = 'vrchat-world' | 'avatar-3d' | 'past-game' | 'vket'
 
 export type WorkStatus =
   | "published"
@@ -37,14 +37,16 @@ export type WorkStatus =
   | "recent-public-record"
   | "unverified"
   | "stopped-with-public-record"
-  | "archived";
+  | "archived"
+  | 'confirmed-record'
 
 export type WorkRole =
   | "self-produced"
   | "model-creator"
   | "collaborator"
   | "programming-support"
-  | "pending-confirmation";
+  | "pending-confirmation"
+  | 'exhibitor'
 
 export interface WorkMedia {
   readonly kind: "image";
@@ -62,6 +64,7 @@ export interface Work {
   readonly status: WorkStatus;
   readonly role: WorkRole;
   readonly period: string | null;
+  readonly firstPublishedAt: ISODate | null
   readonly media: readonly WorkMedia[];
   readonly featured: boolean;
   readonly url: string;
@@ -117,27 +120,11 @@ export interface ActivityArea {
   readonly factsPending: readonly PendingFact[];
 }
 
-export type HistoryCategory = "vket";
-export type HistoryStatus = "confirmed-record";
-
-export interface HistoryEntry {
-  readonly id: string;
-  readonly period: string;
-  readonly title: string;
-  readonly category: HistoryCategory;
-  readonly status: HistoryStatus;
-  readonly groupName: string;
-  readonly sources: readonly ContentSource[];
-  readonly verifiedAt: ISODate;
-  readonly factsPending: readonly PendingFact[];
-}
-
 export interface CanonicalContent {
   readonly profile: SiteProfile;
   readonly links: readonly ExternalLink[];
   readonly activityAreas: readonly ActivityArea[];
   readonly works: readonly Work[];
-  readonly history: readonly HistoryEntry[];
 }
 
 export interface ContentValidationIssue {

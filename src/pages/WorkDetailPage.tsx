@@ -61,9 +61,42 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                   <dd>{work.period}</dd>
                 </div>
               ) : null}
+              {work.firstPublishedAt ? (
+                <div>
+                  <dt>初公開日</dt>
+                  <dd>
+                    <time dateTime={work.firstPublishedAt}>{formatPublishedDate(work.firstPublishedAt)}</time>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
           </section>
         </div>
+
+        {work.media.length > 0 ? (
+          <section className="work-gallery" aria-labelledby="work-gallery-title">
+            <div className="work-gallery__heading">
+              <div>
+                <p className="section-kicker">Visual archive</p>
+                <h2 id="work-gallery-title">作品画像</h2>
+              </div>
+              <p>{work.media.length}点</p>
+            </div>
+            <ul>
+              {work.media.map((media, index) => (
+                <li key={media.url} className={index === 0 ? 'work-gallery__hero' : undefined}>
+                  <figure>
+                    <img src={media.url} alt={media.alt} loading="lazy" decoding="async" />
+                    <figcaption>
+                      <span>IMAGE {String(index + 1).padStart(2, '0')}</span>
+                      {media.credit ? <span>{media.credit}</span> : null}
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <nav className="work-neighbors" aria-label="同じカテゴリの制作">
           {previousWork ? (
@@ -96,4 +129,9 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
       </div>
     </article>
   )
+}
+
+function formatPublishedDate(value: string): string {
+  const [year, month, day] = value.split('-').map(Number)
+  return `${year}年${month}月${day}日`
 }
