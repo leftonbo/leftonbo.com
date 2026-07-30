@@ -2,8 +2,8 @@ import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
 export default {
-  id: 'kuso-dekke-pusher-game',
-  slug: 'kuso-dekke-pusher-game',
+  id: 'massive-medal-pusher',
+  slug: 'massive-medal-pusher',
   title: 'クソでっけぇプッシャーゲーム',
   description:
     'りくち制作のVRChatゲームワールド。メダルを落としてクレジットを獲得し、ルーレットやパークでプッシャー台を強化していく。LefTonboはProgramming Supportとして参加。',

@@ -167,7 +167,7 @@ describe('canonical content', () => {
     expect(indexOf('vket-2020')).toBeLessThan(indexOf('light-trail'))
     expect(indexOf('dorofune')).toBeLessThan(indexOf('elem-shot'))
     expect(indexOf('super-block-break')).toBeLessThan(indexOf('itagashi-board-game-world'))
-    expect(indexOf('itagashi-board-game-world')).toBeLessThan(indexOf('kuso-dekke-pusher-game'))
+    expect(indexOf('itagashi-board-game-world')).toBeLessThan(indexOf('massive-medal-pusher'))
   })
 
   it('describes the portfolio without asserting current activity', () => {
