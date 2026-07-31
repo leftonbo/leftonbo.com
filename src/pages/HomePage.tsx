@@ -1,8 +1,9 @@
-import { categoryLabels, editorialEntranceWorkIds, roleLabels } from '../app/presentation'
+import { editorialEntranceWorkIds } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
 import { FlightMap } from '../components/FlightMap'
 import type { FlightStop } from '../components/FlightMap'
-import { WorkMark } from '../components/WorkMark'
+import { OfficialLinkIcon } from '../components/OfficialLinkIcon'
+import { WorkCard } from '../components/WorkCard'
 import type { ActivityArea, ExternalLink as ExternalLinkData, SiteProfile, Work } from '../content/types'
 
 interface HomePageProps {
@@ -61,44 +62,27 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
         <div className="container">
           <div className="section-split-heading">
             <div>
-              <p className="section-kicker">Selected entrances</p>
+              <p className="section-kicker">Selected works</p>
               <h2 className="section-title" id="entrance-title">
-                制作の入口
+                代表作
               </h2>
             </div>
             <div>
               <p className="section-lead">
-                活動の幅が分かるよう、カテゴリの異なる制作を入口として並べています。
+                ワールド、ゲーム、3Dモデルから、LefTonboを知るための4作品を選びました。
               </p>
               <a className="text-link-arrow" href="/works/">
                 掲載作品をすべて見る <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
-          <ol className="entrance-list">
-            {entranceWorks.map((work, index) => (
+          <ul className="work-card-grid work-card-grid--featured" aria-label="代表作">
+            {entranceWorks.map((work) => (
               <li key={work.id}>
-                <article className="entrance-work">
-                  <p className="entrance-work__number" aria-hidden="true">
-                    {String(index + 1).padStart(2, '0')}
-                  </p>
-                  <WorkMark category={work.category} />
-                  <div>
-                    <p className="entrance-work__meta">
-                      {categoryLabels[work.category]} / {roleLabels[work.role]}
-                    </p>
-                    <h3>
-                      <a href={`/works/${work.slug}/`}>{work.title}</a>
-                    </h3>
-                    <p>{work.description}</p>
-                  </div>
-                  <a className="entrance-work__go" href={`/works/${work.slug}/`} aria-label={`${work.title}の詳細を見る`}>
-                    <span aria-hidden="true">→</span>
-                  </a>
-                </article>
+                <WorkCard work={work} />
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
       </section>
 
@@ -175,7 +159,10 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
           <ul>
             {primaryLinks.map((link) => (
               <li key={link.id}>
-                <ExternalLink href={link.url}>{link.label}</ExternalLink>
+                <ExternalLink href={link.url}>
+                  <OfficialLinkIcon linkId={link.id} category={link.category} />
+                  <span>{link.label}</span>
+                </ExternalLink>
               </li>
             ))}
             <li>

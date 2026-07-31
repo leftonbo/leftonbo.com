@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { categoryLabels, roleLabels, workCategoryOrder } from '../app/presentation'
+import { categoryLabels, workCategoryOrder } from '../app/presentation'
 import type { Work, WorkCategory } from '../content/types'
-import { WorkMark } from './WorkMark'
+import { WorkCard } from './WorkCard'
 
 type WorkFilter = 'all' | WorkCategory
 
@@ -84,33 +84,10 @@ export function WorkIndex({ works }: WorkIndexProps) {
             </button>
           ))}
         </div>
-        <ul className="work-list" id="work-results">
+        <ul className="work-card-grid" id="work-results" aria-label="制作一覧">
           {filteredWorks.map((work) => (
             <li key={work.id}>
-              <article className="work-listing">
-                <WorkMark category={work.category} />
-                <div className="work-listing__body">
-                  <div className="work-listing__meta">
-                    <span>{categoryLabels[work.category]}</span>
-                    {work.period ? <span>{work.period}</span> : null}
-                  </div>
-                  <h3>
-                    <a href={`/works/${work.slug}/`}>{work.title}</a>
-                  </h3>
-                  <p>{work.description}</p>
-                  {work.role !== 'pending-confirmation' ? (
-                    <p className="work-listing__role">関わり方: {roleLabels[work.role]}</p>
-                  ) : null}
-                </div>
-                <a
-                  className="work-listing__detail"
-                  href={`/works/${work.slug}/`}
-                  aria-label={`${work.title}の詳細を見る`}
-                >
-                  詳細を見る
-                  <span aria-hidden="true">→</span>
-                </a>
-              </article>
+              <WorkCard work={work} />
             </li>
           ))}
         </ul>

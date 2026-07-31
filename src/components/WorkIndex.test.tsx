@@ -65,7 +65,7 @@ describe('WorkIndex', () => {
     window.dispatchEvent(new PopStateEvent('popstate'))
 
     await waitFor(() => {
-      const results = screen.getByRole('list', { name: '' })
+      const results = screen.getByRole('list', { name: '制作一覧' })
       expect(within(results).getAllByRole('article')).toHaveLength(avatar3dCount)
     })
   })

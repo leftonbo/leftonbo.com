@@ -9,6 +9,7 @@ describe('App routes', () => {
     expect(screen.getByRole('heading', { level: 1, name: /LefTonbo/ })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: '制作を見る' })).toHaveAttribute('href', '/works/')
     expect(screen.getByRole('heading', { name: '制作の航路' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '代表作' })).toBeInTheDocument()
   })
 
   it('renders a detail page with an official destination and concise details', () => {

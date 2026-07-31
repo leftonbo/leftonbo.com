@@ -1,5 +1,6 @@
 import { linkCategoryLabels } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
+import { OfficialLinkIcon } from '../components/OfficialLinkIcon'
 import { PageIntro } from '../components/PageIntro'
 import type { ExternalLink as ExternalLinkData, ExternalLinkCategory } from '../content/types'
 
@@ -38,10 +39,13 @@ export function LinksPage({ links }: LinksPageProps) {
                 .filter((link) => link.category === category)
                 .map((link) => (
                   <li key={link.id} id={link.id === 'tonbo-notion' ? 'creation' : undefined}>
-                    <p>{linkCategoryLabels[link.category]}</p>
-                    <h3>
-                      <ExternalLink href={link.url}>{link.label}</ExternalLink>
-                    </h3>
+                    <ExternalLink className="official-link-card" href={link.url}>
+                      <OfficialLinkIcon linkId={link.id} category={link.category} />
+                      <div className="official-link-card__copy">
+                        <p>{linkCategoryLabels[link.category]}</p>
+                        <h3>{link.label}</h3>
+                      </div>
+                    </ExternalLink>
                   </li>
                 )),
             )}

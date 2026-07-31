@@ -43,8 +43,8 @@ export const workCategoryOrder: readonly WorkCategory[] = [
 ]
 
 export const editorialEntranceWorkIds = [
-  'tonbo-werewolf',
-  'tonbo-battlefield-shadow-valley',
-  'sajak-sahagin-v3',
-  'light-trail',
+  'tonbo-battlefield-the-two-bases',
+  'massive-medal-pusher',
+  'gabugabu-specter',
+  'infiroad',
 ] as const
