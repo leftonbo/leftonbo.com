@@ -10,6 +10,22 @@ function getWork(id: string) {
 }
 
 describe('WorkDetailPage', () => {
+  it('uses the first work image in the hero and exposes image descriptions as captions', () => {
+    const work = getWork('light-trail')
+    render(<WorkDetailPage work={work} works={works} />)
+
+    const heroImage = document.querySelector('.work-detail__visual img')
+    expect(heroImage).toHaveAttribute('src', work.media[0]?.url)
+    expect(screen.getAllByText(work.media[0]?.alt ?? '')).not.toHaveLength(0)
+  })
+
+  it('shows the default work mark when a work has no images', () => {
+    render(<WorkDetailPage work={getWork('ball-maze')} works={works} />)
+
+    expect(document.querySelector('.work-detail__visual--fallback .work-mark')).toBeInTheDocument()
+    expect(document.querySelector('.work-detail__visual img')).not.toBeInTheDocument()
+  })
+
   it('shows structured game facts and introduction only for game works', () => {
     const { rerender } = render(<WorkDetailPage work={getWork('light-trail')} works={works} />)
 

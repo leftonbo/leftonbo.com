@@ -13,6 +13,7 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
   const currentIndex = categoryWorks.findIndex((item) => item.id === work.id)
   const previousWork = currentIndex > 0 ? categoryWorks[currentIndex - 1] : undefined
   const nextWork = currentIndex >= 0 ? categoryWorks[currentIndex + 1] : undefined
+  const headerMedia = work.media[0]
 
   return (
     <article className="work-detail">
@@ -29,6 +30,19 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
           </ol>
         </nav>
         <header className="work-detail__hero">
+          <div className={`work-detail__visual${headerMedia ? '' : ' work-detail__visual--fallback'}`}>
+            {headerMedia ? (
+              <img
+                src={headerMedia.url}
+                alt={headerMedia.alt}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
+            ) : (
+              <WorkMark category={work.category} />
+            )}
+          </div>
           <div className="work-detail__title">
             <p className="section-kicker">{categoryLabels[work.category]}</p>
             <h1>{work.title}</h1>
@@ -37,7 +51,6 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               公式の公開先へ
             </ExternalLink>
           </div>
-          <WorkMark category={work.category} />
         </header>
 
         <div className="work-detail__content">
@@ -109,8 +122,13 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                   <figure>
                     <img src={media.url} alt={media.alt} loading="lazy" decoding="async" />
                     <figcaption>
-                      <span>IMAGE {String(index + 1).padStart(2, '0')}</span>
-                      {media.credit ? <span>{media.credit}</span> : null}
+                      <div>
+                        <span className="work-gallery__index">
+                          IMAGE {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <p>{media.caption ?? media.alt}</p>
+                      </div>
+                      {media.credit ? <span className="work-gallery__credit">{media.credit}</span> : null}
                     </figcaption>
                   </figure>
                 </li>

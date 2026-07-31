@@ -52,6 +52,7 @@ export interface WorkMedia {
   readonly kind: "image";
   readonly url: string;
   readonly alt: string;
+  readonly caption?: string;
   readonly credit: string | null;
 }
 

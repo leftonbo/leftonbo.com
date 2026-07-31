@@ -17,7 +17,7 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
   const entranceWorks = editorialEntranceWorkIds
     .map((id) => works.find((work) => work.id === id || work.slug === id))
     .filter((work): work is Work => work !== undefined)
-  const flightStops = createFlightStops(activityAreas)
+  const flightStops = createFlightStops(activityAreas, works)
   const exhibitionWorks = works.filter((work) => work.category === 'vket')
   const primaryLinks = ['tonbo-notion', 'vrchat', 'booth', 'github']
     .map((id) => externalLinks.find((link) => link.id === id))
@@ -177,18 +177,62 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
   )
 }
 
-function createFlightStops(activityAreas: readonly ActivityArea[]): readonly FlightStop[] {
+function createFlightStops(
+  activityAreas: readonly ActivityArea[],
+  works: readonly Work[],
+): readonly FlightStop[] {
   const findArea = (id: string) => activityAreas.find((area) => area.id === id)
-  const candidates = [
-    { area: findArea('vrchat-worlds'), href: '/works/?category=vrchat-world#work-index' },
-    { area: findArea('avatar-3d'), href: '/works/?category=avatar-3d#work-index' },
-    { area: findArea('games'), href: '/works/?category=game#work-index' },
-    { area: findArea('original-characters'), href: findArea('original-characters')?.url ?? '/links/#creation', external: true },
+  const candidates: readonly {
+    area: ActivityArea | undefined
+    category?: Work['category']
+    href: string
+    external?: boolean
+  }[] = [
+    {
+      area: findArea('vrchat-worlds'),
+      category: 'vrchat-world',
+      href: '/works/?category=vrchat-world#work-index',
+    },
+    {
+      area: findArea('avatar-3d'),
+      category: 'avatar-3d',
+      href: '/works/?category=avatar-3d#work-index',
+    },
+    {
+      area: findArea('games'),
+      category: 'game',
+      href: '/works/?category=game#work-index',
+    },
+    {
+      area: findArea('original-characters'),
+      href: findArea('original-characters')?.url ?? '/links/#creation',
+      external: true,
+    },
   ]
 
-  return candidates.flatMap(({ area, href, external }) =>
-    area ? [{ id: area.id, label: area.label, description: area.description, href, external }] : [],
-  )
+  return candidates.flatMap(({ area, category, href, external }) => {
+    if (!area) return []
+
+    const relatedWorks = category ? works.filter((work) => work.category === category) : []
+    const previewWork = relatedWorks.find((work) => work.media.length > 0)
+    const previewMedia = previewWork?.media[0]
+
+    return [{
+      id: area.id,
+      label: area.label,
+      description: area.description,
+      href,
+      external,
+      meta: category ? `${relatedWorks.length}作品` : '公開資料',
+      preview: previewWork && previewMedia
+        ? {
+            url: previewMedia.url,
+            alt: `${area.label}の代表作品「${previewWork.title}」。${previewMedia.alt}`,
+            title: previewWork.title,
+          }
+        : undefined,
+    }]
+  })
 }
 
 function getActivityHref(area: ActivityArea): { href: string; external: boolean } | undefined {

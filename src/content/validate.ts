@@ -208,6 +208,9 @@ function validateWorkMedia(
       addUrlIssue(issues, `${mediaPath}.url`, item.url);
     }
     addRequiredTextIssue(issues, `${mediaPath}.alt`, item.alt);
+    if (item.caption !== undefined) {
+      addRequiredTextIssue(issues, `${mediaPath}.caption`, item.caption)
+    }
     if (item.credit !== null) {
       addRequiredTextIssue(issues, `${mediaPath}.credit`, item.credit);
     }

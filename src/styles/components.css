@@ -247,8 +247,6 @@
 }
 
 .flight-map__heading {
-  position: relative;
-  z-index: 1;
   max-width: 28rem;
 }
 
@@ -264,113 +262,169 @@
   font-size: 0.9rem;
 }
 
-.flight-map__canvas {
-  position: relative;
-  min-height: 19rem;
-  margin-block-start: calc(var(--space-4) * -1);
+.flight-map__board {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--space-3);
+  margin-block-start: var(--space-4);
+  border-top: 1px solid var(--color-line-strong);
 }
 
-.flight-map__route {
-  position: absolute;
-  inset: 0;
+.flight-map__preview {
+  display: grid;
+  min-height: 28rem;
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+  background: var(--color-ink);
+  border-radius: var(--radius-sm);
+}
+
+.flight-map__preview img {
   width: 100%;
   height: 100%;
-  overflow: visible;
-  fill: none;
-  pointer-events: none;
-  stroke: var(--color-flight);
-  opacity: 0;
-  stroke-linecap: round;
-  stroke-width: 3;
-  animation: reveal-flight-route var(--motion-route) var(--ease-out) 120ms forwards;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.flight-map__preview-fallback {
+  position: relative;
+  display: grid;
+  align-content: center;
+  padding: var(--space-4);
+  overflow: hidden;
+  color: var(--color-surface);
+  text-transform: uppercase;
+}
+
+.flight-map__preview-fallback::after {
+  position: absolute;
+  right: -2.5rem;
+  bottom: -2rem;
+  width: 8rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--color-wing);
+  border-radius: 50%;
+  content: "";
+}
+
+.flight-map__preview-fallback span,
+.flight-map__preview-fallback strong {
+  position: relative;
+  z-index: 1;
+}
+
+.flight-map__preview-fallback span {
+  color: var(--color-wing);
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.flight-map__preview-fallback strong {
+  max-width: 5ch;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 0.95;
+}
+
+.flight-map__preview-caption {
+  display: grid;
+  gap: var(--space-1);
+  min-height: 5.5rem;
+  align-content: center;
+  padding: var(--space-3);
+  border-top: 1px solid color-mix(in srgb, var(--color-surface) 25%, transparent);
+  color: var(--color-surface);
+}
+
+.flight-map__preview-caption span {
+  color: var(--color-wing-soft);
+  font-family: var(--font-data);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.flight-map__preview-caption strong {
+  line-height: 1.35;
 }
 
 .flight-map__stops {
-  position: absolute;
-  inset: 0;
+  display: grid;
+  align-content: stretch;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .flight-map__stop {
-  position: absolute;
-}
-
-.flight-map__stop--1 {
-  bottom: 6%;
-  left: 1%;
-}
-
-.flight-map__stop--2 {
-  top: 25%;
-  left: 35%;
-}
-
-.flight-map__stop--3 {
-  right: 22%;
-  bottom: 18%;
-}
-
-.flight-map__stop--4 {
-  top: 5%;
-  right: 0;
+  display: grid;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .flight-map__stop a {
-  display: inline-flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   gap: var(--space-2);
   align-items: center;
-  min-height: 2.75rem;
-  padding: 0.35rem 0.7rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-line-strong);
-  border-radius: 999px;
+  min-height: 6.5rem;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
   color: var(--color-ink);
-  font-size: clamp(0.75rem, 1.4vw, 0.9rem);
-  font-weight: 700;
   text-decoration: none;
-  transition: transform var(--motion-fast) var(--ease-out);
+  transition: background-color var(--motion-fast) var(--ease-out);
 }
 
 .flight-map__stop a:hover,
 .flight-map__stop a.is-active {
-  border-color: var(--color-wing);
-  color: var(--color-flight);
-  transform: translateY(-0.2rem);
+  background: var(--color-paper);
 }
 
-.flight-map__dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  flex: 0 0 auto;
+.flight-map__stop a::before {
+  position: absolute;
+  inset: var(--space-2) auto var(--space-2) 0;
+  width: 0.2rem;
   background: var(--color-wing);
-  border: 0.15rem solid var(--color-surface);
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px var(--color-wing);
+  border-radius: 999px;
+  content: "";
+  opacity: 0;
 }
 
-.flight-map__description {
+.flight-map__stop a:hover::before,
+.flight-map__stop a.is-active::before {
+  opacity: 1;
+}
+
+.flight-map__destination {
   display: grid;
-  grid-template-columns: minmax(7rem, 0.35fr) 1fr;
-  gap: var(--space-3);
-  min-height: 4.75rem;
-  padding-block-start: var(--space-3);
-  margin: 0;
-  border-top: 1px solid var(--color-line);
-  color: var(--color-ink-muted);
-  font-size: 0.9rem;
+  gap: var(--space-1);
+  min-width: 0;
 }
 
-.flight-map__description span {
+.flight-map__destination strong {
   color: var(--color-ink);
-  font-weight: 700;
+  line-height: 1.35;
 }
 
-@keyframes reveal-flight-route {
-  to {
-    opacity: 1;
-  }
+.flight-map__destination small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-ink-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.flight-map__meta {
+  color: var(--color-flight);
+  font-family: var(--font-data);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.flight-map__arrow {
+  color: var(--color-wing);
 }
 
 @media (max-width: 767.98px) {
@@ -392,60 +446,17 @@
     grid-template-columns: 1fr;
   }
 
-  .flight-map__canvas {
+  .flight-map__board {
+    grid-template-columns: 1fr;
+  }
+
+  .flight-map__preview {
     min-height: auto;
-    margin-block: var(--space-4);
-  }
-
-  .flight-map__route {
-    inset: 1rem auto 1rem 1.1rem;
-    width: 2px;
-    height: auto;
-    background: var(--color-flight);
-  }
-
-  .flight-map__route path {
-    display: none;
-  }
-
-  .flight-map__stops {
-    position: static;
-    display: grid;
-    gap: var(--space-3);
-    padding-inline-start: 0.45rem;
-  }
-
-  .flight-map__stop {
-    position: static;
+    aspect-ratio: 16 / 10;
   }
 
   .flight-map__stop a {
-    width: 100%;
-    justify-content: flex-start;
-    padding-inline: 0.4rem;
-    background: transparent;
-    border-color: transparent;
-    border-radius: var(--radius-sm);
-    font-size: 0.95rem;
-  }
-
-  .flight-map__stop a:hover,
-  .flight-map__stop a.is-active {
-    background: var(--color-paper);
-    border-color: var(--color-line);
-    transform: none;
-  }
-
-  .flight-map__description {
-    grid-template-columns: 1fr;
-    min-height: 7rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .flight-map__route {
-    opacity: 1;
-    animation: none;
+    min-height: 5.75rem;
   }
 }
 

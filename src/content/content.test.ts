@@ -95,4 +95,22 @@ describe('コンテンツの整合性', () => {
       expect(localWorkImages, media.url).toHaveProperty(`../../public${media.url}`)
     }
   })
+
+  it('画像の説明文を指定する場合は空文字を許可しない', () => {
+    const sourceWork = works.find((work) => work.media.length > 0)
+    const sourceMedia = sourceWork?.media[0]
+    if (!sourceWork || !sourceMedia) throw new Error('画像付きの制作記事がありません。')
+
+    const issues = collectContentValidationIssues(
+      contentWithWorks([{
+        ...sourceWork,
+        media: [{ ...sourceMedia, caption: ' ' }, ...sourceWork.media.slice(1)],
+      }]),
+    )
+
+    expect(issues).toContainEqual({
+      path: 'works[0].media[0].caption',
+      message: '必須の文字列が空です。',
+    })
+  })
 })

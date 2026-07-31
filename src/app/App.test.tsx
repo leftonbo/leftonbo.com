@@ -23,7 +23,7 @@ describe('App routes', () => {
     expect(screen.getByText('2018年4月29日')).toHaveAttribute('datetime', '2018-04-29')
     expect(screen.getByRole('heading', { level: 2, name: 'ゲーム紹介' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: '作品画像' })).toBeInTheDocument()
-    expect(screen.getAllByRole('img')).toHaveLength(5)
+    expect(screen.getAllByRole('img')).toHaveLength(6)
     expect(screen.getAllByRole('img')[0]).toHaveAttribute(
       'src',
       '/images/works/light-trail/hero.webp',
