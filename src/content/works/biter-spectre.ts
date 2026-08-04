@@ -2,8 +2,8 @@ import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
 export default {
-  id: 'gabugabu-specter',
-  slug: 'gabugabu-specter',
+  id: 'biter-spectre',
+  slug: 'biter-spectre',
   title: 'がぶがぶスペクター',
   description: 'SDK3、PhysBone、lilToon、PC／Questに対応する販売アバター。',
   category: 'avatar-3d',
@@ -14,7 +14,7 @@ export default {
   media: [
     {
       kind: 'image',
-      url: '/images/works/gabugabu-specter/hero.webp',
+      url: '/images/works/biter-spectre/hero.webp',
       alt: 'がぶがぶスペクターのキャラクター画像',
       credit: null,
     },

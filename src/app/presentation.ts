@@ -45,6 +45,6 @@ export const workCategoryOrder: readonly WorkCategory[] = [
 export const editorialEntranceWorkIds = [
   'tonbo-battlefield-the-two-bases',
   'massive-medal-pusher',
-  'gabugabu-specter',
+  'biter-spectre',
   'infiroad',
 ] as const
