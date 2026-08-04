@@ -71,6 +71,89 @@ describe('コンテンツの整合性', () => {
     )
   })
 
+  it('Vket固有データと出典用途の不整合を検出する', () => {
+    const vketWork = works.find((work) => work.id === 'vket-2025-summer')
+    const nonVketWork = works.find((work) => work.category !== 'vket')
+    const eventPostIndex = vketWork?.sources.findIndex((source) => source.role === 'event-post')
+    if (!vketWork?.vketExhibition || !nonVketWork || eventPostIndex === undefined || eventPostIndex < 0) {
+      throw new Error('検証元のVket記事がありません。')
+    }
+
+    const invalidEventSources = vketWork.sources.map((source, index) =>
+      index === eventPostIndex ? { ...source, url: 'https://example.com/post/1' } : source,
+    )
+    const duplicateRoleSources = vketWork.sources.map((source) => ({
+      ...source,
+      role: 'event-post' as const,
+    }))
+    const invalidRoleSources = vketWork.sources.map((source, index) =>
+      index === 0 ? { ...source, role: 'unknown' as 'catalog' } : source,
+    )
+
+    const issues = collectContentValidationIssues(
+      contentWithWorks([
+        {
+          ...vketWork,
+          id: 'invalid-vket-period-and-world',
+          slug: 'invalid-vket-period-and-world',
+          period: '2025 Summer',
+          vketExhibition: { world: { ...vketWork.vketExhibition.world, url: 'not-a-url' } },
+        },
+        {
+          ...vketWork,
+          id: 'vket-without-exhibition',
+          slug: 'vket-without-exhibition',
+          vketExhibition: undefined,
+        },
+        {
+          ...nonVketWork,
+          id: 'non-vket-with-exhibition',
+          slug: 'non-vket-with-exhibition',
+          vketExhibition: vketWork.vketExhibition,
+        },
+        {
+          ...vketWork,
+          id: 'vket-with-invalid-event-post',
+          slug: 'vket-with-invalid-event-post',
+          sources: invalidEventSources,
+        },
+        {
+          ...vketWork,
+          id: 'vket-with-duplicate-source-role',
+          slug: 'vket-with-duplicate-source-role',
+          sources: duplicateRoleSources,
+        },
+        {
+          ...vketWork,
+          id: 'vket-with-invalid-source-role',
+          slug: 'vket-with-invalid-source-role',
+          sources: invalidRoleSources,
+        },
+      ]),
+    )
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        { path: 'works[0].period', message: 'YYYY形式の年ではありません。' },
+        {
+          path: 'works[0].vketExhibition.world.url',
+          message: '不正なURLです: not-a-url',
+        },
+        {
+          path: 'works[1].vketExhibition',
+          message: 'Vket作品にはvketExhibitionが必要です。',
+        },
+        {
+          path: 'works[2].vketExhibition',
+          message: 'Vket作品以外にはvketExhibitionを指定できません。',
+        },
+        { path: `works[3].sources[${eventPostIndex}].url`, message: 'Xの投稿URLではありません。' },
+        { path: 'works[4].sources.role', message: '重複しています: event-post' },
+        { path: 'works[5].sources[0].role', message: '許可されていない値です: unknown' },
+      ]),
+    )
+  })
+
   it('参照キーになる作品IDとslugの重複を検出する', () => {
     const sourceWork = works[0]
     if (!sourceWork) throw new Error('検証元の制作記事がありません。')

@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: '2026 Summer',
+  period: '2026',
   firstPublishedAt: '2026-07-11',
+  vketExhibition: {
+    world: {
+      name: 'VOLTAGER - EX-Volcano',
+      url: null,
+    },
+  },
   media: [
     {
       kind: 'image',
@@ -27,12 +33,14 @@ export default {
       label: 'Vket 2026 Summer 出展者ページ',
       url: 'https://vket.com/2026Summer/exhibitor/1779',
       kind: 'third-party-public',
+      role: 'catalog',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
     {
       label: 'LefTonboによる出展告知',
       url: 'https://x.com/LefTonbo/status/2075816666462859538',
       kind: 'first-party-public',
+      role: 'event-post',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],
@@ -40,7 +48,7 @@ export default {
   factsPending: [
     {
       field: 'link-availability',
-      note: 'カタログと本人告知の公開状態をサイト公開前に再確認する。',
+      note: '展示ワールドのPublic Linkは未公開。公開後に追記する。カタログと本人告知の公開状態もサイト公開前に再確認する。',
     },
   ],
 } satisfies Work

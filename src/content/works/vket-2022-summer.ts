@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: '2022 Summer',
+  period: '2022',
   firstPublishedAt: '2022-08-13',
+  vketExhibition: {
+    world: {
+      name: "Poppin' Jump - Lemon Squash",
+      url: 'https://vrchat.com/home/launch?worldId=wrld_84a006d7-171b-4925-9b46-0fd142927a24',
+    },
+  },
   media: [
     {
       kind: 'image',

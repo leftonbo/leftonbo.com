@@ -22,6 +22,7 @@ const sourceKinds = new Set([
   "third-party-public",
   "person-confirmed",
 ]);
+const sourceRoles = new Set(['catalog', 'event-post'])
 const pendingFactFields = new Set([
   "current-status",
   "first-published-at",
@@ -73,6 +74,8 @@ const externalLinkStatuses = new Set([
 ]);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
+const yearPattern = /^\d{4}$/
+const xPostUrlPattern = /^https:\/\/x\.com\/[A-Za-z0-9_]+\/status\/\d+\/?$/
 
 function addRequiredTextIssue(
   issues: ContentValidationIssue[],
@@ -166,6 +169,9 @@ function validateSources(
     addRequiredTextIssue(issues, `${sourcePath}.label`, source.label);
     addUrlIssue(issues, `${sourcePath}.url`, source.url);
     addEnumIssue(issues, `${sourcePath}.kind`, source.kind, sourceKinds);
+    if (source.role !== undefined) {
+      addEnumIssue(issues, `${sourcePath}.role`, source.role, sourceRoles)
+    }
     addDateIssue(issues, `${sourcePath}.verifiedAt`, source.verifiedAt);
   });
 }
@@ -247,6 +253,56 @@ function validateGameDetails(
 
   gameDetails.introduction.forEach((paragraph, index) => {
     addRequiredTextIssue(issues, `${path}.introduction[${index}]`, paragraph)
+  })
+}
+
+function validateVketExhibition(
+  issues: ContentValidationIssue[],
+  workPath: string,
+  work: Work,
+): void {
+  const sourceRolesForWork = work.sources.flatMap((source) =>
+    source.role === undefined ? [] : [source.role],
+  )
+  addDuplicateIssues(issues, `${workPath}.sources.role`, sourceRolesForWork)
+
+  if (work.category !== 'vket') {
+    if (work.vketExhibition !== undefined) {
+      issues.push({
+        path: `${workPath}.vketExhibition`,
+        message: 'Vket作品以外にはvketExhibitionを指定できません。',
+      })
+    }
+    if (sourceRolesForWork.length > 0) {
+      issues.push({
+        path: `${workPath}.sources`,
+        message: 'Vket作品以外の出典にはVket用のroleを指定できません。',
+      })
+    }
+    return
+  }
+
+  if (work.vketExhibition === undefined) {
+    issues.push({
+      path: `${workPath}.vketExhibition`,
+      message: 'Vket作品にはvketExhibitionが必要です。',
+    })
+    return
+  }
+
+  const worldPath = `${workPath}.vketExhibition.world`
+  addRequiredTextIssue(issues, `${worldPath}.name`, work.vketExhibition.world.name)
+  if (work.vketExhibition.world.url !== null) {
+    addUrlIssue(issues, `${worldPath}.url`, work.vketExhibition.world.url)
+  }
+
+  work.sources.forEach((source, index) => {
+    if (source.role === 'event-post' && !xPostUrlPattern.test(source.url)) {
+      issues.push({
+        path: `${workPath}.sources[${index}].url`,
+        message: 'Xの投稿URLではありません。',
+      })
+    }
   })
 }
 
@@ -345,11 +401,15 @@ export function collectContentValidationIssues(
     addEnumIssue(issues, `${path}.role`, work.role, workRoles);
     if (work.period !== null) {
       addRequiredTextIssue(issues, `${path}.period`, work.period);
+      if (!yearPattern.test(work.period)) {
+        issues.push({ path: `${path}.period`, message: 'YYYY形式の年ではありません。' })
+      }
     }
     if (work.firstPublishedAt !== null) {
       addDateIssue(issues, `${path}.firstPublishedAt`, work.firstPublishedAt)
     }
     validateGameDetails(issues, `${path}.gameDetails`, work)
+    validateVketExhibition(issues, path, work)
     validateWorkMedia(issues, `${path}.media`, work.media);
     if (typeof work.featured !== "boolean") {
       issues.push({ path: `${path}.featured`, message: "booleanではありません。" });

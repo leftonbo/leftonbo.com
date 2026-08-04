@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: '2023 Winter',
+  period: '2023',
   firstPublishedAt: '2023-12-02',
+  vketExhibition: {
+    world: {
+      name: '龍の背中 - ウンバルスカイ',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_ec2d7769-a025-4dd9-9710-e7e555b5e2c5',
+    },
+  },
   media: [
     {
       kind: 'image',
@@ -27,6 +33,7 @@ export default {
       label: 'LefTonboによる出展告知',
       url: 'https://x.com/LefTonbo/status/1730542256560419126',
       kind: 'first-party-public',
+      role: 'event-post',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],

@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: '2024 Winter',
+  period: '2024',
   firstPublishedAt: '2024-12-07',
+  vketExhibition: {
+    world: {
+      name: 'ガチャットピア - ミスティックカプセル',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_77aae327-c106-407e-b7d2-6d4fd8c32617',
+    },
+  },
   media: [
     {
       kind: 'image',
@@ -27,6 +33,7 @@ export default {
       label: 'LefTonboによる出展告知',
       url: 'https://x.com/LefTonbo/status/1865275992589373950',
       kind: 'first-party-public',
+      role: 'event-post',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],

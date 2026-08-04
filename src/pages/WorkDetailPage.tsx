@@ -1,6 +1,7 @@
 import { categoryLabels, roleLabels } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
 import { WorkMark } from '../components/WorkMark'
+import { XPostEmbed } from '../components/XPostEmbed'
 import type { Work } from '../content/types'
 
 interface WorkDetailPageProps {
@@ -14,6 +15,8 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
   const previousWork = currentIndex > 0 ? categoryWorks[currentIndex - 1] : undefined
   const nextWork = currentIndex >= 0 ? categoryWorks[currentIndex + 1] : undefined
   const headerMedia = work.media[0]
+  const catalogSource = work.sources.find((source) => source.role === 'catalog')
+  const eventPostSource = work.sources.find((source) => source.role === 'event-post')
 
   return (
     <article className="work-detail">
@@ -82,6 +85,31 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                   </dd>
                 </div>
               ) : null}
+              {work.vketExhibition ? (
+                <div>
+                  <dt>出展ワールド</dt>
+                  <dd>
+                    {work.vketExhibition.world.url ? (
+                      <ExternalLink href={work.vketExhibition.world.url}>
+                        {work.vketExhibition.world.name}
+                      </ExternalLink>
+                    ) : (
+                      <>
+                        {work.vketExhibition.world.name}
+                        <span className="fact-list__note">Public Link 未公開</span>
+                      </>
+                    )}
+                  </dd>
+                </div>
+              ) : null}
+              {catalogSource ? (
+                <div>
+                  <dt>カタログ</dt>
+                  <dd>
+                    <ExternalLink href={catalogSource.url}>{catalogSource.label}</ExternalLink>
+                  </dd>
+                </div>
+              ) : null}
               {work.gameDetails ? (
                 <div>
                   <dt>ジャンル</dt>
@@ -106,6 +134,14 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
             </section>
           ) : null}
         </div>
+
+        {eventPostSource ? (
+          <section className="work-event-post" aria-labelledby="work-event-post-title">
+            <p className="section-kicker">Event post</p>
+            <h2 id="work-event-post-title">開催時のX投稿</h2>
+            <XPostEmbed url={eventPostSource.url} />
+          </section>
+        ) : null}
 
         {work.media.length > 0 ? (
           <section className="work-gallery" aria-labelledby="work-gallery-title">

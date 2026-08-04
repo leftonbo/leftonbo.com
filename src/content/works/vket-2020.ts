@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: 'Vket 5（2020）',
+  period: '2020',
   firstPublishedAt: '2020-12-18',
+  vketExhibition: {
+    world: {
+      name: 'メテコレプカ - キギステルトフ',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_70f79986-2e5c-4ba2-8364-3414b4bab501',
+    },
+  },
   media: [
     {
       kind: 'image',
@@ -27,6 +33,7 @@ export default {
       label: 'LefTonboによる出展告知',
       url: 'https://x.com/LefTonbo/status/1340158760346505217',
       kind: 'first-party-public',
+      role: 'event-post',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],

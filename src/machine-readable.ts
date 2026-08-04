@@ -34,23 +34,37 @@ export function getMachineReadableFiles(): Record<string, string> {
     })),
   }
   const worksPayload = {
-    schemaVersion: 4,
+    schemaVersion: 5,
     siteUpdatedAt: siteProfile.updatedAt,
     count: works.length,
-    works: works.map((work) => ({
-      id: work.id,
-      slug: work.slug,
-      title: work.title,
-      description: work.description,
-      category: work.category,
-      role: work.role === 'pending-confirmation' ? null : work.role,
-      period: work.period,
-      firstPublishedAt: work.firstPublishedAt,
-      gameDetails: work.gameDetails ?? null,
-      media: work.media,
-      featured: work.featured,
-      url: work.url,
-    })),
+    works: works.map((work) => {
+      const catalogSource = work.sources.find((source) => source.role === 'catalog')
+      const eventPostSource = work.sources.find((source) => source.role === 'event-post')
+
+      return {
+        id: work.id,
+        slug: work.slug,
+        title: work.title,
+        description: work.description,
+        category: work.category,
+        role: work.role === 'pending-confirmation' ? null : work.role,
+        period: work.period,
+        firstPublishedAt: work.firstPublishedAt,
+        gameDetails: work.gameDetails ?? null,
+        vketExhibition: work.vketExhibition
+          ? {
+              world: work.vketExhibition.world,
+              catalog: catalogSource
+                ? { label: catalogSource.label, url: catalogSource.url }
+                : null,
+              eventPostUrl: eventPostSource?.url ?? null,
+            }
+          : null,
+        media: work.media,
+        featured: work.featured,
+        url: work.url,
+      }
+    }),
   }
 
   return {
@@ -154,10 +168,21 @@ function createWorksMarkdown(): string {
     const entries = works
       .filter((work) => work.category === category)
       .map((work) => {
+        const catalogSource = work.sources.find((source) => source.role === 'catalog')
+        const eventPostSource = work.sources.find((source) => source.role === 'event-post')
         const details = [
           ...(work.role === 'pending-confirmation' ? [] : [`- 関わり方: ${roleLabels[work.role]}`]),
           ...(work.period ? [`- 制作時期: ${work.period}`] : []),
           ...(work.firstPublishedAt ? [`- 初公開日: ${work.firstPublishedAt}`] : []),
+          ...(work.vketExhibition
+            ? [
+                work.vketExhibition.world.url
+                  ? `- 出展ワールド: [${work.vketExhibition.world.name}](${work.vketExhibition.world.url})`
+                  : `- 出展ワールド: ${work.vketExhibition.world.name}（Public Link 未公開）`,
+              ]
+            : []),
+          ...(catalogSource ? [`- カタログ: [${catalogSource.label}](${catalogSource.url})`] : []),
+          ...(eventPostSource ? [`- 開催時のX投稿: ${eventPostSource.url}`] : []),
           ...(work.gameDetails ? [`- ジャンル: ${work.gameDetails.genre}`] : []),
           ...(work.gameDetails?.developmentTool
             ? [`- 制作ツール: ${work.gameDetails.developmentTool}`]

@@ -29,10 +29,20 @@ describe('機械可読出力', () => {
       schemaVersion?: number
       count?: number
       siteUpdatedAt?: string
-      works?: Array<{ id?: string; media?: unknown[]; firstPublishedAt?: string | null; period?: string | null }>
+      works?: Array<{
+        id?: string
+        media?: unknown[]
+        firstPublishedAt?: string | null
+        period?: string | null
+        vketExhibition?: {
+          world: { name: string; url: string | null }
+          catalog: { label: string; url: string } | null
+          eventPostUrl: string | null
+        } | null
+      }>
     }
 
-    expect(worksJson.schemaVersion).toBe(4)
+    expect(worksJson.schemaVersion).toBe(5)
     expect(worksJson.count).toBe(works.length)
     expect(worksJson.siteUpdatedAt).toBe(siteProfile.updatedAt)
     expect(worksJson.works?.map((work) => work.id)).toEqual(works.map((work) => work.id))
@@ -41,6 +51,33 @@ describe('機械可読出力', () => {
         (work) => 'firstPublishedAt' in work && 'period' in work && Array.isArray(work.media),
       ),
     ).toBe(true)
+
+    const vket2025 = worksJson.works?.find((work) => work.id === 'vket-2025-summer')
+    const vket2026 = worksJson.works?.find((work) => work.id === 'vket-2026-summer')
+    expect(vket2025?.vketExhibition).toEqual({
+      world: {
+        name: '森聖街 ヤポプエト - 中願の秋夜',
+        url: 'https://vrchat.com/home/launch?worldId=wrld_63f5b036-89d5-4d47-bc31-a6761173e13e',
+      },
+      catalog: {
+        label: 'Vket 2025 Summer 出展者ページ',
+        url: 'https://vket.com/2025Summer/exhibitor/310',
+      },
+      eventPostUrl: 'https://x.com/LefTonbo/status/1943618961502789769',
+    })
+    expect(vket2026?.vketExhibition?.world).toEqual({
+      name: 'VOLTAGER - EX-Volcano',
+      url: null,
+    })
+
+    const worksMarkdown = files['works.md']
+    expect(worksMarkdown).toContain(
+      '- 出展ワールド: [森聖街 ヤポプエト - 中願の秋夜](https://vrchat.com/home/launch?worldId=wrld_63f5b036-89d5-4d47-bc31-a6761173e13e)',
+    )
+    expect(worksMarkdown).toContain('- カタログ: [Vket 2025 Summer 出展者ページ]')
+    expect(worksMarkdown).toContain(
+      '- 出展ワールド: VOLTAGER - EX-Volcano（Public Link 未公開）',
+    )
   })
 
   it('すべての作品URLをsitemapへ出力する', () => {

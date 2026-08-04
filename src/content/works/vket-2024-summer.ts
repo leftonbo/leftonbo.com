@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: '2024 Summer',
+  period: '2024',
   firstPublishedAt: '2024-07-20',
+  vketExhibition: {
+    world: {
+      name: '魔女の森ノクトール - MIRAGE',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_d1d11132-e119-4f1a-8179-e65007849c44',
+    },
+  },
   media: [
     {
       kind: 'image',
@@ -27,6 +33,7 @@ export default {
       label: 'LefTonboによる出展告知',
       url: 'https://x.com/LefTonbo/status/1814658684930437351',
       kind: 'first-party-public',
+      role: 'event-post',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],

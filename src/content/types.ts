@@ -7,10 +7,13 @@ export type SourceKind =
   | "third-party-public"
   | "person-confirmed";
 
+export type SourceRole = 'catalog' | 'event-post'
+
 export interface ContentSource {
   readonly label: string;
   readonly url: string;
   readonly kind: SourceKind;
+  readonly role?: SourceRole
   readonly verifiedAt: ISODate;
 }
 
@@ -62,6 +65,13 @@ export interface GameDetails {
   readonly introduction: readonly string[]
 }
 
+export interface VketExhibition {
+  readonly world: {
+    readonly name: string
+    readonly url: string | null
+  }
+}
+
 export interface Work {
   readonly id: string;
   readonly slug: string;
@@ -73,6 +83,7 @@ export interface Work {
   readonly period: string | null;
   readonly firstPublishedAt: ISODate | null
   readonly gameDetails?: GameDetails
+  readonly vketExhibition?: VketExhibition
   readonly media: readonly WorkMedia[];
   readonly featured: boolean;
   readonly url: string;

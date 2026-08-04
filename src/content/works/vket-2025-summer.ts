@@ -10,8 +10,14 @@ export default {
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',
-  period: '2025 Summer',
+  period: '2025',
   firstPublishedAt: '2025-07-12',
+  vketExhibition: {
+    world: {
+      name: '森聖街 ヤポプエト - 中願の秋夜',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_63f5b036-89d5-4d47-bc31-a6761173e13e',
+    },
+  },
   media: [
     {
       kind: 'image',
@@ -27,12 +33,14 @@ export default {
       label: 'Vket 2025 Summer 出展者ページ',
       url: 'https://vket.com/2025Summer/exhibitor/310',
       kind: 'third-party-public',
+      role: 'catalog',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
     {
       label: 'LefTonboによる出展告知',
       url: 'https://x.com/LefTonbo/status/1943618961502789769',
       kind: 'first-party-public',
+      role: 'event-post',
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],
