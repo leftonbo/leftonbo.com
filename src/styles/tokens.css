@@ -1,17 +1,21 @@
 :root {
   color-scheme: light;
-  --color-paper: #f3f8f6;
-  --color-surface: #ffffff;
-  --color-ink: #17313a;
-  --color-ink-muted: #4f646a;
-  --color-flight: #23777b;
-  --color-flight-soft: #d7ece8;
-  --color-reed: #5c7747;
-  --color-reed-soft: #e3ebdc;
-  --color-wing: #d66743;
-  --color-wing-soft: #f7e1d8;
-  --color-line: #afc4bf;
-  --color-line-strong: #6b8580;
+  --color-paper: #f7f1f2;
+  --color-surface: #fffdfd;
+  --color-ink: #3a2931;
+  --color-ink-muted: #6b565d;
+  --color-flight: #a13f32;
+  --color-flight-soft: #e8d3d1;
+  --color-reed: #80535f;
+  --color-reed-soft: #eee0e3;
+  --color-wing: #d65c3f;
+  --color-wing-soft: #f6ddd5;
+  --color-line: #d5bfbe;
+  --color-line-strong: #96716f;
+  --color-link-hover: #782d27;
+  --color-inverse-accent: #f5a18e;
+  --color-inverse-muted: #d9c6c9;
+  --color-inverse-line: #765966;
   --font-display: "Avenir Next", "Noto Sans JP Variable", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
   --font-body: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
   --font-data: ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", "Noto Sans JP Variable", monospace;
@@ -24,8 +28,8 @@
   --space-7: 5.25rem;
   --radius-sm: 0.75rem;
   --radius-lg: 1.25rem;
-  --shadow-lift: 0 1rem 2.5rem rgb(23 49 58 / 10%);
-  --focus-ring: 0 0 0 0.25rem rgb(214 103 67 / 28%);
+  --shadow-lift: 0 1rem 2.5rem rgb(58 41 49 / 11%);
+  --focus-ring: 0 0 0 0.25rem rgb(214 92 63 / 28%);
   --motion-fast: 160ms;
   --motion-route: 520ms;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -35,6 +39,6 @@
   --bs-body-color: var(--color-ink);
   --bs-body-bg: var(--color-paper);
   --bs-link-color: var(--color-flight);
-  --bs-link-hover-color: #15585b;
+  --bs-link-hover-color: var(--color-link-hover);
   --bs-border-color: var(--color-line);
 }

@@ -30,7 +30,7 @@ a {
 }
 
 a:hover {
-  color: #15585b;
+  color: var(--color-link-hover);
 }
 
 :where(a, button, summary, [tabindex]):focus-visible {
@@ -42,7 +42,7 @@ a:hover {
 
 button,
 a {
-  -webkit-tap-highlight-color: rgb(214 103 67 / 20%);
+  -webkit-tap-highlight-color: rgb(214 92 63 / 20%);
   touch-action: manipulation;
 }
 

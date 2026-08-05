@@ -14,13 +14,13 @@
   position: sticky;
   z-index: var(--layer-sticky);
   top: 0;
-  background: rgb(243 248 246 / 94%);
-  border-bottom: 1px solid rgb(107 133 128 / 55%);
+  background: rgb(247 241 242 / 94%);
+  border-bottom: 1px solid rgb(150 113 111 / 55%);
 }
 
 @supports (backdrop-filter: blur(0.5rem)) {
   .site-header {
-    background: rgb(243 248 246 / 82%);
+    background: rgb(247 241 242 / 82%);
     backdrop-filter: blur(0.75rem);
   }
 }
@@ -120,7 +120,7 @@
 
 .site-footer .data-label,
 .site-footer__note {
-  color: #bfd1cd;
+  color: var(--color-inverse-muted);
 }
 
 .site-footer__grid {
@@ -235,7 +235,7 @@
   background: var(--color-surface);
   border-style: dashed;
   border-radius: 50% 30% 50% 30%;
-  color: var(--color-wing);
+  color: var(--color-flight);
 }
 
 .flight-map {
@@ -314,7 +314,7 @@
 }
 
 .flight-map__preview-fallback span {
-  color: var(--color-wing);
+  color: var(--color-inverse-accent);
   font-family: var(--font-data);
   font-size: 0.7rem;
   letter-spacing: 0.12em;
@@ -562,7 +562,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
-  box-shadow: 0 0.35rem 0 rgb(23 49 58 / 4%);
+  box-shadow: 0 0.35rem 0 rgb(58 41 49 / 5%);
   transition:
     border-color var(--motion-fast) var(--ease-out),
     box-shadow var(--motion-fast) var(--ease-out),
@@ -607,7 +607,7 @@
 .work-card__visual--fallback .work-mark {
   width: clamp(6rem, 34%, 8.5rem);
   background: var(--color-surface);
-  box-shadow: 0 0.75rem 2rem rgb(23 49 58 / 12%);
+  box-shadow: 0 0.75rem 2rem rgb(58 41 49 / 12%);
 }
 
 .work-card__body {
@@ -693,7 +693,7 @@
   flex: 0 0 auto;
   place-items: center;
   background: var(--color-flight-soft);
-  border: 1px solid rgb(35 119 123 / 18%);
+  border: 1px solid rgb(161 63 50 / 18%);
   border-radius: 0.85rem;
   color: var(--color-ink);
 }
