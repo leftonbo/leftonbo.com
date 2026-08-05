@@ -40,7 +40,7 @@ Add Japanese JSDoc only to exported APIs whose purpose, invariants, side effects
 
 ## Testing Guidelines
 
-Write behavior-focused Vitest tests with Testing Library in the configured `jsdom` environment. Cover routing, canonical-content validation, machine-readable output, and accessibility regressions when affected. No numeric coverage threshold is configured; add targeted tests for every changed behavior.
+Write behavior-focused Vitest tests with Testing Library in the configured `jsdom` environment. Cover routing, machine-readable output, and accessibility regressions when affected. No numeric coverage threshold is configured; add targeted tests for every changed behavior.
 
 ## Commit Message Guidelines
 
