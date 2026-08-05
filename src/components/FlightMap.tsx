@@ -39,6 +39,8 @@ export function FlightMap({ stops }: FlightMapProps) {
               <img
                 src={activeStop.preview.url}
                 alt={activeStop.preview.alt}
+                width="16"
+                height="10"
                 loading="eager"
                 decoding="async"
               />

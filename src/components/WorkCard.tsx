@@ -16,7 +16,14 @@ export function WorkCard({ work }: WorkCardProps) {
         className={`work-card__visual${preview ? '' : ' work-card__visual--fallback'}`}
       >
         {preview ? (
-          <img src={preview.url} alt={preview.alt} loading="lazy" decoding="async" />
+          <img
+            src={preview.url}
+            alt={preview.alt}
+            width="16"
+            height="10"
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <WorkMark category={work.category} />
         )}

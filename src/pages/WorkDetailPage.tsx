@@ -38,6 +38,8 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               <img
                 src={headerMedia.url}
                 alt={headerMedia.alt}
+                width="16"
+                height="10"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
@@ -156,7 +158,14 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               {work.media.map((media, index) => (
                 <li key={media.url} className={index === 0 ? 'work-gallery__hero' : undefined}>
                   <figure>
-                    <img src={media.url} alt={media.alt} loading="lazy" decoding="async" />
+                    <img
+                      src={media.url}
+                      alt={media.alt}
+                      width="16"
+                      height="9"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <figcaption>
                       <div>
                         <span className="work-gallery__index">
