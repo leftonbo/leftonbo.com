@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   overflow: clip;
-  padding-block: clamp(4rem, 9vw, 8.5rem);
+  padding-block: clamp(2.5rem, 6vh, 4rem);
 }
 
 .hero::before,
@@ -38,7 +38,7 @@
 }
 
 .hero h1 span {
-  font-size: clamp(4rem, 8.3vw, 7rem);
+  font-size: clamp(3.25rem, 6.4vw, 5.5rem);
   letter-spacing: -0.07em;
   line-height: 0.9;
   white-space: nowrap;
@@ -47,16 +47,16 @@
 .hero h1 small {
   margin-block-start: var(--space-3);
   color: var(--color-flight);
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
   letter-spacing: 0.15em;
 }
 
 .hero__lead {
   max-width: 36rem;
   margin-block-end: var(--space-2);
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-size: clamp(1.1rem, 1.55vw, 1.35rem);
   font-weight: 700;
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .hero__note {
@@ -68,7 +68,7 @@
   display: flex;
   gap: var(--space-3);
   flex-wrap: wrap;
-  margin-block: var(--space-5);
+  margin-block: var(--space-4);
 }
 
 .action-link {
@@ -352,14 +352,6 @@
 }
 
 @media (max-width: 479.98px) {
-  .hero {
-    padding-block: var(--space-6);
-  }
-
-  .hero h1 span {
-    font-size: clamp(3.5rem, 21vw, 5rem);
-  }
-
   .hero__areas li + li::before {
     content: "";
     margin: 0;

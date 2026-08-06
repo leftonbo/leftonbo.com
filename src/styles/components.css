@@ -156,22 +156,23 @@
 }
 
 .page-intro {
-  padding-block: var(--space-7) var(--space-6);
+  padding-block: clamp(2.5rem, 5vw, 3.25rem) clamp(2rem, 4vw, 2.5rem);
   border-bottom: 1px solid var(--color-line);
 }
 
 .page-intro h1 {
   max-width: 16ch;
-  margin-block-end: var(--space-4);
-  font-size: clamp(2.7rem, 7vw, 6.8rem);
+  margin-block-end: var(--space-3);
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
   letter-spacing: -0.055em;
+  line-height: 1.15;
 }
 
 .page-intro p:last-child {
   max-width: 43rem;
   margin: 0;
   color: var(--color-ink-muted);
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
 }
 
 .work-mark {
@@ -239,7 +240,7 @@
 }
 
 .flight-map {
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.25rem, 2vw, 1.5rem);
   background: var(--color-surface);
   border: 1px solid var(--color-line-strong);
   border-radius: var(--radius-lg) var(--radius-lg) 3.75rem var(--radius-lg);
@@ -252,7 +253,7 @@
 
 .flight-map__heading h2 {
   margin-block-end: var(--space-2);
-  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
   letter-spacing: -0.035em;
 }
 
@@ -266,13 +267,13 @@
   display: grid;
   grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.2fr);
   gap: var(--space-3);
-  margin-block-start: var(--space-4);
+  margin-block-start: var(--space-3);
   border-top: 1px solid var(--color-line-strong);
 }
 
 .flight-map__preview {
   display: grid;
-  min-height: 28rem;
+  min-height: clamp(20rem, 45vh, 22rem);
   grid-template-rows: minmax(0, 1fr) auto;
   overflow: hidden;
   background: var(--color-ink);
@@ -367,8 +368,8 @@
   grid-template-columns: minmax(0, 1fr) auto auto;
   gap: var(--space-2);
   align-items: center;
-  min-height: 6.5rem;
-  padding: var(--space-3);
+  min-height: 4.75rem;
+  padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
   color: var(--color-ink);
   text-decoration: none;
