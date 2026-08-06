@@ -47,6 +47,7 @@ export default {
   ],
   featured: false,
   url: 'https://tonbonotion01.notion.site/game-infiroad',
+  primaryActionLabel: 'ダウンロード版・ブラウザ版を見る',
   sources: [
     {
       label: 'TonboNotion01: Infiroad',

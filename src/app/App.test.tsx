@@ -15,7 +15,7 @@ describe('App routes', () => {
   it('renders a detail page with an official destination and concise details', () => {
     render(<App pathname="/works/light-trail/" />)
     expect(screen.getByRole('heading', { level: 1, name: 'Light Trail' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /公式の公開先へ/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: '配布・プレイ先を見る' })).toHaveAttribute(
       'href',
       'https://tonbonotion01.notion.site/game-lighttrail',
     )

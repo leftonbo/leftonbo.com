@@ -87,6 +87,7 @@ export interface Work {
   readonly media: readonly WorkMedia[];
   readonly featured: boolean;
   readonly url: string;
+  readonly primaryActionLabel?: string;
   readonly sources: readonly ContentSource[];
   readonly verifiedAt: ISODate;
   readonly factsPending: readonly PendingFact[];

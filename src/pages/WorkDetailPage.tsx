@@ -1,4 +1,4 @@
-import { categoryLabels, roleLabels } from '../app/presentation'
+import { categoryLabels, getWorkActionLabel, roleLabels } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
 import { WorkMark } from '../components/WorkMark'
 import { XPostEmbed } from '../components/XPostEmbed'
@@ -53,7 +53,7 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
             <h1>{work.title}</h1>
             <p>{work.description}</p>
             <ExternalLink className="action-link action-link--primary" href={work.url}>
-              公式の公開先へ
+              {getWorkActionLabel(work)}
             </ExternalLink>
           </div>
         </header>

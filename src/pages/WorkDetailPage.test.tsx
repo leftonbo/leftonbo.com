@@ -43,6 +43,32 @@ describe('WorkDetailPage', () => {
     expect(screen.queryByRole('heading', { name: 'ゲーム紹介' })).not.toBeInTheDocument()
   })
 
+  it('labels the primary action for each destination instead of using a generic label', () => {
+    const { rerender } = render(
+      <WorkDetailPage work={getWork('tonbo-werewolf')} works={works} />,
+    )
+
+    expect(screen.getByRole('link', { name: 'VRChatでワールドを開く' })).toHaveAttribute(
+      'href',
+      'https://vrchat.com/home/launch?worldId=wrld_07ee4e44-940f-4405-a398-e969114a0164',
+    )
+
+    rerender(<WorkDetailPage work={getWork('biter-spectre')} works={works} />)
+    expect(screen.getByRole('link', { name: 'ショップで見る' })).toHaveAttribute(
+      'href',
+      'https://booth.pm/ja/items/5221596',
+    )
+
+    rerender(<WorkDetailPage work={getWork('infiroad')} works={works} />)
+    expect(screen.getByRole('link', { name: 'ダウンロード版・ブラウザ版を見る' })).toHaveAttribute(
+      'href',
+      'https://tonbonotion01.notion.site/game-infiroad',
+    )
+
+    rerender(<WorkDetailPage work={getWork('vket-2025-summer')} works={works} />)
+    expect(screen.getByRole('link', { name: 'Vket出展者ページを見る' })).toBeInTheDocument()
+  })
+
   it('omits an unconfirmed development tool and operational history labels', () => {
     render(<WorkDetailPage work={getWork('pipe-4-run')} works={works} />)
 

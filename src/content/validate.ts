@@ -415,6 +415,9 @@ export function collectContentValidationIssues(
       issues.push({ path: `${path}.featured`, message: "booleanではありません。" });
     }
     addUrlIssue(issues, `${path}.url`, work.url);
+    if (work.primaryActionLabel !== undefined) {
+      addRequiredTextIssue(issues, `${path}.primaryActionLabel`, work.primaryActionLabel)
+    }
     addDateIssue(issues, `${path}.verifiedAt`, work.verifiedAt);
     validateSources(issues, `${path}.sources`, work.sources);
     validatePendingFacts(issues, `${path}.factsPending`, work.factsPending);
