@@ -22,7 +22,7 @@ const sourceKinds = new Set([
   "third-party-public",
   "person-confirmed",
 ]);
-const sourceRoles = new Set(['catalog', 'event-post'])
+const sourceRoles = new Set(['catalog', 'event-post', 'video'])
 const pendingFactFields = new Set([
   "current-status",
   "first-published-at",
@@ -266,6 +266,15 @@ function validateVketExhibition(
   )
   addDuplicateIssues(issues, `${workPath}.sources.role`, sourceRolesForWork)
 
+  work.sources.forEach((source, index) => {
+    if (source.role === 'event-post' && !xPostUrlPattern.test(source.url)) {
+      issues.push({
+        path: `${workPath}.sources[${index}].url`,
+        message: 'Xの投稿URLではありません。',
+      })
+    }
+  })
+
   if (work.category !== 'vket') {
     if (work.vketExhibition !== undefined) {
       issues.push({
@@ -273,12 +282,15 @@ function validateVketExhibition(
         message: 'Vket作品以外にはvketExhibitionを指定できません。',
       })
     }
-    if (sourceRolesForWork.length > 0) {
-      issues.push({
-        path: `${workPath}.sources`,
-        message: 'Vket作品以外の出典にはVket用のroleを指定できません。',
-      })
-    }
+
+    work.sources.forEach((source, index) => {
+      if (source.role === 'catalog') {
+        issues.push({
+          path: `${workPath}.sources[${index}].role`,
+          message: 'Vket作品以外にはカタログ用途を指定できません。',
+        })
+      }
+    })
     return
   }
 
@@ -295,15 +307,6 @@ function validateVketExhibition(
   if (work.vketExhibition.world.url !== null) {
     addUrlIssue(issues, `${worldPath}.url`, work.vketExhibition.world.url)
   }
-
-  work.sources.forEach((source, index) => {
-    if (source.role === 'event-post' && !xPostUrlPattern.test(source.url)) {
-      issues.push({
-        path: `${workPath}.sources[${index}].url`,
-        message: 'Xの投稿URLではありません。',
-      })
-    }
-  })
 }
 
 export function collectContentValidationIssues(

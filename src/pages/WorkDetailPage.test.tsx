@@ -95,6 +95,16 @@ describe('WorkDetailPage', () => {
     )
   })
 
+  it('shows a linked introduction video when the work provides one', () => {
+    render(<WorkDetailPage work={getWork('biter-spectre')} works={works} />)
+
+    expect(screen.getByRole('heading', { name: '紹介動画' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'YouTubeで紹介動画を見る' })).toHaveAttribute(
+      'href',
+      'https://www.youtube.com/watch?v=L6p00Q4XVSM',
+    )
+  })
+
   it('shows an unlinked pending world for Vket 2026 Summer', () => {
     render(<WorkDetailPage work={getWork('vket-2026-summer')} works={works} />)
 

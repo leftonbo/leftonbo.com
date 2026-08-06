@@ -7,7 +7,7 @@ export type SourceKind =
   | "third-party-public"
   | "person-confirmed";
 
-export type SourceRole = 'catalog' | 'event-post'
+export type SourceRole = 'catalog' | 'event-post' | 'video'
 
 export interface ContentSource {
   readonly label: string;

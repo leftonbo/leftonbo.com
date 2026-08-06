@@ -33,7 +33,7 @@ describe('WorkIndex', () => {
     expect(screen.getAllByRole('article')).toHaveLength(avatar3dCount)
     expect(screen.getByRole('button', { name: avatar3dButtonName })).toHaveAttribute('aria-pressed', 'true')
     expect(window.location.search).toBe('?category=avatar-3d')
-    expect(screen.getByRole('heading', { name: 'サジャクサハギン v3.0' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'サジャクサハギン' })).toBeInTheDocument()
   })
 
   it('supports keyboard activation and visible state semantics', async () => {

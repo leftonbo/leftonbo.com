@@ -5,10 +5,11 @@ export default {
   id: 'biter-spectre',
   slug: 'biter-spectre',
   title: 'がぶがぶスペクター',
-  description: 'SDK3、PhysBone、lilToon、PC／Questに対応する販売アバター。',
+  description:
+    'Vket 2023 Winterへの出展を機に頒布を始めた、PC／Quest両対応のVRChat向け販売アバター。黒いおばけの姿をしており、カラー変更や舌を伸ばすギミックを備える。',
   category: 'avatar-3d',
   status: 'published',
-  role: 'pending-confirmation',
+  role: 'self-produced',
   period: '2023',
   firstPublishedAt: '2023-12-02',
   media: [
@@ -34,13 +35,16 @@ export default {
       kind: 'first-party-public',
       verifiedAt: '2026-07-26',
     },
-  ],
-  verifiedAt: '2026-07-26',
-  factsPending: [
     {
-      field: 'role',
-      note: '公開資料で本人の具体的な制作担当表記を確認する。',
+      label: 'がぶがぶスペクター紹介動画',
+      url: 'https://www.youtube.com/watch?v=L6p00Q4XVSM',
+      kind: 'first-party-public',
+      role: 'video',
+      verifiedAt: '2026-08-07',
     },
+  ],
+  verifiedAt: '2026-08-07',
+  factsPending: [
     {
       field: 'current-status',
       note: '現在の販売状態をサイト公開前に確認する。',

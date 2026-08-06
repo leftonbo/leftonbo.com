@@ -6,13 +6,20 @@ export default {
   slug: 'massive-medal-pusher',
   title: 'クソでっけぇプッシャーゲーム',
   description:
-    'りくち制作のVRChatゲームワールド。メダルを落としてクレジットを獲得し、ルーレットやパークでプッシャー台を強化していく。LefTonboはProgramming Supportとして参加。',
+    'りくち氏が制作した、巨大なプッシャー台で遊べるVRChatワールド。メダルを落としてクレジットを獲得し、ルーレットやパークでプッシャー台を強化する。ジャックポットを当てれば大量のメダルを獲得できる。LefTonboは共同制作として参加し、主にゲームプログラミングを担当。',
   category: 'vrchat-world',
   status: 'recent-public-record',
-  role: 'programming-support',
-  period: null,
-  firstPublishedAt: null,
-  media: [],
+  role: 'collaborator',
+  period: '2025',
+  firstPublishedAt: '2025-04-13',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/massive-medal-pusher/hero.webp',
+      alt: '大量のメダルが流れる巨大なプッシャー台',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://vrchat.com/home/launch?worldId=wrld_1af53798-92a3-4c3f-99ae-a7c42ec6084d',
   sources: [
@@ -35,23 +42,15 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [
     {
       field: 'current-status',
       note: '現在の公開状態をサイト公開前に確認する。',
     },
     {
-      field: 'first-published-at',
-      note: '初公開日は未確認。',
-    },
-    {
       field: 'last-updated-at',
       note: '最終更新日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な原本画像を確認する。',
     },
   ],
 } satisfies Work

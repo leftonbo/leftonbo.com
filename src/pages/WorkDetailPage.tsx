@@ -17,6 +17,7 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
   const headerMedia = work.media[0]
   const catalogSource = work.sources.find((source) => source.role === 'catalog')
   const eventPostSource = work.sources.find((source) => source.role === 'event-post')
+  const videoSource = work.sources.find((source) => source.role === 'video')
 
   return (
     <article className="work-detail">
@@ -133,6 +134,15 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               {work.gameDetails.introduction.map((paragraph, index) => (
                 <p key={`${work.id}-introduction-${index}`}>{paragraph}</p>
               ))}
+            </section>
+          ) : null}
+          {videoSource ? (
+            <section aria-labelledby="work-video-title">
+              <p className="section-kicker">Video</p>
+              <h2 id="work-video-title">紹介動画</h2>
+              <ExternalLink className="action-link" href={videoSource.url}>
+                YouTubeで紹介動画を見る
+              </ExternalLink>
             </section>
           ) : null}
         </div>

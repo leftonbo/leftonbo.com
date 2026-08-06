@@ -5,13 +5,35 @@ export default {
   id: 'kawauchi-board-game-world',
   slug: 'kawauchi-board-game-world',
   title: '『かわうち』ボードゲームワールド',
-  description: '2〜4人向けのカード・ボードゲームワールド。',
+  description:
+    '「TDMボドゲ同好会」と共同制作した、ボードゲーム「かわいい子たちとお家を建てるゲーム」を遊べるVRChatワールド。島で出会ったかわいい生き物たちと資源を集め、誰よりも早く立派な家の完成を目指す。自然に囲まれた島には街や洞窟、遺跡があり、ゲームの外でも探索を楽しめる。2024年8月31日には拡張版「かわうちプラス」の追加に合わせてワールド全体を一新。LefTonboは主にワールドギミックとワールドモデリングを担当し、1周年記念では特別キャラクターカードのイラストも制作した。',
   category: 'vrchat-world',
   status: 'recent-evidence',
   role: 'collaborator',
   period: '2024',
-  firstPublishedAt: null,
-  media: [],
+  firstPublishedAt: '2024-01-05',
+  media: [
+    {
+      kind: 'image',
+      url: '/images/works/kawauchi-board-game-world/hero.webp',
+      alt: '『かわうち』ボードゲームワールドのサムネイル',
+      credit: null,
+    },
+    {
+      kind: 'image',
+      url: '/images/works/kawauchi-board-game-world/gallery-02.webp',
+      alt: 'リメイク前の『かわうち』の島',
+      caption: 'リメイク前の島のようす',
+      credit: null,
+    },
+    {
+      kind: 'image',
+      url: '/images/works/kawauchi-board-game-world/gallery-03.webp',
+      alt: 'リメイク後の『かわうち』のボードゲーム会場',
+      caption: '「かわうちプラス」の追加に合わせて一新した島とゲーム会場',
+      credit: null,
+    },
+  ],
   featured: false,
   url: 'https://vrchat.com/home/launch?worldId=wrld_66c742e9-ff23-460b-b71f-84549fe4b6f5',
   sources: [
@@ -28,27 +50,15 @@ export default {
       verifiedAt: CONTENT_VERIFIED_AT,
     },
   ],
-  verifiedAt: CONTENT_VERIFIED_AT,
+  verifiedAt: '2026-08-07',
   factsPending: [
-    {
-      field: 'role',
-      note: '共同制作での具体的な担当範囲は未確認。',
-    },
     {
       field: 'current-status',
       note: '現在の公開状態をサイト公開前に確認する。',
     },
     {
-      field: 'first-published-at',
-      note: '初公開日は未確認。',
-    },
-    {
       field: 'last-updated-at',
-      note: '最終更新日は未確認。',
-    },
-    {
-      field: 'media',
-      note: '再掲載可能な原本画像を確認する。',
+      note: '2024年8月31日の大幅更新以降の更新日は未確認。',
     },
   ],
 } satisfies Work
