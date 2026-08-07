@@ -38,6 +38,26 @@ describe('コンテンツの整合性', () => {
     }
   })
 
+  it('販売・配布中のアバター情報を確定済みの事実として保持する', () => {
+    const sajakSahagin = works.find((work) => work.id === 'sajak-sahagin')
+    const biterSpectre = works.find((work) => work.id === 'biter-spectre')
+    if (!sajakSahagin || !biterSpectre) throw new Error('検証元のアバター記事がありません。')
+
+    expect(sajakSahagin.firstPublishedAt).toBe('2020-12-19')
+    expect(sajakSahagin.description).toContain('現在もフリー配布中')
+    expect(sajakSahagin.factsPending).not.toContainEqual(
+      expect.objectContaining({ field: 'current-status' }),
+    )
+
+    expect(biterSpectre.description).toContain('現在も販売中')
+    expect(biterSpectre.factsPending).not.toContainEqual(
+      expect.objectContaining({ field: 'current-status' }),
+    )
+    expect(biterSpectre.factsPending).toContainEqual(
+      expect.objectContaining({ field: 'version' }),
+    )
+  })
+
   it('カテゴリに応じて必要または不要になる従属データを検証する', () => {
     const gameWork = works.find((work) => work.category === 'game' && work.gameDetails)
     const nonGameWork = works.find((work) => work.category !== 'game')
