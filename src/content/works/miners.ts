@@ -52,7 +52,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/game-miners',
+  url: 'https://drive.google.com/file/d/1PPia2NuihGE66XRwI1Z7bBvRVD0F4Kd3/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: Miners',
@@ -67,6 +68,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

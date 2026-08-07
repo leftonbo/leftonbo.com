@@ -32,7 +32,7 @@ export function getWorkActionLabel(work: Work): string {
     case 'avatar-3d':
       return 'ショップで見る'
     case 'game':
-      return work.status === 'archived' ? '作品記録を見る' : '配布・プレイ先を見る'
+      return '作品をダウンロード'
     case 'vket':
       if (work.url.startsWith('https://x.com/')) return '出展時のX投稿を見る'
       if (work.url.includes('/exhibitor/')) return 'Vket出展者ページを見る'

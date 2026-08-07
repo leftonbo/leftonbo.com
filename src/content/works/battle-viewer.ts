@@ -24,7 +24,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca08034ab74e872cd8aac2e',
+  url: 'https://drive.google.com/file/d/1VvXSW2YZoQPVYTzmnVffLo54C5709u74/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: ばとるびゅ～わ',
@@ -39,6 +40,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

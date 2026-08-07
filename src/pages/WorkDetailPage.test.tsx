@@ -60,13 +60,35 @@ describe('WorkDetailPage', () => {
     )
 
     rerender(<WorkDetailPage work={getWork('infiroad')} works={works} />)
-    expect(screen.getByRole('link', { name: 'ダウンロード版・ブラウザ版を見る' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: '作品をダウンロード' })).toHaveAttribute(
       'href',
-      'https://tonbonotion01.notion.site/game-infiroad',
+      'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
     )
 
     rerender(<WorkDetailPage work={getWork('vket-2025-summer')} works={works} />)
     expect(screen.getByRole('link', { name: 'Vket出展者ページを見る' })).toBeInTheDocument()
+  })
+
+  it('ゲームのWindows版注記と用途別の追加リンクを表示する', () => {
+    const { rerender } = render(<WorkDetailPage work={getWork('infiroad')} works={works} />)
+
+    expect(screen.getByText('Windows版のみ')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'ブラウザ版をプレイ' })).toHaveAttribute(
+      'href',
+      'https://unityroom.com/games/infiroad',
+    )
+    expect(screen.queryByText('関連リンク')).not.toBeInTheDocument()
+
+    rerender(<WorkDetailPage work={getWork('heroad')} works={works} />)
+
+    expect(screen.getByText('関連リンク')).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: 'WOLF RPGエディターコンテスト 第8回 結果' }),
+    ).toHaveAttribute(
+      'href',
+      'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml',
+    )
+    expect(screen.queryByRole('link', { name: 'ブラウザ版をプレイ' })).not.toBeInTheDocument()
   })
 
   it('omits an unconfirmed development tool and operational history labels', () => {

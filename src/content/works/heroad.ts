@@ -46,7 +46,15 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/game-heroad',
+  url: 'https://drive.google.com/file/d/1U5kni4YQB8edsI_WqttULBOgKspCTxTO/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
+  additionalLinks: [
+    {
+      label: 'WOLF RPGエディターコンテスト 第8回 結果',
+      url: 'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml',
+      placement: 'related',
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: HeRoad',
@@ -61,6 +69,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

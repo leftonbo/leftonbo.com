@@ -24,7 +24,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca080dca870ff86c206e825',
+  url: 'https://drive.google.com/file/d/1_OhGHOwfc6Nxl7iwkAIvYohUV8QzfsfY/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: RocketLunch嫌ぁ～',
@@ -39,6 +40,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

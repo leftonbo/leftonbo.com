@@ -15,10 +15,11 @@ describe('App routes', () => {
   it('renders a detail page with an official destination and concise details', () => {
     render(<App pathname="/works/light-trail/" />)
     expect(screen.getByRole('heading', { level: 1, name: 'Light Trail' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: '配布・プレイ先を見る' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: '作品をダウンロード' })).toHaveAttribute(
       'href',
-      'https://tonbonotion01.notion.site/game-lighttrail',
+      'https://drive.google.com/file/d/1HMw8Zo1vm36MpH8ocF6sZPFk4g7fcdkk/view?usp=drive_link',
     )
+    expect(screen.getByText('Windows版のみ')).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: '作品情報' })).toBeInTheDocument()
     expect(screen.getByText('2018年4月29日')).toHaveAttribute('datetime', '2018-04-29')
     expect(screen.getByRole('heading', { level: 2, name: 'ゲーム紹介' })).toBeInTheDocument()

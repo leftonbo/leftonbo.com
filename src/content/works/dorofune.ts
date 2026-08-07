@@ -28,7 +28,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca080e3bc62cb6847f5ef6e',
+  url: 'https://drive.google.com/file/d/1mfbte0ZXoCkWVO3VSnzS_5qu-GilCbrA/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: どろふね',
@@ -43,6 +44,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

@@ -46,8 +46,15 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/game-infiroad',
-  primaryActionLabel: 'ダウンロード版・ブラウザ版を見る',
+  url: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
+  additionalLinks: [
+    {
+      label: 'ブラウザ版をプレイ',
+      url: 'https://unityroom.com/games/infiroad',
+      placement: 'action',
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: Infiroad',
@@ -62,6 +69,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

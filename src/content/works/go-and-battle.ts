@@ -42,7 +42,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca0803c99a9cb82648afdb7',
+  url: 'https://drive.google.com/file/d/1LgigLl-QRvQql4gCS_76Y1Am8gVgbxiP/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: Go and Battle!',
@@ -57,6 +58,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

@@ -18,6 +18,8 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
   const catalogSource = work.sources.find((source) => source.role === 'catalog')
   const eventPostSource = work.sources.find((source) => source.role === 'event-post')
   const videoSource = work.sources.find((source) => source.role === 'video')
+  const actionLinks = work.additionalLinks?.filter((link) => link.placement === 'action') ?? []
+  const relatedLinks = work.additionalLinks?.filter((link) => link.placement === 'related') ?? []
 
   return (
     <article className="work-detail">
@@ -53,9 +55,21 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
             <p className="section-kicker">{categoryLabels[work.category]}</p>
             <h1>{work.title}</h1>
             <p>{work.description}</p>
-            <ExternalLink className="action-link action-link--primary" href={work.url}>
-              {getWorkActionLabel(work)}
-            </ExternalLink>
+            <div className="work-detail__actions">
+              <div className="work-detail__primary-action">
+                <ExternalLink className="action-link action-link--primary" href={work.url}>
+                  {getWorkActionLabel(work)}
+                </ExternalLink>
+                {work.primaryActionNote ? (
+                  <p className="work-detail__action-note">{work.primaryActionNote}</p>
+                ) : null}
+              </div>
+              {actionLinks.map((link) => (
+                <ExternalLink className="action-link" href={link.url} key={link.url}>
+                  {link.label}
+                </ExternalLink>
+              ))}
+            </div>
           </div>
         </header>
 
@@ -123,6 +137,20 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                 <div>
                   <dt>制作ツール</dt>
                   <dd>{work.gameDetails.developmentTool}</dd>
+                </div>
+              ) : null}
+              {relatedLinks.length > 0 ? (
+                <div>
+                  <dt>関連リンク</dt>
+                  <dd>
+                    <ul className="fact-list__links">
+                      {relatedLinks.map((link) => (
+                        <li key={link.url}>
+                          <ExternalLink href={link.url}>{link.label}</ExternalLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </dd>
                 </div>
               ) : null}
             </dl>

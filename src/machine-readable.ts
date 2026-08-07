@@ -1,4 +1,4 @@
-import { categoryLabels, roleLabels, workCategoryOrder } from './app/presentation'
+import { categoryLabels, getWorkActionLabel, roleLabels, workCategoryOrder } from './app/presentation'
 import { getStaticRoutePaths } from './app/routes'
 import { activityAreas, externalLinks, siteProfile } from './content/site'
 import type { Work } from './content/types'
@@ -34,7 +34,7 @@ export function getMachineReadableFiles(): Record<string, string> {
     })),
   }
   const worksPayload = {
-    schemaVersion: 5,
+    schemaVersion: 6,
     siteUpdatedAt: siteProfile.updatedAt,
     count: works.length,
     works: works.map((work) => {
@@ -63,6 +63,8 @@ export function getMachineReadableFiles(): Record<string, string> {
         media: work.media,
         featured: work.featured,
         url: work.url,
+        primaryActionNote: work.primaryActionNote ?? null,
+        additionalLinks: work.additionalLinks ?? [],
       }
     }),
   }
@@ -142,7 +144,7 @@ export function creativeWorkJsonLd(work: Work) {
     '@type': 'CreativeWork',
     '@id': `${SITE_ORIGIN}/works/${work.slug}/#work`,
     url: `${SITE_ORIGIN}/works/${work.slug}/`,
-    sameAs: work.url,
+    sameAs: [work.url, ...(work.additionalLinks?.map((link) => link.url) ?? [])],
     name: work.title,
     description: work.description,
     genre: work.gameDetails?.genre ?? categoryLabels[work.category],
@@ -170,6 +172,12 @@ function createWorksMarkdown(): string {
       .map((work) => {
         const catalogSource = work.sources.find((source) => source.role === 'catalog')
         const eventPostSource = work.sources.find((source) => source.role === 'event-post')
+        const primaryLinkLabel = work.category === 'game' ? 'ダウンロード' : '公開先'
+        const primaryLinkNote = work.primaryActionNote ? `（${work.primaryActionNote}）` : ''
+        const additionalLinks = (work.additionalLinks ?? []).map(
+          (link) =>
+            `- ${link.placement === 'action' ? 'ブラウザ版' : '関連リンク'}: [${link.label}](${link.url})`,
+        )
         const details = [
           ...(work.role === 'pending-confirmation' ? [] : [`- 関わり方: ${roleLabels[work.role]}`]),
           ...(work.period ? [`- 制作時期: ${work.period}`] : []),
@@ -187,7 +195,8 @@ function createWorksMarkdown(): string {
           ...(work.gameDetails?.developmentTool
             ? [`- 制作ツール: ${work.gameDetails.developmentTool}`]
             : []),
-          `- 公開先: ${work.url}`,
+          `- ${primaryLinkLabel}: [${getWorkActionLabel(work)}](${work.url})${primaryLinkNote}`,
+          ...additionalLinks,
         ].join('\n')
         const introduction = work.gameDetails
           ? `\n\n#### ゲーム紹介\n\n${work.gameDetails.introduction.join('\n\n')}`

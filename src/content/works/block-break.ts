@@ -36,7 +36,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca0805f9319fa2878f5a9b3',
+  url: 'https://drive.google.com/file/d/109gVB6J0JrsXI1Fi3Ka6VMP5v5JXacDn/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: Block Break',
@@ -51,6 +52,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

@@ -72,6 +72,14 @@ export interface VketExhibition {
   }
 }
 
+export type WorkLinkPlacement = 'action' | 'related'
+
+export interface WorkLink {
+  readonly label: string
+  readonly url: string
+  readonly placement: WorkLinkPlacement
+}
+
 export interface Work {
   readonly id: string;
   readonly slug: string;
@@ -88,6 +96,8 @@ export interface Work {
   readonly featured: boolean;
   readonly url: string;
   readonly primaryActionLabel?: string;
+  readonly primaryActionNote?: string
+  readonly additionalLinks?: readonly WorkLink[]
   readonly sources: readonly ContentSource[];
   readonly verifiedAt: ISODate;
   readonly factsPending: readonly PendingFact[];

@@ -36,7 +36,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca08080a8e8ec3a4ea3d487',
+  url: 'https://drive.google.com/file/d/15Weks96HSMpK13ic01lo1OfrFfGD7I8X/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: ElemShot',
@@ -51,6 +52,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

@@ -27,7 +27,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca080da9b59e3ecb5b49ee4',
+  url: 'https://drive.google.com/file/d/1bDgsBggb3YN2yd8X5n5rMcOtlDFsNfr4/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: Pipe 4 Run',
@@ -42,6 +43,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

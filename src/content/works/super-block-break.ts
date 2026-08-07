@@ -24,7 +24,8 @@ export default {
     },
   ],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca080099e9cc01a5be97a0e',
+  url: 'https://drive.google.com/file/d/1qn27Lf1UWREOL9IQkhPc6TzYLbMvsMiA/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: スーパーブロック崩し',
@@ -39,6 +40,6 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [],
 } satisfies Work

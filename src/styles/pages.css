@@ -443,6 +443,26 @@
   font-size: clamp(1.05rem, 1.7vw, 1.3rem);
 }
 
+.work-detail__actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.work-detail__primary-action {
+  display: grid;
+  gap: var(--space-1);
+  justify-items: start;
+}
+
+.work-detail__action-note {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+}
+
 .work-detail__visual .work-mark {
   width: clamp(8rem, 16vw, 13rem);
 }
@@ -508,6 +528,14 @@
   font-family: var(--font-data);
   font-size: 0.75rem;
   font-weight: 500;
+}
+
+.fact-list__links {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .work-event-post {

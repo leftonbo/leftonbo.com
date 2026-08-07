@@ -7,6 +7,7 @@ import type {
   PendingFact,
   Work,
   WorkCategory,
+  WorkLink,
   WorkMedia,
 } from "./types";
 
@@ -57,6 +58,7 @@ const workRoles = new Set([
   'exhibitor',
 ]);
 const workMediaKinds = new Set(["image"]);
+const workLinkPlacements = new Set(['action', 'related'])
 const externalLinkCategories = new Set([
   "hub",
   "code",
@@ -221,6 +223,24 @@ function validateWorkMedia(
       addRequiredTextIssue(issues, `${mediaPath}.credit`, item.credit);
     }
   });
+}
+
+function validateAdditionalLinks(
+  issues: ContentValidationIssue[],
+  path: string,
+  links: readonly WorkLink[],
+): void {
+  if (!Array.isArray(links)) {
+    issues.push({ path, message: 'additionalLinksは配列である必要があります。' })
+    return
+  }
+
+  links.forEach((link, index) => {
+    const linkPath = `${path}[${index}]`
+    addRequiredTextIssue(issues, `${linkPath}.label`, link.label)
+    addUrlIssue(issues, `${linkPath}.url`, link.url)
+    addEnumIssue(issues, `${linkPath}.placement`, link.placement, workLinkPlacements)
+  })
 }
 
 function validateGameDetails(
@@ -420,6 +440,12 @@ export function collectContentValidationIssues(
     addUrlIssue(issues, `${path}.url`, work.url);
     if (work.primaryActionLabel !== undefined) {
       addRequiredTextIssue(issues, `${path}.primaryActionLabel`, work.primaryActionLabel)
+    }
+    if (work.primaryActionNote !== undefined) {
+      addRequiredTextIssue(issues, `${path}.primaryActionNote`, work.primaryActionNote)
+    }
+    if (work.additionalLinks !== undefined) {
+      validateAdditionalLinks(issues, `${path}.additionalLinks`, work.additionalLinks)
     }
     addDateIssue(issues, `${path}.verifiedAt`, work.verifiedAt);
     validateSources(issues, `${path}.sources`, work.sources);

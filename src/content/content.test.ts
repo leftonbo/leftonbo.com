@@ -18,6 +18,23 @@ const canonicalContent: CanonicalContent = {
   works,
 }
 
+const gameDownloadUrls = {
+  miners: 'https://drive.google.com/file/d/1PPia2NuihGE66XRwI1Z7bBvRVD0F4Kd3/view?usp=drive_link',
+  'battle-viewer': 'https://drive.google.com/file/d/1VvXSW2YZoQPVYTzmnVffLo54C5709u74/view?usp=drive_link',
+  'block-break': 'https://drive.google.com/file/d/109gVB6J0JrsXI1Fi3Ka6VMP5v5JXacDn/view?usp=drive_link',
+  'pipe-4-run': 'https://drive.google.com/file/d/1bDgsBggb3YN2yd8X5n5rMcOtlDFsNfr4/view?usp=drive_link',
+  dorofune: 'https://drive.google.com/file/d/1mfbte0ZXoCkWVO3VSnzS_5qu-GilCbrA/view?usp=drive_link',
+  'rocket-lunch-iyaa': 'https://drive.google.com/file/d/1_OhGHOwfc6Nxl7iwkAIvYohUV8QzfsfY/view?usp=drive_link',
+  'elem-shot': 'https://drive.google.com/file/d/15Weks96HSMpK13ic01lo1OfrFfGD7I8X/view?usp=drive_link',
+  'super-block-break': 'https://drive.google.com/file/d/1qn27Lf1UWREOL9IQkhPc6TzYLbMvsMiA/view?usp=drive_link',
+  'go-and-battle': 'https://drive.google.com/file/d/1LgigLl-QRvQql4gCS_76Y1Am8gVgbxiP/view?usp=drive_link',
+  heroad: 'https://drive.google.com/file/d/1U5kni4YQB8edsI_WqttULBOgKspCTxTO/view?usp=drive_link',
+  'light-trail': 'https://drive.google.com/file/d/1HMw8Zo1vm36MpH8ocF6sZPFk4g7fcdkk/view?usp=drive_link',
+  'ball-maze-2': 'https://drive.google.com/file/d/1m9bcRETXUyf8dddbYJT3nhHUAiWQKewp/view?usp=drive_link',
+  'ball-maze': 'https://drive.google.com/file/d/1UCmCTtbGTsaCXiZY5gMHlke7wi7AfIdv/view?usp=drive_link',
+  infiroad: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
+} as const
+
 function contentWithWorks(nextWorks: readonly Work[]): CanonicalContent {
   return { ...canonicalContent, works: nextWorks }
 }
@@ -55,6 +72,58 @@ describe('コンテンツの整合性', () => {
     )
     expect(biterSpectre.factsPending).toContainEqual(
       expect.objectContaining({ field: 'version' }),
+    )
+  })
+
+  it('ゲーム作品のWindows版ダウンロード先と確認元を分けて保持する', () => {
+    expect(works.filter((work) => work.category === 'game')).toHaveLength(
+      Object.keys(gameDownloadUrls).length,
+    )
+
+    for (const [id, url] of Object.entries(gameDownloadUrls)) {
+      const work = works.find((item) => item.id === id)
+      if (!work) throw new Error(`ゲーム記事が見つかりません: ${id}`)
+
+      expect(work.category).toBe('game')
+      expect(work.url).toBe(url)
+      expect(work.primaryActionNote).toBe('Windows版のみ')
+      expect(work.sources.some((source) => source.url.includes('notion.site'))).toBe(true)
+    }
+  })
+
+  it('作品の追加リンクと主アクション注記を検証する', () => {
+    const sourceWork = works.find((work) => work.id === 'infiroad')
+    if (!sourceWork) throw new Error('検証元のゲーム記事がありません。')
+
+    const issues = collectContentValidationIssues(
+      contentWithWorks([
+        {
+          ...sourceWork,
+          primaryActionNote: ' ',
+          additionalLinks: [
+            {
+              label: ' ',
+              url: 'not-a-url',
+              placement: 'unknown' as 'action',
+            },
+          ],
+        },
+      ]),
+    )
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        { path: 'works[0].primaryActionNote', message: '必須の文字列が空です。' },
+        { path: 'works[0].additionalLinks[0].label', message: '必須の文字列が空です。' },
+        {
+          path: 'works[0].additionalLinks[0].url',
+          message: '不正なURLです: not-a-url',
+        },
+        {
+          path: 'works[0].additionalLinks[0].placement',
+          message: '許可されていない値です: unknown',
+        },
+      ]),
     )
   })
 

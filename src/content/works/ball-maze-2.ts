@@ -19,7 +19,8 @@ export default {
   },
   media: [],
   featured: false,
-  url: 'https://tonbonotion01.notion.site/1848538c8ca0807bb0b6d177ce583026',
+  url: 'https://drive.google.com/file/d/1m9bcRETXUyf8dddbYJT3nhHUAiWQKewp/view?usp=drive_link',
+  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: Ball Maze II',
@@ -34,7 +35,7 @@ export default {
       verifiedAt: '2026-07-26',
     },
   ],
-  verifiedAt: '2026-07-26',
+  verifiedAt: '2026-08-07',
   factsPending: [
     {
       field: 'media',
