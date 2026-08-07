@@ -62,7 +62,6 @@ export interface WorkMedia {
 export interface GameDetails {
   readonly genre: string
   readonly developmentTool: string | null
-  readonly introduction: readonly string[]
 }
 
 export interface VketExhibition {
@@ -84,7 +83,8 @@ export interface Work {
   readonly id: string;
   readonly slug: string;
   readonly title: string;
-  readonly description: string;
+  readonly summary: string;
+  readonly introduction: readonly string[]
   readonly category: WorkCategory;
   readonly status: WorkStatus;
   readonly role: WorkRole;

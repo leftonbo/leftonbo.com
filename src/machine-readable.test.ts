@@ -31,6 +31,8 @@ describe('機械可読出力', () => {
       siteUpdatedAt?: string
       works?: Array<{
         id?: string
+        summary?: string
+        introduction?: string[]
         url?: string
         primaryActionNote?: string | null
         additionalLinks?: Array<{ label: string; url: string; placement: string }>
@@ -45,13 +47,18 @@ describe('機械可読出力', () => {
       }>
     }
 
-    expect(worksJson.schemaVersion).toBe(6)
+    expect(worksJson.schemaVersion).toBe(7)
     expect(worksJson.count).toBe(works.length)
     expect(worksJson.siteUpdatedAt).toBe(siteProfile.updatedAt)
     expect(worksJson.works?.map((work) => work.id)).toEqual(works.map((work) => work.id))
     expect(
       worksJson.works?.every(
-        (work) => 'firstPublishedAt' in work && 'period' in work && Array.isArray(work.media),
+        (work) =>
+          typeof work.summary === 'string' &&
+          Array.isArray(work.introduction) &&
+          'firstPublishedAt' in work &&
+          'period' in work &&
+          Array.isArray(work.media),
       ),
     ).toBe(true)
 
@@ -75,6 +82,10 @@ describe('機械可読出力', () => {
 
     const infiroad = worksJson.works?.find((work) => work.id === 'infiroad')
     expect(infiroad).toMatchObject({
+      summary: '勇者と仲間を強化しながら無限回廊を進む、Unity製のクリッカーゲーム。',
+      introduction: expect.arrayContaining([
+        expect.stringContaining('魔物に支配された世界を取り戻すため'),
+      ]),
       url: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
       primaryActionNote: 'Windows版のみ',
       additionalLinks: [
@@ -103,6 +114,7 @@ describe('機械可読出力', () => {
     expect(worksMarkdown).toContain(
       '- 関連リンク: [WOLF RPGエディターコンテスト 第8回 結果](https://silversecond.com/WolfRPGEditor/Contest/result08.shtml)',
     )
+    expect(worksMarkdown).toContain('#### 作品紹介')
     expect(worksMarkdown).not.toContain('https://tonbonotion01.notion.site/game-infiroad')
   })
 

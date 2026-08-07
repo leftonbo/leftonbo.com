@@ -4,7 +4,8 @@ export default {
   id: 'rocket-lunch-iyaa',
   slug: 'rocket-lunch-iyaa',
   title: 'RocketLunch嫌ぁ～',
-  description: '身内の企画に合わせ、1日で制作したUnity 4.x製のバカゲーFPS。',
+  summary: '身内の企画に合わせて1日で制作した、Unity 4.x製のFPS。',
+  introduction: ['身内の企画に合わせ、1日で制作したUnity 4.x製のFPS。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: 'FPS',
     developmentTool: 'Unity 4.x',
-    introduction: ['身内の企画に合わせ、1日で制作したUnity 4.x製のFPS。'],
   },
   media: [
     {

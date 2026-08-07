@@ -4,7 +4,8 @@ export default {
   id: 'go-and-battle',
   slug: 'go-and-battle',
   title: 'Go and Battle!',
-  description: 'すごろくにRPG風の戦闘を組み合わせたゲーム。ボスやライバルを倒しながらゴールを目指す。',
+  summary: 'すごろくとRPG風の戦闘を組み合わせ、ボスやライバルを倒してゴールを目指すゲーム。',
+  introduction: ['すごろくにRPG風の戦闘を組み合わせ、ボスやライバルを倒しながらゴールを目指す。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: 'すごろくRPG',
     developmentTool: 'Tonyu System',
-    introduction: ['すごろくにRPG風の戦闘を組み合わせ、ボスやライバルを倒しながらゴールを目指す。'],
   },
   media: [
     {

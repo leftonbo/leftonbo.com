@@ -42,7 +42,7 @@ export function renderPage(route: string): RenderedPage {
       html,
       head: {
         title: `${match.work.title} | ${siteProfile.name}`,
-        description: match.work.description,
+        description: match.work.summary,
         canonical: canonicalUrl(`/works/${match.work.slug}/`),
         ogType: 'article',
       },

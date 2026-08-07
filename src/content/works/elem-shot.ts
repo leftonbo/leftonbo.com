@@ -4,7 +4,8 @@ export default {
   id: 'elem-shot',
   slug: 'elem-shot',
   title: 'ElemShot',
-  description: '3種類のショットを使い分けて進むシューティングゲーム。',
+  summary: '3種類のショットを使い分けて進むシューティングゲーム。',
+  introduction: ['3種類のショットを使い分けて進むシューティングゲーム。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: 'シューティング',
     developmentTool: 'DXライブラリ',
-    introduction: ['3種類のショットを使い分けて進むシューティングゲーム。'],
   },
   media: [
     {

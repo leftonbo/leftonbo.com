@@ -5,8 +5,10 @@ export default {
   id: 'tonbo-battlefield-shadow-valley',
   slug: 'tonbo-battlefield-shadow-valley',
   title: 'TonboBattlefield: Shadow Valley',
-  description:
+  summary: 'ハロウィン仕様のマップと新武器を収録した、TonboBattlefieldシリーズ第3作。',
+  introduction: [
     'TonboBattlefieldシリーズ第3作となるハロウィン仕様の対戦ワールド。一新したマップ、新しい武器、隠し要素を収録する。',
+  ],
   category: 'vrchat-world',
   status: 'published',
   role: 'self-produced',

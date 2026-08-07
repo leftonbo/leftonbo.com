@@ -26,21 +26,22 @@ describe('WorkDetailPage', () => {
     expect(document.querySelector('.work-detail__visual img')).not.toBeInTheDocument()
   })
 
-  it('shows structured game facts and introduction only for game works', () => {
+  it('shows game-only facts and a common introduction for every work', () => {
     const { rerender } = render(<WorkDetailPage work={getWork('light-trail')} works={works} />)
 
     expect(screen.getByText('ジャンル')).toBeInTheDocument()
     expect(screen.getByText('RPG', { selector: 'dd' })).toBeInTheDocument()
     expect(screen.getByText('制作ツール')).toBeInTheDocument()
     expect(screen.getByText('RPGツクールMV')).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'ゲーム紹介' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '作品紹介' })).toBeInTheDocument()
     expect(screen.getByText(/ゲームクリエイターズキャンプの企画制作作品/)).toBeInTheDocument()
 
     rerender(<WorkDetailPage work={getWork('tonbo-werewolf')} works={works} />)
 
     expect(screen.queryByText('ジャンル')).not.toBeInTheDocument()
     expect(screen.queryByText('制作ツール')).not.toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: 'ゲーム紹介' })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '作品紹介' })).toBeInTheDocument()
+    expect(screen.getByText(/「猫猫村」のような遊び/)).toBeInTheDocument()
   })
 
   it('labels the primary action for each destination instead of using a generic label', () => {

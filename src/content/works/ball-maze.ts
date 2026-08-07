@@ -4,7 +4,8 @@ export default {
   id: 'ball-maze',
   slug: 'ball-maze',
   title: 'Ball Maze',
-  description: 'ビー玉転がし風の迷路ゲーム。',
+  summary: '全14ステージを収録した、ビー玉転がし風の迷路ゲーム。',
+  introduction: ['Tonyu Systemで制作した、ビー玉転がし風の迷路ゲーム。全14ステージを収録する。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: '擬似3D迷路',
     developmentTool: 'Tonyu System',
-    introduction: ['Tonyu Systemで制作した、ビー玉転がし風の迷路ゲーム。全14ステージを収録する。'],
   },
   media: [],
   featured: false,

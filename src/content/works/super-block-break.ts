@@ -4,7 +4,8 @@ export default {
   id: 'super-block-break',
   slug: 'super-block-break',
   title: 'スーパーブロック崩し',
-  description: '公開情報で確認できる、最も古い制作ゲーム。',
+  summary: 'Tonyu Systemで制作した、公開情報上もっとも古い制作ゲーム。',
+  introduction: ['Tonyu Systemを使って制作した、公開情報で確認できる範囲では最も古いゲーム。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: 'ブロック崩し',
     developmentTool: 'Tonyu System',
-    introduction: ['Tonyu Systemを使って制作した、公開情報で確認できる範囲では最も古いゲーム。'],
   },
   media: [
     {

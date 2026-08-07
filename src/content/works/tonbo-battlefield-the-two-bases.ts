@@ -5,8 +5,11 @@ export default {
   id: 'tonbo-battlefield-the-two-bases',
   slug: 'tonbo-battlefield-the-two-bases',
   title: 'TonboBattlefield 2: The Two Bases',
-  description:
-    '前作を発展させたFPS風対戦ワールド。20種類の武器、両手持ち武器、初心者向けの説明スクリーン、優勝者の表彰式を備える。',
+  summary: '20種類の武器と複数のゲームモードを備えた、FPS風のVRChat対戦ワールド。',
+  introduction: [
+    '前作を発展させたFPS風の対戦ワールド。20種類の武器に加え、両手持ち武器を使って戦える。',
+    '複数のゲームモード、初心者向けの説明スクリーン、優勝者の表彰式を備える。',
+  ],
   category: 'vrchat-world',
   status: 'published',
   role: 'self-produced',

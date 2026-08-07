@@ -37,7 +37,7 @@ export function WorkCard({ work }: WorkCardProps) {
         <h3>
           <a href={detailHref}>{work.title}</a>
         </h3>
-        <p>{work.description}</p>
+        <p>{work.summary}</p>
         <a className="work-card__detail" href={detailHref}>
           作品を見る
           <span className="visually-hidden">：{work.title}</span>

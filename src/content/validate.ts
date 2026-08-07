@@ -78,6 +78,7 @@ const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
 const yearPattern = /^\d{4}$/
 const xPostUrlPattern = /^https:\/\/x\.com\/[A-Za-z0-9_]+\/status\/\d+\/?$/
+const workSummaryMaxLength = 80
 
 function addRequiredTextIssue(
   issues: ContentValidationIssue[],
@@ -265,15 +266,38 @@ function validateGameDetails(
   if (gameDetails.developmentTool !== null) {
     addRequiredTextIssue(issues, `${path}.developmentTool`, gameDetails.developmentTool)
   }
+}
 
-  if (!Array.isArray(gameDetails.introduction) || gameDetails.introduction.length === 0) {
-    issues.push({ path: `${path}.introduction`, message: '紹介文が1段落以上必要です。' })
+function validateWorkIntroduction(
+  issues: ContentValidationIssue[],
+  path: string,
+  introduction: readonly string[],
+): void {
+  if (!Array.isArray(introduction) || introduction.length === 0) {
+    issues.push({ path, message: '紹介文が1段落以上必要です。' })
     return
   }
 
-  gameDetails.introduction.forEach((paragraph, index) => {
-    addRequiredTextIssue(issues, `${path}.introduction[${index}]`, paragraph)
+  introduction.forEach((paragraph, index) => {
+    addRequiredTextIssue(issues, `${path}[${index}]`, paragraph)
   })
+}
+
+function validateWorkSummary(
+  issues: ContentValidationIssue[],
+  path: string,
+  summary: string,
+): void {
+  addRequiredTextIssue(issues, path, summary)
+
+  if (summary.includes('\n')) {
+    issues.push({ path, message: '改行を含められません。' })
+  }
+
+  const length = Array.from(summary).length
+  if (length > workSummaryMaxLength) {
+    issues.push({ path, message: `${workSummaryMaxLength}文字を超えています: ${length}文字` })
+  }
 }
 
 function validateVketExhibition(
@@ -418,7 +442,8 @@ export function collectContentValidationIssues(
       });
     }
     addRequiredTextIssue(issues, `${path}.title`, work.title);
-    addRequiredTextIssue(issues, `${path}.description`, work.description);
+    validateWorkSummary(issues, `${path}.summary`, work.summary)
+    validateWorkIntroduction(issues, `${path}.introduction`, work.introduction)
     addEnumIssue(issues, `${path}.category`, work.category, workCategories);
     addEnumIssue(issues, `${path}.status`, work.status, workStatuses);
     addEnumIssue(issues, `${path}.role`, work.role, workRoles);

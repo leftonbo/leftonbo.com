@@ -4,7 +4,8 @@ export default {
   id: 'battle-viewer',
   slug: 'battle-viewer',
   title: 'ばとるびゅ～わ',
-  description: '四角い生命体が戦う様子を眺めるシミュレーションゲーム。',
+  summary: '四角い生命体が戦う様子を眺めるシミュレーションゲーム。',
+  introduction: ['四角い生命体が戦う様子を眺めるシミュレーションゲーム。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: 'シミュレーション',
     developmentTool: 'Tonyu System',
-    introduction: ['四角い生命体が戦う様子を眺めるシミュレーションゲーム。'],
   },
   media: [
     {

@@ -5,8 +5,10 @@ export default {
   id: 'tonbo-battlefield-classic-remake',
   slug: 'tonbo-battlefield-classic-remake',
   title: 'TonboBattlefield Classic（トンバト クラシック）',
-  description:
-    'Udon製のバトルアクションワールド。剣・銃・拳を使い、複数のゲームモードで対戦できる。',
+  summary: '剣や銃、拳を使い、複数のモードで対戦できるUdon製バトルアクションワールド。',
+  introduction: [
+    '剣や銃、拳を使い、複数のゲームモードで対戦できるUdon製のバトルアクションワールド。',
+  ],
   category: 'vrchat-world',
   status: 'published',
   role: 'self-produced',

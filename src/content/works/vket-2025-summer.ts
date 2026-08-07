@@ -5,8 +5,11 @@ export default {
   id: 'vket-2025-summer',
   slug: 'vket-2025-summer',
   title: 'Virtual Market 2025 Summer 出展',
-  description:
-    '展示ワールド「森聖街 ヤポプエト - 中願の秋夜」に出展し、「がぶがぶスペクター」を展示。「TonboBattlefield」シリーズ、「かわいい子たちとお家を建てるゲーム」の紹介ムービー、「クソでっけぇプッシャーゲーム」を紹介した。',
+  summary: 'アバターと3つのゲーム作品を「森聖街 ヤポプエト」で紹介したVket出展。',
+  introduction: [
+    '展示ワールド「森聖街 ヤポプエト - 中願の秋夜」に出展し、「がぶがぶスペクター」を展示した。',
+    '「TonboBattlefield」シリーズ、「かわいい子たちとお家を建てるゲーム」の紹介ムービー、「クソでっけぇプッシャーゲーム」も紹介した。',
+  ],
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',

@@ -5,8 +5,11 @@ export default {
   id: 'sajak-sahagin',
   slug: 'sajak-sahagin',
   title: 'サジャクサハギン',
-  description:
-    'Vket 5への出展を機に頒布を始めた、PC／Quest両対応のVRChat向け無料アバター。サメのような姿をした魚人をモチーフにしている。',
+  summary: 'サメのような魚人をモチーフにした、PC／Quest対応の無料VRChatアバター。',
+  introduction: [
+    'Vket 5への出展を機に頒布を始めた、PC／Quest両対応のVRChat向け無料アバター。',
+    'サメのような姿をした魚人をモチーフにしている。',
+  ],
   category: 'avatar-3d',
   status: 'published',
   role: 'self-produced',

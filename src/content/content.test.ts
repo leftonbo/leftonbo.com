@@ -18,23 +18,6 @@ const canonicalContent: CanonicalContent = {
   works,
 }
 
-const gameDownloadUrls = {
-  miners: 'https://drive.google.com/file/d/1PPia2NuihGE66XRwI1Z7bBvRVD0F4Kd3/view?usp=drive_link',
-  'battle-viewer': 'https://drive.google.com/file/d/1VvXSW2YZoQPVYTzmnVffLo54C5709u74/view?usp=drive_link',
-  'block-break': 'https://drive.google.com/file/d/109gVB6J0JrsXI1Fi3Ka6VMP5v5JXacDn/view?usp=drive_link',
-  'pipe-4-run': 'https://drive.google.com/file/d/1bDgsBggb3YN2yd8X5n5rMcOtlDFsNfr4/view?usp=drive_link',
-  dorofune: 'https://drive.google.com/file/d/1mfbte0ZXoCkWVO3VSnzS_5qu-GilCbrA/view?usp=drive_link',
-  'rocket-lunch-iyaa': 'https://drive.google.com/file/d/1_OhGHOwfc6Nxl7iwkAIvYohUV8QzfsfY/view?usp=drive_link',
-  'elem-shot': 'https://drive.google.com/file/d/15Weks96HSMpK13ic01lo1OfrFfGD7I8X/view?usp=drive_link',
-  'super-block-break': 'https://drive.google.com/file/d/1qn27Lf1UWREOL9IQkhPc6TzYLbMvsMiA/view?usp=drive_link',
-  'go-and-battle': 'https://drive.google.com/file/d/1LgigLl-QRvQql4gCS_76Y1Am8gVgbxiP/view?usp=drive_link',
-  heroad: 'https://drive.google.com/file/d/1U5kni4YQB8edsI_WqttULBOgKspCTxTO/view?usp=drive_link',
-  'light-trail': 'https://drive.google.com/file/d/1HMw8Zo1vm36MpH8ocF6sZPFk4g7fcdkk/view?usp=drive_link',
-  'ball-maze-2': 'https://drive.google.com/file/d/1m9bcRETXUyf8dddbYJT3nhHUAiWQKewp/view?usp=drive_link',
-  'ball-maze': 'https://drive.google.com/file/d/1UCmCTtbGTsaCXiZY5gMHlke7wi7AfIdv/view?usp=drive_link',
-  infiroad: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
-} as const
-
 function contentWithWorks(nextWorks: readonly Work[]): CanonicalContent {
   return { ...canonicalContent, works: nextWorks }
 }
@@ -84,6 +67,39 @@ describe('コンテンツの整合性', () => {
           path: 'works[1].gameDetails',
           message: 'ゲーム作品以外にはgameDetailsを指定できません。',
         },
+      ]),
+    )
+  })
+
+  it('作品の短い要約と段落形式の紹介文を検証する', () => {
+    const sourceWork = works[0]
+    if (!sourceWork) throw new Error('検証元の制作記事がありません。')
+
+    const issues = collectContentValidationIssues(
+      contentWithWorks([
+        {
+          ...sourceWork,
+          id: 'work-with-long-summary',
+          slug: 'work-with-long-summary',
+          summary: 'あ'.repeat(81),
+          introduction: [],
+        },
+        {
+          ...sourceWork,
+          id: 'work-with-multiline-summary',
+          slug: 'work-with-multiline-summary',
+          summary: '一覧用の要約\n詳細',
+          introduction: [' '],
+        },
+      ]),
+    )
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        { path: 'works[0].summary', message: '80文字を超えています: 81文字' },
+        { path: 'works[0].introduction', message: '紹介文が1段落以上必要です。' },
+        { path: 'works[1].summary', message: '改行を含められません。' },
+        { path: 'works[1].introduction[0]', message: '必須の文字列が空です。' },
       ]),
     )
   })

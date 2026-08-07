@@ -5,8 +5,10 @@ export default {
   id: 'tonbo-house-03',
   slug: 'tonbo-house-03',
   title: 'TonboHouse03',
-  description:
+  summary: '食事を楽しみながらUdonChipsゲームで遊べる、3番目のホームワールド。',
+  introduction: [
     '3番目のホームワールド。ささやかな食事と、数値がインフレしていくUdonChipsゲームを楽しめる。',
+  ],
   category: 'vrchat-world',
   status: 'published',
   role: 'self-produced',

@@ -5,8 +5,11 @@ export default {
   id: 'vket-2024-summer',
   slug: 'vket-2024-summer',
   title: 'Virtual Market 2024 Summer 出展',
-  description:
-    '展示ワールド「魔女の森ノクトール - MIRAGE」に出展し、「がぶがぶスペクター」を展示。「TonboBattlefield」シリーズと「かわいい子たちとお家を建てるゲーム」を紹介した。後者の紹介ムービーを追加したほか、出展ワールドの雰囲気に合わせてブースを細かく変更した。',
+  summary: '「がぶがぶスペクター」と制作ワールドを、魔女の森に合わせたブースで紹介したVket出展。',
+  introduction: [
+    '展示ワールド「魔女の森ノクトール - MIRAGE」に出展し、「がぶがぶスペクター」を展示。「TonboBattlefield」シリーズと「かわいい子たちとお家を建てるゲーム」を紹介した。',
+    '「かわいい子たちとお家を建てるゲーム」の紹介ムービーを追加したほか、出展ワールドの雰囲気に合わせてブースを細かく変更した。',
+  ],
   category: 'vket',
   status: 'confirmed-record',
   role: 'exhibitor',

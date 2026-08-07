@@ -4,8 +4,12 @@ export default {
   id: 'heroad',
   slug: 'heroad',
   title: 'HeRoad',
-  description:
-    'WOLF RPG Editor製の「サクサク爽快RPG」。WOLF RPGエディターコンテスト第8回で総合14位、熱中度部門8位、遊びやすさ部門3位に入った。',
+  summary: '7種類の仲間を使い分け、テンポよくボスを攻略する「サクサク爽快RPG」。',
+  introduction: [
+    'Infiroadのスピンオフとして制作したRPG。魔王討伐の使命を受けた勇者を、全7種類の仲間が支える。',
+    '仲間が持つ個性豊かなスキルを使い分け、ボスを攻略しながらテンポよく進む。',
+    'WOLF RPGエディターコンテスト第8回で総合14位、熱中度部門8位、遊びやすさ部門3位に入った。',
+  ],
   category: 'game',
   status: 'published',
   role: 'self-produced',
@@ -14,10 +18,6 @@ export default {
   gameDetails: {
     genre: 'RPG',
     developmentTool: 'WOLF RPGエディター',
-    introduction: [
-      'Infiroadのスピンオフとして制作したRPG。魔王討伐の使命を受けた勇者を、全7種類の仲間が支える。',
-      '仲間が持つ個性豊かなスキルを使い分け、ボスを攻略しながらテンポよく進む。',
-    ],
   },
   media: [
     {

@@ -4,7 +4,10 @@ export default {
   id: 'ball-maze-2',
   slug: 'ball-maze-2',
   title: 'Ball Maze II',
-  description: 'ビー玉転がし風の迷路ゲーム第2作。高さの概念とステージエディット機能を加えた。',
+  summary: '高さの概念とステージエディット機能を加えた、ビー玉転がし風迷路ゲームの第2作。',
+  introduction: [
+    'ビー玉転がし風の迷路ゲーム「Ball Maze」の続編。高さの概念とステージエディット機能を加えた。',
+  ],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,9 +16,6 @@ export default {
   gameDetails: {
     genre: '擬似3D迷路',
     developmentTool: 'Tonyu System',
-    introduction: [
-      'ビー玉転がし風の迷路ゲーム「Ball Maze」の続編。高さの概念とステージエディット機能を加えた。',
-    ],
   },
   media: [],
   featured: false,

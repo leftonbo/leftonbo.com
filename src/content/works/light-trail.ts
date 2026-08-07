@@ -4,8 +4,11 @@ export default {
   id: 'light-trail',
   slug: 'light-trail',
   title: 'Light Trail',
-  description:
-    'RPG Maker MV製の「ライトに遊べる、ライトな救世RPG」。闇に包まれた世界で、光の勇者ルスタが各地に残る光を取り戻す旅に出る。停滞要素を抑えた、スピーディでストレスフリーな作品。',
+  summary: '停滞要素を抑え、テンポよく遊べる「ライトな救世RPG」。',
+  introduction: [
+    'ゲームクリエイターズキャンプの企画制作作品。闇に包まれた世界で、光の勇者ルスタが各地に残る光を取り戻す旅に出る。',
+    '仲間や特別な能力を使い、苦行や詰み、リソース管理による停滞を抑えて進む。世界のフレーバーや収集アイテムも用意した。',
+  ],
   category: 'game',
   status: 'published',
   role: 'self-produced',
@@ -14,10 +17,6 @@ export default {
   gameDetails: {
     genre: 'RPG',
     developmentTool: 'RPGツクールMV',
-    introduction: [
-      'ゲームクリエイターズキャンプの企画制作作品。闇に包まれた世界で、光の勇者ルスタが各地に残る光を取り戻す旅に出る。',
-      '仲間や特別な能力を使い、苦行や詰み、リソース管理による停滞を抑えて進む。世界のフレーバーや収集アイテムも用意した。',
-    ],
   },
   media: [
     {

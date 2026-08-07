@@ -22,7 +22,7 @@ describe('App routes', () => {
     expect(screen.getByText('Windows版のみ')).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: '作品情報' })).toBeInTheDocument()
     expect(screen.getByText('2018年4月29日')).toHaveAttribute('datetime', '2018-04-29')
-    expect(screen.getByRole('heading', { level: 2, name: 'ゲーム紹介' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: '作品紹介' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: '作品画像' })).toBeInTheDocument()
     expect(screen.getAllByRole('img')).toHaveLength(6)
     expect(screen.getAllByRole('img')[0]).toHaveAttribute(

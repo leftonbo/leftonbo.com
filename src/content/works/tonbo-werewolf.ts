@@ -5,8 +5,11 @@ export default {
   id: 'tonbo-werewolf',
   slug: 'tonbo-werewolf',
   title: 'トンボ人狼（TonboWerewolf）',
-  description:
-    'Udonで実装した、人狼ゲームを遊べるVRChatワールド。VRChatでも「猫猫村」のような遊びを楽しみたいという思いから制作した。',
+  summary: 'VRChatで人狼ゲームを遊べるよう、Udonで実装したゲームワールド。',
+  introduction: [
+    'Udonで実装した、人狼ゲームを遊べるVRChatワールド。',
+    'VRChatでも「猫猫村」のような遊びを楽しみたいという思いから制作した。',
+  ],
   category: 'vrchat-world',
   status: 'published',
   role: 'self-produced',

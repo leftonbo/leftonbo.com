@@ -4,8 +4,10 @@ export default {
   id: 'pipe-4-run',
   slug: 'pipe-4-run',
   title: 'Pipe 4 Run',
-  description:
-    'STARTから流れる水がENDへ届くようにパイプを配置する対戦パズル。到達したプレイヤーのうち、最もスコアが高い人が勝利する。最大8人まで対応。',
+  summary: 'パイプをつないで水をゴールへ導き、スコアを競う最大8人対応の対戦パズル。',
+  introduction: [
+    'STARTから流れる水がENDへ届くようにパイプを配置する。ENDへ到達したプレイヤーのうち、最もスコアが高い人が勝利する。推奨人数は4人までで、最大8人で対戦できる。',
+  ],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -14,9 +16,6 @@ export default {
   gameDetails: {
     genre: '対戦パズル',
     developmentTool: null,
-    introduction: [
-      'STARTから流れる水がENDへ届くようにパイプを配置する。ENDへ到達したプレイヤーのうち、最もスコアが高い人が勝利する。推奨人数は4人までで、最大8人で対戦できる。',
-    ],
   },
   media: [
     {

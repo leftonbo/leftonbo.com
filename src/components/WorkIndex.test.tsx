@@ -23,6 +23,16 @@ describe('WorkIndex', () => {
     expect(screen.getByText(String(works.length), { selector: '.work-index__count strong' })).toBeInTheDocument()
   })
 
+  it('renders only the short summary in each work card', () => {
+    const work = works.find((item) => item.id === 'itagashi-board-game-world')
+    if (!work) throw new Error('検証元の制作記事がありません。')
+
+    render(<WorkIndex works={[work]} />)
+
+    expect(screen.getByText(work.summary)).toBeInTheDocument()
+    expect(screen.queryByText(work.introduction[0] ?? '')).not.toBeInTheDocument()
+  })
+
   it('filters by category and writes the state to the URL', async () => {
     const user = userEvent.setup()
     render(<WorkIndex works={works} />)

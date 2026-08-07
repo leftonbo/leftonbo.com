@@ -4,8 +4,11 @@ export default {
   id: 'infiroad',
   slug: 'infiroad',
   title: 'Infiroad',
-  description:
-    'Unity製のクリッカーゲーム。分身を召喚する魔道書と一本の白剣を手に、勇者が魔物を倒しながら無限回廊を進んで世界を取り戻す。',
+  summary: '勇者と仲間を強化しながら無限回廊を進む、Unity製のクリッカーゲーム。',
+  introduction: [
+    '魔物に支配された世界を取り戻すため、勇者が分身を召喚する魔道書と一本の白剣を手に無限回廊を進む。',
+    '勇者を召喚して戦い、最大20種類の仲間を雇って自動的に出現させられる。仲間ごとの能力に加え、レリックとミスリルによる強化要素を備える。',
+  ],
   category: 'game',
   status: 'stopped-with-public-record',
   role: 'self-produced',
@@ -14,10 +17,6 @@ export default {
   gameDetails: {
     genre: 'クリッカー',
     developmentTool: 'Unity 5.x',
-    introduction: [
-      '魔物に支配された世界を取り戻すため、勇者が分身を召喚する魔道書と一本の白剣を手に無限回廊を進む。',
-      '勇者を召喚して戦い、最大20種類の仲間を雇って自動的に出現させられる。仲間ごとの能力に加え、レリックとミスリルによる強化要素を備える。',
-    ],
   },
   media: [
     {

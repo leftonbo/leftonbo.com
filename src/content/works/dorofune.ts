@@ -4,8 +4,11 @@ export default {
   id: 'dorofune',
   slug: 'dorofune',
   title: 'どろふね',
-  description:
-    '海を目指す「人」を乗せた泥船が、沈んでは新しい船へ思いをつないでいくゲーム。残った「悔しさ」が次の泥船を加速させる。',
+  summary: '沈むたびに残る「悔しさ」で次の船を加速させ、海を目指す避けゲーム。',
+  introduction: [
+    '海を目指す「人」を乗せた泥船は自動で進むが、やがて沈んでしまう。そこで残った「悔しさ」が、新しい泥船を加速させる。',
+    '2013年に大学サークルの展示作品として公開した。',
+  ],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -14,10 +17,6 @@ export default {
   gameDetails: {
     genre: '避けゲー',
     developmentTool: 'DXライブラリ',
-    introduction: [
-      '海を目指す「人」を乗せた泥船は自動で進むが、やがて沈んでしまう。そこで残った「悔しさ」が、新しい泥船を加速させる。',
-      '2013年に大学サークルの展示作品として公開したもの。',
-    ],
   },
   media: [
     {

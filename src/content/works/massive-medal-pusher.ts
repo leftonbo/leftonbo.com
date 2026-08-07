@@ -5,8 +5,11 @@ export default {
   id: 'massive-medal-pusher',
   slug: 'massive-medal-pusher',
   title: 'クソでっけぇプッシャーゲーム',
-  description:
-    'りくち氏が制作した、巨大なプッシャー台で遊べるVRChatワールド。メダルを落としてクレジットを獲得し、ルーレットやパークでプッシャー台を強化する。ジャックポットを当てれば大量のメダルを獲得できる。LefTonboは共同制作として参加し、主にゲームプログラミングを担当。',
+  summary: '巨大なプッシャー台を強化しながら大量のメダル獲得を目指す、共同制作のVRChatワールド。',
+  introduction: [
+    'りくち氏が制作した、巨大なプッシャー台で遊べるVRChatワールド。メダルを落としてクレジットを獲得し、ルーレットやパークでプッシャー台を強化する。ジャックポットを当てれば大量のメダルを獲得できる。',
+    'LefTonboは共同制作として参加し、主にゲームプログラミングを担当した。',
+  ],
   category: 'vrchat-world',
   status: 'recent-public-record',
   role: 'collaborator',

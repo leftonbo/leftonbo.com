@@ -54,7 +54,7 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
           <div className="work-detail__title">
             <p className="section-kicker">{categoryLabels[work.category]}</p>
             <h1>{work.title}</h1>
-            <p>{work.description}</p>
+            <p>{work.summary}</p>
             <div className="work-detail__actions">
               <div className="work-detail__primary-action">
                 <ExternalLink className="action-link action-link--primary" href={work.url}>
@@ -155,15 +155,13 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               ) : null}
             </dl>
           </section>
-          {work.gameDetails ? (
-            <section className="work-detail__introduction" aria-labelledby="game-introduction-title">
-              <p className="section-kicker">Introduction</p>
-              <h2 id="game-introduction-title">ゲーム紹介</h2>
-              {work.gameDetails.introduction.map((paragraph, index) => (
-                <p key={`${work.id}-introduction-${index}`}>{paragraph}</p>
-              ))}
-            </section>
-          ) : null}
+          <section className="work-detail__introduction" aria-labelledby="work-introduction-title">
+            <p className="section-kicker">Introduction</p>
+            <h2 id="work-introduction-title">作品紹介</h2>
+            {work.introduction.map((paragraph, index) => (
+              <p key={`${work.id}-introduction-${index}`}>{paragraph}</p>
+            ))}
+          </section>
           {videoSource ? (
             <section aria-labelledby="work-video-title">
               <p className="section-kicker">Video</p>

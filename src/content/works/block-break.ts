@@ -4,7 +4,8 @@ export default {
   id: 'block-break',
   slug: 'block-break',
   title: 'Block Break',
-  description: '過去に制作していたブロック崩しを、公開できる形に整えた作品。',
+  summary: '過去に制作したブロック崩しを、公開できる形に整えたゲーム。',
+  introduction: ['過去に制作していたブロック崩しを、公開できる形に整えた作品。'],
   category: 'game',
   status: 'archived',
   role: 'self-produced',
@@ -13,7 +14,6 @@ export default {
   gameDetails: {
     genre: 'ブロック崩し',
     developmentTool: 'Tonyu System',
-    introduction: ['過去に制作していたブロック崩しを、公開できる形に整えた作品。'],
   },
   media: [
     {

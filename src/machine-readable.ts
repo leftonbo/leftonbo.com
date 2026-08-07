@@ -34,7 +34,7 @@ export function getMachineReadableFiles(): Record<string, string> {
     })),
   }
   const worksPayload = {
-    schemaVersion: 6,
+    schemaVersion: 7,
     siteUpdatedAt: siteProfile.updatedAt,
     count: works.length,
     works: works.map((work) => {
@@ -45,7 +45,8 @@ export function getMachineReadableFiles(): Record<string, string> {
         id: work.id,
         slug: work.slug,
         title: work.title,
-        description: work.description,
+        summary: work.summary,
+        introduction: work.introduction,
         category: work.category,
         role: work.role === 'pending-confirmation' ? null : work.role,
         period: work.period,
@@ -146,7 +147,7 @@ export function creativeWorkJsonLd(work: Work) {
     url: `${SITE_ORIGIN}/works/${work.slug}/`,
     sameAs: [work.url, ...(work.additionalLinks?.map((link) => link.url) ?? [])],
     name: work.title,
-    description: work.description,
+    description: work.summary,
     genre: work.gameDetails?.genre ?? categoryLabels[work.category],
     inLanguage: 'ja',
     ...(work.firstPublishedAt ? { datePublished: work.firstPublishedAt } : {}),
@@ -198,10 +199,8 @@ function createWorksMarkdown(): string {
           `- ${primaryLinkLabel}: [${getWorkActionLabel(work)}](${work.url})${primaryLinkNote}`,
           ...additionalLinks,
         ].join('\n')
-        const introduction = work.gameDetails
-          ? `\n\n#### ゲーム紹介\n\n${work.gameDetails.introduction.join('\n\n')}`
-          : ''
-        return `### [${work.title}](${SITE_ORIGIN}/works/${work.slug}/)\n\n${work.description}\n\n${details}${introduction}`
+        const introduction = `\n\n#### 作品紹介\n\n${work.introduction.join('\n\n')}`
+        return `### [${work.title}](${SITE_ORIGIN}/works/${work.slug}/)\n\n${work.summary}\n\n${details}${introduction}`
       })
       .join('\n\n')
     return `## ${categoryLabels[category]}\n\n${entries}`
