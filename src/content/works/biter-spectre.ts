@@ -6,7 +6,7 @@ export default {
   slug: 'biter-spectre',
   title: 'がぶがぶスペクター',
   description:
-    'Vket 2023 Winterへの出展を機に頒布を始めた、PC／Quest両対応のVRChat向けアバター。黒いおばけの姿で、カラー変更や舌を伸ばすギミックを備え、現在も販売中。',
+    'Vket 2023 Winterへの出展を機に頒布を始めた、PC／Quest両対応のVRChat向け販売アバター。黒いおばけの姿をしており、カラー変更や舌を伸ばすギミックを備える。',
   category: 'avatar-3d',
   status: 'published',
   role: 'self-produced',
@@ -45,6 +45,10 @@ export default {
   ],
   verifiedAt: '2026-08-07',
   factsPending: [
+    {
+      field: 'current-status',
+      note: '現在の販売状態をサイト公開前に確認する。',
+    },
     {
       field: 'version',
       note: '最新バージョンは未確認。',
