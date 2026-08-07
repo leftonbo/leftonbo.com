@@ -2,8 +2,8 @@ import { CONTENT_VERIFIED_AT } from '../types'
 import type { Work } from '../types'
 
 export default {
-  id: 'sajak-sahagin-v3',
-  slug: 'sajak-sahagin-v3',
+  id: 'sajak-sahagin',
+  slug: 'sajak-sahagin',
   title: 'サジャクサハギン',
   description:
     'Vket 5への出展を機に頒布を始めた、PC／Quest両対応のVRChat向け無料アバター。サメのような姿をした魚人をモチーフにしている。',
@@ -15,7 +15,7 @@ export default {
   media: [
     {
       kind: 'image',
-      url: '/images/works/sajak-sahagin-v3/hero.webp',
+      url: '/images/works/sajak-sahagin/hero.webp',
       alt: 'サメのような姿をした魚人アバター「サジャクサハギン」',
       credit: null,
     },

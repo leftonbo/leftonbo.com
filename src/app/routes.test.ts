@@ -19,12 +19,14 @@ describe('route matching', () => {
     }
 
     expect(matchRoute('/works/itagashi-board-game-world/', works).kind).toBe('work-detail')
+    expect(matchRoute('/works/sajak-sahagin/', works).kind).toBe('work-detail')
     expect(matchRoute('/works/tonbo-battlefield-the-two-bases/', works).kind).toBe('work-detail')
   })
 
   it('returns the recovery page for an invalid detail URL', () => {
     expect(matchRoute('/works/not-a-real-work/', works).kind).toBe('not-found')
     expect(matchRoute('/works/ita-gashi-board-game-world/', works).kind).toBe('not-found')
+    expect(matchRoute('/works/sajak-sahagin-v3/', works).kind).toBe('not-found')
     expect(matchRoute('/works/tonbo-battlefield-2-the-two-bases/', works).kind).toBe('not-found')
     expect(matchRoute('/somewhere-else/', works).kind).toBe('not-found')
   })
