@@ -11,7 +11,7 @@ export default {
   status: 'published',
   role: 'self-produced',
   period: '2020',
-  firstPublishedAt: '2020-12-18',
+  firstPublishedAt: '2020-12-19',
   media: [
     {
       kind: 'image',
