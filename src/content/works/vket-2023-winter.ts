@@ -41,10 +41,5 @@ export default {
     },
   ],
   verifiedAt: CONTENT_VERIFIED_AT,
-  factsPending: [
-    {
-      field: 'link-availability',
-      note: '本人告知の公開状態をサイト公開前に再確認する。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

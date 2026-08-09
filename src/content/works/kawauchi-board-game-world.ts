@@ -55,14 +55,5 @@ export default {
     },
   ],
   verifiedAt: '2026-08-07',
-  factsPending: [
-    {
-      field: 'current-status',
-      note: '現在の公開状態をサイト公開前に確認する。',
-    },
-    {
-      field: 'last-updated-at',
-      note: '2024年8月31日の大幅更新以降の更新日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

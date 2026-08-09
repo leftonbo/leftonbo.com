@@ -34,10 +34,5 @@ export default {
     },
   ],
   verifiedAt: '2026-08-07',
-  factsPending: [
-    {
-      field: 'current-status',
-      note: '現在の配布状態をサイト公開前に確認する。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

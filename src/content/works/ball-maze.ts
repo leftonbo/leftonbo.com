@@ -34,10 +34,5 @@ export default {
     },
   ],
   verifiedAt: '2026-08-07',
-  factsPending: [
-    {
-      field: 'media',
-      note: '公開ページに再掲載できる画像は見つかっていない。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work

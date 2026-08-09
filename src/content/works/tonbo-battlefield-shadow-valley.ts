@@ -39,10 +39,5 @@ export default {
     },
   ],
   verifiedAt: '2026-07-26',
-  factsPending: [
-    {
-      field: 'last-updated-at',
-      note: 'ワールドの最終更新日は未確認。',
-    },
-  ],
+  factsPending: [],
 } satisfies Work
