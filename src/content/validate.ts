@@ -5,6 +5,8 @@ import type {
   ContentSource,
   ContentValidationIssue,
   PendingFact,
+  ProfileHistoryEntry,
+  ProfileToolGroup,
   Work,
   WorkCategory,
   WorkLink,
@@ -309,6 +311,47 @@ function validateWorkIntroduction(
   })
 }
 
+function validateProfileHistory(
+  issues: ContentValidationIssue[],
+  path: string,
+  history: readonly ProfileHistoryEntry[],
+): void {
+  if (!Array.isArray(history) || history.length === 0) {
+    issues.push({ path, message: '経歴が1件以上必要です。' })
+    return
+  }
+
+  history.forEach((entry, index) => {
+    const entryPath = `${path}[${index}]`
+    addRequiredTextIssue(issues, `${entryPath}.period`, entry.period)
+    addRequiredTextIssue(issues, `${entryPath}.title`, entry.title)
+    addRequiredTextIssue(issues, `${entryPath}.description`, entry.description)
+  })
+}
+
+function validateProfileTools(
+  issues: ContentValidationIssue[],
+  path: string,
+  tools: readonly ProfileToolGroup[],
+): void {
+  if (!Array.isArray(tools) || tools.length === 0) {
+    issues.push({ path, message: '使用ツールが1分類以上必要です。' })
+    return
+  }
+
+  tools.forEach((group, index) => {
+    const groupPath = `${path}[${index}]`
+    addRequiredTextIssue(issues, `${groupPath}.label`, group.label)
+    if (!Array.isArray(group.items) || group.items.length === 0) {
+      issues.push({ path: `${groupPath}.items`, message: 'ツールが1件以上必要です。' })
+      return
+    }
+    group.items.forEach((item: string, itemIndex: number) => {
+      addRequiredTextIssue(issues, `${groupPath}.items[${itemIndex}]`, item)
+    })
+  })
+}
+
 function validateWorkSummary(
   issues: ContentValidationIssue[],
   path: string,
@@ -393,8 +436,16 @@ export function collectContentValidationIssues(
     "profile.groupDescription",
     content.profile.groupDescription,
   );
+  addRequiredTextIssue(issues, 'profile.tagline', content.profile.tagline)
   addRequiredTextIssue(issues, "profile.summary", content.profile.summary);
   validateWorkIntroduction(issues, "profile.introduction", content.profile.introduction)
+  addRequiredTextIssue(issues, 'profile.craft', content.profile.craft)
+  validateProfileHistory(issues, 'profile.history', content.profile.history)
+  validateProfileTools(issues, 'profile.tools', content.profile.tools)
+  if (typeof content.profile.acceptsRequests !== 'boolean') {
+    issues.push({ path: 'profile.acceptsRequests', message: 'booleanではありません。' })
+  }
+  addRequiredTextIssue(issues, 'profile.contactNote', content.profile.contactNote)
   addDateIssue(issues, "profile.updatedAt", content.profile.updatedAt);
   addDateIssue(issues, "profile.verifiedAt", content.profile.verifiedAt);
   validateSources(issues, "profile.sources", content.profile.sources);

@@ -10,15 +10,21 @@ const identityLinkIds = new Set(['tonbo-notion', 'github', 'x', 'vrchat'])
 export function getMachineReadableFiles(): Record<string, string> {
   const publicRoutes = getStaticRoutePaths(works).filter((route) => route !== '/404.html')
   const profilePayload = {
-    schemaVersion: 4,
+    schemaVersion: 5,
     profile: {
       name: siteProfile.name,
       reading: siteProfile.reading,
       handle: siteProfile.handle,
       groupName: siteProfile.groupName,
       groupDescription: siteProfile.groupDescription,
+      tagline: siteProfile.tagline,
       summary: siteProfile.summary,
       introduction: siteProfile.introduction,
+      craft: siteProfile.craft,
+      history: siteProfile.history,
+      tools: siteProfile.tools,
+      acceptsRequests: siteProfile.acceptsRequests,
+      contactNote: siteProfile.contactNote,
       updatedAt: siteProfile.updatedAt,
     },
     activityAreas: activityAreas.map((area) => ({
@@ -92,6 +98,8 @@ export function personJsonLd() {
     '@id': `${SITE_ORIGIN}/#person`,
     name: siteProfile.name,
     alternateName: [siteProfile.reading, siteProfile.handle],
+    jobTitle: siteProfile.tagline,
+    description: siteProfile.introduction.join(' '),
     url: `${SITE_ORIGIN}/`,
     image: `${SITE_ORIGIN}/images/profile.webp`,
     sameAs: externalLinks.filter((link) => identityLinkIds.has(link.id)).map((link) => link.url),
@@ -167,8 +175,14 @@ function createProfileMarkdown(): string {
   const areas = activityAreas.map((area) => `- **${area.label}**: ${area.description}`).join('\n')
   const links = externalLinks.map((link) => `- [${link.label}](${link.url})`).join('\n')
   const introduction = siteProfile.introduction.join('\n\n')
+  const history = siteProfile.history
+    .map((entry) => `### ${entry.period} ${entry.title}\n\n${entry.description}`)
+    .join('\n\n')
+  const tools = siteProfile.tools
+    .map((group) => `- **${group.label}**: ${group.items.join('、')}`)
+    .join('\n')
 
-  return `# ${siteProfile.name}（${siteProfile.reading}）\n\n${siteProfile.summary}\n\n${introduction}\n\n- 基本名義: ${siteProfile.name}\n- URL・ユーザーID表記: ${siteProfile.handle}\n- 活動グループ名: ${siteProfile.groupName}\n- サイト更新日: ${siteProfile.updatedAt}\n\n## 制作領域\n\n${areas}\n\n## 公式リンク\n\n${links}\n`
+  return `# ${siteProfile.name}（${siteProfile.reading}）\n\n${siteProfile.tagline}\n\n${introduction}\n\n## 制作で大切にしていること\n\n${siteProfile.craft}\n\n## 活動の歩み\n\n${history}\n\n## 使用ツール\n\n${tools}\n\n## 活動方針\n\n- 依頼、共同制作: ${siteProfile.acceptsRequests ? '受け付けています' : '現在は受け付けていません'}\n- 連絡先: ${siteProfile.contactNote}\n- ${siteProfile.groupName}: ${siteProfile.groupDescription}\n- サイト更新日: ${siteProfile.updatedAt}\n\n## 制作領域\n\n${areas}\n\n## 公式リンク\n\n${links}\n`
 }
 
 function formatWorkLink(link: WorkLink): string {

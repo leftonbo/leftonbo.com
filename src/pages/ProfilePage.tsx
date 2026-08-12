@@ -15,7 +15,7 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
       <PageIntro
         kicker="Profile"
         title={`${profile.name}について`}
-        description={profile.summary}
+        description={profile.tagline}
       />
       <section className="section-shell profile-overview" aria-labelledby="about-title">
         <div className="container profile-grid">
@@ -37,6 +37,76 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
+            <div className="profile-craft">
+              <h3>制作で大切にしていること</h3>
+              <p>{profile.craft}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell section-shell--surface" aria-labelledby="profile-history-title">
+        <div className="container">
+          <div className="section-split-heading">
+            <div>
+              <p className="section-kicker">History</p>
+              <h2 className="section-title" id="profile-history-title">
+                活動の歩み
+              </h2>
+            </div>
+            <p className="section-lead">
+              Tonyu Systemで始めたゲーム制作から、Unity、VRChatワールド制作へと活動の場所を広げてきました。
+            </p>
+          </div>
+          <ol className="profile-timeline">
+            {profile.history.map((entry) => (
+              <li key={`${entry.period}-${entry.title}`}>
+                <span className="profile-timeline__period">{entry.period}</span>
+                <div>
+                  <h3>{entry.title}</h3>
+                  <p>{entry.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section-shell" aria-labelledby="profile-practice-title">
+        <div className="container">
+          <p className="section-kicker">Practice</p>
+          <h2 className="section-title" id="profile-practice-title">
+            制作環境と活動方針
+          </h2>
+          <div className="profile-practice">
+            <section aria-labelledby="profile-tools-title">
+              <h3 id="profile-tools-title">使っているもの</h3>
+              <dl className="profile-facts">
+                {profile.tools.map((group) => (
+                  <div key={group.label}>
+                    <dt>{group.label}</dt>
+                    <dd>{group.items.join('、')}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+            <section aria-labelledby="profile-policy-title">
+              <h3 id="profile-policy-title">活動について</h3>
+              <dl className="profile-facts">
+                <div>
+                  <dt>依頼、共同制作</dt>
+                  <dd>{profile.acceptsRequests ? '受け付けています' : '現在は受け付けていません'}</dd>
+                </div>
+                <div>
+                  <dt>連絡先</dt>
+                  <dd>{profile.contactNote}</dd>
+                </div>
+                <div>
+                  <dt>{profile.groupName}</dt>
+                  <dd>{profile.groupDescription}</dd>
+                </div>
+              </dl>
+            </section>
           </div>
         </div>
       </section>

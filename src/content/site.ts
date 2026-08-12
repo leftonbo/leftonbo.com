@@ -11,12 +11,52 @@ export const siteProfile = {
   handle: "leftonbo",
   groupName: "TonboWorkshop",
   groupDescription:
-    "Discord、BOOTH、Vketで使用している活動グループ名。",
+    "個人サークル。現在はDiscordグループ名やショップ名として使用しています。",
+  tagline: "放浪するゲームクリエイター",
   summary:
     "VRChatワールド、アバター／3Dモデル、ゲーム、Web、オリジナルキャラクターの制作をまとめたポートフォリオ。",
   introduction: [
-    "VRChatワールド、アバター／3Dモデル、ゲーム、Webなど、デジタル空間とインタラクティブな作品を制作しています。",
+    "2004年ごろにゲーム制作を始めました。現在はUnityを中心に、ゲームやVRChatワールドなど、さまざまな場所でゲーム制作に関わっています。",
   ],
+  craft:
+    "制作では、操作したときの手触りと、動かしたときの爽快感を大切にしています。細かなところまで気を配るほうらしいのですが、実装に集中している間は、その細部が少し見えにくくなることもあります。",
+  history: [
+    {
+      period: "2004年ごろ",
+      title: "ゲーム制作を始める",
+      description:
+        "Tonyu Systemを使ってゲーム制作を始めました。最初にリリースした作品は「スーパーブロック崩し」です。",
+    },
+    {
+      period: "2015年ごろ",
+      title: "Unityでの制作へ",
+      description: "Unityに触れ、本格的にUnityでのゲーム制作を始めました。",
+    },
+    {
+      period: "2019年",
+      title: "VRChatに触れる",
+      description: "VRChatに触れました。",
+    },
+    {
+      period: "2020年",
+      title: "VRChatワールド制作を始める",
+      description: "Udonの登場をきっかけに、VRChat向けのワールド制作を始めました。",
+    },
+    {
+      period: "現在",
+      title: "場所を越えてゲーム制作に関わる",
+      description: "さまざまな場所で、ゲーム制作に関わる活動を続けています。",
+    },
+  ],
+  tools: [
+    { label: "ゲームエンジン", items: ["Unity"] },
+    { label: "コーディング、エディタ", items: ["VS Code", "Cursor"] },
+    { label: "AIツール", items: ["Codex"] },
+    { label: "3Dモデリング", items: ["Blender"] },
+    { label: "イラスト", items: ["Clip Studio Paint"] },
+  ],
+  acceptsRequests: false,
+  contactNote: "連絡先は用途による明確な使い分けをしていません。",
   updatedAt: "2026-08-13",
   sources: [
     {
