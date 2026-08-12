@@ -18,17 +18,22 @@ export default {
     genre: '避けゲー',
     developmentTool: 'DXライブラリ',
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/dorofune/hero.webp',
+    alt: 'どろふねのゲーム画面',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/dorofune/hero.webp',
-      alt: 'どろふねのゲーム画面',
-      credit: null,
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1mfbte0ZXoCkWVO3VSnzS_5qu-GilCbrA/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1mfbte0ZXoCkWVO3VSnzS_5qu-GilCbrA/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: どろふね',

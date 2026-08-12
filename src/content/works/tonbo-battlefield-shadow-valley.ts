@@ -14,16 +14,21 @@ export default {
   role: 'self-produced',
   period: '2022',
   firstPublishedAt: '2022-10-15',
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/tonbo-battlefield-shadow-valley/hero.webp',
+    alt: 'TonboBattlefield: Shadow Valleyのサムネイル',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/tonbo-battlefield-shadow-valley/hero.webp',
-      alt: 'TonboBattlefield: Shadow Valleyのサムネイル',
-      credit: null,
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_c063925a-f1b6-4901-ad91-26b3bdfd1270',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_c063925a-f1b6-4901-ad91-26b3bdfd1270',
   sources: [
     {
       label: 'VRChat: TonboBattlefield: Shadow Valley',

@@ -15,16 +15,21 @@ export default {
   role: 'self-produced',
   period: '2023',
   firstPublishedAt: '2023-12-02',
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/biter-spectre/hero.webp',
+    alt: 'がぶがぶスペクターのキャラクター画像',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: 3,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/biter-spectre/hero.webp',
-      alt: 'がぶがぶスペクターのキャラクター画像',
-      credit: null,
+      label: 'ショップで見る',
+      url: 'https://booth.pm/ja/items/5221596',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://booth.pm/ja/items/5221596',
   sources: [
     {
       label: 'BOOTH: がぶがぶスペクター',

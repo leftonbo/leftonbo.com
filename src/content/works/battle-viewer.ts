@@ -15,17 +15,22 @@ export default {
     genre: 'シミュレーション',
     developmentTool: 'Tonyu System',
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/battle-viewer/hero.webp',
+    alt: 'ばとるびゅ～わのゲーム画面',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/battle-viewer/hero.webp',
-      alt: 'ばとるびゅ～わのゲーム画面',
-      credit: null,
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1VvXSW2YZoQPVYTzmnVffLo54C5709u74/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1VvXSW2YZoQPVYTzmnVffLo54C5709u74/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: ばとるびゅ～わ',

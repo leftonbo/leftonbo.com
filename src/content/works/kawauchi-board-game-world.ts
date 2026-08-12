@@ -16,13 +16,13 @@ export default {
   role: 'collaborator',
   period: '2024',
   firstPublishedAt: '2024-01-05',
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/kawauchi-board-game-world/hero.webp',
+    alt: '『かわうち』ボードゲームワールドのサムネイル',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/kawauchi-board-game-world/hero.webp',
-      alt: '『かわうち』ボードゲームワールドのサムネイル',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/kawauchi-board-game-world/gallery-02.webp',
@@ -38,8 +38,14 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_66c742e9-ff23-460b-b71f-84549fe4b6f5',
+  featuredOrder: null,
+  links: [
+    {
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_66c742e9-ff23-460b-b71f-84549fe4b6f5',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'VRChat: 『かわうち』',

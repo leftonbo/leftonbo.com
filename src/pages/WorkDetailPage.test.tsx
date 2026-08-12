@@ -10,12 +10,13 @@ function getWork(id: string) {
 }
 
 describe('WorkDetailPage', () => {
-  it('uses the first work image in the hero and exposes image descriptions as captions', () => {
+  it('uses the dedicated hero image without repeating it in the gallery', () => {
     const work = getWork('light-trail')
     render(<WorkDetailPage work={work} works={works} />)
 
     const heroImage = document.querySelector('.work-detail__visual img')
-    expect(heroImage).toHaveAttribute('src', work.media[0]?.url)
+    expect(heroImage).toHaveAttribute('src', work.heroMedia?.url)
+    expect(document.querySelectorAll(`.work-gallery img[src="${work.heroMedia?.url}"]`)).toHaveLength(0)
     expect(screen.getAllByText(work.media[0]?.alt ?? '')).not.toHaveLength(0)
   })
 
@@ -90,6 +91,21 @@ describe('WorkDetailPage', () => {
       'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml',
     )
     expect(screen.queryByRole('link', { name: 'ブラウザ版をプレイ' })).not.toBeInTheDocument()
+  })
+
+  it('公開終了したリンクをクリックできない状態で表示する', () => {
+    const work = getWork('infiroad')
+    const disabledWork = {
+      ...work,
+      links: work.links.map((link) =>
+        link.tags.includes('primary') ? { ...link, disabled: true } : link,
+      ),
+    }
+
+    render(<WorkDetailPage work={disabledWork} works={works} />)
+
+    expect(screen.queryByRole('link', { name: '作品をダウンロード' })).not.toBeInTheDocument()
+    expect(screen.getByText('作品をダウンロード')).toHaveAttribute('aria-disabled', 'true')
   })
 
   it('omits an unconfirmed development tool and operational history labels', () => {

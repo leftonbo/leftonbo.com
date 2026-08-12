@@ -15,13 +15,13 @@ export default {
     genre: 'シューティング',
     developmentTool: 'DXライブラリ',
   },
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/elem-shot/hero.webp',
+    alt: 'ElemShotのゲーム画面',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/elem-shot/hero.webp',
-      alt: 'ElemShotのゲーム画面',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/elem-shot/gallery-02.webp',
@@ -35,9 +35,15 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/15Weks96HSMpK13ic01lo1OfrFfGD7I8X/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
+  featuredOrder: null,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/15Weks96HSMpK13ic01lo1OfrFfGD7I8X/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: ElemShot',

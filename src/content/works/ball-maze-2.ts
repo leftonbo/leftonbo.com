@@ -17,10 +17,17 @@ export default {
     genre: '擬似3D迷路',
     developmentTool: 'Tonyu System',
   },
+  heroMedia: null,
   media: [],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1m9bcRETXUyf8dddbYJT3nhHUAiWQKewp/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
+  featuredOrder: null,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1m9bcRETXUyf8dddbYJT3nhHUAiWQKewp/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: Ball Maze II',

@@ -14,16 +14,21 @@ export default {
   role: 'self-produced',
   period: '2023',
   firstPublishedAt: '2023-01-21',
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/tonbo-house-03/hero.webp',
+    alt: 'TonboHouse03の室内',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/tonbo-house-03/hero.webp',
-      alt: 'TonboHouse03の室内',
-      credit: null,
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/world/wrld_74ae3805-93b3-4945-a495-a20eb2984eb6',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/world/wrld_74ae3805-93b3-4945-a495-a20eb2984eb6',
   sources: [
     {
       label: 'VRChat: TonboHouse03',

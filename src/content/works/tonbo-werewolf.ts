@@ -15,13 +15,13 @@ export default {
   role: 'self-produced',
   period: '2020',
   firstPublishedAt: '2020-09-24',
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/tonbo-werewolf/hero.webp',
+    alt: 'トンボ人狼の村を見渡したスクリーンショット',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/tonbo-werewolf/hero.webp',
-      alt: 'トンボ人狼の村を見渡したスクリーンショット',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/tonbo-werewolf/gallery-02.webp',
@@ -29,8 +29,14 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_07ee4e44-940f-4405-a398-e969114a0164',
+  featuredOrder: null,
+  links: [
+    {
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_07ee4e44-940f-4405-a398-e969114a0164',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'VRChat: TonboWerewolf',

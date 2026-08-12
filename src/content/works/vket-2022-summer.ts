@@ -21,16 +21,21 @@ export default {
       url: 'https://vrchat.com/home/launch?worldId=wrld_84a006d7-171b-4925-9b46-0fd142927a24',
     },
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/vket-2022-summer/hero.webp',
+    alt: "Vket 2022 SummerのPoppin' Jump - Lemon Squashに設置したゲームワールド紹介ブース",
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/vket-2022-summer/hero.webp',
-      alt: "Vket 2022 SummerのPoppin' Jump - Lemon Squashに設置したゲームワールド紹介ブース",
-      credit: null,
+      label: 'Vket公式サイトを見る',
+      url: 'https://summer2022.vket.com/',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://summer2022.vket.com/',
   sources: [
     {
       label: 'Virtual Market 2022 Summer 公式サイト',

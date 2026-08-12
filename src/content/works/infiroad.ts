@@ -18,13 +18,13 @@ export default {
     genre: 'クリッカー',
     developmentTool: 'Unity 5.x',
   },
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/infiroad/hero.webp',
+    alt: 'Infiroadのゲーム画面',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/infiroad/hero.webp',
-      alt: 'Infiroadのゲーム画面',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/infiroad/gallery-02.webp',
@@ -44,14 +44,18 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
-  additionalLinks: [
+  featuredOrder: 4,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
     {
       label: 'ブラウザ版をプレイ',
       url: 'https://unityroom.com/games/infiroad',
-      placement: 'action',
+      tags: ['action'],
     },
   ],
   sources: [

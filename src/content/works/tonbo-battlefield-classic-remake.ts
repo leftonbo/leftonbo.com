@@ -14,13 +14,13 @@ export default {
   role: 'self-produced',
   period: '2021',
   firstPublishedAt: '2021-01-21',
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/tonbo-battlefield-classic-remake/hero.webp',
+    alt: 'TonboBattlefield Classicのサムネイル',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/tonbo-battlefield-classic-remake/hero.webp',
-      alt: 'TonboBattlefield Classicのサムネイル',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/tonbo-battlefield-classic-remake/gallery-02.webp',
@@ -28,8 +28,14 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_b20a27d2-cd22-4aa0-a25b-666dc97451ec',
+  featuredOrder: null,
+  links: [
+    {
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_b20a27d2-cd22-4aa0-a25b-666dc97451ec',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'VRChat: TonboBattlefield Classic',

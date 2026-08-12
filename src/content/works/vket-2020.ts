@@ -21,16 +21,21 @@ export default {
       url: 'https://vrchat.com/home/launch?worldId=wrld_70f79986-2e5c-4ba2-8364-3414b4bab501',
     },
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/vket-2020/hero.webp',
+    alt: 'Vket 5のメテコレプカ - キギステルトフに設置したサジャクサハギン展示ブース',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/vket-2020/hero.webp',
-      alt: 'Vket 5のメテコレプカ - キギステルトフに設置したサジャクサハギン展示ブース',
-      credit: null,
+      label: '出展時のX投稿を見る',
+      url: 'https://x.com/LefTonbo/status/1340158760346505217',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://x.com/LefTonbo/status/1340158760346505217',
   sources: [
     {
       label: 'LefTonboによる出展告知',

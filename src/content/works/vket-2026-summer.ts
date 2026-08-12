@@ -21,16 +21,21 @@ export default {
       url: null,
     },
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/vket-2026-summer/hero.webp',
+    alt: 'Virtual Market 2026 Summerに設置した短編インクリメンタルゲームで遊べるTonboWorkshopブース',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/vket-2026-summer/hero.webp',
-      alt: 'Virtual Market 2026 Summerに設置した短編インクリメンタルゲームで遊べるTonboWorkshopブース',
-      credit: null,
+      label: 'Vket出展者ページを見る',
+      url: 'https://vket.com/2026Summer/exhibitor/1779',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://vket.com/2026Summer/exhibitor/1779',
   sources: [
     {
       label: 'Vket 2026 Summer 出展者ページ',

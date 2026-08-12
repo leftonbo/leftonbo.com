@@ -15,16 +15,21 @@ export default {
   role: 'self-produced',
   period: '2020',
   firstPublishedAt: '2020-12-19',
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/sajak-sahagin/hero.webp',
+    alt: 'サメのような姿をした魚人アバター「サジャクサハギン」',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/sajak-sahagin/hero.webp',
-      alt: 'サメのような姿をした魚人アバター「サジャクサハギン」',
-      credit: null,
+      label: 'ショップで見る',
+      url: 'https://booth.pm/ja/items/2610294',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://booth.pm/ja/items/2610294',
   sources: [
     {
       label: 'BOOTH: サジャクサハギン',

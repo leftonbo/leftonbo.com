@@ -71,12 +71,14 @@ export interface VketExhibition {
   }
 }
 
-export type WorkLinkPlacement = 'action' | 'related'
+export type WorkLinkTag = 'primary' | 'action' | 'related'
 
 export interface WorkLink {
   readonly label: string
   readonly url: string
-  readonly placement: WorkLinkPlacement
+  readonly note?: string
+  readonly tags: readonly WorkLinkTag[]
+  readonly disabled?: boolean
 }
 
 export interface Work {
@@ -92,12 +94,10 @@ export interface Work {
   readonly firstPublishedAt: ISODate | null
   readonly gameDetails?: GameDetails
   readonly vketExhibition?: VketExhibition
+  readonly heroMedia: WorkMedia | null
   readonly media: readonly WorkMedia[];
-  readonly featured: boolean;
-  readonly url: string;
-  readonly primaryActionLabel?: string;
-  readonly primaryActionNote?: string
-  readonly additionalLinks?: readonly WorkLink[]
+  readonly featuredOrder: number | null
+  readonly links: readonly WorkLink[]
   readonly sources: readonly ContentSource[];
   readonly verifiedAt: ISODate;
   readonly factsPending: readonly PendingFact[];
@@ -110,6 +110,7 @@ export interface SiteProfile {
   readonly groupName: string;
   readonly groupDescription: string;
   readonly summary: string;
+  readonly introduction: readonly string[]
   readonly updatedAt: ISODate;
   readonly sources: readonly ContentSource[];
   readonly verifiedAt: ISODate;

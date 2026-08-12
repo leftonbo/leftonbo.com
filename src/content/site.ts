@@ -14,7 +14,10 @@ export const siteProfile = {
     "Discord、BOOTH、Vketで使用している活動グループ名。",
   summary:
     "VRChatワールド、アバター／3Dモデル、ゲーム、Web、オリジナルキャラクターの制作をまとめたポートフォリオ。",
-  updatedAt: "2026-08-07",
+  introduction: [
+    "VRChatワールド、アバター／3Dモデル、ゲーム、Webなど、デジタル空間とインタラクティブな作品を制作しています。",
+  ],
+  updatedAt: "2026-08-13",
   sources: [
     {
       label: "GitHub",

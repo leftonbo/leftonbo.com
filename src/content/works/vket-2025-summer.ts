@@ -21,16 +21,21 @@ export default {
       url: 'https://vrchat.com/home/launch?worldId=wrld_63f5b036-89d5-4d47-bc31-a6761173e13e',
     },
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/vket-2025-summer/hero.webp',
+    alt: 'Virtual Market 2025 Summerに設置したTonboWorkshopの展示ブース',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/vket-2025-summer/hero.webp',
-      alt: 'Virtual Market 2025 Summerに設置したTonboWorkshopの展示ブース',
-      credit: null,
+      label: 'Vket出展者ページを見る',
+      url: 'https://vket.com/2025Summer/exhibitor/310',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://vket.com/2025Summer/exhibitor/310',
   sources: [
     {
       label: 'Vket 2025 Summer 出展者ページ',

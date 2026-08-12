@@ -1,4 +1,4 @@
-import type { ExternalLinkCategory, Work, WorkCategory, WorkRole } from '../content/types'
+import type { ExternalLinkCategory, WorkCategory, WorkRole } from '../content/types'
 
 export const categoryLabels: Record<WorkCategory, string> = {
   'vrchat-world': 'VRChatワールド',
@@ -23,23 +23,6 @@ export const roleLabels: Record<WorkRole, string> = {
   exhibitor: 'イベント出展',
 }
 
-export function getWorkActionLabel(work: Work): string {
-  if (work.primaryActionLabel) return work.primaryActionLabel
-
-  switch (work.category) {
-    case 'vrchat-world':
-      return 'VRChatでワールドを開く'
-    case 'avatar-3d':
-      return 'ショップで見る'
-    case 'game':
-      return '作品をダウンロード'
-    case 'vket':
-      if (work.url.startsWith('https://x.com/')) return '出展時のX投稿を見る'
-      if (work.url.includes('/exhibitor/')) return 'Vket出展者ページを見る'
-      return 'Vket公式サイトを見る'
-  }
-}
-
 export const linkCategoryLabels: Record<ExternalLinkCategory, string> = {
   hub: '情報ハブ',
   code: 'ソースコード',
@@ -58,10 +41,3 @@ export const workCategoryOrder: readonly WorkCategory[] = [
   'game',
   'vket',
 ]
-
-export const editorialEntranceWorkIds = [
-  'tonbo-battlefield-the-two-bases',
-  'massive-medal-pusher',
-  'biter-spectre',
-  'infiroad',
-] as const

@@ -15,16 +15,21 @@ export default {
   role: 'collaborator',
   period: '2025',
   firstPublishedAt: '2025-04-13',
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/massive-medal-pusher/hero.webp',
+    alt: '大量のメダルが流れる巨大なプッシャー台',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: 2,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/massive-medal-pusher/hero.webp',
-      alt: '大量のメダルが流れる巨大なプッシャー台',
-      credit: null,
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_1af53798-92a3-4c3f-99ae-a7c42ec6084d',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_1af53798-92a3-4c3f-99ae-a7c42ec6084d',
   sources: [
     {
       label: 'VRChat: クソでっけぇプッシャーゲーム',

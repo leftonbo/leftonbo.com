@@ -76,27 +76,6 @@ export function renderPage(route: string): RenderedPage {
     }
   }
 
-  if (match.kind === 'links') {
-    return {
-      html,
-      head: {
-        title: `公式リンク | ${siteProfile.name}`,
-        description: `${siteProfile.name}のプロフィール、作品、配布・販売、ソースコード、コミュニティ、メッセージ窓口。`,
-        canonical: canonicalUrl('/links/'),
-        ogType: 'website',
-      },
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        url: canonicalUrl('/links/'),
-        name: `${siteProfile.name}の公式リンク`,
-        dateModified: siteProfile.updatedAt,
-        inLanguage: 'ja',
-        about: { '@id': 'https://leftonbo.com/#person' },
-      },
-    }
-  }
-
   if (match.kind === 'not-found') {
     return {
       html,

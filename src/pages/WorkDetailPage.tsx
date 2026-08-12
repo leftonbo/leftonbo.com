@@ -1,4 +1,4 @@
-import { categoryLabels, getWorkActionLabel, roleLabels } from '../app/presentation'
+import { categoryLabels, roleLabels } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
 import { WorkMark } from '../components/WorkMark'
 import { XPostEmbed } from '../components/XPostEmbed'
@@ -14,12 +14,13 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
   const currentIndex = categoryWorks.findIndex((item) => item.id === work.id)
   const previousWork = currentIndex > 0 ? categoryWorks[currentIndex - 1] : undefined
   const nextWork = currentIndex >= 0 ? categoryWorks[currentIndex + 1] : undefined
-  const headerMedia = work.media[0]
+  const headerMedia = work.heroMedia
   const catalogSource = work.sources.find((source) => source.role === 'catalog')
   const eventPostSource = work.sources.find((source) => source.role === 'event-post')
   const videoSource = work.sources.find((source) => source.role === 'video')
-  const actionLinks = work.additionalLinks?.filter((link) => link.placement === 'action') ?? []
-  const relatedLinks = work.additionalLinks?.filter((link) => link.placement === 'related') ?? []
+  const primaryLink = work.links.find((link) => link.tags.includes('primary'))
+  const actionLinks = work.links.filter((link) => link.tags.includes('action'))
+  const relatedLinks = work.links.filter((link) => link.tags.includes('related'))
 
   return (
     <article className="work-detail">
@@ -56,18 +57,32 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
             <h1>{work.title}</h1>
             <p>{work.summary}</p>
             <div className="work-detail__actions">
-              <div className="work-detail__primary-action">
-                <ExternalLink className="action-link action-link--primary" href={work.url}>
-                  {getWorkActionLabel(work)}
-                </ExternalLink>
-                {work.primaryActionNote ? (
-                  <p className="work-detail__action-note">{work.primaryActionNote}</p>
-                ) : null}
-              </div>
+              {primaryLink ? (
+                <div className="work-detail__primary-action">
+                  {primaryLink.disabled ? (
+                    <span className="action-link action-link--primary action-link--disabled" aria-disabled="true">
+                      {primaryLink.label}
+                    </span>
+                  ) : (
+                    <ExternalLink className="action-link action-link--primary" href={primaryLink.url}>
+                      {primaryLink.label}
+                    </ExternalLink>
+                  )}
+                  {primaryLink.note ? (
+                    <p className="work-detail__action-note">{primaryLink.note}</p>
+                  ) : null}
+                </div>
+              ) : null}
               {actionLinks.map((link) => (
-                <ExternalLink className="action-link" href={link.url} key={link.url}>
-                  {link.label}
-                </ExternalLink>
+                link.disabled ? (
+                  <span className="action-link action-link--disabled" aria-disabled="true" key={link.url}>
+                    {link.label}
+                  </span>
+                ) : (
+                  <ExternalLink className="action-link" href={link.url} key={link.url}>
+                    {link.label}
+                  </ExternalLink>
+                )
               ))}
             </div>
           </div>
@@ -146,7 +161,12 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                     <ul className="fact-list__links">
                       {relatedLinks.map((link) => (
                         <li key={link.url}>
-                          <ExternalLink href={link.url}>{link.label}</ExternalLink>
+                          {link.disabled ? (
+                            <span className="work-link-disabled">{link.label}（公開終了）</span>
+                          ) : (
+                            <ExternalLink href={link.url}>{link.label}</ExternalLink>
+                          )}
+                          {link.note ? <small>{link.note}</small> : null}
                         </li>
                       ))}
                     </ul>

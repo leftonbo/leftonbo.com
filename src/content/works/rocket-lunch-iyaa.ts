@@ -15,17 +15,22 @@ export default {
     genre: 'FPS',
     developmentTool: 'Unity 4.x',
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/rocket-lunch-iyaa/hero.webp',
+    alt: 'RocketLunch嫌ぁ～のゲーム画面',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/rocket-lunch-iyaa/hero.webp',
-      alt: 'RocketLunch嫌ぁ～のゲーム画面',
-      credit: null,
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1_OhGHOwfc6Nxl7iwkAIvYohUV8QzfsfY/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1_OhGHOwfc6Nxl7iwkAIvYohUV8QzfsfY/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: RocketLunch嫌ぁ～',

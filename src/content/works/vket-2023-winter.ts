@@ -21,16 +21,21 @@ export default {
       url: 'https://vrchat.com/home/launch?worldId=wrld_ec2d7769-a025-4dd9-9710-e7e555b5e2c5',
     },
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/vket-2023-winter/hero.webp',
+    alt: 'Virtual Market 2023 Winterに設置したがぶがぶスペクターの展示ブース',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/vket-2023-winter/hero.webp',
-      alt: 'Virtual Market 2023 Winterに設置したがぶがぶスペクターの展示ブース',
-      credit: null,
+      label: '出展時のX投稿を見る',
+      url: 'https://x.com/LefTonbo/status/1730542256560419126',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://x.com/LefTonbo/status/1730542256560419126',
   sources: [
     {
       label: 'LefTonboによる出展告知',

@@ -8,6 +8,7 @@ import type {
   Work,
   WorkCategory,
   WorkLink,
+  WorkLinkTag,
   WorkMedia,
 } from "./types";
 
@@ -58,7 +59,7 @@ const workRoles = new Set([
   'exhibitor',
 ]);
 const workMediaKinds = new Set(["image"]);
-const workLinkPlacements = new Set(['action', 'related'])
+const workLinkTags = new Set(['primary', 'action', 'related'])
 const externalLinkCategories = new Set([
   "hub",
   "code",
@@ -196,6 +197,28 @@ function validatePendingFacts(
   });
 }
 
+function validateWorkMediaItem(
+  issues: ContentValidationIssue[],
+  path: string,
+  item: WorkMedia,
+): void {
+  addEnumIssue(issues, `${path}.kind`, item.kind, workMediaKinds)
+  if (typeof item.url === 'string' && item.url.startsWith('/')) {
+    if (!/^\/[a-zA-Z0-9._/-]+$/.test(item.url) || item.url.startsWith('//')) {
+      issues.push({ path: `${path}.url`, message: '不正なサイト内URLです。' })
+    }
+  } else {
+    addUrlIssue(issues, `${path}.url`, item.url)
+  }
+  addRequiredTextIssue(issues, `${path}.alt`, item.alt)
+  if (item.caption !== undefined) {
+    addRequiredTextIssue(issues, `${path}.caption`, item.caption)
+  }
+  if (item.credit !== null) {
+    addRequiredTextIssue(issues, `${path}.credit`, item.credit)
+  }
+}
+
 function validateWorkMedia(
   issues: ContentValidationIssue[],
   path: string,
@@ -206,33 +229,16 @@ function validateWorkMedia(
     return;
   }
 
-  media.forEach((item, index) => {
-    const mediaPath = `${path}[${index}]`;
-    addEnumIssue(issues, `${mediaPath}.kind`, item.kind, workMediaKinds);
-    if (typeof item.url === 'string' && item.url.startsWith('/')) {
-      if (!/^\/[a-zA-Z0-9._/-]+$/.test(item.url) || item.url.startsWith('//')) {
-        issues.push({ path: `${mediaPath}.url`, message: '不正なサイト内URLです。' })
-      }
-    } else {
-      addUrlIssue(issues, `${mediaPath}.url`, item.url);
-    }
-    addRequiredTextIssue(issues, `${mediaPath}.alt`, item.alt);
-    if (item.caption !== undefined) {
-      addRequiredTextIssue(issues, `${mediaPath}.caption`, item.caption)
-    }
-    if (item.credit !== null) {
-      addRequiredTextIssue(issues, `${mediaPath}.credit`, item.credit);
-    }
-  });
+  media.forEach((item, index) => validateWorkMediaItem(issues, `${path}[${index}]`, item))
 }
 
-function validateAdditionalLinks(
+function validateWorkLinks(
   issues: ContentValidationIssue[],
   path: string,
   links: readonly WorkLink[],
 ): void {
   if (!Array.isArray(links)) {
-    issues.push({ path, message: 'additionalLinksは配列である必要があります。' })
+    issues.push({ path, message: 'linksは配列である必要があります。' })
     return
   }
 
@@ -240,8 +246,28 @@ function validateAdditionalLinks(
     const linkPath = `${path}[${index}]`
     addRequiredTextIssue(issues, `${linkPath}.label`, link.label)
     addUrlIssue(issues, `${linkPath}.url`, link.url)
-    addEnumIssue(issues, `${linkPath}.placement`, link.placement, workLinkPlacements)
+    if (link.note !== undefined) {
+      addRequiredTextIssue(issues, `${linkPath}.note`, link.note)
+    }
+    if (!Array.isArray(link.tags) || link.tags.length === 0) {
+      issues.push({ path: `${linkPath}.tags`, message: '1件以上のタグが必要です。' })
+    } else {
+      link.tags.forEach((tag: WorkLinkTag, tagIndex: number) => {
+        addEnumIssue(issues, `${linkPath}.tags[${tagIndex}]`, tag, workLinkTags)
+      })
+      if (new Set(link.tags).size !== link.tags.length) {
+        issues.push({ path: `${linkPath}.tags`, message: '同じタグが重複しています。' })
+      }
+    }
+    if (link.disabled !== undefined && typeof link.disabled !== 'boolean') {
+      issues.push({ path: `${linkPath}.disabled`, message: 'booleanではありません。' })
+    }
   })
+
+  const primaryCount = links.filter((link) => link.tags.includes('primary')).length
+  if (primaryCount !== 1) {
+    issues.push({ path, message: 'primaryタグを持つリンクは必ず1件にしてください。' })
+  }
 }
 
 function validateGameDetails(
@@ -368,6 +394,7 @@ export function collectContentValidationIssues(
     content.profile.groupDescription,
   );
   addRequiredTextIssue(issues, "profile.summary", content.profile.summary);
+  validateWorkIntroduction(issues, "profile.introduction", content.profile.introduction)
   addDateIssue(issues, "profile.updatedAt", content.profile.updatedAt);
   addDateIssue(issues, "profile.verifiedAt", content.profile.verifiedAt);
   validateSources(issues, "profile.sources", content.profile.sources);
@@ -430,6 +457,13 @@ export function collectContentValidationIssues(
     "works.slug",
     content.works.map((work) => work.slug),
   );
+  addDuplicateIssues(
+    issues,
+    'works.featuredOrder',
+    content.works.flatMap((work) =>
+      work.featuredOrder === null ? [] : [String(work.featuredOrder)],
+    ),
+  )
 
   content.works.forEach((work, index) => {
     const path = `works[${index}]`;
@@ -458,20 +492,26 @@ export function collectContentValidationIssues(
     }
     validateGameDetails(issues, `${path}.gameDetails`, work)
     validateVketExhibition(issues, path, work)
-    validateWorkMedia(issues, `${path}.media`, work.media);
-    if (typeof work.featured !== "boolean") {
-      issues.push({ path: `${path}.featured`, message: "booleanではありません。" });
+    if (work.heroMedia !== null) {
+      validateWorkMediaItem(issues, `${path}.heroMedia`, work.heroMedia)
     }
-    addUrlIssue(issues, `${path}.url`, work.url);
-    if (work.primaryActionLabel !== undefined) {
-      addRequiredTextIssue(issues, `${path}.primaryActionLabel`, work.primaryActionLabel)
+    validateWorkMedia(issues, `${path}.media`, work.media)
+    if (work.heroMedia && work.media.some((media) => media.url === work.heroMedia?.url)) {
+      issues.push({
+        path: `${path}.media`,
+        message: 'heroMediaと同じ画像を含められません。',
+      })
     }
-    if (work.primaryActionNote !== undefined) {
-      addRequiredTextIssue(issues, `${path}.primaryActionNote`, work.primaryActionNote)
+    if (
+      work.featuredOrder !== null &&
+      (!Number.isInteger(work.featuredOrder) || work.featuredOrder < 1)
+    ) {
+      issues.push({
+        path: `${path}.featuredOrder`,
+        message: '1以上の整数またはnullである必要があります。',
+      })
     }
-    if (work.additionalLinks !== undefined) {
-      validateAdditionalLinks(issues, `${path}.additionalLinks`, work.additionalLinks)
-    }
+    validateWorkLinks(issues, `${path}.links`, work.links)
     addDateIssue(issues, `${path}.verifiedAt`, work.verifiedAt);
     validateSources(issues, `${path}.sources`, work.sources);
     validatePendingFacts(issues, `${path}.factsPending`, work.factsPending);

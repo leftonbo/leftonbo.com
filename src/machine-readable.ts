@@ -1,7 +1,7 @@
-import { categoryLabels, getWorkActionLabel, roleLabels, workCategoryOrder } from './app/presentation'
+import { categoryLabels, roleLabels, workCategoryOrder } from './app/presentation'
 import { getStaticRoutePaths } from './app/routes'
 import { activityAreas, externalLinks, siteProfile } from './content/site'
-import type { Work } from './content/types'
+import type { Work, WorkLink } from './content/types'
 import { works } from './content/works'
 
 const SITE_ORIGIN = 'https://leftonbo.com'
@@ -10,7 +10,7 @@ const identityLinkIds = new Set(['tonbo-notion', 'github', 'x', 'vrchat'])
 export function getMachineReadableFiles(): Record<string, string> {
   const publicRoutes = getStaticRoutePaths(works).filter((route) => route !== '/404.html')
   const profilePayload = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     profile: {
       name: siteProfile.name,
       reading: siteProfile.reading,
@@ -18,6 +18,7 @@ export function getMachineReadableFiles(): Record<string, string> {
       groupName: siteProfile.groupName,
       groupDescription: siteProfile.groupDescription,
       summary: siteProfile.summary,
+      introduction: siteProfile.introduction,
       updatedAt: siteProfile.updatedAt,
     },
     activityAreas: activityAreas.map((area) => ({
@@ -34,7 +35,7 @@ export function getMachineReadableFiles(): Record<string, string> {
     })),
   }
   const worksPayload = {
-    schemaVersion: 7,
+    schemaVersion: 8,
     siteUpdatedAt: siteProfile.updatedAt,
     count: works.length,
     works: works.map((work) => {
@@ -61,11 +62,14 @@ export function getMachineReadableFiles(): Record<string, string> {
               eventPostUrl: eventPostSource?.url ?? null,
             }
           : null,
+        heroMedia: work.heroMedia,
         media: work.media,
-        featured: work.featured,
-        url: work.url,
-        primaryActionNote: work.primaryActionNote ?? null,
-        additionalLinks: work.additionalLinks ?? [],
+        featuredOrder: work.featuredOrder,
+        links: work.links.map((link) => ({
+          ...link,
+          note: link.note ?? null,
+          disabled: link.disabled ?? false,
+        })),
       }
     }),
   }
@@ -145,7 +149,7 @@ export function creativeWorkJsonLd(work: Work) {
     '@type': 'CreativeWork',
     '@id': `${SITE_ORIGIN}/works/${work.slug}/#work`,
     url: `${SITE_ORIGIN}/works/${work.slug}/`,
-    sameAs: [work.url, ...(work.additionalLinks?.map((link) => link.url) ?? [])],
+    sameAs: work.links.filter((link) => !link.disabled).map((link) => link.url),
     name: work.title,
     description: work.summary,
     genre: work.gameDetails?.genre ?? categoryLabels[work.category],
@@ -162,8 +166,22 @@ export function canonicalUrl(route: string): string {
 function createProfileMarkdown(): string {
   const areas = activityAreas.map((area) => `- **${area.label}**: ${area.description}`).join('\n')
   const links = externalLinks.map((link) => `- [${link.label}](${link.url})`).join('\n')
+  const introduction = siteProfile.introduction.join('\n\n')
 
-  return `# ${siteProfile.name}（${siteProfile.reading}）\n\n${siteProfile.summary}\n\n- 基本名義: ${siteProfile.name}\n- URL・ユーザーID表記: ${siteProfile.handle}\n- 活動グループ名: ${siteProfile.groupName}\n- サイト更新日: ${siteProfile.updatedAt}\n\n## 活動領域\n\n${areas}\n\n## 公式リンク\n\n${links}\n`
+  return `# ${siteProfile.name}（${siteProfile.reading}）\n\n${siteProfile.summary}\n\n${introduction}\n\n- 基本名義: ${siteProfile.name}\n- URL・ユーザーID表記: ${siteProfile.handle}\n- 活動グループ名: ${siteProfile.groupName}\n- サイト更新日: ${siteProfile.updatedAt}\n\n## 制作領域\n\n${areas}\n\n## 公式リンク\n\n${links}\n`
+}
+
+function formatWorkLink(link: WorkLink): string {
+  const kind = link.tags.includes('primary')
+    ? '公開先'
+    : link.tags.includes('action')
+      ? '別の公開先'
+      : '関連リンク'
+  const note = link.note ? `（${link.note}）` : ''
+
+  return link.disabled
+    ? `- ${kind}: ${link.label}（公開終了）${note}`
+    : `- ${kind}: [${link.label}](${link.url})${note}`
 }
 
 function createWorksMarkdown(): string {
@@ -173,12 +191,6 @@ function createWorksMarkdown(): string {
       .map((work) => {
         const catalogSource = work.sources.find((source) => source.role === 'catalog')
         const eventPostSource = work.sources.find((source) => source.role === 'event-post')
-        const primaryLinkLabel = work.category === 'game' ? 'ダウンロード' : '公開先'
-        const primaryLinkNote = work.primaryActionNote ? `（${work.primaryActionNote}）` : ''
-        const additionalLinks = (work.additionalLinks ?? []).map(
-          (link) =>
-            `- ${link.placement === 'action' ? 'ブラウザ版' : '関連リンク'}: [${link.label}](${link.url})`,
-        )
         const details = [
           ...(work.role === 'pending-confirmation' ? [] : [`- 関わり方: ${roleLabels[work.role]}`]),
           ...(work.period ? [`- 制作時期: ${work.period}`] : []),
@@ -196,8 +208,7 @@ function createWorksMarkdown(): string {
           ...(work.gameDetails?.developmentTool
             ? [`- 制作ツール: ${work.gameDetails.developmentTool}`]
             : []),
-          `- ${primaryLinkLabel}: [${getWorkActionLabel(work)}](${work.url})${primaryLinkNote}`,
-          ...additionalLinks,
+          ...work.links.map(formatWorkLink),
         ].join('\n')
         const introduction = `\n\n#### 作品紹介\n\n${work.introduction.join('\n\n')}`
         return `### [${work.title}](${SITE_ORIGIN}/works/${work.slug}/)\n\n${work.summary}\n\n${details}${introduction}`
@@ -210,7 +221,7 @@ function createWorksMarkdown(): string {
 }
 
 function createLlmsText(): string {
-  return `# LefTonbo\n\n> LefTonbo（レフとんぼ）の公式ポータル兼ポートフォリオ。VRChatワールド、アバター／3D、ゲーム、Web、オリジナルキャラクター創作への入口です。\n\nサイト更新日: ${siteProfile.updatedAt}\n\n## Canonical data\n\n- [プロフィールJSON](${SITE_ORIGIN}/data/profile.json)\n- [制作一覧JSON](${SITE_ORIGIN}/data/works.json)\n- [プロフィールMarkdown](${SITE_ORIGIN}/profile.md)\n- [制作一覧Markdown](${SITE_ORIGIN}/works.md)\n\n## Human-readable pages\n\n- [ホーム](${SITE_ORIGIN}/)\n- [制作一覧](${SITE_ORIGIN}/works/)\n- [プロフィール](${SITE_ORIGIN}/profile/)\n- [公式リンク](${SITE_ORIGIN}/links/)\n`
+  return `# LefTonbo\n\n> LefTonbo（レフとんぼ）の公式ポータル兼ポートフォリオ。VRChatワールド、アバター／3D、ゲーム、Web、オリジナルキャラクター創作への入口です。\n\nサイト更新日: ${siteProfile.updatedAt}\n\n## Canonical data\n\n- [プロフィールJSON](${SITE_ORIGIN}/data/profile.json)\n- [制作一覧JSON](${SITE_ORIGIN}/data/works.json)\n- [プロフィールMarkdown](${SITE_ORIGIN}/profile.md)\n- [制作一覧Markdown](${SITE_ORIGIN}/works.md)\n\n## Human-readable pages\n\n- [ホーム](${SITE_ORIGIN}/)\n- [制作一覧](${SITE_ORIGIN}/works/)\n- [プロフィールと公式リンク](${SITE_ORIGIN}/profile/)\n`
 }
 
 function createSitemap(routes: readonly string[]): string {

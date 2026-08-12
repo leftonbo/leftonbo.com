@@ -17,17 +17,22 @@ export default {
     genre: '対戦パズル',
     developmentTool: null,
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/pipe-4-run/hero.webp',
+    alt: 'Pipe 4 Runのゲーム画面',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/pipe-4-run/hero.webp',
-      alt: 'Pipe 4 Runのゲーム画面',
-      credit: null,
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1bDgsBggb3YN2yd8X5n5rMcOtlDFsNfr4/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1bDgsBggb3YN2yd8X5n5rMcOtlDFsNfr4/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: Pipe 4 Run',

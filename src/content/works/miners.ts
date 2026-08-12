@@ -19,13 +19,13 @@ export default {
     genre: '採掘アクション',
     developmentTool: 'DXライブラリ',
   },
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/miners/hero.webp',
+    alt: 'Minersのゲーム画面',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/miners/hero.webp',
-      alt: 'Minersのゲーム画面',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/miners/gallery-02.webp',
@@ -51,9 +51,15 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1PPia2NuihGE66XRwI1Z7bBvRVD0F4Kd3/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
+  featuredOrder: null,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1PPia2NuihGE66XRwI1Z7bBvRVD0F4Kd3/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: Miners',

@@ -15,13 +15,13 @@ export default {
     genre: 'すごろくRPG',
     developmentTool: 'Tonyu System',
   },
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/go-and-battle/hero.webp',
+    alt: 'Go and Battle!のゲーム画面',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/go-and-battle/hero.webp',
-      alt: 'Go and Battle!のゲーム画面',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/go-and-battle/gallery-02.webp',
@@ -41,9 +41,15 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1LgigLl-QRvQql4gCS_76Y1Am8gVgbxiP/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
+  featuredOrder: null,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1LgigLl-QRvQql4gCS_76Y1Am8gVgbxiP/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: Go and Battle!',

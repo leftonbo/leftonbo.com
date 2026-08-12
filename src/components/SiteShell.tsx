@@ -13,7 +13,6 @@ const navigation = [
   { href: '/', label: 'ホーム' },
   { href: '/works/', label: '制作' },
   { href: '/profile/', label: 'プロフィール' },
-  { href: '/links/', label: '公式リンク' },
 ] as const
 
 export function SiteShell({

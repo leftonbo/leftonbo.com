@@ -5,7 +5,6 @@ export type RouteMatch =
   | { readonly kind: 'works' }
   | { readonly kind: 'work-detail'; readonly work: Work }
   | { readonly kind: 'profile' }
-  | { readonly kind: 'links' }
   | { readonly kind: 'not-found' }
 
 export function normalizePathname(pathname: string): string {
@@ -39,10 +38,6 @@ export function matchRoute(pathname: string, works: readonly Work[]): RouteMatch
     return { kind: 'profile' }
   }
 
-  if (normalizedPath === '/links/') {
-    return { kind: 'links' }
-  }
-
   const detailMatch = /^\/works\/([^/]+)\/$/.exec(normalizedPath)
   const slug = detailMatch?.[1]
 
@@ -57,5 +52,5 @@ export function matchRoute(pathname: string, works: readonly Work[]): RouteMatch
 }
 
 export function getStaticRoutePaths(works: readonly Work[]): readonly string[] {
-  return ['/', '/works/', ...works.map((work) => `/works/${work.slug}/`), '/profile/', '/links/', '/404.html']
+  return ['/', '/works/', ...works.map((work) => `/works/${work.slug}/`), '/profile/', '/404.html']
 }

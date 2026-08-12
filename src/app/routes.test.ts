@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { works } from '../content/works'
-import { matchRoute, normalizePathname } from './routes'
+import { getStaticRoutePaths, matchRoute, normalizePathname } from './routes'
 
 describe('route matching', () => {
   it('normalizes extensionless and index paths', () => {
@@ -29,5 +29,10 @@ describe('route matching', () => {
     expect(matchRoute('/works/sajak-sahagin-v3/', works).kind).toBe('not-found')
     expect(matchRoute('/works/tonbo-battlefield-2-the-two-bases/', works).kind).toBe('not-found')
     expect(matchRoute('/somewhere-else/', works).kind).toBe('not-found')
+    expect(matchRoute('/links/', works).kind).toBe('not-found')
+  })
+
+  it('does not generate the removed links page', () => {
+    expect(getStaticRoutePaths(works)).not.toContain('/links/')
   })
 })

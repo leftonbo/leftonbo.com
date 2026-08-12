@@ -16,13 +16,13 @@ export default {
   role: 'collaborator',
   period: '2025',
   firstPublishedAt: '2025-12-26',
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/itagashi-board-game-world/hero.webp',
+    alt: '『いた菓子』ボードゲームワールドのサムネイル',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/itagashi-board-game-world/hero.webp',
-      alt: '『いた菓子』ボードゲームワールドのサムネイル',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/itagashi-board-game-world/gallery-02.webp',
@@ -45,8 +45,14 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_3439fc9a-5067-4109-809e-62f43f75cfbe',
+  featuredOrder: null,
+  links: [
+    {
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_3439fc9a-5067-4109-809e-62f43f75cfbe',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'VRChat: 『いた菓子』',

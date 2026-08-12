@@ -19,13 +19,13 @@ export default {
     genre: 'RPG',
     developmentTool: 'WOLF RPGエディター',
   },
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/heroad/hero.webp',
+    alt: 'HeRoadのタイトル画面',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/heroad/hero.webp',
-      alt: 'HeRoadのタイトル画面',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/heroad/gallery-02.webp',
@@ -45,14 +45,18 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1U5kni4YQB8edsI_WqttULBOgKspCTxTO/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
-  additionalLinks: [
+  featuredOrder: null,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1U5kni4YQB8edsI_WqttULBOgKspCTxTO/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
     {
       label: 'WOLF RPGエディターコンテスト 第8回 結果',
       url: 'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml',
-      placement: 'related',
+      tags: ['related'],
     },
   ],
   sources: [

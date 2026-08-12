@@ -15,17 +15,22 @@ export default {
     genre: 'ブロック崩し',
     developmentTool: 'Tonyu System',
   },
-  media: [
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/super-block-break/hero.webp',
+    alt: 'スーパーブロック崩しのゲーム画面',
+    credit: null,
+  },
+  media: [],
+  featuredOrder: null,
+  links: [
     {
-      kind: 'image',
-      url: '/images/works/super-block-break/hero.webp',
-      alt: 'スーパーブロック崩しのゲーム画面',
-      credit: null,
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1qn27Lf1UWREOL9IQkhPc6TzYLbMvsMiA/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1qn27Lf1UWREOL9IQkhPc6TzYLbMvsMiA/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
   sources: [
     {
       label: 'TonboNotion01: スーパーブロック崩し',

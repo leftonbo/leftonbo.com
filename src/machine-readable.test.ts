@@ -33,10 +33,16 @@ describe('機械可読出力', () => {
         id?: string
         summary?: string
         introduction?: string[]
-        url?: string
-        primaryActionNote?: string | null
-        additionalLinks?: Array<{ label: string; url: string; placement: string }>
+        heroMedia?: unknown | null
         media?: unknown[]
+        featuredOrder?: number | null
+        links?: Array<{
+          label: string
+          url: string
+          note: string | null
+          tags: string[]
+          disabled: boolean
+        }>
         firstPublishedAt?: string | null
         period?: string | null
         vketExhibition?: {
@@ -47,7 +53,7 @@ describe('機械可読出力', () => {
       }>
     }
 
-    expect(worksJson.schemaVersion).toBe(7)
+    expect(worksJson.schemaVersion).toBe(8)
     expect(worksJson.count).toBe(works.length)
     expect(worksJson.siteUpdatedAt).toBe(siteProfile.updatedAt)
     expect(worksJson.works?.map((work) => work.id)).toEqual(works.map((work) => work.id))
@@ -58,7 +64,10 @@ describe('機械可読出力', () => {
           Array.isArray(work.introduction) &&
           'firstPublishedAt' in work &&
           'period' in work &&
-          Array.isArray(work.media),
+          'heroMedia' in work &&
+          Array.isArray(work.media) &&
+          'featuredOrder' in work &&
+          Array.isArray(work.links),
       ),
     ).toBe(true)
 
@@ -86,13 +95,21 @@ describe('機械可読出力', () => {
       introduction: expect.arrayContaining([
         expect.stringContaining('魔物に支配された世界を取り戻すため'),
       ]),
-      url: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
-      primaryActionNote: 'Windows版のみ',
-      additionalLinks: [
+      featuredOrder: 4,
+      links: [
+        {
+          label: '作品をダウンロード',
+          url: 'https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link',
+          note: 'Windows版のみ',
+          tags: ['primary'],
+          disabled: false,
+        },
         {
           label: 'ブラウザ版をプレイ',
           url: 'https://unityroom.com/games/infiroad',
-          placement: 'action',
+          note: null,
+          tags: ['action'],
+          disabled: false,
         },
       ],
     })
@@ -106,10 +123,10 @@ describe('機械可読出力', () => {
       '- 出展ワールド: VOLTAGER - EX-Volcano（Public Link 未公開）',
     )
     expect(worksMarkdown).toContain(
-      '- ダウンロード: [作品をダウンロード](https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link)（Windows版のみ）',
+      '- 公開先: [作品をダウンロード](https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link)（Windows版のみ）',
     )
     expect(worksMarkdown).toContain(
-      '- ブラウザ版: [ブラウザ版をプレイ](https://unityroom.com/games/infiroad)',
+      '- 別の公開先: [ブラウザ版をプレイ](https://unityroom.com/games/infiroad)',
     )
     expect(worksMarkdown).toContain(
       '- 関連リンク: [WOLF RPGエディターコンテスト 第8回 結果](https://silversecond.com/WolfRPGEditor/Contest/result08.shtml)',
@@ -142,14 +159,18 @@ describe('機械可読出力', () => {
     const infiroad = works.find((work) => work.id === 'infiroad')
     const heroad = works.find((work) => work.id === 'heroad')
     if (!infiroad || !heroad) throw new Error('検証元のゲーム記事がありません。')
-    expect(creativeWorkJsonLd(infiroad).sameAs).toEqual([
-      infiroad.url,
-      'https://unityroom.com/games/infiroad',
-    ])
-    expect(creativeWorkJsonLd(heroad).sameAs).toEqual([
-      heroad.url,
-      'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml',
-    ])
+    expect(creativeWorkJsonLd(infiroad).sameAs).toEqual(infiroad.links.map((link) => link.url))
+    expect(creativeWorkJsonLd(heroad).sameAs).toEqual(heroad.links.map((link) => link.url))
+
+    const disabledPrimaryWork = {
+      ...infiroad,
+      links: infiroad.links.map((link) =>
+        link.tags.includes('primary') ? { ...link, disabled: true } : link,
+      ),
+    }
+    expect(creativeWorkJsonLd(disabledPrimaryWork).sameAs).not.toContain(
+      infiroad.links.find((link) => link.tags.includes('primary'))?.url,
+    )
 
     const sameAs = personJsonLd().sameAs
     for (const link of externalLinks.filter((item) => item.status === 'availability-unverified')) {

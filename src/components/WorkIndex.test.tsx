@@ -21,6 +21,9 @@ describe('WorkIndex', () => {
     render(<WorkIndex works={works} />)
     expect(screen.getAllByRole('article')).toHaveLength(works.length)
     expect(screen.getByText(String(works.length), { selector: '.work-index__count strong' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '代表作' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'アーカイブ' })).toBeInTheDocument()
+    expect(screen.getByRole('combobox', { name: '並び順' })).toHaveValue('featured')
   })
 
   it('renders only the short summary in each work card', () => {
@@ -44,6 +47,9 @@ describe('WorkIndex', () => {
     expect(screen.getByRole('button', { name: avatar3dButtonName })).toHaveAttribute('aria-pressed', 'true')
     expect(window.location.search).toBe('?category=avatar-3d')
     expect(screen.getByRole('heading', { name: 'サジャクサハギン' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: '代表作' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'アーカイブ' })).not.toBeInTheDocument()
+    expect(screen.getByRole('list', { name: '制作一覧' })).toBeInTheDocument()
   })
 
   it('supports keyboard activation and visible state semantics', async () => {
@@ -75,8 +81,37 @@ describe('WorkIndex', () => {
     window.dispatchEvent(new PopStateEvent('popstate'))
 
     await waitFor(() => {
-      const results = screen.getByRole('list', { name: '制作一覧' })
+      const results = document.querySelector<HTMLElement>('.work-results')
+      if (!results) throw new Error('制作一覧がありません。')
       expect(within(results).getAllByRole('article')).toHaveLength(avatar3dCount)
+    })
+  })
+
+  it('changes the order and persists the selected sort in the URL', async () => {
+    const user = userEvent.setup()
+    render(<WorkIndex works={works} />)
+
+    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'oldest')
+
+    expect(window.location.search).toBe('?sort=oldest')
+    expect(screen.getByRole('combobox', { name: '並び順' })).toHaveValue('oldest')
+    const standardList = screen.getByRole('list', { name: '制作一覧' })
+    const standardTitles = within(standardList)
+      .getAllByRole('heading')
+      .map((heading) => heading.textContent)
+    expect(standardTitles.at(0)).toBe('スーパーブロック崩し')
+    expect(screen.queryByRole('heading', { name: '代表作' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'アーカイブ' })).not.toBeInTheDocument()
+  })
+
+  it('restores category and sort state together from a direct URL', async () => {
+    window.history.replaceState({}, '', '/works/?category=game&sort=oldest#work-index')
+    render(<WorkIndex works={works} />)
+
+    await waitFor(() => {
+      expect(screen.getByRole('combobox', { name: '並び順' })).toHaveValue('oldest')
+      expect(screen.getAllByRole('article')).toHaveLength(gameCount)
+      expect(screen.getByRole('list', { name: '制作一覧' })).toBeInTheDocument()
     })
   })
 

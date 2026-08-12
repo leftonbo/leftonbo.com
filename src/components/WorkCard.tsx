@@ -7,7 +7,7 @@ interface WorkCardProps {
 }
 
 export function WorkCard({ work }: WorkCardProps) {
-  const preview = work.media[0]
+  const preview = work.heroMedia
   const detailHref = `/works/${work.slug}/`
 
   return (
@@ -21,7 +21,7 @@ export function WorkCard({ work }: WorkCardProps) {
             alt={preview.alt}
             width="16"
             height="10"
-            loading="lazy"
+            loading={work.featuredOrder === null ? 'lazy' : 'eager'}
             decoding="async"
           />
         ) : (

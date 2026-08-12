@@ -15,13 +15,13 @@ export default {
   role: 'self-produced',
   period: '2021',
   firstPublishedAt: '2021-10-08',
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/tonbo-battlefield-the-two-bases/hero.webp',
+    alt: 'TonboBattlefield 2のメインサムネイル',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/tonbo-battlefield-the-two-bases/hero.webp',
-      alt: 'TonboBattlefield 2のメインサムネイル',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/tonbo-battlefield-the-two-bases/gallery-02.webp',
@@ -41,8 +41,14 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://vrchat.com/home/launch?worldId=wrld_0a8afad0-0cf0-4b7a-a420-c1fc262c585a',
+  featuredOrder: 1,
+  links: [
+    {
+      label: 'VRChatでワールドを開く',
+      url: 'https://vrchat.com/home/launch?worldId=wrld_0a8afad0-0cf0-4b7a-a420-c1fc262c585a',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'VRChat: TonboBattlefield 2',

@@ -18,13 +18,13 @@ export default {
     genre: 'RPG',
     developmentTool: 'RPGツクールMV',
   },
+  heroMedia: {
+    kind: 'image',
+    url: '/images/works/light-trail/hero.webp',
+    alt: 'Light Trailのゲーム画面',
+    credit: null,
+  },
   media: [
-    {
-      kind: 'image',
-      url: '/images/works/light-trail/hero.webp',
-      alt: 'Light Trailのゲーム画面',
-      credit: null,
-    },
     {
       kind: 'image',
       url: '/images/works/light-trail/gallery-02.webp',
@@ -50,9 +50,15 @@ export default {
       credit: null,
     },
   ],
-  featured: false,
-  url: 'https://drive.google.com/file/d/1HMw8Zo1vm36MpH8ocF6sZPFk4g7fcdkk/view?usp=drive_link',
-  primaryActionNote: 'Windows版のみ',
+  featuredOrder: null,
+  links: [
+    {
+      label: '作品をダウンロード',
+      url: 'https://drive.google.com/file/d/1HMw8Zo1vm36MpH8ocF6sZPFk4g7fcdkk/view?usp=drive_link',
+      note: 'Windows版のみ',
+      tags: ['primary'],
+    },
+  ],
   sources: [
     {
       label: 'TonboNotion01: Light Trail',

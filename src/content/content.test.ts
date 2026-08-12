@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import { editorialEntranceWorkIds } from '../app/presentation'
 import { activityAreas, externalLinks, siteProfile } from './site'
 import type { CanonicalContent, Work } from './types'
 import { collectContentValidationIssues } from './validate'
@@ -27,15 +26,16 @@ describe('コンテンツの整合性', () => {
     expect(collectContentValidationIssues()).toEqual([])
   })
 
-  it('すべての作品記事を自動集約し、代表作IDが実在する作品を参照する', () => {
+  it('すべての作品記事を自動集約し、代表作の順序を重複なく定義する', () => {
     expect(new Set(works.map((work) => work.id))).toEqual(
       new Set(Object.values(workArticles).map((work) => work.id)),
     )
-    expect(new Set(editorialEntranceWorkIds).size).toBe(editorialEntranceWorkIds.length)
-
-    for (const id of editorialEntranceWorkIds) {
-      expect(works.some((work) => work.id === id || work.slug === id)).toBe(true)
-    }
+    const featuredOrders = works
+      .map((work) => work.featuredOrder)
+      .filter((order): order is number => order !== null)
+    expect(featuredOrders).toHaveLength(4)
+    expect(new Set(featuredOrders).size).toBe(featuredOrders.length)
+    expect([...featuredOrders].sort((left, right) => left - right)).toEqual([1, 2, 3, 4])
   })
 
   it('カテゴリに応じて必要または不要になる従属データを検証する', () => {
@@ -204,7 +204,11 @@ describe('コンテンツの整合性', () => {
   })
 
   it('サイト内画像の参照先ファイルが存在する', () => {
-    const localMedia = works.flatMap((work) => work.media.filter((media) => media.url.startsWith('/')))
+    const localMedia = works.flatMap((work) =>
+      [work.heroMedia, ...work.media].filter(
+        (media): media is NonNullable<Work['heroMedia']> => media !== null && media.url.startsWith('/'),
+      ),
+    )
     expect(localMedia.length).toBeGreaterThan(0)
 
     for (const media of localMedia) {
@@ -227,6 +231,20 @@ describe('コンテンツの整合性', () => {
     expect(issues).toContainEqual({
       path: 'works[0].media[0].caption',
       message: '必須の文字列が空です。',
+    })
+  })
+
+  it('ヒーロー画像とギャラリー画像の重複を検出する', () => {
+    const sourceWork = works.find((work) => work.heroMedia !== null)
+    if (!sourceWork?.heroMedia) throw new Error('ヒーロー画像付きの制作記事がありません。')
+
+    const issues = collectContentValidationIssues(
+      contentWithWorks([{ ...sourceWork, media: [sourceWork.heroMedia, ...sourceWork.media] }]),
+    )
+
+    expect(issues).toContainEqual({
+      path: 'works[0].media',
+      message: 'heroMediaと同じ画像を含められません。',
     })
   })
 })

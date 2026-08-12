@@ -1,13 +1,15 @@
 import { ExternalLink } from '../components/ExternalLink'
+import { OfficialLinkGroups } from '../components/OfficialLinkGroups'
 import { PageIntro } from '../components/PageIntro'
-import type { ActivityArea, SiteProfile } from '../content/types'
+import type { ActivityArea, ExternalLink as ExternalLinkData, SiteProfile } from '../content/types'
 
 interface ProfilePageProps {
   profile: SiteProfile
   activityAreas: readonly ActivityArea[]
+  externalLinks: readonly ExternalLinkData[]
 }
 
-export function ProfilePage({ profile, activityAreas }: ProfilePageProps) {
+export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePageProps) {
   return (
     <>
       <PageIntro
@@ -15,9 +17,9 @@ export function ProfilePage({ profile, activityAreas }: ProfilePageProps) {
         title={`${profile.name}について`}
         description={profile.summary}
       />
-      <section className="section-shell profile-overview" aria-labelledby="naming-title">
+      <section className="section-shell profile-overview" aria-labelledby="about-title">
         <div className="container profile-grid">
-          <div>
+          <div className="profile-portrait">
             <img
               className="profile-avatar"
               src="/images/profile.webp"
@@ -26,33 +28,16 @@ export function ProfilePage({ profile, activityAreas }: ProfilePageProps) {
               height="512"
               decoding="async"
             />
-            <p className="section-kicker">Names</p>
-            <h2 id="naming-title">名義と表記</h2>
-            <p>
-              <strong>{profile.name}</strong> を基本名義として使用しています。
-            </p>
           </div>
-          <dl className="naming-list">
-            <div>
-              <dt>基本表記</dt>
-              <dd>{profile.name}</dd>
+          <div className="profile-about">
+            <p className="section-kicker">About</p>
+            <h2 id="about-title">つくっている人</h2>
+            <div className="profile-introduction">
+              {profile.introduction.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
-            <div>
-              <dt>読み方／日本語表記</dt>
-              <dd>{profile.reading}</dd>
-            </div>
-            <div>
-              <dt>URL・ユーザーID表記</dt>
-              <dd>{profile.handle}</dd>
-            </div>
-            <div>
-              <dt>活動グループ名</dt>
-              <dd>
-                {profile.groupName}
-                <small>{profile.groupDescription}</small>
-              </dd>
-            </div>
-          </dl>
+          </div>
         </div>
       </section>
 
@@ -60,7 +45,7 @@ export function ProfilePage({ profile, activityAreas }: ProfilePageProps) {
         <div className="container">
           <p className="section-kicker">Activity areas</p>
           <h2 className="section-title" id="profile-activity-title">
-            公開している活動の入口
+            制作しているもの
           </h2>
           <ul className="profile-areas">
             {activityAreas.map((area) => (
@@ -71,6 +56,23 @@ export function ProfilePage({ profile, activityAreas }: ProfilePageProps) {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="section-shell" id="official-links" aria-labelledby="profile-links-title">
+        <div className="container">
+          <div className="section-split-heading">
+            <div>
+              <p className="section-kicker">Official destinations</p>
+              <h2 className="section-title" id="profile-links-title">
+                公式の行き先
+              </h2>
+            </div>
+            <p className="section-lead">
+              作品を見る、最新の活動を追う、連絡するなど、目的ごとに公開先をまとめています。
+            </p>
+          </div>
+          <OfficialLinkGroups links={externalLinks} />
         </div>
       </section>
     </>
