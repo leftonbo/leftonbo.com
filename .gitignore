@@ -22,3 +22,6 @@ output/
 
 # Working memories that should not be commited
 .working/
+
+# Python artifacts
+__pycache__/
