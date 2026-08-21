@@ -1,16 +1,54 @@
 import axe from 'axe-core'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { App } from './App'
 
 describe('App routes', () => {
   it('renders the top page with the primary journey', () => {
-    render(<App pathname="/" />)
+    const { container } = render(<App pathname="/" />)
     expect(screen.getByRole('heading', { level: 1, name: /LefTonbo/ })).toBeInTheDocument()
     expect(screen.getAllByRole('link', { name: '制作を見る' })[0]).toHaveAttribute('href', '/works/')
+    expect(screen.getByText('放浪するゲームクリエイター')).toBeInTheDocument()
+    expect(screen.getByText('ゲームづくりを中心に、活動をまとめています。')).toBeInTheDocument()
+    expect(screen.getByText('VRChatワールド、3Dモデル、Webなど。')).toBeInTheDocument()
+    expect(screen.getByText('MAIN WORKS')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '代表作' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: '制作領域' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: '掲載作品をすべて見る' })).toHaveClass(
+      'section-heading-row__action',
+    )
+    expect(screen.getByText('WHAT I MAKE')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'つくっているもの' })).toBeInTheDocument()
+    expect(screen.queryByText('Official portal & portfolio')).not.toBeInTheDocument()
+    expect(screen.queryByText('公開できる制作と活動を、一か所からたどれるポータルです。')).not.toBeInTheDocument()
+    expect(screen.queryByText(/LefTonboを知るための4作品/)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: '出展の記録' })).not.toBeInTheDocument()
+
+    for (const card of container.querySelectorAll('.work-card')) {
+      expect(within(card as HTMLElement).getAllByRole('link')).toHaveLength(1)
+    }
+  })
+
+  it('pauses and resumes the decorative wisp parade', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<App pathname="/" />)
+    const control = screen.getByRole('button', { name: '火の玉のアニメーションを停止' })
+
+    expect(control).toHaveAttribute('aria-pressed', 'false')
+    expect(container.querySelector('.hero-wisps__stage')).toHaveAttribute('aria-hidden', 'true')
+    expect(container.querySelectorAll('.hero-wisps__stage img[alt=""]')).toHaveLength(8)
+
+    await user.click(control)
+    expect(screen.getByRole('button', { name: '火の玉のアニメーションを再生' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+
+    await user.click(screen.getByRole('button', { name: '火の玉のアニメーションを再生' }))
+    expect(screen.getByRole('button', { name: '火の玉のアニメーションを停止' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    )
   })
 
   it('integrates the person introduction and official destinations into the profile', () => {

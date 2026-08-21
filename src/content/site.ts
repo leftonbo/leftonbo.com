@@ -13,8 +13,7 @@ export const siteProfile = {
   groupDescription:
     "個人サークル。現在はDiscordグループ名やショップ名として使用しています。",
   tagline: "放浪するゲームクリエイター",
-  summary:
-    "VRChatワールド、アバター／3Dモデル、ゲーム、Web、オリジナルキャラクターの制作をまとめたポートフォリオ。",
+  summary: "ゲームづくりを中心に、これまでの活動をまとめています。",
   introduction: [
     "2004年ごろにゲーム制作を始めました。現在はUnityを中心に、ゲームやVRChatワールドなど、さまざまな場所でゲーム制作に関わっています。",
   ],
@@ -57,7 +56,7 @@ export const siteProfile = {
   ],
   acceptsRequests: false,
   contactNote: "連絡先は用途による明確な使い分けをしていません。",
-  updatedAt: "2026-08-13",
+  updatedAt: "2026-08-21",
   sources: [
     {
       label: "GitHub",

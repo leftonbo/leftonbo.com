@@ -36,6 +36,16 @@ describe('WorkIndex', () => {
     expect(screen.queryByText(work.introduction[0] ?? '')).not.toBeInTheDocument()
   })
 
+  it('uses one destination link for each work card', () => {
+    render(<WorkIndex works={works} />)
+
+    for (const article of screen.getAllByRole('article')) {
+      const links = within(article).getAllByRole('link')
+      expect(links).toHaveLength(1)
+      expect(links[0]).toHaveAttribute('href', expect.stringMatching(/^\/works\/[^/]+\/$/))
+    }
+  })
+
   it('filters by category and writes the state to the URL', async () => {
     const user = userEvent.setup()
     render(<WorkIndex works={works} />)

@@ -223,11 +223,66 @@ function validateHead(head, route) {
     fail(`renderPage(${route}).head.canonical must end with a slash`);
   }
 
+  if (
+    head.socialImage === null ||
+    typeof head.socialImage !== "object" ||
+    Array.isArray(head.socialImage)
+  ) {
+    fail(`renderPage(${route}).head.socialImage must be an object`);
+  }
+
+  for (const key of ["url", "alt", "mimeType"]) {
+    if (
+      typeof head.socialImage[key] !== "string" ||
+      head.socialImage[key].trim().length === 0
+    ) {
+      fail(`renderPage(${route}).head.socialImage.${key} must be a non-empty string`);
+    }
+  }
+
+  let socialImageUrl;
+
+  try {
+    socialImageUrl = new URL(head.socialImage.url);
+  } catch {
+    fail(`renderPage(${route}).head.socialImage.url must be an absolute URL`);
+  }
+
+  if (!['http:', 'https:'].includes(socialImageUrl.protocol)) {
+    fail(`renderPage(${route}).head.socialImage.url must use HTTP or HTTPS`);
+  }
+
+  for (const key of ["width", "height"]) {
+    if (
+      head.socialImage[key] !== undefined &&
+      (!Number.isInteger(head.socialImage[key]) || head.socialImage[key] <= 0)
+    ) {
+      fail(`renderPage(${route}).head.socialImage.${key} must be a positive integer`);
+    }
+  }
+
+  if (head.publishedTime !== undefined && !/^\d{4}-\d{2}-\d{2}$/u.test(head.publishedTime)) {
+    fail(`renderPage(${route}).head.publishedTime must be an ISO date`);
+  }
+
+  if (head.noindex !== undefined && typeof head.noindex !== "boolean") {
+    fail(`renderPage(${route}).head.noindex must be a boolean`);
+  }
+
   return {
     title: head.title.trim(),
     description: head.description.trim(),
     canonical: canonicalUrl.href,
     ogType: head.ogType.trim(),
+    socialImage: {
+      url: socialImageUrl.href,
+      alt: head.socialImage.alt.trim(),
+      mimeType: head.socialImage.mimeType.trim(),
+      width: head.socialImage.width,
+      height: head.socialImage.height,
+    },
+    publishedTime: head.publishedTime,
+    noindex: head.noindex ?? false,
   };
 }
 
@@ -237,6 +292,9 @@ function renderHeadTags(head, jsonLd, route) {
   const description = escapeHtml(safeHead.description);
   const canonical = escapeHtml(safeHead.canonical);
   const ogType = escapeHtml(safeHead.ogType);
+  const socialImage = escapeHtml(safeHead.socialImage.url);
+  const socialImageAlt = escapeHtml(safeHead.socialImage.alt);
+  const socialImageType = escapeHtml(safeHead.socialImage.mimeType);
 
   const tags = [
     `<title>${title}</title>`,
@@ -248,13 +306,30 @@ function renderHeadTags(head, jsonLd, route) {
     `<meta property="og:type" content="${ogType}">`,
     `<meta property="og:site_name" content="LefTonbo">`,
     `<meta property="og:locale" content="ja_JP">`,
-    `<meta name="twitter:card" content="summary">`,
+    `<meta property="og:image" content="${socialImage}">`,
+    `<meta property="og:image:alt" content="${socialImageAlt}">`,
+    `<meta property="og:image:type" content="${socialImageType}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${title}">`,
     `<meta name="twitter:description" content="${description}">`,
+    `<meta name="twitter:image" content="${socialImage}">`,
+    `<meta name="twitter:image:alt" content="${socialImageAlt}">`,
     `<script type="application/ld+json">${serializeJsonLd(jsonLd, route)}</script>`,
   ];
 
-  if (route === NOT_FOUND_ROUTE) {
+  if (safeHead.socialImage.width !== undefined) {
+    tags.splice(12, 0, `<meta property="og:image:width" content="${safeHead.socialImage.width}">`);
+  }
+
+  if (safeHead.socialImage.height !== undefined) {
+    tags.splice(13, 0, `<meta property="og:image:height" content="${safeHead.socialImage.height}">`);
+  }
+
+  if (safeHead.publishedTime !== undefined) {
+    tags.splice(-1, 0, `<meta property="article:published_time" content="${escapeHtml(safeHead.publishedTime)}">`);
+  }
+
+  if (safeHead.noindex) {
     tags.splice(2, 0, `<meta name="robots" content="noindex, follow">`);
   }
 

@@ -1,5 +1,6 @@
 import { renderToString } from 'react-dom/server'
 import { App } from './app/App'
+import { createPageMetadata, type PageMetadata } from './app/metadata'
 import { getStaticRoutePaths, matchRoute, normalizePathname } from './app/routes'
 import { assertValidContent } from './content/validate'
 import { activityAreas, siteProfile } from './content/site'
@@ -13,16 +14,9 @@ import {
   worksCollectionJsonLd,
 } from './machine-readable'
 
-interface PageHead {
-  readonly title: string
-  readonly description: string
-  readonly canonical: string
-  readonly ogType: 'website' | 'article'
-}
-
 interface RenderedPage {
   readonly html: string
-  readonly head: PageHead
+  readonly head: PageMetadata
   readonly jsonLd: object | readonly object[]
 }
 
@@ -36,16 +30,12 @@ export function renderPage(route: string): RenderedPage {
   const pathname = normalizePathname(route)
   const match = matchRoute(pathname, works)
   const html = renderToString(<App pathname={pathname} />)
+  const head = createPageMetadata(pathname, works)
 
   if (match.kind === 'work-detail') {
     return {
       html,
-      head: {
-        title: `${match.work.title} | ${siteProfile.name}`,
-        description: match.work.summary,
-        canonical: canonicalUrl(`/works/${match.work.slug}/`),
-        ogType: 'article',
-      },
+      head,
       jsonLd: creativeWorkJsonLd(match.work),
     }
   }
@@ -53,12 +43,7 @@ export function renderPage(route: string): RenderedPage {
   if (match.kind === 'works') {
     return {
       html,
-      head: {
-        title: `制作 | ${siteProfile.name}`,
-        description: 'VRChatワールド、アバター／3D、ゲーム制作を紹介します。',
-        canonical: canonicalUrl('/works/'),
-        ogType: 'website',
-      },
+      head,
       jsonLd: worksCollectionJsonLd(),
     }
   }
@@ -66,12 +51,7 @@ export function renderPage(route: string): RenderedPage {
   if (match.kind === 'profile') {
     return {
       html,
-      head: {
-        title: `プロフィール | ${siteProfile.name}`,
-        description: `${siteProfile.name}（${siteProfile.reading}）の名義と活動領域。`,
-        canonical: canonicalUrl('/profile/'),
-        ogType: 'website',
-      },
+      head,
       jsonLd: [personJsonLd(), profilePageJsonLd()],
     }
   }
@@ -79,12 +59,7 @@ export function renderPage(route: string): RenderedPage {
   if (match.kind === 'not-found') {
     return {
       html,
-      head: {
-        title: `ページが見つかりません | ${siteProfile.name}`,
-        description: '指定されたページは見つかりませんでした。ホームまたは制作一覧から移動できます。',
-        canonical: canonicalUrl('/404.html'),
-        ogType: 'website',
-      },
+      head,
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
@@ -97,12 +72,7 @@ export function renderPage(route: string): RenderedPage {
 
   return {
     html,
-    head: {
-      title: `${siteProfile.name}（${siteProfile.reading}）公式ポータル`,
-      description: `${siteProfile.name}のVRChatワールド、アバター／3D、ゲーム、Web、オリジナルキャラクター創作への入口です。`,
-      canonical: canonicalUrl('/'),
-      ogType: 'website',
-    },
+    head,
     jsonLd: [
       personJsonLd(),
       profilePageJsonLd(),

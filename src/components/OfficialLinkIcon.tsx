@@ -8,6 +8,7 @@ const iconPaths: Readonly<Record<string, string>> = {
   bluesky: '/icons/links/bluesky.svg',
   pixiv: '/icons/links/pixiv.svg',
   discord: '/icons/links/discord.svg',
+  booth: '/icons/links/booth.svg',
 }
 
 interface OfficialLinkIconProps {
@@ -20,7 +21,11 @@ export function OfficialLinkIcon({ category, linkId }: OfficialLinkIconProps) {
 
   return (
     <span className="official-link-icon" aria-hidden="true">
-      {iconPath ? <img src={iconPath} alt="" width="24" height="24" /> : <FallbackIcon category={category} />}
+      {iconPath ? (
+        <img src={iconPath} alt="" width="24" height="24" loading="lazy" decoding="async" />
+      ) : (
+        <FallbackIcon category={category} />
+      )}
     </span>
   )
 }

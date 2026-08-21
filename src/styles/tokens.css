@@ -16,6 +16,11 @@
   --color-inverse-accent: #f5a18e;
   --color-inverse-muted: #d9c6c9;
   --color-inverse-line: #765966;
+  --color-night: #1c151b;
+  --color-plum: #32212a;
+  --color-flame: #e65f43;
+  --color-spark: #f6ad55;
+  --color-flame-pale: #fff1cf;
   --font-display: "Avenir Next", "Noto Sans JP Variable", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
   --font-body: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
   --font-data: ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", "Noto Sans JP Variable", monospace;

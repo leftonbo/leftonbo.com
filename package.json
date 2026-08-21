@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run typecheck && npm run build:client && npm run build:ssr && npm run prerender",
+    "build": "npm run typecheck && npm run build:client && npm run build:ssr && npm run prerender && npm run verify:dist",
     "build:client": "vite build",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist/server",
     "prerender": "node scripts/prerender.mjs",
+    "verify:dist": "node scripts/verify-dist.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint . --max-warnings 0",

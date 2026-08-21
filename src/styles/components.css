@@ -149,6 +149,7 @@
 
 .external-mark {
   display: inline-block;
+  flex: 0 0 auto;
   margin-inline-start: 0.35em;
   font-family: var(--font-data);
   font-size: 0.82em;
@@ -449,7 +450,7 @@
 .work-card {
   display: flex;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   flex-direction: column;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
@@ -461,10 +462,31 @@
     transform var(--motion-fast) var(--ease-out);
 }
 
-.work-card:hover {
+.work-card:hover,
+.work-card:focus-within {
   border-color: var(--color-line-strong);
   box-shadow: var(--shadow-lift);
   transform: translateY(-0.2rem);
+}
+
+.work-card__link {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+  flex-direction: column;
+  border-radius: inherit;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.work-card__link:hover {
+  color: var(--color-ink);
+}
+
+.work-card__link:focus-visible {
+  border-radius: var(--radius-lg);
 }
 
 .work-card__visual {
@@ -485,7 +507,8 @@
   transition: transform var(--motion-fast) var(--ease-out);
 }
 
-.work-card:hover .work-card__visual img {
+.work-card:hover .work-card__visual img,
+.work-card:focus-within .work-card__visual img {
   transform: scale(1.025);
 }
 
@@ -544,10 +567,8 @@
   letter-spacing: -0.025em;
 }
 
-.work-card h3 a {
+.work-card h3 {
   color: var(--color-ink);
-  text-decoration-color: var(--color-flight);
-  text-decoration-thickness: 0.08em;
 }
 
 .work-card__body > p {
@@ -565,7 +586,6 @@
   color: var(--color-ink);
   font-size: 0.86rem;
   font-weight: 700;
-  text-decoration: none;
 }
 
 .work-card__detail-arrow {
@@ -574,8 +594,16 @@
   transition: transform var(--motion-fast) var(--ease-out);
 }
 
-.work-card__detail:hover .work-card__detail-arrow {
+.work-card__link:hover .work-card__detail-arrow,
+.work-card__link:focus-visible .work-card__detail-arrow {
   transform: translateX(0.2rem);
+}
+
+.ui-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  overflow: visible;
+  vertical-align: -0.125em;
 }
 
 .official-link-icon {

@@ -3,9 +3,11 @@ import componentsCss from './components.css?raw'
 import pagesCss from './pages.css?raw'
 
 describe('header layout styles', () => {
-  it('keeps the home hero compact on desktop viewports', () => {
-    expect(pagesCss).toMatch(/\.hero\s*\{[^}]*padding-block: clamp\(2\.5rem, 6vh, 4rem\);/s)
-    expect(pagesCss).toMatch(/\.hero h1 span\s*\{[^}]*font-size: clamp\(3\.25rem, 6\.4vw, 5\.5rem\);/s)
+  it('uses the dark hero composition without the former outline ornaments', () => {
+    expect(pagesCss).toMatch(/\/\* Home redesign \*\/[\s\S]*\.hero\s*\{[^}]*min-height: clamp\(32rem, 71vh, 45rem\);/s)
+    expect(pagesCss).toMatch(/\.hero h1 span\s*\{[^}]*font-size: clamp\(3\.6rem, 7\.2vw, 6\.5rem\);/s)
+    expect(pagesCss).toMatch(/\.hero::before\s*\{[^}]*border: 0;/s)
+    expect(pagesCss).toMatch(/\.hero::after\s*\{[^}]*display: none;/s)
   })
 
   it('keeps shared page introductions within the compact type scale', () => {

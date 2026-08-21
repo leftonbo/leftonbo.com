@@ -1,5 +1,6 @@
 import { categoryLabels, roleLabels } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
+import { UiIcon } from '../components/UiIcon'
 import { WorkMark } from '../components/WorkMark'
 import { XPostEmbed } from '../components/XPostEmbed'
 import type { Work } from '../content/types'
@@ -242,7 +243,7 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
           {previousWork ? (
             <a href={`/works/${previousWork.slug}/`}>
               <span>
-                <span aria-hidden="true">← </span>
+                <UiIcon name="arrow-left" width="14" height="14" />
                 前の制作
               </span>
               <strong>{previousWork.title}</strong>
@@ -253,14 +254,16 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
           {nextWork ? (
             <a href={`/works/${nextWork.slug}/`}>
               <span>
-                次の制作 <span aria-hidden="true">→</span>
+                次の制作
+                <UiIcon name="arrow-right" width="14" height="14" />
               </span>
               <strong>{nextWork.title}</strong>
             </a>
           ) : (
             <a href={`/works/?category=${work.category}#work-index`}>
               <span>
-                一覧へ <span aria-hidden="true">→</span>
+                一覧へ
+                <UiIcon name="arrow-right" width="14" height="14" />
               </span>
               <strong>{categoryLabels[work.category]}</strong>
             </a>
