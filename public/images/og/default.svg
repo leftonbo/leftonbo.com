@@ -5,8 +5,8 @@
       <stop offset="1" stop-color="#32212A"/>
     </linearGradient>
     <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(970 180) rotate(126) scale(410 520)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E65F43" stop-opacity=".28"/>
-      <stop offset="1" stop-color="#E65F43" stop-opacity="0"/>
+      <stop stop-color="#8DEBF4" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#8DEBF4" stop-opacity="0"/>
     </radialGradient>
     <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0D090C" flood-opacity=".45"/>
@@ -14,19 +14,26 @@
   </defs>
   <rect width="1200" height="630" fill="url(#background)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
-  <g filter="url(#shadow)" transform="translate(775 84) scale(1.45)">
-    <path d="M72 18c21-8 42 2 51 19 18-6 35-2 49 10-14 1-24 7-31 18 13 2 23 9 30 20-20-6-35-3-47 8-11 17-35 24-56 16-23-9-37-31-31-54 5-19 18-31 35-37Z" fill="#E65F43"/>
-    <path d="M111 37c23-7 41-3 57 10-17 2-30 10-38 24 14 0 26 5 36 14-23-5-41 0-54 15l-12-15 11-48Z" fill="#F6AD55"/>
-    <path d="M64 29c19-8 42 1 51 20 10 21 1 46-19 56-22 10-48 1-58-20-10-22 1-47 26-56Z" fill="#FFF1CF" stroke="#3E2932" stroke-width="4"/>
-    <path d="M57 61c4-3 8-3 12 0M87 58c4-3 8-3 12 0M66 77c7 8 16 8 24 0" fill="none" stroke="#3E2932" stroke-width="4" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="940" cy="349" rx="88" ry="16" fill="#8DEBF4" opacity=".15"/>
+    <circle cx="940" cy="248" r="72" fill="#8DEBF4"/>
+    <ellipse cx="915" cy="230" rx="12" ry="26" fill="#FFF"/>
+    <ellipse cx="965" cy="230" rx="12" ry="26" fill="#FFF"/>
+    <circle cx="873" cy="193" r="9" fill="#C8F8FC"/>
+    <circle cx="898" cy="160" r="7" fill="#C8F8FC"/>
+    <circle cx="935" cy="148" r="11" fill="#C8F8FC"/>
+    <circle cx="976" cy="162" r="6" fill="#C8F8FC"/>
+    <circle cx="1004" cy="192" r="9" fill="#C8F8FC"/>
   </g>
-  <g filter="url(#shadow)" transform="translate(958 350) scale(.92)">
-    <path d="M72 17c22-7 43 3 52 22 16-8 33-7 50 2-12 6-21 14-26 25 12 4 21 12 27 24-21-7-38-4-52 8-13 15-37 20-57 11-23-10-35-33-28-56 6-19 18-31 34-36Z" fill="#EB5C3F"/>
-    <path d="M113 37c22-8 40-7 57 4-14 6-25 16-31 28 13 2 24 8 33 18-22-5-40-1-54 13l-14-14 9-49Z" fill="#FFC45E"/>
-    <path d="M64 29c20-7 43 3 52 23 9 22-1 47-22 56-22 9-47-1-56-23-9-23 2-48 26-56Z" fill="#FFF1CF" stroke="#3E2932" stroke-width="4"/>
-    <circle cx="62" cy="63" r="5" fill="#3E2932"/>
-    <circle cx="96" cy="59" r="5" fill="#3E2932"/>
-    <ellipse cx="80" cy="82" rx="8" ry="10" fill="#3E2932"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="1080" cy="526" rx="59" ry="11" fill="#F6AD55" opacity=".14"/>
+    <circle cx="1080" cy="456" r="47" fill="#F6AD55"/>
+    <ellipse cx="1064" cy="445" rx="8" ry="18" fill="#FFF"/>
+    <ellipse cx="1096" cy="445" rx="8" ry="18" fill="#FFF"/>
+    <circle cx="1042" cy="420" r="6" fill="#FFE3A7"/>
+    <circle cx="1063" cy="394" r="8" fill="#FFE3A7"/>
+    <circle cx="1094" cy="400" r="5" fill="#FFE3A7"/>
+    <circle cx="1119" cy="420" r="7" fill="#FFE3A7"/>
   </g>
   <g fill="#FFF1CF" font-family="Avenir Next, Noto Sans JP, sans-serif">
     <text x="78" y="255" font-size="92" font-weight="700" letter-spacing="-4">LefTonbo</text>

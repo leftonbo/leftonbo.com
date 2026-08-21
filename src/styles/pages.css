@@ -980,38 +980,168 @@
 }
 
 .hero-wisps {
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 
 .hero-wisps__stage {
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 25%, rgb(0 0 0 / 12%) 36%, #000 58%);
+  mask-image: linear-gradient(90deg, transparent 0 25%, rgb(0 0 0 / 12%) 36%, #000 58%);
 }
 
 .hero-wisp {
   position: absolute;
-  top: var(--wisp-top);
+  bottom: var(--wisp-bottom);
   left: 0;
   display: block;
   width: var(--wisp-size);
-  animation: wisp-cross var(--wisp-duration) linear var(--wisp-delay) infinite;
+  aspect-ratio: 1;
+  animation: wisp-traverse var(--wisp-duration) linear var(--wisp-delay) infinite;
   will-change: transform;
 }
 
-.hero-wisp__sprite {
-  display: block;
-  animation: wisp-bob var(--wisp-bob-duration) ease-in-out infinite alternate;
+.hero-wisp__hover,
+.hero-wisp__particles {
+  position: absolute;
+  inset: 0;
 }
 
-.hero-wisp img {
+.hero-wisp__hover {
   display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0.65rem 1.4rem rgb(230 95 67 / 24%));
+  animation: wisp-hover var(--wisp-hover-duration) ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+.hero-wisp__body {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  background: var(--wisp-color);
+  border-radius: 50%;
+  box-shadow: 0 0 1.6rem var(--wisp-glow-color);
+}
+
+.hero-wisp__body::before {
+  position: absolute;
+  z-index: -1;
+  inset: -16%;
+  background: var(--wisp-color);
+  border-radius: 50%;
+  content: "";
+  filter: blur(1rem);
+  opacity: 0.18;
+  animation: wisp-aura 2.8s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.hero-wisp__eye {
+  position: absolute;
+  top: 25%;
+  width: 17%;
+  height: 43%;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.hero-wisp__eye--left {
+  left: 25%;
+}
+
+.hero-wisp__eye--right {
+  right: 25%;
+}
+
+.hero-wisp__particle {
+  position: absolute;
+  z-index: 2;
+  width: var(--particle-size);
+  aspect-ratio: 0.7;
+  background: var(--wisp-particle-color);
+  border-radius: 62% 38% 70% 30%;
+  box-shadow: 0 0 0.65rem var(--wisp-glow-color);
+  opacity: 0;
+  animation: wisp-particle var(--particle-duration) ease-out calc(var(--particle-delay) + var(--wisp-particle-offset)) infinite;
+}
+
+.hero-wisp__particle:nth-child(1) {
+  --particle-size: 12%;
+  --particle-duration: 1.8s;
+  --particle-delay: -0.45s;
+  --particle-drift: -0.8rem;
+  --particle-rise: -2.4rem;
+  bottom: 58%;
+  left: 8%;
+}
+
+.hero-wisp__particle:nth-child(2) {
+  --particle-size: 16%;
+  --particle-duration: 2.6s;
+  --particle-delay: -1.7s;
+  --particle-drift: -0.25rem;
+  --particle-rise: -4rem;
+  bottom: 88%;
+  left: 28%;
+}
+
+.hero-wisp__particle:nth-child(3) {
+  --particle-size: 10%;
+  --particle-duration: 1.5s;
+  --particle-delay: -0.8s;
+  --particle-drift: 0.35rem;
+  --particle-rise: -2.2rem;
+  bottom: 94%;
+  left: 54%;
+}
+
+.hero-wisp__particle:nth-child(4) {
+  --particle-size: 14%;
+  --particle-duration: 2.2s;
+  --particle-delay: -1.25s;
+  --particle-drift: 0.9rem;
+  --particle-rise: -3.4rem;
+  right: 7%;
+  bottom: 62%;
+}
+
+.hero-wisp__particle:nth-child(5) {
+  --particle-size: 9%;
+  --particle-duration: 1.4s;
+  --particle-delay: -0.2s;
+  --particle-drift: -0.55rem;
+  --particle-rise: -1.8rem;
+  bottom: 76%;
+  left: 18%;
+}
+
+.hero-wisp__particle:nth-child(6) {
+  --particle-size: 12%;
+  --particle-duration: 2.8s;
+  --particle-delay: -2.15s;
+  --particle-drift: 0.6rem;
+  --particle-rise: -3.8rem;
+  right: 21%;
+  bottom: 82%;
+}
+
+.hero-wisp__ground-glow {
+  position: absolute;
+  right: 10%;
+  bottom: -1rem;
+  left: 10%;
+  height: 1rem;
+  background: radial-gradient(ellipse, var(--wisp-glow-color) 0 12%, transparent 70%);
+  opacity: 0.28;
+  animation: wisp-ground-glow var(--wisp-hover-duration) ease-in-out infinite alternate;
+  transform-origin: center;
 }
 
 .hero-wisps--paused .hero-wisp,
-.hero-wisps--paused .hero-wisp__sprite {
+.hero-wisps--paused .hero-wisp__hover,
+.hero-wisps--paused .hero-wisp__particle,
+.hero-wisps--paused .hero-wisp__ground-glow,
+.hero-wisps--paused .hero-wisp__body::before {
   animation-play-state: paused;
 }
 
@@ -1040,23 +1170,63 @@
   color: var(--color-night);
 }
 
-@keyframes wisp-cross {
+@keyframes wisp-traverse {
   from {
-    transform: translate3d(calc(100vw + 12rem), 0, 0);
+    transform: translate3d(calc(100vw + 10rem), 0, 0);
   }
 
   to {
-    transform: translate3d(-16rem, 0, 0);
+    transform: translate3d(-12rem, 0, 0);
   }
 }
 
-@keyframes wisp-bob {
+@keyframes wisp-hover {
   from {
-    transform: translate3d(0, -0.45rem, 0) rotate(-2deg);
+    transform: translate3d(-0.3rem, 0, 0);
   }
 
   to {
-    transform: translate3d(0, 0.65rem, 0) rotate(2.5deg);
+    transform: translate3d(0.45rem, -1.2rem, 0);
+  }
+}
+
+@keyframes wisp-particle {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0.25rem, 0) scale(0.35);
+  }
+
+  18% {
+    opacity: 0.88;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--particle-drift), var(--particle-rise), 0) scale(0.08);
+  }
+}
+
+@keyframes wisp-ground-glow {
+  from {
+    opacity: 0.3;
+    transform: scaleX(0.76);
+  }
+
+  to {
+    opacity: 0.1;
+    transform: scaleX(1.18);
+  }
+}
+
+@keyframes wisp-aura {
+  from {
+    opacity: 0.14;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 0.24;
+    transform: scale(1.08);
   }
 }
 
@@ -1289,6 +1459,11 @@
     background: linear-gradient(90deg, rgb(28 21 27 / 99%) 0 38%, rgb(28 21 27 / 86%) 62%, rgb(28 21 27 / 34%) 100%);
   }
 
+  .hero-wisps__stage {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0 48%, rgb(0 0 0 / 12%) 56%, #000 72%);
+    mask-image: linear-gradient(90deg, transparent 0 48%, rgb(0 0 0 / 12%) 56%, #000 72%);
+  }
+
   .activity-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1331,7 +1506,18 @@
   }
 
   .hero-wisp {
-    opacity: 0.8;
+    bottom: var(--wisp-mobile-bottom);
+    width: var(--wisp-mobile-size);
+    opacity: 0.86;
+  }
+
+  .hero-wisp:nth-child(n + 5) {
+    display: none;
+  }
+
+  .hero-wisps__stage {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .section-heading-row {
@@ -1388,7 +1574,7 @@
   .hero-wisp {
     display: none;
     animation: none !important;
-    opacity: 0.72;
+    opacity: 0.78;
     transform: none !important;
     will-change: auto;
   }
@@ -1398,26 +1584,76 @@
   }
 
   .hero-wisp:nth-child(1) {
-    top: 12%;
-    left: 75%;
+    bottom: 4%;
+    left: 76%;
   }
 
   .hero-wisp:nth-child(2) {
-    top: 69%;
-    left: 62%;
+    bottom: 17%;
+    left: 61%;
   }
 
   .hero-wisp:nth-child(3) {
-    top: 43%;
-    left: 84%;
+    bottom: 9%;
+    left: 87%;
   }
 
-  .hero-wisp__sprite {
+  .hero-wisp__hover,
+  .hero-wisp__particle,
+  .hero-wisp__ground-glow,
+  .hero-wisp__body::before {
     animation: none !important;
+  }
+
+  .hero-wisp__hover {
+    transform: none !important;
+  }
+
+  .hero-wisp__particle {
+    display: none;
+    opacity: 0;
+  }
+
+  .hero-wisp__particle:nth-child(1),
+  .hero-wisp__particle:nth-child(2) {
+    display: block;
+    opacity: 0.48;
+  }
+
+  .hero-wisp__particle:nth-child(1) {
+    transform: translate3d(-0.2rem, -1rem, 0) scale(0.7);
+  }
+
+  .hero-wisp__particle:nth-child(2) {
+    transform: translate3d(0.2rem, -1.6rem, 0) scale(0.55);
+  }
+
+  .hero-wisp__ground-glow {
+    opacity: 0.18;
+    transform: scaleX(0.95);
+  }
+
+  .hero-wisp__body::before {
+    opacity: 0.16;
+    transform: none;
   }
 
   .hero-wisps__control {
     display: none;
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: reduce) {
+  .hero-wisp:nth-child(1) {
+    left: 68%;
+  }
+
+  .hero-wisp:nth-child(2) {
+    left: 52%;
+  }
+
+  .hero-wisp:nth-child(3) {
+    left: 80%;
   }
 }
 

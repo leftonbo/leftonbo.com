@@ -36,19 +36,21 @@ describe('App routes', () => {
 
     expect(control).toHaveAttribute('aria-pressed', 'false')
     expect(container.querySelector('.hero-wisps__stage')).toHaveAttribute('aria-hidden', 'true')
-    expect(container.querySelectorAll('.hero-wisps__stage img[alt=""]')).toHaveLength(8)
+    expect(container.querySelectorAll('.hero-wisp')).toHaveLength(8)
 
     await user.click(control)
     expect(screen.getByRole('button', { name: '火の玉のアニメーションを再生' })).toHaveAttribute(
       'aria-pressed',
       'true',
     )
+    expect(container.querySelector('.hero-wisps')).toHaveClass('hero-wisps--paused')
 
     await user.click(screen.getByRole('button', { name: '火の玉のアニメーションを再生' }))
     expect(screen.getByRole('button', { name: '火の玉のアニメーションを停止' })).toHaveAttribute(
       'aria-pressed',
       'false',
     )
+    expect(container.querySelector('.hero-wisps')).not.toHaveClass('hero-wisps--paused')
   })
 
   it('integrates the person introduction and official destinations into the profile', () => {
