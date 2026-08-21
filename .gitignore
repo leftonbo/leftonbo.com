@@ -4,6 +4,12 @@ dist/
 coverage/
 logs/
 
+# Python artifacts
+__pycache__/
+
+# Wrangler artifacts
+.wrangler/
+
 # Agent CI artifacts
 .playwright-cli/
 output/
@@ -22,6 +28,3 @@ output/
 
 # Working memories that should not be commited
 .working/
-
-# Python artifacts
-__pycache__/
