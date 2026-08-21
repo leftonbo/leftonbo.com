@@ -1046,83 +1046,84 @@
 }
 
 .hero-wisp__eye--left {
-  left: 25%;
+  left: 10%;
+  width: 12%;
 }
 
 .hero-wisp__eye--right {
-  right: 25%;
+  right: 40%;
 }
 
 .hero-wisp__particle {
   position: absolute;
   z-index: 2;
   width: var(--particle-size);
-  aspect-ratio: 0.7;
+  aspect-ratio: 1;
   background: var(--wisp-particle-color);
-  border-radius: 62% 38% 70% 30%;
+  border-radius: 50%;
   box-shadow: 0 0 0.65rem var(--wisp-glow-color);
   opacity: 0;
   animation: wisp-particle var(--particle-duration) ease-out calc(var(--particle-delay) + var(--wisp-particle-offset)) infinite;
 }
 
 .hero-wisp__particle:nth-child(1) {
-  --particle-size: 12%;
+  --particle-size: 52%;
   --particle-duration: 1.8s;
   --particle-delay: -0.45s;
-  --particle-drift: -0.8rem;
+  --particle-drift: 0.8rem;
   --particle-rise: -2.4rem;
   bottom: 58%;
-  left: 8%;
+  left: 12%;
 }
 
 .hero-wisp__particle:nth-child(2) {
-  --particle-size: 16%;
+  --particle-size: 66%;
   --particle-duration: 2.6s;
   --particle-delay: -1.7s;
-  --particle-drift: -0.25rem;
+  --particle-drift: 0.75rem;
   --particle-rise: -4rem;
-  bottom: 88%;
-  left: 28%;
+  bottom: 78%;
+  left: 38%;
 }
 
 .hero-wisp__particle:nth-child(3) {
-  --particle-size: 10%;
+  --particle-size: 60%;
   --particle-duration: 1.5s;
   --particle-delay: -0.8s;
-  --particle-drift: 0.35rem;
+  --particle-drift: 0.95rem;
   --particle-rise: -2.2rem;
-  bottom: 94%;
-  left: 54%;
+  bottom: 84%;
+  left: 64%;
 }
 
 .hero-wisp__particle:nth-child(4) {
-  --particle-size: 14%;
+  --particle-size: 54%;
   --particle-duration: 2.2s;
   --particle-delay: -1.25s;
-  --particle-drift: 0.9rem;
+  --particle-drift: 1.5rem;
   --particle-rise: -3.4rem;
-  right: 7%;
+  right: 19%;
   bottom: 62%;
 }
 
 .hero-wisp__particle:nth-child(5) {
-  --particle-size: 9%;
+  --particle-size: 69%;
   --particle-duration: 1.4s;
   --particle-delay: -0.2s;
-  --particle-drift: -0.55rem;
+  --particle-drift: -0.15rem;
   --particle-rise: -1.8rem;
-  bottom: 76%;
-  left: 18%;
+  bottom: 66%;
+  left: 24%;
 }
 
 .hero-wisp__particle:nth-child(6) {
-  --particle-size: 12%;
+  --particle-size: 52%;
   --particle-duration: 2.8s;
   --particle-delay: -2.15s;
   --particle-drift: 0.6rem;
   --particle-rise: -3.8rem;
-  right: 21%;
-  bottom: 82%;
+  right: 31%;
+  bottom: 72%;
 }
 
 .hero-wisp__ground-glow {
