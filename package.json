@@ -11,6 +11,7 @@
     "prerender": "node scripts/prerender.mjs",
     "verify:dist": "node scripts/verify-dist.mjs",
     "preview": "vite preview",
+    "content:new": "node scripts/create-work.mjs",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint . --max-warnings 0",
     "test": "vitest",
