@@ -104,6 +104,28 @@ describe('コンテンツの整合性', () => {
     )
   })
 
+  it('公開終了作品だけは公開先リンクを省略できる', () => {
+    const archivedWork = works.find((work) => work.status === 'archived')
+    const publishedWork = works.find((work) => work.status === 'published')
+    if (!archivedWork || !publishedWork) throw new Error('検証元の制作記事がありません。')
+
+    const issues = collectContentValidationIssues(
+      contentWithWorks([
+        { ...archivedWork, id: 'archived-without-links', slug: 'archived-without-links', links: [] },
+        { ...publishedWork, id: 'published-without-links', slug: 'published-without-links', links: [] },
+      ]),
+    )
+
+    expect(issues).not.toContainEqual({
+      path: 'works[0].links',
+      message: 'primaryタグを持つリンクは必ず1件にしてください。',
+    })
+    expect(issues).toContainEqual({
+      path: 'works[1].links',
+      message: 'primaryタグを持つリンクは必ず1件にしてください。',
+    })
+  })
+
   it('Vket固有データと出典用途の不整合を検出する', () => {
     const vketWork = works.find((work) => work.id === 'vket-2025-summer')
     const nonVketWork = works.find((work) => work.category !== 'vket')

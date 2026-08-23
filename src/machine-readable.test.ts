@@ -150,7 +150,8 @@ describe('機械可読出力', () => {
       '- 関連リンク: [WOLF RPGエディターコンテスト 第8回 結果](https://silversecond.com/WolfRPGEditor/Contest/result08.shtml)',
     )
     expect(worksMarkdown).toContain('#### 作品紹介')
-    expect(worksMarkdown).not.toContain('https://tonbonotion01.notion.site/game-infiroad')
+    expect(worksMarkdown).not.toContain('tonbonotion01.notion.site')
+    expect(files['data/works.json']).not.toContain('tonbonotion01.notion.site')
     expect(files['profile.md']).toContain('## 活動の歩み')
     expect(files['profile.md']).toContain('スーパーブロック崩し')
     expect(files['profile.md']).toContain('現在は受け付けていません')

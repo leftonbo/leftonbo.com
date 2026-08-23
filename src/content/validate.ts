@@ -9,7 +9,6 @@ import type {
   ProfileToolGroup,
   Work,
   WorkCategory,
-  WorkLink,
   WorkLinkTag,
   WorkMedia,
 } from "./types";
@@ -237,8 +236,10 @@ function validateWorkMedia(
 function validateWorkLinks(
   issues: ContentValidationIssue[],
   path: string,
-  links: readonly WorkLink[],
+  work: Work,
 ): void {
+  const links = work.links
+
   if (!Array.isArray(links)) {
     issues.push({ path, message: 'linksは配列である必要があります。' })
     return
@@ -267,6 +268,8 @@ function validateWorkLinks(
   })
 
   const primaryCount = links.filter((link) => link.tags.includes('primary')).length
+  if (links.length === 0 && work.status === 'archived') return
+
   if (primaryCount !== 1) {
     issues.push({ path, message: 'primaryタグを持つリンクは必ず1件にしてください。' })
   }
@@ -562,7 +565,7 @@ export function collectContentValidationIssues(
         message: '1以上の整数またはnullである必要があります。',
       })
     }
-    validateWorkLinks(issues, `${path}.links`, work.links)
+    validateWorkLinks(issues, `${path}.links`, work)
     addDateIssue(issues, `${path}.verifiedAt`, work.verifiedAt);
     validateSources(issues, `${path}.sources`, work.sources);
     validatePendingFacts(issues, `${path}.factsPending`, work.factsPending);

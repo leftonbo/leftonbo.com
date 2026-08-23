@@ -56,7 +56,7 @@ export const siteProfile = {
   ],
   acceptsRequests: false,
   contactNote: "連絡先は用途による明確な使い分けをしていません。",
-  updatedAt: "2026-08-21",
+  updatedAt: "2026-08-23",
   sources: [
     {
       label: "GitHub",
