@@ -9,7 +9,9 @@ import workDetailCss from './pages/work-detail.css?raw'
 describe('home layout styles', () => {
   it('uses the dark hero composition without the former outline ornaments', () => {
     expect(homeCss).toMatch(/\.hero\s*\{[^}]*min-height: clamp\(32rem, 71vh, 45rem\);/s)
-    expect(homeCss).toMatch(/\.hero h1 span\s*\{[^}]*font-size: clamp\(3\.6rem, 7\.2vw, 6\.5rem\);/s)
+    expect(homeCss).toMatch(
+      /\.hero h1 span\s*\{[^}]*font-size: clamp\(3\.6rem, 7\.2vw, 6\.5rem\);/s,
+    )
     expect(homeCss).toMatch(/\.hero::before\s*\{[^}]*border: 0;/s)
     expect(homeCss).toMatch(/\.hero::after\s*\{[^}]*display: none;/s)
   })

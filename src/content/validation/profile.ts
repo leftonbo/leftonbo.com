@@ -1,4 +1,9 @@
-import type { ContentValidationIssue, ProfileHistoryEntry, ProfileToolGroup, SiteProfile } from '../types'
+import type {
+  ContentValidationIssue,
+  ProfileHistoryEntry,
+  ProfileToolGroup,
+  SiteProfile,
+} from '../types'
 import {
   addDateIssue,
   addRequiredTextIssue,
@@ -48,10 +53,7 @@ function validateProfileTools(
   })
 }
 
-export function validateProfile(
-  issues: ContentValidationIssue[],
-  profile: SiteProfile,
-): void {
+export function validateProfile(issues: ContentValidationIssue[], profile: SiteProfile): void {
   addRequiredTextIssue(issues, 'profile.name', profile.name)
   addRequiredTextIssue(issues, 'profile.reading', profile.reading)
   addRequiredTextIssue(issues, 'profile.handle', profile.handle)

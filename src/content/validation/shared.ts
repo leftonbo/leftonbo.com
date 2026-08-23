@@ -34,11 +34,7 @@ export function addEnumIssue(
   }
 }
 
-export function addUrlIssue(
-  issues: ContentValidationIssue[],
-  path: string,
-  value: unknown,
-): void {
+export function addUrlIssue(issues: ContentValidationIssue[], path: string, value: unknown): void {
   if (typeof value !== 'string' || value.trim().length === 0) {
     issues.push({ path, message: 'URLが空です。' })
     return
@@ -64,11 +60,7 @@ export function addSitePathIssue(
   }
 }
 
-export function addDateIssue(
-  issues: ContentValidationIssue[],
-  path: string,
-  value: unknown,
-): void {
+export function addDateIssue(issues: ContentValidationIssue[], path: string, value: unknown): void {
   if (typeof value !== 'string' || !isoDatePattern.test(value)) {
     issues.push({ path, message: 'YYYY-MM-DD形式の日付ではありません。' })
     return

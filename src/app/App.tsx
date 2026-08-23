@@ -35,7 +35,11 @@ export function App({ pathname }: AppProps) {
       {route.kind === 'works' ? <WorksPage works={works} /> : null}
       {route.kind === 'work-detail' ? <WorkDetailPage work={route.work} works={works} /> : null}
       {route.kind === 'profile' ? (
-        <ProfilePage profile={siteProfile} activityAreas={activityAreas} externalLinks={externalLinks} />
+        <ProfilePage
+          profile={siteProfile}
+          activityAreas={activityAreas}
+          externalLinks={externalLinks}
+        />
       ) : null}
       {route.kind === 'not-found' ? <NotFoundPage /> : null}
     </SiteShell>

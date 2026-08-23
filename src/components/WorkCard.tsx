@@ -14,9 +14,7 @@ export function WorkCard({ work }: WorkCardProps) {
   return (
     <article className="work-card">
       <a className="work-card__link" href={detailHref}>
-        <div
-          className={`work-card__visual${preview ? '' : ' work-card__visual--fallback'}`}
-        >
+        <div className={`work-card__visual${preview ? '' : ' work-card__visual--fallback'}`}>
           {preview ? (
             <img
               src={preview.url}

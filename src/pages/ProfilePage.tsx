@@ -12,11 +12,7 @@ interface ProfilePageProps {
 export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePageProps) {
   return (
     <>
-      <PageIntro
-        kicker="Profile"
-        title={`${profile.name}について`}
-        description={profile.tagline}
-      />
+      <PageIntro kicker="Profile" title={`${profile.name}について`} description={profile.tagline} />
       <section className="section-shell profile-overview" aria-labelledby="about-title">
         <div className="container profile-grid">
           <div className="profile-portrait">
@@ -45,7 +41,10 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
         </div>
       </section>
 
-      <section className="section-shell section-shell--surface" aria-labelledby="profile-history-title">
+      <section
+        className="section-shell section-shell--surface"
+        aria-labelledby="profile-history-title"
+      >
         <div className="container">
           <div className="section-split-heading">
             <div>
@@ -55,7 +54,8 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
               </h2>
             </div>
             <p className="section-lead">
-              Tonyu Systemで始めたゲーム制作から、Unity、VRChatワールド制作へと活動の場所を広げてきました。
+              Tonyu
+              Systemで始めたゲーム制作から、Unity、VRChatワールド制作へと活動の場所を広げてきました。
             </p>
           </div>
           <ol className="profile-timeline">
@@ -94,7 +94,10 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
         </div>
       </section>
 
-      <section className="section-shell section-shell--surface" aria-labelledby="profile-activity-title">
+      <section
+        className="section-shell section-shell--surface"
+        aria-labelledby="profile-activity-title"
+      >
         <div className="container">
           <p className="section-kicker">Activity areas</p>
           <h2 className="section-title" id="profile-activity-title">
@@ -105,7 +108,9 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
               <li key={area.id}>
                 <h3>{area.label}</h3>
                 <p>{area.description}</p>
-                {area.url ? <ExternalLink href={area.url}>{area.label}の公開先</ExternalLink> : null}
+                {area.url ? (
+                  <ExternalLink href={area.url}>{area.label}の公開先</ExternalLink>
+                ) : null}
               </li>
             ))}
           </ul>

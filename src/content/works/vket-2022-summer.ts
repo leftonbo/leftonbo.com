@@ -7,7 +7,7 @@ export default {
   title: 'Virtual Market 2022 Summer 出展',
   summary: '大型ブースで「トンボ人狼」など3つのVRChatワールドを紹介したVket出展。',
   introduction: [
-    '「Poppin\' Jump - Lemon Squash」の大型ブース枠で、制作ワールド「トンボ人狼」、「TonboBattlefield Classic」、「TonboBattlefield 2: The Two Bases」を紹介した。',
+    "「Poppin' Jump - Lemon Squash」の大型ブース枠で、制作ワールド「トンボ人狼」、「TonboBattlefield Classic」、「TonboBattlefield 2: The Two Bases」を紹介した。",
     '大型枠を十分に活かしきれなかった展示でもあった。',
   ],
   category: 'vket',

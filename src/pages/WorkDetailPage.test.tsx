@@ -16,7 +16,9 @@ describe('WorkDetailPage', () => {
 
     const heroImage = document.querySelector('.work-detail__visual img')
     expect(heroImage).toHaveAttribute('src', work.heroMedia?.url)
-    expect(document.querySelectorAll(`.work-gallery img[src="${work.heroMedia?.url}"]`)).toHaveLength(0)
+    expect(
+      document.querySelectorAll(`.work-gallery img[src="${work.heroMedia?.url}"]`),
+    ).toHaveLength(0)
     expect(screen.getAllByText(work.media[0]?.alt ?? '')).not.toHaveLength(0)
   })
 
@@ -46,9 +48,7 @@ describe('WorkDetailPage', () => {
   })
 
   it('labels the primary action for each destination instead of using a generic label', () => {
-    const { rerender } = render(
-      <WorkDetailPage work={getWork('tonbo-werewolf')} works={works} />,
-    )
+    const { rerender } = render(<WorkDetailPage work={getWork('tonbo-werewolf')} works={works} />)
 
     expect(screen.getByRole('link', { name: 'VRChatでワールドを開く' })).toHaveAttribute(
       'href',
@@ -86,10 +86,7 @@ describe('WorkDetailPage', () => {
     expect(screen.getByText('関連リンク')).toBeInTheDocument()
     expect(
       screen.getByRole('link', { name: 'WOLF RPGエディターコンテスト 第8回 結果' }),
-    ).toHaveAttribute(
-      'href',
-      'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml',
-    )
+    ).toHaveAttribute('href', 'https://silversecond.com/WolfRPGEditor/Contest/result08.shtml')
     expect(screen.queryByRole('link', { name: 'ブラウザ版をプレイ' })).not.toBeInTheDocument()
   })
 
@@ -150,7 +147,9 @@ describe('WorkDetailPage', () => {
     const worldRow = screen.getByText('出展ワールド').closest('div')
     if (!worldRow) throw new Error('出展ワールド行がありません。')
 
-    expect(within(worldRow).getByText('VOLTAGER - EX-Volcano', { exact: false })).toBeInTheDocument()
+    expect(
+      within(worldRow).getByText('VOLTAGER - EX-Volcano', { exact: false }),
+    ).toBeInTheDocument()
     expect(within(worldRow).getByText('Public Link 未公開')).toBeInTheDocument()
     expect(within(worldRow).queryByRole('link')).not.toBeInTheDocument()
   })

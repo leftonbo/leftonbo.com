@@ -135,9 +135,7 @@ describe('機械可読出力', () => {
       '- 出展ワールド: [森聖街 ヤポプエト - 中願の秋夜](https://vrchat.com/home/launch?worldId=wrld_63f5b036-89d5-4d47-bc31-a6761173e13e)',
     )
     expect(worksMarkdown).toContain('- カタログ: [Vket 2025 Summer 出展者ページ]')
-    expect(worksMarkdown).toContain(
-      '- 出展ワールド: VOLTAGER - EX-Volcano（Public Link 未公開）',
-    )
+    expect(worksMarkdown).toContain('- 出展ワールド: VOLTAGER - EX-Volcano（Public Link 未公開）')
     expect(worksMarkdown).toContain(
       '- 公開先: [作品をダウンロード](https://drive.google.com/file/d/1PiEavuddwcomdSPQ8TrLLdRsPj60afHS/view?usp=drive_link)（Windows版のみ）',
     )

@@ -6,7 +6,8 @@ describe('page metadata', () => {
   it('builds the approved home, works, and profile metadata', () => {
     expect(createPageMetadata('/', works)).toMatchObject({
       title: 'LefTonbo（レフとんぼ）｜放浪するゲームクリエイター',
-      description: 'ゲームづくりを中心に、VRChatワールド、3Dモデル、Webなど、LefTonboの活動をまとめています。',
+      description:
+        'ゲームづくりを中心に、VRChatワールド、3Dモデル、Webなど、LefTonboの活動をまとめています。',
       canonical: 'https://leftonbo.com/',
       socialImage: {
         url: 'https://leftonbo.com/images/og/home.png',

@@ -25,45 +25,45 @@ slugに使える文字は英小文字、数字、ハイフンです。コマン�
 
 作品ファイルは末尾の`satisfies Work`によって型を検査します。フィールド名は変更せず、値だけを編集してください。
 
-| フィールド | 入力内容 |
-| --- | --- |
-| `id` | 原則としてslugと同じ値。既存作品と重複させない |
-| `slug` | URLの一部。ファイル名と同じ英小文字・数字・ハイフンの文字列 |
-| `title` | 公開する作品名 |
-| `summary` | 一覧用の要約。改行なし、80文字以内 |
-| `introduction` | 詳細ページの紹介文。段落ごとに配列へ分ける |
-| `category` | `vrchat-world`、`avatar-3d`、`game`、`vket`のいずれか |
-| `status` | 下表の公開状態から選ぶ |
-| `role` | 下表の制作上の役割から選ぶ |
-| `period` | 制作年を`YYYY`で記入。不明なら`null` |
-| `firstPublishedAt` | 初回公開日を`YYYY-MM-DD`で記入。不明なら`null` |
-| `featuredOrder` | ホームの代表作に出す場合は1以上の重複しない整数。それ以外は`null` |
-| `verifiedAt` | 内容を最後に確認した日付を`YYYY-MM-DD`で記入 |
+| フィールド         | 入力内容                                                          |
+| ------------------ | ----------------------------------------------------------------- |
+| `id`               | 原則としてslugと同じ値。既存作品と重複させない                    |
+| `slug`             | URLの一部。ファイル名と同じ英小文字・数字・ハイフンの文字列       |
+| `title`            | 公開する作品名                                                    |
+| `summary`          | 一覧用の要約。改行なし、80文字以内                                |
+| `introduction`     | 詳細ページの紹介文。段落ごとに配列へ分ける                        |
+| `category`         | `vrchat-world`、`avatar-3d`、`game`、`vket`のいずれか             |
+| `status`           | 下表の公開状態から選ぶ                                            |
+| `role`             | 下表の制作上の役割から選ぶ                                        |
+| `period`           | 制作年を`YYYY`で記入。不明なら`null`                              |
+| `firstPublishedAt` | 初回公開日を`YYYY-MM-DD`で記入。不明なら`null`                    |
+| `featuredOrder`    | ホームの代表作に出す場合は1以上の重複しない整数。それ以外は`null` |
+| `verifiedAt`       | 内容を最後に確認した日付を`YYYY-MM-DD`で記入                      |
 
 ゲーム作品には`gameDetails`が必要です。`genre`と、分かる場合は`developmentTool`を記入します。Vket作品には`vketExhibition`が必要です。それ以外のカテゴリには、これらのカテゴリ固有フィールドを追加しません。
 
 ### 公開状態は確認できた事実に合わせる
 
-| 値 | 用途 |
-| --- | --- |
-| `published` | 現在公開中と確認できた作品 |
-| `recent-evidence` | 最近の公開痕跡を確認できた作品 |
-| `recent-public-record` | 最近の公開記録を確認できた作品 |
-| `confirmed-record` | 記録として存在を確認できた作品 |
-| `unverified` | 現在の状態を確認できない作品 |
+| 値                           | 用途                                   |
+| ---------------------------- | -------------------------------------- |
+| `published`                  | 現在公開中と確認できた作品             |
+| `recent-evidence`            | 最近の公開痕跡を確認できた作品         |
+| `recent-public-record`       | 最近の公開記録を確認できた作品         |
+| `confirmed-record`           | 記録として存在を確認できた作品         |
+| `unverified`                 | 現在の状態を確認できない作品           |
 | `stopped-with-public-record` | 開発停止を確認でき、公開記録が残る作品 |
-| `archived` | 公開終了またはアーカイブ済みの作品 |
+| `archived`                   | 公開終了またはアーカイブ済みの作品     |
 
 ### 制作上の役割は断定できる範囲で選ぶ
 
-| 値 | 用途 |
-| --- | --- |
-| `self-produced` | 自主制作 |
-| `model-creator` | モデル制作者 |
-| `collaborator` | 委託・共同制作 |
-| `programming-support` | プログラミング支援 |
-| `exhibitor` | 出展者 |
-| `pending-confirmation` | 役割を確認中 |
+| 値                     | 用途               |
+| ---------------------- | ------------------ |
+| `self-produced`        | 自主制作           |
+| `model-creator`        | モデル制作者       |
+| `collaborator`         | 委託・共同制作     |
+| `programming-support`  | プログラミング支援 |
+| `exhibitor`            | 出展者             |
+| `pending-confirmation` | 役割を確認中       |
 
 ## 画像は作品専用ディレクトリへ置く
 

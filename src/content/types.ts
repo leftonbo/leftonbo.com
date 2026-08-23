@@ -1,12 +1,8 @@
-export const CONTENT_VERIFIED_AT = "2026-07-18" as const;
+export const CONTENT_VERIFIED_AT = '2026-07-18' as const
 
-export type ISODate = `${number}-${number}-${number}`;
+export type ISODate = `${number}-${number}-${number}`
 
-export const sourceKinds = [
-  'first-party-public',
-  'third-party-public',
-  'person-confirmed',
-] as const
+export const sourceKinds = ['first-party-public', 'third-party-public', 'person-confirmed'] as const
 
 export type SourceKind = (typeof sourceKinds)[number]
 
@@ -15,11 +11,11 @@ export const sourceRoles = ['catalog', 'event-post', 'video'] as const
 export type SourceRole = (typeof sourceRoles)[number]
 
 export interface ContentSource {
-  readonly label: string;
-  readonly url: string;
-  readonly kind: SourceKind;
+  readonly label: string
+  readonly url: string
+  readonly kind: SourceKind
   readonly role?: SourceRole
-  readonly verifiedAt: ISODate;
+  readonly verifiedAt: ISODate
 }
 
 export const pendingFactFields = [
@@ -36,8 +32,8 @@ export const pendingFactFields = [
 export type PendingFactField = (typeof pendingFactFields)[number]
 
 export interface PendingFact {
-  readonly field: PendingFactField;
-  readonly note: string;
+  readonly field: PendingFactField
+  readonly note: string
 }
 
 export const workCategories = ['vrchat-world', 'avatar-3d', 'game', 'vket'] as const
@@ -72,11 +68,11 @@ export const workMediaKinds = ['image'] as const
 export type WorkMediaKind = (typeof workMediaKinds)[number]
 
 export interface WorkMedia {
-  readonly kind: WorkMediaKind;
-  readonly url: string;
-  readonly alt: string;
-  readonly caption?: string;
-  readonly credit: string | null;
+  readonly kind: WorkMediaKind
+  readonly url: string
+  readonly alt: string
+  readonly caption?: string
+  readonly credit: string | null
 }
 
 export interface GameDetails {
@@ -104,25 +100,25 @@ export interface WorkLink {
 }
 
 export interface Work {
-  readonly id: string;
-  readonly slug: string;
-  readonly title: string;
-  readonly summary: string;
+  readonly id: string
+  readonly slug: string
+  readonly title: string
+  readonly summary: string
   readonly introduction: readonly string[]
-  readonly category: WorkCategory;
-  readonly status: WorkStatus;
-  readonly role: WorkRole;
-  readonly period: string | null;
+  readonly category: WorkCategory
+  readonly status: WorkStatus
+  readonly role: WorkRole
+  readonly period: string | null
   readonly firstPublishedAt: ISODate | null
   readonly gameDetails?: GameDetails
   readonly vketExhibition?: VketExhibition
   readonly heroMedia: WorkMedia | null
-  readonly media: readonly WorkMedia[];
+  readonly media: readonly WorkMedia[]
   readonly featuredOrder: number | null
   readonly links: readonly WorkLink[]
-  readonly sources: readonly ContentSource[];
-  readonly verifiedAt: ISODate;
-  readonly factsPending: readonly PendingFact[];
+  readonly sources: readonly ContentSource[]
+  readonly verifiedAt: ISODate
+  readonly factsPending: readonly PendingFact[]
 }
 
 export interface ProfileHistoryEntry {
@@ -137,19 +133,19 @@ export interface ProfileToolGroup {
 }
 
 export interface SiteProfile {
-  readonly name: string;
-  readonly reading: string;
-  readonly handle: string;
+  readonly name: string
+  readonly reading: string
+  readonly handle: string
   readonly tagline: string
-  readonly summary: string;
+  readonly summary: string
   readonly introduction: readonly string[]
   readonly craft: string
   readonly history: readonly ProfileHistoryEntry[]
   readonly tools: readonly ProfileToolGroup[]
-  readonly updatedAt: ISODate;
-  readonly sources: readonly ContentSource[];
-  readonly verifiedAt: ISODate;
-  readonly factsPending: readonly PendingFact[];
+  readonly updatedAt: ISODate
+  readonly sources: readonly ContentSource[]
+  readonly verifiedAt: ISODate
+  readonly factsPending: readonly PendingFact[]
 }
 
 export const externalLinkCategories = [
@@ -171,22 +167,22 @@ export const externalLinkStatuses = ['recent-evidence', 'availability-unverified
 export type ExternalLinkStatus = (typeof externalLinkStatuses)[number]
 
 export interface ExternalLink {
-  readonly id: string;
-  readonly label: string;
-  readonly url: string;
-  readonly category: ExternalLinkCategory;
-  readonly status: ExternalLinkStatus;
-  readonly verifiedAt: ISODate;
+  readonly id: string
+  readonly label: string
+  readonly url: string
+  readonly category: ExternalLinkCategory
+  readonly status: ExternalLinkStatus
+  readonly verifiedAt: ISODate
 }
 
 export interface ActivityArea {
-  readonly id: string;
-  readonly label: string;
-  readonly description: string;
-  readonly url?: string;
-  readonly sources: readonly ContentSource[];
-  readonly verifiedAt: ISODate;
-  readonly factsPending: readonly PendingFact[];
+  readonly id: string
+  readonly label: string
+  readonly description: string
+  readonly url?: string
+  readonly sources: readonly ContentSource[]
+  readonly verifiedAt: ISODate
+  readonly factsPending: readonly PendingFact[]
 }
 
 export interface HomeWorksActivityPresentation {
@@ -206,8 +202,7 @@ export interface HomeExternalActivityPresentation {
 }
 
 export type HomeActivityPresentation =
-  | HomeWorksActivityPresentation
-  | HomeExternalActivityPresentation
+  HomeWorksActivityPresentation | HomeExternalActivityPresentation
 
 export interface HomePrimaryLink {
   readonly linkId: ExternalLink['id']
@@ -221,14 +216,14 @@ export interface HomeContent {
 }
 
 export interface CanonicalContent {
-  readonly profile: SiteProfile;
-  readonly links: readonly ExternalLink[];
-  readonly activityAreas: readonly ActivityArea[];
-  readonly works: readonly Work[];
+  readonly profile: SiteProfile
+  readonly links: readonly ExternalLink[]
+  readonly activityAreas: readonly ActivityArea[]
+  readonly works: readonly Work[]
   readonly home: HomeContent
 }
 
 export interface ContentValidationIssue {
-  readonly path: string;
-  readonly message: string;
+  readonly path: string
+  readonly message: string
 }

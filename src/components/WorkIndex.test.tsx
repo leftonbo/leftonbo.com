@@ -20,7 +20,9 @@ describe('WorkIndex', () => {
   it('renders every work in the no-filter baseline', () => {
     render(<WorkIndex works={works} />)
     expect(screen.getAllByRole('article')).toHaveLength(works.length)
-    expect(screen.getByText(String(works.length), { selector: '.work-index__count strong' })).toBeInTheDocument()
+    expect(
+      screen.getByText(String(works.length), { selector: '.work-index__count strong' }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '代表作' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'アーカイブ' })).toBeInTheDocument()
     expect(screen.getByRole('combobox', { name: '並び順' })).toHaveValue('featured')
@@ -54,7 +56,10 @@ describe('WorkIndex', () => {
     await user.click(screen.getByRole('button', { name: avatar3dButtonName }))
 
     expect(screen.getAllByRole('article')).toHaveLength(avatar3dCount)
-    expect(screen.getByRole('button', { name: avatar3dButtonName })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: avatar3dButtonName })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
     expect(window.location.search).toBe('?category=avatar-3d')
     expect(screen.getByRole('heading', { name: 'サジャクサハギン' })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: '代表作' })).not.toBeInTheDocument()
@@ -67,7 +72,9 @@ describe('WorkIndex', () => {
     render(<WorkIndex works={works} />)
 
     await user.tab()
-    expect(screen.getByRole('button', { name: new RegExp(`すべて\\s*${works.length}`) })).toHaveFocus()
+    expect(
+      screen.getByRole('button', { name: new RegExp(`すべて\\s*${works.length}`) }),
+    ).toHaveFocus()
     await user.tab()
     const worldButton = screen.getByRole('button', {
       name: new RegExp(`VRChatワールド\\s*${vrchatWorldCount}`),
@@ -133,7 +140,9 @@ describe('WorkIndex', () => {
       expect(window.location.search).toBe('')
     })
     expect(screen.getAllByRole('article')).toHaveLength(works.length)
-    expect(screen.getByRole('button', { name: new RegExp(`すべて\\s*${works.length}`) })).toHaveAttribute('aria-pressed', 'true')
+    expect(
+      screen.getByRole('button', { name: new RegExp(`すべて\\s*${works.length}`) }),
+    ).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('does not add duplicate history entries for the active category', async () => {

@@ -20,7 +20,10 @@ describe('App routes', () => {
       'height',
       '512',
     )
-    expect(screen.getAllByRole('link', { name: '制作を見る' })[0]).toHaveAttribute('href', '/works/')
+    expect(screen.getAllByRole('link', { name: '制作を見る' })[0]).toHaveAttribute(
+      'href',
+      '/works/',
+    )
     expect(screen.getByText('放浪するゲームクリエイター')).toBeInTheDocument()
     expect(screen.getByText('ゲームづくりを中心に、活動をまとめています。')).toBeInTheDocument()
     expect(screen.getByText('VRChatワールド、3Dモデル、Webなど。')).toBeInTheDocument()
@@ -32,7 +35,9 @@ describe('App routes', () => {
     expect(screen.getByText('WHAT I MAKE')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'つくっているもの' })).toBeInTheDocument()
     expect(screen.queryByText('Official portal & portfolio')).not.toBeInTheDocument()
-    expect(screen.queryByText('公開できる制作と活動を、一か所からたどれるポータルです。')).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('公開できる制作と活動を、一か所からたどれるポータルです。'),
+    ).not.toBeInTheDocument()
     expect(screen.queryByText(/LefTonboを知るための4作品/)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: '出展の記録' })).not.toBeInTheDocument()
 

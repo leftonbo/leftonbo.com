@@ -23,6 +23,8 @@ Tests are colocated with implementation files and use the `*.test.ts` or `*.test
 - `npm run dev`: start the Vite development server with hot reload.
 - `npm run test`: run Vitest in watch mode.
 - `npm run test:run`: run Vitest without watch mode.
+- `npm run format`: format supported project files with Prettier.
+- `npm run format:check`: verify that supported project files are formatted.
 - `npm run lint`: run ESLint, failing on any warning.
 - `npm run build`: type-check, build client and SSR bundles, then prerender static routes.
 - `npm run preview`: serve the production build locally.

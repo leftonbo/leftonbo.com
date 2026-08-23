@@ -124,7 +124,11 @@ export function HomePage({
                 : getRequiredUrl(area.url, `activityAreas.${area.id}.url`)
               const previewWorks = isWorksDestination
                 ? presentation.workSlugs.map((slug) =>
-                    getRequiredItem(workBySlug, slug, `home.activities.${presentation.areaId}.${slug}`),
+                    getRequiredItem(
+                      workBySlug,
+                      slug,
+                      `home.activities.${presentation.areaId}.${slug}`,
+                    ),
                   )
                 : undefined
               const destinationLabel = isWorksDestination

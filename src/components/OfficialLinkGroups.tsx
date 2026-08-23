@@ -45,7 +45,11 @@ export function OfficialLinkGroups({ links }: OfficialLinkGroupsProps) {
         if (groupedLinks.length === 0) return null
 
         return (
-          <section className="official-link-group" aria-labelledby={`official-link-group-${group.id}`} key={group.id}>
+          <section
+            className="official-link-group"
+            aria-labelledby={`official-link-group-${group.id}`}
+            key={group.id}
+          >
             <h3 id={`official-link-group-${group.id}`}>{group.title}</h3>
             <ul className="official-link-list">
               {groupedLinks.map((link) => (

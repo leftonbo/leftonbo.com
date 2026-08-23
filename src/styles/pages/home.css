@@ -20,10 +20,16 @@
   width: 100%;
   height: 100%;
   aspect-ratio: auto;
-  background: linear-gradient(90deg, rgb(28 21 27 / 99%) 0 32%, rgb(28 21 27 / 91%) 45%, rgb(28 21 27 / 20%) 76%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    rgb(28 21 27 / 99%) 0 32%,
+    rgb(28 21 27 / 91%) 45%,
+    rgb(28 21 27 / 20%) 76%,
+    transparent 100%
+  );
   border: 0;
   border-radius: 0;
-  content: "";
+  content: '';
   opacity: 1;
   pointer-events: none;
   transform: none;
@@ -184,7 +190,7 @@
   inset: -16%;
   background: var(--wisp-color);
   border-radius: 50%;
-  content: "";
+  content: '';
   filter: blur(1rem);
   opacity: 0.18;
   animation: wisp-aura 2.8s ease-in-out infinite alternate;
@@ -218,7 +224,8 @@
   border-radius: 50%;
   box-shadow: 0 0 0.65rem var(--wisp-glow-color);
   opacity: 0;
-  animation: wisp-particle var(--particle-duration) ease-out calc(var(--particle-delay) + var(--wisp-particle-offset)) infinite;
+  animation: wisp-particle var(--particle-duration) ease-out
+    calc(var(--particle-delay) + var(--wisp-particle-offset)) infinite;
 }
 
 .hero-wisp__particle:nth-child(1) {
@@ -435,7 +442,7 @@
   grid-column: span 2;
 }
 
-.activity-card-grid > li[data-size="wide"] {
+.activity-card-grid > li[data-size='wide'] {
   grid-column: span 3;
 }
 
@@ -602,7 +609,12 @@
 
 @media (max-width: 991.98px) {
   .hero::before {
-    background: linear-gradient(90deg, rgb(28 21 27 / 99%) 0 38%, rgb(28 21 27 / 86%) 62%, rgb(28 21 27 / 34%) 100%);
+    background: linear-gradient(
+      90deg,
+      rgb(28 21 27 / 99%) 0 38%,
+      rgb(28 21 27 / 86%) 62%,
+      rgb(28 21 27 / 34%) 100%
+    );
   }
 
   .hero-wisps__stage {
@@ -615,7 +627,7 @@
   }
 
   .activity-card-grid > li,
-  .activity-card-grid > li[data-size="wide"] {
+  .activity-card-grid > li[data-size='wide'] {
     grid-column: span 1;
   }
 
@@ -640,7 +652,12 @@
   }
 
   .hero::before {
-    background: linear-gradient(180deg, rgb(28 21 27 / 99%) 0 53%, rgb(28 21 27 / 76%) 75%, rgb(28 21 27 / 35%) 100%);
+    background: linear-gradient(
+      180deg,
+      rgb(28 21 27 / 99%) 0 53%,
+      rgb(28 21 27 / 76%) 75%,
+      rgb(28 21 27 / 35%) 100%
+    );
   }
 
   .hero__content {
@@ -700,7 +717,7 @@
   }
 
   .activity-card-grid > li,
-  .activity-card-grid > li[data-size="wide"],
+  .activity-card-grid > li[data-size='wide'],
   .activity-card-grid > li:last-child {
     grid-column: 1;
   }

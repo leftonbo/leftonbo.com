@@ -49,13 +49,18 @@ const machineReadableDevFiles: Plugin = {
       let fileName: string
 
       try {
-        fileName = decodeURIComponent(new URL(request.url, 'http://localhost').pathname).replace(/^\//, '')
+        fileName = decodeURIComponent(new URL(request.url, 'http://localhost').pathname).replace(
+          /^\//,
+          '',
+        )
       } catch {
         next()
         return
       }
 
-      const extension = Object.keys(machineReadableContentTypes).find((key) => fileName.endsWith(key))
+      const extension = Object.keys(machineReadableContentTypes).find((key) =>
+        fileName.endsWith(key),
+      )
       const contentType = extension ? machineReadableContentTypes[extension] : undefined
       if (!contentType) {
         next()

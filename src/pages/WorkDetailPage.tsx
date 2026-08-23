@@ -38,7 +38,9 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
           </ol>
         </nav>
         <header className="work-detail__hero">
-          <div className={`work-detail__visual${headerMedia ? '' : ' work-detail__visual--fallback'}`}>
+          <div
+            className={`work-detail__visual${headerMedia ? '' : ' work-detail__visual--fallback'}`}
+          >
             {headerMedia ? (
               <img
                 src={headerMedia.url}
@@ -61,11 +63,17 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               {primaryLink ? (
                 <div className="work-detail__primary-action">
                   {primaryLink.disabled ? (
-                    <span className="action-link action-link--primary action-link--disabled" aria-disabled="true">
+                    <span
+                      className="action-link action-link--primary action-link--disabled"
+                      aria-disabled="true"
+                    >
                       {primaryLink.label}
                     </span>
                   ) : (
-                    <ExternalLink className="action-link action-link--primary" href={primaryLink.url}>
+                    <ExternalLink
+                      className="action-link action-link--primary"
+                      href={primaryLink.url}
+                    >
                       {primaryLink.label}
                     </ExternalLink>
                   )}
@@ -74,17 +82,21 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                   ) : null}
                 </div>
               ) : null}
-              {actionLinks.map((link) => (
+              {actionLinks.map((link) =>
                 link.disabled ? (
-                  <span className="action-link action-link--disabled" aria-disabled="true" key={link.url}>
+                  <span
+                    className="action-link action-link--disabled"
+                    aria-disabled="true"
+                    key={link.url}
+                  >
                     {link.label}
                   </span>
                 ) : (
                   <ExternalLink className="action-link" href={link.url} key={link.url}>
                     {link.label}
                   </ExternalLink>
-                )
-              ))}
+                ),
+              )}
             </div>
           </div>
         </header>
@@ -114,7 +126,9 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                 <div>
                   <dt>初公開日</dt>
                   <dd>
-                    <time dateTime={work.firstPublishedAt}>{formatPublishedDate(work.firstPublishedAt)}</time>
+                    <time dateTime={work.firstPublishedAt}>
+                      {formatPublishedDate(work.firstPublishedAt)}
+                    </time>
                   </dd>
                 </div>
               ) : null}
@@ -230,7 +244,9 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                         </span>
                         <p>{media.caption ?? media.alt}</p>
                       </div>
-                      {media.credit ? <span className="work-gallery__credit">{media.credit}</span> : null}
+                      {media.credit ? (
+                        <span className="work-gallery__credit">{media.credit}</span>
+                      ) : null}
                     </figcaption>
                   </figure>
                 </li>

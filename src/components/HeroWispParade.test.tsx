@@ -17,12 +17,14 @@ describe('HeroWispParade', () => {
   })
 
   it('creates cool colors normally and warm colors only in the warm branch', () => {
-    const coolRandom = vi.fn()
+    const coolRandom = vi
+      .fn()
       .mockReturnValueOnce(0)
       .mockReturnValueOnce(0)
       .mockReturnValueOnce(0)
       .mockReturnValueOnce(0)
-    const warmRandom = vi.fn()
+    const warmRandom = vi
+      .fn()
       .mockReturnValueOnce(0.9)
       .mockReturnValueOnce(1)
       .mockReturnValueOnce(1)

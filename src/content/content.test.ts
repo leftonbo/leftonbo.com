@@ -153,8 +153,18 @@ describe('コンテンツの整合性', () => {
 
     const issues = collectContentValidationIssues(
       contentWithWorks([
-        { ...archivedWork, id: 'archived-without-links', slug: 'archived-without-links', links: [] },
-        { ...publishedWork, id: 'published-without-links', slug: 'published-without-links', links: [] },
+        {
+          ...archivedWork,
+          id: 'archived-without-links',
+          slug: 'archived-without-links',
+          links: [],
+        },
+        {
+          ...publishedWork,
+          id: 'published-without-links',
+          slug: 'published-without-links',
+          links: [],
+        },
       ]),
     )
 
@@ -172,7 +182,12 @@ describe('コンテンツの整合性', () => {
     const vketWork = works.find((work) => work.id === 'vket-2025-summer')
     const nonVketWork = works.find((work) => work.category !== 'vket')
     const eventPostIndex = vketWork?.sources.findIndex((source) => source.role === 'event-post')
-    if (!vketWork?.vketExhibition || !nonVketWork || eventPostIndex === undefined || eventPostIndex < 0) {
+    if (
+      !vketWork?.vketExhibition ||
+      !nonVketWork ||
+      eventPostIndex === undefined ||
+      eventPostIndex < 0
+    ) {
       throw new Error('検証元のVket記事がありません。')
     }
 
@@ -270,7 +285,8 @@ describe('コンテンツの整合性', () => {
   it('サイト内画像の参照先ファイルが存在する', () => {
     const localMedia = works.flatMap((work) =>
       [work.heroMedia, ...work.media].filter(
-        (media): media is NonNullable<Work['heroMedia']> => media !== null && media.url.startsWith('/'),
+        (media): media is NonNullable<Work['heroMedia']> =>
+          media !== null && media.url.startsWith('/'),
       ),
     )
     expect(localMedia.length).toBeGreaterThan(0)
@@ -292,10 +308,12 @@ describe('コンテンツの整合性', () => {
     if (!sourceWork || !sourceMedia) throw new Error('画像付きの制作記事がありません。')
 
     const issues = collectContentValidationIssues(
-      contentWithWorks([{
-        ...sourceWork,
-        media: [{ ...sourceMedia, caption: ' ' }, ...sourceWork.media.slice(1)],
-      }]),
+      contentWithWorks([
+        {
+          ...sourceWork,
+          media: [{ ...sourceMedia, caption: ' ' }, ...sourceWork.media.slice(1)],
+        },
+      ]),
     )
 
     expect(issues).toContainEqual({

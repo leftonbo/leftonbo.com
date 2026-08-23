@@ -18,7 +18,9 @@ export function normalizePathname(pathname: string): string {
     return pathWithoutQuery
   }
 
-  const withLeadingSlash = pathWithoutQuery.startsWith('/') ? pathWithoutQuery : `/${pathWithoutQuery}`
+  const withLeadingSlash = pathWithoutQuery.startsWith('/')
+    ? pathWithoutQuery
+    : `/${pathWithoutQuery}`
   const withoutIndexFile = withLeadingSlash.replace(/\/index\.html$/, '/')
   return withoutIndexFile.endsWith('/') ? withoutIndexFile : `${withoutIndexFile}/`
 }

@@ -29,7 +29,11 @@ export function validateExternalLinks(
   issues: ContentValidationIssue[],
   links: readonly ExternalLink[],
 ): void {
-  addDuplicateIssues(issues, 'links.id', links.map((link) => link.id))
+  addDuplicateIssues(
+    issues,
+    'links.id',
+    links.map((link) => link.id),
+  )
   links.forEach((link, index) => {
     const path = `links[${index}]`
     addRequiredTextIssue(issues, `${path}.id`, link.id)
@@ -45,7 +49,11 @@ export function validateActivityAreas(
   issues: ContentValidationIssue[],
   activityAreas: readonly ActivityArea[],
 ): void {
-  addDuplicateIssues(issues, 'activityAreas.id', activityAreas.map((area) => area.id))
+  addDuplicateIssues(
+    issues,
+    'activityAreas.id',
+    activityAreas.map((area) => area.id),
+  )
   activityAreas.forEach((area, index) => {
     const path = `activityAreas[${index}]`
     addRequiredTextIssue(issues, `${path}.id`, area.id)

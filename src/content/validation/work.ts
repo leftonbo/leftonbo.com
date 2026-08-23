@@ -59,11 +59,7 @@ function validateWorkMedia(
   media.forEach((item, index) => validateWorkMediaItem(issues, `${path}[${index}]`, item))
 }
 
-function validateWorkLinks(
-  issues: ContentValidationIssue[],
-  path: string,
-  work: Work,
-): void {
+function validateWorkLinks(issues: ContentValidationIssue[], path: string, work: Work): void {
   if (!Array.isArray(work.links)) {
     issues.push({ path, message: 'linksは配列である必要があります。' })
     return
@@ -96,11 +92,7 @@ function validateWorkLinks(
   }
 }
 
-function validateGameDetails(
-  issues: ContentValidationIssue[],
-  path: string,
-  work: Work,
-): void {
+function validateGameDetails(issues: ContentValidationIssue[], path: string, work: Work): void {
   if (work.category !== 'game') {
     if (work.gameDetails !== undefined) {
       issues.push({ path, message: 'ゲーム作品以外にはgameDetailsを指定できません。' })
@@ -181,14 +173,20 @@ function validateVketExhibition(
 }
 
 export function validateWorks(issues: ContentValidationIssue[], works: readonly Work[]): void {
-  addDuplicateIssues(issues, 'works.id', works.map((work) => work.id))
-  addDuplicateIssues(issues, 'works.slug', works.map((work) => work.slug))
+  addDuplicateIssues(
+    issues,
+    'works.id',
+    works.map((work) => work.id),
+  )
+  addDuplicateIssues(
+    issues,
+    'works.slug',
+    works.map((work) => work.slug),
+  )
   addDuplicateIssues(
     issues,
     'works.featuredOrder',
-    works.flatMap((work) =>
-      work.featuredOrder === null ? [] : [String(work.featuredOrder)],
-    ),
+    works.flatMap((work) => (work.featuredOrder === null ? [] : [String(work.featuredOrder)])),
   )
 
   works.forEach((work, index) => {

@@ -76,7 +76,9 @@ function syncPageMetadata(metadata: PageMetadata) {
 
   const existingCanonical = document.head.querySelector('link[rel="canonical"]')
   const canonicalElement =
-    existingCanonical instanceof HTMLLinkElement ? existingCanonical : document.createElement('link')
+    existingCanonical instanceof HTMLLinkElement
+      ? existingCanonical
+      : document.createElement('link')
   if (!(existingCanonical instanceof HTMLLinkElement)) {
     canonicalElement.rel = 'canonical'
     document.head.append(canonicalElement)
@@ -116,7 +118,8 @@ function upsertOptionalMeta(
 
 function upsertMeta(attribute: 'name' | 'property', key: string, content: string) {
   const existingMeta = document.head.querySelector(`meta[${attribute}="${key}"]`)
-  const element = existingMeta instanceof HTMLMetaElement ? existingMeta : document.createElement('meta')
+  const element =
+    existingMeta instanceof HTMLMetaElement ? existingMeta : document.createElement('meta')
   if (!(existingMeta instanceof HTMLMetaElement)) {
     element.setAttribute(attribute, key)
     document.head.append(element)

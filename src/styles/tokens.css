@@ -21,9 +21,14 @@
   --color-flame: #e65f43;
   --color-spark: #f6ad55;
   --color-flame-pale: #fff1cf;
-  --font-display: "Avenir Next", "Noto Sans JP Variable", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
-  --font-body: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
-  --font-data: ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono", "Noto Sans JP Variable", monospace;
+  --font-display:
+    'Avenir Next', 'Noto Sans JP Variable', 'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN',
+    'Yu Gothic UI', sans-serif;
+  --font-body:
+    'Noto Sans JP Variable', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', system-ui, sans-serif;
+  --font-data:
+    ui-monospace, 'SFMono-Regular', 'Cascadia Code', 'Roboto Mono', 'Noto Sans JP Variable',
+    monospace;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;

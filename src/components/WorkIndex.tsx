@@ -44,7 +44,10 @@ export function WorkIndex({ works }: WorkIndexProps) {
   }, [])
 
   const filteredWorks = useMemo(
-    () => selectedCategory === 'all' ? works : works.filter((work) => work.category === selectedCategory),
+    () =>
+      selectedCategory === 'all'
+        ? works
+        : works.filter((work) => work.category === selectedCategory),
     [selectedCategory, works],
   )
   const sortedWorks = useMemo(
@@ -123,7 +126,10 @@ export function WorkIndex({ works }: WorkIndexProps) {
           </div>
           <label className="work-sort">
             <span>並び順</span>
-            <select value={selectedSort} onChange={(event) => selectSort(event.target.value as WorkSort)}>
+            <select
+              value={selectedSort}
+              onChange={(event) => selectSort(event.target.value as WorkSort)}
+            >
               <option value="featured">おすすめ順</option>
               <option value="newest">新しい順</option>
               <option value="oldest">古い順</option>
@@ -146,7 +152,10 @@ export function WorkIndex({ works }: WorkIndexProps) {
                   ))}
                 </ul>
               </section>
-              <section className="work-results__group work-results__group--archive" aria-labelledby="archive-works-title">
+              <section
+                className="work-results__group work-results__group--archive"
+                aria-labelledby="archive-works-title"
+              >
                 <div className="work-results__heading">
                   <h3 id="archive-works-title">アーカイブ</h3>
                   <p>これまでの制作記録</p>

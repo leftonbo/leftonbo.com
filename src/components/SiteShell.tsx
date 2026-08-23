@@ -30,7 +30,13 @@ export function SiteShell({
       <header className="site-header">
         <div className="container site-header__inner">
           <a className="site-brand" href="/">
-            <img className="site-brand__mark" src="/images/site-icon.webp" alt="" width="512" height="512" />
+            <img
+              className="site-brand__mark"
+              src="/images/site-icon.webp"
+              alt=""
+              width="512"
+              height="512"
+            />
             <span>
               <strong>{canonicalName}</strong>
               <small>{japaneseName}</small>
@@ -40,7 +46,10 @@ export function SiteShell({
             <ul className="site-nav">
               {navigation.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} aria-current={isCurrentNavigation(item.href, pathname) ? 'page' : undefined}>
+                  <a
+                    href={item.href}
+                    aria-current={isCurrentNavigation(item.href, pathname) ? 'page' : undefined}
+                  >
                     {item.label}
                   </a>
                 </li>
