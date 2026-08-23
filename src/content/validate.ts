@@ -433,22 +433,12 @@ export function collectContentValidationIssues(
   addRequiredTextIssue(issues, "profile.name", content.profile.name);
   addRequiredTextIssue(issues, "profile.reading", content.profile.reading);
   addRequiredTextIssue(issues, "profile.handle", content.profile.handle);
-  addRequiredTextIssue(issues, "profile.groupName", content.profile.groupName);
-  addRequiredTextIssue(
-    issues,
-    "profile.groupDescription",
-    content.profile.groupDescription,
-  );
   addRequiredTextIssue(issues, 'profile.tagline', content.profile.tagline)
   addRequiredTextIssue(issues, "profile.summary", content.profile.summary);
   validateWorkIntroduction(issues, "profile.introduction", content.profile.introduction)
   addRequiredTextIssue(issues, 'profile.craft', content.profile.craft)
   validateProfileHistory(issues, 'profile.history', content.profile.history)
   validateProfileTools(issues, 'profile.tools', content.profile.tools)
-  if (typeof content.profile.acceptsRequests !== 'boolean') {
-    issues.push({ path: 'profile.acceptsRequests', message: 'booleanではありません。' })
-  }
-  addRequiredTextIssue(issues, 'profile.contactNote', content.profile.contactNote)
   addDateIssue(issues, "profile.updatedAt", content.profile.updatedAt);
   addDateIssue(issues, "profile.verifiedAt", content.profile.verifiedAt);
   validateSources(issues, "profile.sources", content.profile.sources);

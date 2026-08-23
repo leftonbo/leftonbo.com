@@ -9,9 +9,6 @@ export const siteProfile = {
   name: "LefTonbo",
   reading: "レフとんぼ",
   handle: "leftonbo",
-  groupName: "TonboWorkshop",
-  groupDescription:
-    "SNSグループ名・ショップ名",
   tagline: "放浪するゲームクリエイター",
   summary: "ゲーム制作を中心にこれまでの活動をまとめています",
   introduction: [
@@ -54,8 +51,6 @@ export const siteProfile = {
     { label: "イラスト", items: ["Clip Studio Paint"] },
     { label: "3Dモデリング", items: ["Blender"] },
   ],
-  acceptsRequests: false,
-  contactNote: "連絡先は用途による明確な使い分けをしていません。",
   updatedAt: "2026-08-23",
   sources: [
     {

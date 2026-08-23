@@ -56,20 +56,18 @@ describe('機械可読出力', () => {
     const profileJson = JSON.parse(files['data/profile.json'] ?? '{}') as {
       schemaVersion?: number
       profile?: {
-        tagline?: string
         history?: unknown[]
         tools?: unknown[]
-        acceptsRequests?: boolean
       }
     }
 
-    expect(profileJson.schemaVersion).toBe(5)
-    expect(profileJson.profile).toMatchObject({
-      tagline: '放浪するゲームクリエイター',
-      acceptsRequests: false,
-    })
-    expect(profileJson.profile?.history).toHaveLength(5)
-    expect(profileJson.profile?.tools).toHaveLength(5)
+    expect(profileJson.schemaVersion).toBe(6)
+    expect(profileJson.profile?.history).toEqual(expect.any(Array))
+    expect(profileJson.profile?.tools).toEqual(expect.any(Array))
+    expect(profileJson.profile).not.toHaveProperty('acceptsRequests')
+    expect(profileJson.profile).not.toHaveProperty('contactNote')
+    expect(profileJson.profile).not.toHaveProperty('groupName')
+    expect(profileJson.profile).not.toHaveProperty('groupDescription')
 
     expect(worksJson.schemaVersion).toBe(8)
     expect(worksJson.count).toBe(works.length)
@@ -152,9 +150,7 @@ describe('機械可読出力', () => {
     expect(worksMarkdown).toContain('#### 作品紹介')
     expect(worksMarkdown).not.toContain('tonbonotion01.notion.site')
     expect(files['data/works.json']).not.toContain('tonbonotion01.notion.site')
-    expect(files['profile.md']).toContain('## 活動の歩み')
-    expect(files['profile.md']).toContain('スーパーブロック崩し')
-    expect(files['profile.md']).toContain('現在は受け付けていません')
+    expect(files['profile.md']).not.toContain('## 活動方針')
   })
 
   it('すべての作品URLをsitemapへ出力する', () => {

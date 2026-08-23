@@ -118,16 +118,12 @@ export interface SiteProfile {
   readonly name: string;
   readonly reading: string;
   readonly handle: string;
-  readonly groupName: string;
-  readonly groupDescription: string;
   readonly tagline: string
   readonly summary: string;
   readonly introduction: readonly string[]
   readonly craft: string
   readonly history: readonly ProfileHistoryEntry[]
   readonly tools: readonly ProfileToolGroup[]
-  readonly acceptsRequests: boolean
-  readonly contactNote: string
   readonly updatedAt: ISODate;
   readonly sources: readonly ContentSource[];
   readonly verifiedAt: ISODate;

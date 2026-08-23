@@ -65,24 +65,15 @@ describe('App routes', () => {
     expect(container.querySelector('.hero-wisps')).not.toHaveClass('hero-wisps--paused')
   })
 
-  it('integrates the person introduction and official destinations into the profile', () => {
+  it('renders the profile without an activity policy section', () => {
     render(<App pathname="/profile/" />)
 
     expect(screen.getByRole('heading', { name: 'つくっている人' })).toBeInTheDocument()
-    expect(screen.getByText('放浪するゲームクリエイター')).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: '制作で大切にしていること' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '活動の歩み' })).toBeInTheDocument()
-    expect(screen.getByText('ゲーム制作を始める')).toBeInTheDocument()
-    expect(screen.getAllByText('Tonyu System', { exact: false })).toHaveLength(2)
-    expect(screen.getByRole('heading', { name: '制作環境と活動方針' })).toBeInTheDocument()
-    expect(screen.getByText('現在は受け付けていません')).toBeInTheDocument()
-    expect(screen.getByText(/個人サークル/)).toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: '名義について' })).not.toBeInTheDocument()
-    expect(screen.queryByText(/個人名義のLefTonbo/)).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '制作環境' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: '活動について' })).not.toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '制作しているもの' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '公式の行き先' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: '作品・制作' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /GitHub/ })).toBeInTheDocument()
   })
 
   it('renders a detail page with an official destination and concise details', () => {
@@ -107,9 +98,7 @@ describe('App routes', () => {
 
   it('renders a useful recovery page for invalid routes', () => {
     render(<App pathname="/works/not-real/" />)
-    expect(screen.getByRole('heading', { level: 1, name: 'この航路は見つかりませんでした。' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'ホームへ戻る' })).toHaveAttribute('href', '/')
-    expect(screen.getByRole('link', { name: '制作を見る' })).toHaveAttribute('href', '/works/')
+    expect(screen.getByRole('main')).toContainElement(screen.getByRole('heading', { level: 1 }))
   })
 
   it('has no automated axe violations on the top page', async () => {

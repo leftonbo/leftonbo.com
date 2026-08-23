@@ -76,7 +76,7 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
         <div className="container">
           <p className="section-kicker">Practice</p>
           <h2 className="section-title" id="profile-practice-title">
-            制作環境と活動方針
+            制作環境
           </h2>
           <div className="profile-practice">
             <section aria-labelledby="profile-tools-title">
@@ -88,23 +88,6 @@ export function ProfilePage({ profile, activityAreas, externalLinks }: ProfilePa
                     <dd>{group.items.join('、')}</dd>
                   </div>
                 ))}
-              </dl>
-            </section>
-            <section aria-labelledby="profile-policy-title">
-              <h3 id="profile-policy-title">活動について</h3>
-              <dl className="profile-facts">
-                <div>
-                  <dt>依頼、共同制作</dt>
-                  <dd>{profile.acceptsRequests ? '受け付けています' : '現在は受け付けていません'}</dd>
-                </div>
-                <div>
-                  <dt>連絡先</dt>
-                  <dd>{profile.contactNote}</dd>
-                </div>
-                <div>
-                  <dt>{profile.groupName}</dt>
-                  <dd>{profile.groupDescription}</dd>
-                </div>
               </dl>
             </section>
           </div>
