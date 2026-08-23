@@ -72,6 +72,11 @@
   color: var(--color-flame-pale);
 }
 
+.hero h1 span,
+.hero h1 small {
+  display: block;
+}
+
 .hero h1 span {
   font-size: clamp(3.6rem, 7.2vw, 6.5rem);
   letter-spacing: -0.075em;

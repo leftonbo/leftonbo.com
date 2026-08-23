@@ -12,6 +12,7 @@ describe('home layout styles', () => {
     expect(homeCss).toMatch(
       /\.hero h1 span\s*\{[^}]*font-size: clamp\(3\.6rem, 7\.2vw, 6\.5rem\);/s,
     )
+    expect(homeCss).toMatch(/\.hero h1 span,\s*\.hero h1 small\s*\{[^}]*display: block;/s)
     expect(homeCss).toMatch(/\.hero::before\s*\{[^}]*border: 0;/s)
     expect(homeCss).toMatch(/\.hero::after\s*\{[^}]*display: none;/s)
   })
