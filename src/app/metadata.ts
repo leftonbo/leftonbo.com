@@ -30,6 +30,14 @@ export const defaultSocialImage: SocialImage = {
   height: 630,
 }
 
+const homeSocialImage: SocialImage = {
+  url: `${SITE_ORIGIN}/images/og/home.png`,
+  alt: 'LefTonbo（レフとんぼ）のプロフィールアイコンと「放浪するゲームクリエイター」の紹介',
+  mimeType: 'image/png',
+  width: 1200,
+  height: 630,
+}
+
 export function createPageMetadata(pathname: string, works: readonly Work[]): PageMetadata {
   const match = matchRoute(pathname, works)
 
@@ -86,7 +94,7 @@ export function createPageMetadata(pathname: string, works: readonly Work[]): Pa
     description: `ゲームづくりを中心に、VRChatワールド、3Dモデル、Webなど、${siteProfile.name}の活動をまとめています。`,
     canonical: canonicalUrl('/'),
     ogType: 'website',
-    socialImage: defaultSocialImage,
+    socialImage: homeSocialImage,
   }
 }
 

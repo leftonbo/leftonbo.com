@@ -86,10 +86,21 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
         <HeroWispParade />
         <div className="container hero__foreground">
           <div className="hero__content">
-            <h1>
-              <span>{profile.name}</span>
-              <small>{profile.reading}</small>
-            </h1>
+            <div className="hero__identity">
+              <img
+                className="hero__avatar"
+                src="/images/profile.webp"
+                alt={`${profile.name}のプロフィールアイコン`}
+                width="512"
+                height="512"
+                loading="eager"
+                decoding="async"
+              />
+              <h1>
+                <span>{profile.name}</span>
+                <small>{profile.reading}</small>
+              </h1>
+            </div>
             <p className="hero__tagline">{profile.tagline}</p>
             <div className="hero__introduction">
               <p>ゲームづくりを中心に、活動をまとめています。</p>

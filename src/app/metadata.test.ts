@@ -8,7 +8,13 @@ describe('page metadata', () => {
       title: 'LefTonbo（レフとんぼ）｜放浪するゲームクリエイター',
       description: 'ゲームづくりを中心に、VRChatワールド、3Dモデル、Webなど、LefTonboの活動をまとめています。',
       canonical: 'https://leftonbo.com/',
-      socialImage: defaultSocialImage,
+      socialImage: {
+        url: 'https://leftonbo.com/images/og/home.png',
+        alt: 'LefTonbo（レフとんぼ）のプロフィールアイコンと「放浪するゲームクリエイター」の紹介',
+        mimeType: 'image/png',
+        width: 1200,
+        height: 630,
+      },
     })
     expect(createPageMetadata('/works/', works)).toMatchObject({
       title: '制作一覧｜LefTonbo',

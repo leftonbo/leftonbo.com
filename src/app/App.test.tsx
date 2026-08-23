@@ -8,6 +8,18 @@ describe('App routes', () => {
   it('renders the top page with the primary journey', () => {
     const { container } = render(<App pathname="/" />)
     expect(screen.getByRole('heading', { level: 1, name: /LefTonbo/ })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'LefTonboのプロフィールアイコン' })).toHaveAttribute(
+      'src',
+      '/images/profile.webp',
+    )
+    expect(screen.getByRole('img', { name: 'LefTonboのプロフィールアイコン' })).toHaveAttribute(
+      'width',
+      '512',
+    )
+    expect(screen.getByRole('img', { name: 'LefTonboのプロフィールアイコン' })).toHaveAttribute(
+      'height',
+      '512',
+    )
     expect(screen.getAllByRole('link', { name: '制作を見る' })[0]).toHaveAttribute('href', '/works/')
     expect(screen.getByText('放浪するゲームクリエイター')).toBeInTheDocument()
     expect(screen.getByText('ゲームづくりを中心に、活動をまとめています。')).toBeInTheDocument()

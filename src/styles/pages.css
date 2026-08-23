@@ -906,8 +906,26 @@
   padding-block: 0;
 }
 
-.hero h1 {
+.hero__identity {
+  display: flex;
+  gap: clamp(var(--space-3), 2.5vw, var(--space-5));
+  align-items: center;
   margin-block-end: var(--space-4);
+}
+
+.hero__avatar {
+  flex: 0 0 auto;
+  width: clamp(6rem, 10vw, 9rem);
+  height: auto;
+  aspect-ratio: 1;
+  border: 3px solid rgb(255 241 207 / 80%);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero h1 {
+  margin: 0;
   color: var(--color-flame-pale);
 }
 
@@ -1502,8 +1520,16 @@
     max-width: 100%;
   }
 
+  .hero__identity {
+    gap: clamp(0.75rem, 4vw, var(--space-4));
+  }
+
+  .hero__avatar {
+    width: clamp(4rem, 18vw, 5.5rem);
+  }
+
   .hero h1 span {
-    font-size: clamp(3.1rem, 17vw, 5rem);
+    font-size: clamp(2.75rem, 13vw, 4.5rem);
   }
 
   .hero-wisp {
