@@ -11,48 +11,48 @@ export const siteProfile = {
   handle: "leftonbo",
   groupName: "TonboWorkshop",
   groupDescription:
-    "個人サークル。現在はDiscordグループ名やショップ名として使用しています。",
+    "SNSグループ名・ショップ名",
   tagline: "放浪するゲームクリエイター",
-  summary: "ゲームづくりを中心に、これまでの活動をまとめています。",
+  summary: "ゲーム制作を中心にこれまでの活動をまとめています",
   introduction: [
-    "2004年ごろにゲーム制作を始めました。現在はUnityを中心に、ゲームやVRChatワールドなど、さまざまな場所でゲーム制作に関わっています。",
+    "2004年ごろにゲーム制作に振れる。現在はUnityを中心に、ゲームやVRChatワールドなど、さまざまな場所でゲーム制作に関わっている。",
   ],
   craft:
-    "制作では、操作したときの手触りと、動かしたときの爽快感を大切にしています。細かなところまで気を配るほうらしいのですが、実装に集中している間は、その細部が少し見えにくくなることもあります。",
+    "ゲーム制作では操作の手触りと、動かしたときの爽快感を大切にしている。細かなところまで気を配るほうだけど、実装に集中しているときはあまり気にしていないかも。",
   history: [
     {
       period: "2004年ごろ",
       title: "ゲーム制作を始める",
       description:
-        "Tonyu Systemを使ってゲーム制作を始めました。最初にリリースした作品は「スーパーブロック崩し」です。",
+        "Tonyu Systemを使ってゲーム制作を開始。最初にリリースした作品は「スーパーブロック崩し」。",
     },
     {
       period: "2015年ごろ",
       title: "Unityでの制作へ",
-      description: "Unityに触れ、本格的にUnityでのゲーム制作を始めました。",
+      description: "Unityに触れ、本格的にUnityでのゲーム制作を始める。",
     },
     {
       period: "2019年",
       title: "VRChatに触れる",
-      description: "VRChatに触れました。",
+      description: "VRヘッドセットの入手をきっかけに、VRChatに触れるようになる。",
     },
     {
       period: "2020年",
       title: "VRChatワールド制作を始める",
-      description: "Udonの登場をきっかけに、VRChat向けのワールド制作を始めました。",
+      description: "Udonの登場をきっかけに、VRChat向けのワールド制作を始める。",
     },
     {
       period: "現在",
       title: "場所を越えてゲーム制作に関わる",
-      description: "さまざまな場所で、ゲーム制作に関わる活動を続けています。",
+      description: "さまざまな場所で、ゲーム制作に関わる活動を続けている。",
     },
   ],
   tools: [
     { label: "ゲームエンジン", items: ["Unity"] },
-    { label: "コーディング、エディタ", items: ["VS Code", "Cursor"] },
+    { label: "コーディング、エディタ", items: ["VS Code"] },
     { label: "AIツール", items: ["Codex"] },
-    { label: "3Dモデリング", items: ["Blender"] },
     { label: "イラスト", items: ["Clip Studio Paint"] },
+    { label: "3Dモデリング", items: ["Blender"] },
   ],
   acceptsRequests: false,
   contactNote: "連絡先は用途による明確な使い分けをしていません。",
@@ -168,7 +168,7 @@ export const activityAreas = [
   {
     id: "vrchat-worlds",
     label: "VRChatワールド制作",
-    description: "自作ワールドと、委託・共同制作ワールドの制作。",
+    description: "自作・委託・共同制作ワールド",
     url: "https://vrchat.com/home/user/usr_e9ccde4f-c5a4-47f6-8cfb-1105679750ce",
     sources: [
       {
@@ -183,8 +183,8 @@ export const activityAreas = [
   },
   {
     id: "avatar-3d",
-    label: "アバター／3Dモデル制作",
-    description: "VRChat向けアバター／3Dモデルの制作。",
+    label: "アバター・3Dモデル制作",
+    description: "VRChat向けアバター・3Dモデルの制作",
     url: "https://tonboshop.booth.pm/",
     sources: [
       {
@@ -200,7 +200,7 @@ export const activityAreas = [
   {
     id: "games",
     label: "ゲーム制作",
-    description: "ブラウザゲーム、PCゲーム、旧ソフトウェアの制作。",
+    description: "ブラウザゲーム、PCゲームの制作",
     url: "https://tonbonotion01.notion.site/",
     sources: [
       {
@@ -222,7 +222,7 @@ export const activityAreas = [
   {
     id: "web",
     label: "Web制作",
-    description: "Webサイトとブラウザ向けコンテンツの制作。",
+    description: "Webサイトとブラウザ向けコンテンツの制作",
     url: "https://github.com/leftonbo",
     sources: [
       {
@@ -238,7 +238,7 @@ export const activityAreas = [
   {
     id: "original-characters",
     label: "オリジナルキャラクター創作",
-    description: "現行の創作資料はNotionの公開ページで案内しています。",
+    description: "現行の創作資料はNotionの公開ページで案内しています",
     url: "https://tonbonotion01.notion.site/tonbo-creations",
     sources: [
       {
