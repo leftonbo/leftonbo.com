@@ -1,0 +1,19 @@
+.not-found {
+  display: grid;
+  min-height: 70vh;
+  align-items: center;
+  padding-block: var(--space-7);
+}
+
+.not-found h1 {
+  max-width: 13ch;
+  margin-block-end: var(--space-4);
+  font-size: clamp(2.7rem, 8vw, 7rem);
+  letter-spacing: -0.06em;
+}
+
+.not-found p:not(.section-kicker) {
+  max-width: 39rem;
+  color: var(--color-ink-muted);
+  font-size: 1.1rem;
+}

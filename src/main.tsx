@@ -9,7 +9,11 @@ import { works } from './content/works'
 import './styles/tokens.css'
 import './styles/global.css'
 import './styles/components.css'
-import './styles/pages.css'
+import './styles/pages/shared.css'
+import './styles/pages/home.css'
+import './styles/pages/work-detail.css'
+import './styles/pages/profile.css'
+import './styles/pages/not-found.css'
 
 const root = document.querySelector('#root')
 
