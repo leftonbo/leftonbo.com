@@ -38,6 +38,12 @@ Use two-space indentation, single quotes, and no semicolons, matching the existi
 
 Add Japanese JSDoc only to exported APIs whose purpose, invariants, side effects, or constraints are not clear from their types and names. Do not add comments that merely restate the implementation.
 
+## Bootstrap Usage
+
+Use Bootstrap CSS selectively as an accessible foundation for Reboot, grid, `container`, and utilities. Keep the site's visual identity in design tokens and site-specific classes; do not make Bootstrap's default theme, uniform card components, or primary blue the main design language.
+
+Do not mix Bootstrap's DOM-manipulating JavaScript with React state. When an interactive Bootstrap pattern is genuinely needed, choose a React-controlled implementation and record why it was introduced. Migrate existing layout or component classes to Bootstrap only when there is a concrete maintenance benefit, then verify the affected routes in a real browser.
+
 ## Testing Guidelines
 
 Write behavior-focused Vitest tests with Testing Library in the configured `jsdom` environment. Cover routing, machine-readable output, and accessibility regressions when affected. No numeric coverage threshold is configured; add targeted tests for every changed behavior.
