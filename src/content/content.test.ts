@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { homeContent } from './home'
 import { activityAreas, externalLinks, siteProfile } from './site'
-import type { CanonicalContent, Work } from './types'
+import type { CanonicalContent, HomeContent, Work } from './types'
 import { collectContentValidationIssues } from './validate'
 import { works } from './works'
 
@@ -9,12 +10,14 @@ const workArticles = import.meta.glob<Work>(['./works/*.ts', '!./works/*.test.ts
   import: 'default',
 })
 const localWorkImages = import.meta.glob('../../public/images/works/**/*.webp')
+const localContentImages = import.meta.glob('../../public/images/**/*.webp')
 
 const canonicalContent: CanonicalContent = {
   profile: siteProfile,
   links: externalLinks,
   activityAreas,
   works,
+  home: homeContent,
 }
 
 function contentWithWorks(nextWorks: readonly Work[]): CanonicalContent {
@@ -24,6 +27,45 @@ function contentWithWorks(nextWorks: readonly Work[]): CanonicalContent {
 describe('コンテンツの整合性', () => {
   it('公開コンテンツ全体がランタイムスキーマを満たす', () => {
     expect(collectContentValidationIssues()).toEqual([])
+  })
+
+  it('ホーム設定の参照切れとカテゴリ不一致を検出する', () => {
+    const sourceActivity = homeContent.activities.find((activity) => activity.kind === 'works')
+    const sourceLink = homeContent.primaryLinks[0]
+    if (!sourceActivity || !sourceLink) throw new Error('検証元のホーム設定がありません。')
+
+    const invalidHome = {
+      ...homeContent,
+      activities: [
+        { ...sourceActivity, areaId: 'missing-area', workSlugs: ['missing-work'] },
+        { ...sourceActivity, areaId: 'duplicate-area', category: 'game' },
+        { ...sourceActivity, areaId: 'duplicate-area' },
+      ],
+      primaryLinks: [{ ...sourceLink, linkId: 'missing-link' }],
+    } as HomeContent
+    const issues = collectContentValidationIssues({ ...canonicalContent, home: invalidHome })
+
+    expect(issues).toEqual(
+      expect.arrayContaining([
+        {
+          path: 'home.activities[0].areaId',
+          message: '参照先の活動領域が見つかりません: missing-area',
+        },
+        {
+          path: 'home.activities[0].workSlugs[0]',
+          message: '参照先の作品が見つかりません: missing-work',
+        },
+        { path: 'home.activities.areaId', message: '重複しています: duplicate-area' },
+        {
+          path: 'home.activities[1].workSlugs[0]',
+          message: '作品カテゴリが一致しません: vrchat-world',
+        },
+        {
+          path: 'home.primaryLinks[0].linkId',
+          message: '参照先の公式リンクが見つかりません: missing-link',
+        },
+      ]),
+    )
   })
 
   it('すべての作品記事を自動集約し、代表作の順序を重複なく定義する', () => {
@@ -235,6 +277,12 @@ describe('コンテンツの整合性', () => {
 
     for (const media of localMedia) {
       expect(localWorkImages, media.url).toHaveProperty(`../../public${media.url}`)
+    }
+
+    for (const activity of homeContent.activities) {
+      if (activity.kind === 'external') {
+        expect(localContentImages, activity.image).toHaveProperty(`../../public${activity.image}`)
+      }
     }
   })
 

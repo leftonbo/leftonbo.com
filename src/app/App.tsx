@@ -1,4 +1,5 @@
 import { SiteShell } from '../components/SiteShell'
+import { homeContent } from '../content/home'
 import { activityAreas, externalLinks, siteProfile } from '../content/site'
 import { works } from '../content/works'
 import { HomePage } from '../pages/HomePage'
@@ -28,6 +29,7 @@ export function App({ pathname }: AppProps) {
           activityAreas={activityAreas}
           works={works}
           externalLinks={externalLinks}
+          homeContent={homeContent}
         />
       ) : null}
       {route.kind === 'works' ? <WorksPage works={works} /> : null}

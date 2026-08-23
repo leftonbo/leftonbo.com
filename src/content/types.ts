@@ -2,12 +2,17 @@ export const CONTENT_VERIFIED_AT = "2026-07-18" as const;
 
 export type ISODate = `${number}-${number}-${number}`;
 
-export type SourceKind =
-  | "first-party-public"
-  | "third-party-public"
-  | "person-confirmed";
+export const sourceKinds = [
+  'first-party-public',
+  'third-party-public',
+  'person-confirmed',
+] as const
 
-export type SourceRole = 'catalog' | 'event-post' | 'video'
+export type SourceKind = (typeof sourceKinds)[number]
+
+export const sourceRoles = ['catalog', 'event-post', 'video'] as const
+
+export type SourceRole = (typeof sourceRoles)[number]
 
 export interface ContentSource {
   readonly label: string;
@@ -17,42 +22,57 @@ export interface ContentSource {
   readonly verifiedAt: ISODate;
 }
 
-export type PendingFactField =
-  | "current-status"
-  | "first-published-at"
-  | "last-updated-at"
-  | "summary"
-  | "role"
-  | "media"
-  | "version"
-  | "link-availability";
+export const pendingFactFields = [
+  'current-status',
+  'first-published-at',
+  'last-updated-at',
+  'summary',
+  'role',
+  'media',
+  'version',
+  'link-availability',
+] as const
+
+export type PendingFactField = (typeof pendingFactFields)[number]
 
 export interface PendingFact {
   readonly field: PendingFactField;
   readonly note: string;
 }
 
-export type WorkCategory = 'vrchat-world' | 'avatar-3d' | 'game' | 'vket'
+export const workCategories = ['vrchat-world', 'avatar-3d', 'game', 'vket'] as const
 
-export type WorkStatus =
-  | "published"
-  | "recent-evidence"
-  | "recent-public-record"
-  | "unverified"
-  | "stopped-with-public-record"
-  | "archived"
-  | 'confirmed-record'
+export type WorkCategory = (typeof workCategories)[number]
 
-export type WorkRole =
-  | "self-produced"
-  | "model-creator"
-  | "collaborator"
-  | "programming-support"
-  | "pending-confirmation"
-  | 'exhibitor'
+export const workStatuses = [
+  'published',
+  'recent-evidence',
+  'recent-public-record',
+  'unverified',
+  'stopped-with-public-record',
+  'archived',
+  'confirmed-record',
+] as const
+
+export type WorkStatus = (typeof workStatuses)[number]
+
+export const workRoles = [
+  'self-produced',
+  'model-creator',
+  'collaborator',
+  'programming-support',
+  'pending-confirmation',
+  'exhibitor',
+] as const
+
+export type WorkRole = (typeof workRoles)[number]
+
+export const workMediaKinds = ['image'] as const
+
+export type WorkMediaKind = (typeof workMediaKinds)[number]
 
 export interface WorkMedia {
-  readonly kind: "image";
+  readonly kind: WorkMediaKind;
   readonly url: string;
   readonly alt: string;
   readonly caption?: string;
@@ -71,7 +91,9 @@ export interface VketExhibition {
   }
 }
 
-export type WorkLinkTag = 'primary' | 'action' | 'related'
+export const workLinkTags = ['primary', 'action', 'related'] as const
+
+export type WorkLinkTag = (typeof workLinkTags)[number]
 
 export interface WorkLink {
   readonly label: string
@@ -130,20 +152,23 @@ export interface SiteProfile {
   readonly factsPending: readonly PendingFact[];
 }
 
-export type ExternalLinkCategory =
-  | "hub"
-  | "code"
-  | "social"
-  | "shop"
-  | "vrchat"
-  | "portfolio"
-  | "contact"
-  | "support"
-  | "community";
+export const externalLinkCategories = [
+  'hub',
+  'code',
+  'social',
+  'shop',
+  'vrchat',
+  'portfolio',
+  'contact',
+  'support',
+  'community',
+] as const
 
-export type ExternalLinkStatus =
-  | "recent-evidence"
-  | "availability-unverified";
+export type ExternalLinkCategory = (typeof externalLinkCategories)[number]
+
+export const externalLinkStatuses = ['recent-evidence', 'availability-unverified'] as const
+
+export type ExternalLinkStatus = (typeof externalLinkStatuses)[number]
 
 export interface ExternalLink {
   readonly id: string;
@@ -164,11 +189,43 @@ export interface ActivityArea {
   readonly factsPending: readonly PendingFact[];
 }
 
+export interface HomeWorksActivityPresentation {
+  readonly kind: 'works'
+  readonly areaId: ActivityArea['id']
+  readonly label: string
+  readonly category: WorkCategory
+  readonly workSlugs: readonly Work['slug'][]
+}
+
+export interface HomeExternalActivityPresentation {
+  readonly kind: 'external'
+  readonly areaId: ActivityArea['id']
+  readonly label: string
+  readonly destinationLabel: string
+  readonly image: string
+}
+
+export type HomeActivityPresentation =
+  | HomeWorksActivityPresentation
+  | HomeExternalActivityPresentation
+
+export interface HomePrimaryLink {
+  readonly linkId: ExternalLink['id']
+  readonly label: string
+}
+
+export interface HomeContent {
+  readonly introduction: readonly string[]
+  readonly activities: readonly HomeActivityPresentation[]
+  readonly primaryLinks: readonly HomePrimaryLink[]
+}
+
 export interface CanonicalContent {
   readonly profile: SiteProfile;
   readonly links: readonly ExternalLink[];
   readonly activityAreas: readonly ActivityArea[];
   readonly works: readonly Work[];
+  readonly home: HomeContent
 }
 
 export interface ContentValidationIssue {

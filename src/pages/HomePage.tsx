@@ -3,82 +3,39 @@ import { HeroWispParade } from '../components/HeroWispParade'
 import { OfficialLinkIcon } from '../components/OfficialLinkIcon'
 import { UiIcon } from '../components/UiIcon'
 import { WorkCard } from '../components/WorkCard'
-import type { ActivityArea, ExternalLink as ExternalLinkData, SiteProfile, Work } from '../content/types'
+import type {
+  ActivityArea,
+  ExternalLink as ExternalLinkData,
+  HomeContent,
+  SiteProfile,
+  Work,
+} from '../content/types'
 
 interface HomePageProps {
   profile: SiteProfile
   activityAreas: readonly ActivityArea[]
   works: readonly Work[]
   externalLinks: readonly ExternalLinkData[]
+  homeContent: HomeContent
 }
 
-interface ActivityPresentation {
-  readonly id: ActivityArea['id']
-  readonly label: string
-  readonly destinationLabel: string
-  readonly workSlugs?: readonly string[]
-  readonly image?: string
-}
-
-const activityPresentations: readonly ActivityPresentation[] = [
-  {
-    id: 'vrchat-worlds',
-    label: 'VRChatワールド',
-    destinationLabel: '3作品を見る',
-    workSlugs: [
-      'tonbo-battlefield-the-two-bases',
-      'massive-medal-pusher',
-      'kawauchi-board-game-world',
-    ],
-  },
-  {
-    id: 'games',
-    label: 'ゲーム',
-    destinationLabel: '3作品を見る',
-    workSlugs: ['infiroad', 'heroad', 'light-trail'],
-  },
-  {
-    id: 'avatar-3d',
-    label: '3Dモデル',
-    destinationLabel: '2作品を見る',
-    workSlugs: ['biter-spectre', 'sajak-sahagin'],
-  },
-  {
-    id: 'web',
-    label: 'Web',
-    destinationLabel: 'GitHubへ',
-    image: '/images/activity/web-github.webp',
-  },
-  {
-    id: 'original-characters',
-    label: 'オリジナルキャラクター',
-    destinationLabel: 'Notionへ',
-    image: '/images/activity/original-characters-notion.webp',
-  },
-]
-
-const categoryDestinations: Readonly<Partial<Record<ActivityArea['id'], string>>> = {
-  'vrchat-worlds': '/works/?category=vrchat-world#work-index',
-  'avatar-3d': '/works/?category=avatar-3d#work-index',
-  games: '/works/?category=game#work-index',
-}
-
-const primaryLinkLabels: Readonly<Record<string, string>> = {
-  'tonbo-notion': 'Notion',
-  vrchat: 'VRChat',
-  booth: 'BOOTH',
-  github: 'GitHub',
-}
-
-export function HomePage({ profile, activityAreas, works, externalLinks }: HomePageProps) {
+export function HomePage({
+  profile,
+  activityAreas,
+  works,
+  externalLinks,
+  homeContent,
+}: HomePageProps) {
   const entranceWorks = works
     .filter((work) => work.featuredOrder !== null)
     .sort((left, right) => (left.featuredOrder ?? 0) - (right.featuredOrder ?? 0))
-  const primaryLinks = ['tonbo-notion', 'vrchat', 'booth', 'github']
-    .map((id) => externalLinks.find((link) => link.id === id))
-    .filter((link): link is ExternalLinkData => link !== undefined)
   const activityAreaById = new Map(activityAreas.map((area) => [area.id, area]))
   const workBySlug = new Map(works.map((work) => [work.slug, work]))
+  const externalLinkById = new Map(externalLinks.map((link) => [link.id, link]))
+  const primaryLinks = homeContent.primaryLinks.map(({ linkId, label }) => ({
+    link: getRequiredItem(externalLinkById, linkId, `home.primaryLinks.${linkId}`),
+    label,
+  }))
 
   return (
     <>
@@ -103,8 +60,9 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
             </div>
             <p className="hero__tagline">{profile.tagline}</p>
             <div className="hero__introduction">
-              <p>ゲームづくりを中心に、活動をまとめています。</p>
-              <p>VRChatワールド、3Dモデル、Webなど。</p>
+              {homeContent.introduction.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
             <div className="hero__actions">
               <a className="action-link action-link--hero-primary" href="/works/">
@@ -154,33 +112,43 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
             </div>
           </div>
           <ul className="activity-card-grid">
-            {activityPresentations.map((presentation) => {
-              const area = activityAreaById.get(presentation.id)
-              if (!area) return null
-
-              const internalHref = categoryDestinations[presentation.id]
-              const href = internalHref ?? area.url
-              if (!href) return null
-
-              const previewWorks = presentation.workSlugs
-                ?.map((slug) => workBySlug.get(slug))
-                .filter((work): work is Work => work !== undefined)
+            {homeContent.activities.map((presentation) => {
+              const area = getRequiredItem(
+                activityAreaById,
+                presentation.areaId,
+                `home.activities.${presentation.areaId}`,
+              )
+              const isWorksDestination = presentation.kind === 'works'
+              const href = isWorksDestination
+                ? `/works/?category=${presentation.category}#work-index`
+                : getRequiredUrl(area.url, `activityAreas.${area.id}.url`)
+              const previewWorks = isWorksDestination
+                ? presentation.workSlugs.map((slug) =>
+                    getRequiredItem(workBySlug, slug, `home.activities.${presentation.areaId}.${slug}`),
+                  )
+                : undefined
+              const destinationLabel = isWorksDestination
+                ? `${presentation.workSlugs.length}作品を見る`
+                : presentation.destinationLabel
               const cardContent = (
                 <>
                   <ActivityVisual
-                    image={presentation.image}
+                    image={isWorksDestination ? undefined : presentation.image}
                     works={previewWorks}
                   />
                   <span className="activity-card__copy">
                     <strong>{presentation.label}</strong>
-                    <span>{presentation.destinationLabel}</span>
+                    <span>{destinationLabel}</span>
                   </span>
                 </>
               )
 
               return (
-                <li key={presentation.id} data-size={previewWorks?.length === 3 ? 'wide' : 'standard'}>
-                  {internalHref ? (
+                <li
+                  key={presentation.areaId}
+                  data-size={previewWorks?.length === 3 ? 'wide' : 'standard'}
+                >
+                  {isWorksDestination ? (
                     <a className="activity-card" href={href}>
                       {cardContent}
                       <UiIcon name="arrow-right" width="18" height="18" />
@@ -212,11 +180,11 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
             </a>
           </div>
           <ul className="official-link-tiles" aria-label="主な公式リンク">
-            {primaryLinks.map((link) => (
+            {primaryLinks.map(({ link, label }) => (
               <li key={link.id}>
                 <ExternalLink href={link.url}>
                   <OfficialLinkIcon linkId={link.id} category={link.category} />
-                  <strong>{primaryLinkLabels[link.id] ?? link.label}</strong>
+                  <strong>{label}</strong>
                 </ExternalLink>
               </li>
             ))}
@@ -225,6 +193,21 @@ export function HomePage({ profile, activityAreas, works, externalLinks }: HomeP
       </section>
     </>
   )
+}
+
+function getRequiredItem<T>(items: ReadonlyMap<string, T>, key: string, path: string): T {
+  const item = items.get(key)
+  if (item === undefined) {
+    throw new Error(`参照先が見つかりません: ${path}`)
+  }
+  return item
+}
+
+function getRequiredUrl(url: string | undefined, path: string): string {
+  if (url === undefined) {
+    throw new Error(`URLが見つかりません: ${path}`)
+  }
+  return url
 }
 
 interface ActivityVisualProps {
