@@ -15,25 +15,19 @@ const REQUIRED_HTML_FRAGMENTS = [
 ]
 const PRERENDER_MARKERS = ['<!--head-tags-->', '<!--app-html-->', '<!--app-route-->']
 const REQUIRED_HEADER_RULES = [
-  `/llms.txt
+  `/*.txt
   Content-Type: text/plain; charset=utf-8
   X-Content-Type-Options: nosniff`,
-  `/robots.txt
-  Content-Type: text/plain; charset=utf-8
-  X-Content-Type-Options: nosniff`,
-  `/profile.md
+  `/*.md
   Content-Type: text/markdown; charset=utf-8
   X-Content-Type-Options: nosniff`,
-  `/works.md
-  Content-Type: text/markdown; charset=utf-8
-  X-Content-Type-Options: nosniff`,
-  `/data/*
-  Content-Type: application/json; charset=utf-8
-  X-Content-Type-Options: nosniff`,
-  `/sitemap.xml
+  `/*.xml
   Content-Type: application/xml; charset=utf-8
   X-Content-Type-Options: nosniff`,
-  `/assets/*
+  `/*.json
+  Content-Type: application/json; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/assets/*.woff2
   Cache-Control: public, max-age=31536000, immutable`,
 ]
 
