@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST_DIR = resolve(PROJECT_ROOT, 'dist')
+const DIST_ASSETS_DIR = resolve(DIST_DIR, 'assets')
 const REQUIRED_HTML_FRAGMENTS = [
   '<title>',
   '<link rel="canonical"',
@@ -13,6 +14,28 @@ const REQUIRED_HTML_FRAGMENTS = [
   '<meta name="twitter:card" content="summary_large_image">',
 ]
 const PRERENDER_MARKERS = ['<!--head-tags-->', '<!--app-html-->', '<!--app-route-->']
+const REQUIRED_HEADER_RULES = [
+  `/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/profile.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/works.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/data/*
+  Content-Type: application/json; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  X-Content-Type-Options: nosniff`,
+  `/assets/*
+  Cache-Control: public, max-age=31536000, immutable`,
+]
 
 function fail(message) {
   throw new Error(`[verify-dist] ${message}`)
@@ -79,11 +102,47 @@ async function verifyMachineReadableFiles() {
   await access(notFoundPath)
 }
 
+async function verifyHeaders() {
+  const headersPath = resolve(DIST_DIR, '_headers')
+  const headers = await readFile(headersPath, 'utf8')
+
+  for (const rule of REQUIRED_HEADER_RULES) {
+    if (!headers.includes(rule)) {
+      fail(`dist/_headers is missing rule:\n${rule}`)
+    }
+  }
+}
+
+async function verifyFontCss() {
+  const assetEntries = await readdir(DIST_ASSETS_DIR, { withFileTypes: true })
+  const cssFiles = assetEntries
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.css'))
+    .map((entry) => resolve(DIST_ASSETS_DIR, entry.name))
+  const css = (await Promise.all(cssFiles.map((file) => readFile(file, 'utf8')))).join('\n')
+  const notoFontFaces = css.match(
+    /@font-face\{[^}]*font-family:(?:["']Noto Sans JP Variable["']|Noto Sans JP Variable);[^}]*\}/g,
+  )
+
+  if (!notoFontFaces?.length) {
+    fail('generated CSS does not contain Noto Sans JP Variable font faces')
+  }
+
+  if (notoFontFaces.some((fontFace) => !fontFace.includes('font-display:swap'))) {
+    fail('generated Noto Sans JP CSS must use font-display: swap')
+  }
+
+  if (css.includes('font-display:optional')) {
+    fail('generated CSS must not contain font-display: optional')
+  }
+}
+
 async function main() {
   const htmlCount = await verifyHtml()
   await verifyMachineReadableFiles()
+  await verifyHeaders()
+  await verifyFontCss()
   console.log(
-    `[verify-dist] verified ${htmlCount} HTML files, data/works.json, llms.txt, and 404.html`,
+    `[verify-dist] verified ${htmlCount} HTML files, machine-readable files, headers, font CSS, and 404.html`,
   )
 }
 
