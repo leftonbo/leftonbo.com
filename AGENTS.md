@@ -8,7 +8,6 @@ Tests are colocated with implementation files and use the `*.test.ts` or `*.test
 
 ## Agent Workflow
 
-- Use Serena for symbol lookup, reference analysis, renames, and symbol-level refactoring.
 - Use `rg --files` and `rg` for filenames, non-code files, and text whose symbol is unknown.
 - Use `apply_patch` for small, localized file edits that are not symbol-level refactors.
 - Before renaming or deleting a symbol, inspect its references and update all affected callers.
