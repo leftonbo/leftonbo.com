@@ -1,3 +1,4 @@
+import { Button, Card } from 'react-bootstrap'
 import { ExternalLink } from '../components/ExternalLink'
 import { HeroWispParade } from '../components/HeroWispParade'
 import { OfficialLinkIcon } from '../components/OfficialLinkIcon'
@@ -65,13 +66,13 @@ export function HomePage({
               ))}
             </div>
             <div className="hero__actions">
-              <a className="action-link action-link--hero-primary" href="/works/">
+              <Button role="link" variant="hero-primary" className="action-link" href="/works/">
                 制作を見る
                 <UiIcon name="arrow-right" width="16" height="16" />
-              </a>
-              <a className="action-link action-link--hero-secondary" href="/profile/">
+              </Button>
+              <Button role="link" variant="hero-secondary" className="action-link" href="/profile/">
                 プロフィール
-              </a>
+              </Button>
             </div>
           </div>
         </div>
@@ -86,10 +87,15 @@ export function HomePage({
                 代表作
               </h2>
             </div>
-            <a className="action-link section-heading-row__action" href="/works/">
+            <Button
+              role="link"
+              variant="primary"
+              className="action-link section-heading-row__action"
+              href="/works/"
+            >
               掲載作品をすべて見る
               <UiIcon name="arrow-right" width="16" height="16" />
-            </a>
+            </Button>
           </div>
           <ul className="work-card-grid work-card-grid--featured" aria-label="代表作">
             {entranceWorks.map((work) => (
@@ -153,14 +159,14 @@ export function HomePage({
                   data-size={previewWorks?.length === 3 ? 'wide' : 'standard'}
                 >
                   {isWorksDestination ? (
-                    <a className="activity-card" href={href}>
+                    <Card as="a" className="activity-card" href={href}>
                       {cardContent}
                       <UiIcon name="arrow-right" width="18" height="18" />
-                    </a>
+                    </Card>
                   ) : (
-                    <ExternalLink className="activity-card" href={href}>
+                    <Card as={ExternalLink} className="activity-card" href={href}>
                       {cardContent}
-                    </ExternalLink>
+                    </Card>
                   )}
                 </li>
               )
@@ -186,10 +192,10 @@ export function HomePage({
           <ul className="official-link-tiles" aria-label="主な公式リンク">
             {primaryLinks.map(({ link, label }) => (
               <li key={link.id}>
-                <ExternalLink href={link.url}>
+                <Card as={ExternalLink} href={link.url}>
                   <OfficialLinkIcon linkId={link.id} category={link.category} />
                   <strong>{label}</strong>
-                </ExternalLink>
+                </Card>
               </li>
             ))}
           </ul>

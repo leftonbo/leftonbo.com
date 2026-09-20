@@ -1,18 +1,18 @@
 :root {
   color-scheme: light;
-  --color-paper: #f7f1f2;
+  --color-paper: var(--bs-body-bg);
   --color-surface: #fffdfd;
-  --color-ink: #3a2931;
+  --color-ink: var(--bs-primary);
   --color-ink-muted: #6b565d;
-  --color-flight: #a13f32;
+  --color-flight: var(--bs-secondary);
   --color-flight-soft: #e8d3d1;
   --color-reed: #80535f;
   --color-reed-soft: #eee0e3;
   --color-wing: #d65c3f;
   --color-wing-soft: #f6ddd5;
-  --color-line: #d5bfbe;
+  --color-line: var(--bs-border-color);
   --color-line-strong: #96716f;
-  --color-link-hover: #782d27;
+  --color-link-hover: var(--bs-link-hover-color);
   --color-inverse-accent: #f5a18e;
   --color-inverse-muted: #d9c6c9;
   --color-inverse-line: #765966;
@@ -41,10 +41,4 @@
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --layer-sticky: 20;
   --layer-skip: 30;
-  --bs-body-font-family: var(--font-body);
-  --bs-body-color: var(--color-ink);
-  --bs-body-bg: var(--color-paper);
-  --bs-link-color: var(--color-flight);
-  --bs-link-hover-color: var(--color-link-hover);
-  --bs-border-color: var(--color-line);
 }

@@ -1,3 +1,4 @@
+import { Badge, Card } from 'react-bootstrap'
 import { categoryLabels, roleLabels } from '../app/presentation'
 import type { Work } from '../content/types'
 import { UiIcon } from './UiIcon'
@@ -12,7 +13,7 @@ export function WorkCard({ work }: WorkCardProps) {
   const detailHref = `/works/${work.slug}/`
 
   return (
-    <article className="work-card">
+    <Card as="article" className="work-card">
       <a className="work-card__link" href={detailHref}>
         <div className={`work-card__visual${preview ? '' : ' work-card__visual--fallback'}`}>
           {preview ? (
@@ -28,11 +29,21 @@ export function WorkCard({ work }: WorkCardProps) {
             <WorkMark category={work.category} />
           )}
         </div>
-        <div className="work-card__body">
+        <Card.Body className="work-card__body">
           <ul className="work-card__tags" aria-label="作品情報">
-            <li data-tone="category">{categoryLabels[work.category]}</li>
-            {work.period ? <li>{work.period}</li> : null}
-            {work.role !== 'pending-confirmation' ? <li>{roleLabels[work.role]}</li> : null}
+            <Badge as="li" bg="" pill data-tone="category">
+              {categoryLabels[work.category]}
+            </Badge>
+            {work.period ? (
+              <Badge as="li" bg="" pill>
+                {work.period}
+              </Badge>
+            ) : null}
+            {work.role !== 'pending-confirmation' ? (
+              <Badge as="li" bg="" pill>
+                {roleLabels[work.role]}
+              </Badge>
+            ) : null}
           </ul>
           <h3>{work.title}</h3>
           <p>{work.summary}</p>
@@ -40,8 +51,8 @@ export function WorkCard({ work }: WorkCardProps) {
             作品を見る
             <UiIcon className="work-card__detail-arrow" name="arrow-right" width="18" height="18" />
           </span>
-        </div>
+        </Card.Body>
       </a>
-    </article>
+    </Card>
   )
 }

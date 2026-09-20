@@ -1,3 +1,4 @@
+import { Card } from 'react-bootstrap'
 import { linkCategoryLabels } from '../app/presentation'
 import type { ExternalLink as ExternalLinkData, ExternalLinkCategory } from '../content/types'
 import { ExternalLink } from './ExternalLink'
@@ -54,13 +55,13 @@ export function OfficialLinkGroups({ links }: OfficialLinkGroupsProps) {
             <ul className="official-link-list">
               {groupedLinks.map((link) => (
                 <li key={link.id} id={link.id === 'tonbo-notion' ? 'creation' : undefined}>
-                  <ExternalLink className="official-link-card" href={link.url}>
+                  <Card as={ExternalLink} className="official-link-card" href={link.url}>
                     <OfficialLinkIcon linkId={link.id} category={link.category} />
                     <span className="official-link-card__copy">
                       <small>{linkCategoryLabels[link.category]}</small>
                       <strong>{link.label}</strong>
                     </span>
-                  </ExternalLink>
+                  </Card>
                 </li>
               ))}
             </ul>

@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap'
 import { useState, type AnimationEvent, type CSSProperties } from 'react'
 import { UiIcon } from './UiIcon'
 import { createRandomWispColor, type WispColor } from './wisp-color'
@@ -190,7 +191,8 @@ export function HeroWispParade() {
           )
         })}
       </div>
-      <button
+      <Button
+        variant="hero-control"
         className="hero-wisps__control"
         type="button"
         aria-label={controlLabel}
@@ -199,7 +201,7 @@ export function HeroWispParade() {
       >
         <UiIcon name={isPaused ? 'play-fill' : 'pause-fill'} width="16" height="16" />
         <span>{isPaused ? '再生' : '停止'}</span>
-      </button>
+      </Button>
     </div>
   )
 }

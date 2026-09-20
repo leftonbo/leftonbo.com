@@ -36,15 +36,17 @@ Write user-facing responses, commit messages, pull request descriptions, review 
 
 ## Coding Style & Naming Conventions
 
-Use two-space indentation, single quotes, and no semicolons, matching the existing TypeScript. Prefer small functional React components, strict types, and accessible native HTML. Name components and pages in PascalCase (`WorkDetailPage.tsx`), functions and variables in camelCase, and tests after their subject (`routes.test.ts`). Keep design tokens in `src/styles/tokens.css`; avoid scattering replacement constants through component CSS. ESLint enforces TypeScript, React Hooks, refresh, and JSX accessibility rules.
+Use two-space indentation, single quotes, and no semicolons, matching the existing TypeScript. Prefer small functional React components, strict types, and accessible native HTML. Name components and pages in PascalCase (`WorkDetailPage.tsx`), functions and variables in camelCase, and tests after their subject (`routes.test.ts`). Keep Bootstrap theme settings in `src/styles/bootstrap.scss` and site-specific design tokens in `src/styles/tokens.css`; avoid scattering replacement constants through component CSS. ESLint enforces TypeScript, React Hooks, refresh, and JSX accessibility rules.
 
 Add Japanese JSDoc only to exported APIs whose purpose, invariants, side effects, or constraints are not clear from their types and names. Do not add comments that merely restate the implementation.
 
 ## Bootstrap Usage
 
-Use Bootstrap CSS selectively as an accessible foundation for Reboot, grid, `container`, and utilities. Keep the site's visual identity in design tokens and site-specific classes; do not make Bootstrap's default theme, uniform card components, or primary blue the main design language.
+Use Bootstrap as the site's styling foundation, including base styles, layout utilities, Navbar, Button, Card, and Badge. Prefer React Bootstrap components over independently styled equivalents. Configure shared appearance through Bootstrap Sass variables in `src/styles/bootstrap.scss` and component CSS variables before adding custom declarations. Preserve the site's existing visual identity; using Bootstrap does not require adopting its default palette or changing the page composition.
 
-Do not mix Bootstrap's DOM-manipulating JavaScript with React state. When an interactive Bootstrap pattern is genuinely needed, choose a React-controlled implementation and record why it was introduced. Migrate existing layout or component classes to Bootstrap only when there is a concrete maintenance benefit, then verify the affected routes in a real browser.
+Keep site-specific CSS for decoration, layout, and interaction details that Bootstrap does not cover or that are needed to preserve the design. Remove declarations duplicated by Bootstrap instead of layering another independent implementation over it. Capture and compare affected routes at representative viewport widths when changing shared styles.
+
+Use React state for interactive behavior; do not load Bootstrap's DOM-manipulating JavaScript. Import React Bootstrap components by name from `react-bootstrap` so the current Node ESM prerender pipeline can resolve them. Preserve HTML semantics, keyboard behavior, and visible focus, including link semantics for navigation styled as a Button. Verify both the production prerender build and affected routes in a real browser.
 
 ## Testing Guidelines
 

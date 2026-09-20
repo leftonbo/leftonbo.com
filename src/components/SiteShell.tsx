@@ -1,3 +1,4 @@
+import { Navbar, Nav } from 'react-bootstrap'
 import type { ReactNode } from 'react'
 import { formatJapaneseDate } from '../utils/date'
 
@@ -27,9 +28,9 @@ export function SiteShell({
       <a className="skip-link visually-hidden-focusable" href="#main-content">
         本文へ移動
       </a>
-      <header className="site-header">
+      <Navbar as="header" role="banner" expand className="site-header">
         <div className="container site-header__inner">
-          <a className="site-brand" href="/">
+          <Navbar.Brand className="site-brand" href="/">
             <img
               className="site-brand__mark"
               src="/images/site-icon.webp"
@@ -41,23 +42,24 @@ export function SiteShell({
               <strong>{canonicalName}</strong>
               <small>{japaneseName}</small>
             </span>
-          </a>
+          </Navbar.Brand>
           <nav aria-label="主要ナビゲーション">
-            <ul className="site-nav">
+            <Nav as="ul" className="site-nav">
               {navigation.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Nav.Link
                     href={item.href}
+                    active={isCurrentNavigation(item.href, pathname)}
                     aria-current={isCurrentNavigation(item.href, pathname) ? 'page' : undefined}
                   >
                     {item.label}
-                  </a>
+                  </Nav.Link>
                 </li>
               ))}
-            </ul>
+            </Nav>
           </nav>
         </div>
-      </header>
+      </Navbar>
       <main className="site-main" id="main-content" tabIndex={-1}>
         {children}
       </main>
