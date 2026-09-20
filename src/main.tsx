@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import '@fontsource-variable/noto-sans-jp/wght.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './styles/bootstrap.scss'
 import { App } from './app/App'
 import { createPageMetadata, type PageMetadata } from './app/metadata'
 import { matchRoute, normalizePathname } from './app/routes'

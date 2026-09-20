@@ -115,28 +115,28 @@
   margin-block: var(--space-5) 0;
 }
 
-.action-link--hero-primary {
-  background: var(--color-flame);
-  border-color: var(--color-flame);
-  color: var(--color-night);
+.btn-hero-primary {
+  --bs-btn-bg: var(--color-flame);
+  --bs-btn-border-color: var(--color-flame);
+  --bs-btn-color: var(--color-night);
+  --bs-btn-hover-bg: var(--color-spark);
+  --bs-btn-active-bg: var(--color-spark);
+  --bs-btn-hover-border-color: var(--color-spark);
+  --bs-btn-active-border-color: var(--color-spark);
+  --bs-btn-hover-color: var(--color-night);
+  --bs-btn-active-color: var(--color-night);
 }
 
-.action-link--hero-primary:hover {
-  background: var(--color-spark);
-  border-color: var(--color-spark);
-  color: var(--color-night);
-}
-
-.action-link--hero-secondary {
-  background: rgb(255 241 207 / 6%);
-  border-color: rgb(255 241 207 / 52%);
-  color: var(--color-flame-pale);
-}
-
-.action-link--hero-secondary:hover {
-  background: rgb(255 241 207 / 14%);
-  border-color: var(--color-flame-pale);
-  color: var(--color-flame-pale);
+.btn-hero-secondary {
+  --bs-btn-bg: rgb(255 241 207 / 6%);
+  --bs-btn-border-color: rgb(255 241 207 / 52%);
+  --bs-btn-color: var(--color-flame-pale);
+  --bs-btn-hover-bg: rgb(255 241 207 / 14%);
+  --bs-btn-active-bg: rgb(255 241 207 / 14%);
+  --bs-btn-hover-border-color: var(--color-flame-pale);
+  --bs-btn-active-border-color: var(--color-flame-pale);
+  --bs-btn-hover-color: var(--color-flame-pale);
+  --bs-btn-active-color: var(--color-flame-pale);
 }
 
 .hero-wisps,
@@ -322,20 +322,18 @@
   gap: var(--space-2);
   align-items: center;
   min-height: 2.75rem;
-  padding: 0.45rem 0.85rem;
-  background: rgb(28 21 27 / 76%);
-  border: 1px solid rgb(255 241 207 / 45%);
-  border-radius: 999px;
-  color: var(--color-flame-pale);
+  --bs-btn-padding-y: 0.45rem;
+  --bs-btn-padding-x: 0.85rem;
+  --bs-btn-bg: rgb(28 21 27 / 76%);
+  --bs-btn-border-color: rgb(255 241 207 / 45%);
+  --bs-btn-color: var(--color-flame-pale);
   font-family: var(--font-data);
-  font-size: 0.75rem;
-  font-weight: 700;
+  --bs-btn-font-size: 0.75rem;
   pointer-events: auto;
-}
-
-.hero-wisps__control:hover {
-  background: var(--color-flame-pale);
-  color: var(--color-night);
+  --bs-btn-hover-bg: var(--color-flame-pale);
+  --bs-btn-active-bg: var(--color-flame-pale);
+  --bs-btn-hover-color: var(--color-night);
+  --bs-btn-active-color: var(--color-night);
 }
 
 @keyframes wisp-traverse {
@@ -416,16 +414,7 @@
 
 .section-heading-row__action {
   min-height: 3.5rem;
-  padding-inline: 1.35rem;
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-surface);
-}
-
-.section-heading-row__action:hover {
-  background: var(--color-flight);
-  border-color: var(--color-flight);
-  color: var(--color-surface);
+  --bs-btn-padding-x: 1.35rem;
 }
 
 .text-link-arrow {
@@ -457,10 +446,6 @@
   min-width: 0;
   overflow: hidden;
   grid-template-columns: minmax(0, 1fr) auto;
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-lg);
-  color: var(--color-ink);
   text-decoration: none;
   transition:
     border-color var(--motion-fast) var(--ease-out),
@@ -561,10 +546,7 @@
   grid-template-rows: 1fr auto;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: var(--color-paper);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-lg);
-  color: var(--color-ink);
+  --bs-card-bg: var(--color-paper);
   text-decoration: none;
   transition:
     border-color var(--motion-fast) var(--ease-out),

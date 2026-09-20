@@ -1,3 +1,4 @@
+import { Button, Badge } from 'react-bootstrap'
 import { useEffect, useMemo, useState } from 'react'
 import { categoryLabels, workCategoryOrder } from '../app/presentation'
 import type { Work, WorkCategory } from '../content/types'
@@ -112,7 +113,9 @@ export function WorkIndex({ works }: WorkIndexProps) {
         <div className="work-index__controls">
           <div className="work-filter" role="group" aria-label="制作カテゴリで絞り込む">
             {filterOptions.map((category) => (
-              <button
+              <Button
+                variant="outline-primary"
+                active={selectedCategory === category}
                 key={category}
                 type="button"
                 aria-controls="work-results"
@@ -120,8 +123,10 @@ export function WorkIndex({ works }: WorkIndexProps) {
                 onClick={() => selectCategory(category)}
               >
                 {category === 'all' ? 'すべて' : categoryLabels[category]}
-                <span>{category === 'all' ? works.length : countWorks(works, category)}</span>
-              </button>
+                <Badge bg="" pill>
+                  {category === 'all' ? works.length : countWorks(works, category)}
+                </Badge>
+              </Button>
             ))}
           </div>
           <label className="work-sort">

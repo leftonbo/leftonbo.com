@@ -1,0 +1,65 @@
+// Bootstrapのテーマをここで生成し、サイト固有の装飾は各CSSに残す。
+$primary: #3a2931;
+$secondary: #a13f32;
+$body-color: $primary;
+$body-bg: #f7f1f2;
+$font-family-sans-serif: 'Noto Sans JP Variable', 'Noto Sans JP', sans-serif;
+$line-height-base: 1.8;
+$link-color: $secondary;
+$link-hover-color: #782d27;
+$border-color: #d5bfbe;
+$border-radius: 0.75rem;
+$border-radius-lg: 1.25rem;
+$headings-font-weight: 700;
+$headings-line-height: 1.25;
+$headings-color: $primary;
+$btn-padding-y: 0.6rem;
+$btn-padding-x: 1rem;
+$btn-font-weight: 700;
+$btn-border-radius: 999px;
+$btn-disabled-opacity: 0.58;
+$btn-transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+$card-spacer-y: 1.25rem;
+$card-spacer-x: 1.25rem;
+$card-bg: #fffdfd;
+$card-color: $primary;
+$card-border-color: $border-color;
+$card-border-radius: $border-radius-lg;
+$badge-font-size: 0.68rem;
+$badge-color: #6b565d;
+$badge-padding-y: 0.28rem;
+$badge-padding-x: 0.62rem;
+$navbar-padding-y: 0;
+$navbar-brand-padding-y: 0;
+$navbar-brand-margin-end: 0;
+$navbar-light-color: $primary;
+$navbar-light-hover-color: $secondary;
+$navbar-light-active-color: $secondary;
+$navbar-light-brand-color: $primary;
+$navbar-light-brand-hover-color: $secondary;
+$nav-link-padding-y: 0;
+$nav-link-font-size: 0.9rem;
+$nav-link-font-weight: 700;
+
+@import 'bootstrap/scss/bootstrap';
+
+.card {
+  overflow-wrap: anywhere;
+}
+
+.btn-hero-primary,
+.btn-hero-secondary,
+.btn-hero-control {
+  --bs-btn-focus-shadow-rgb: 246, 173, 85;
+}
+
+.btn-primary {
+  @include button-variant($primary, $primary, #fffdfd, $secondary, $secondary, #fffdfd);
+}
+
+.btn-outline-primary {
+  --bs-btn-border-color: var(--color-line-strong);
+  --bs-btn-hover-bg: var(--color-surface);
+  --bs-btn-hover-color: var(--color-flight);
+  --bs-btn-hover-border-color: var(--color-line-strong);
+}

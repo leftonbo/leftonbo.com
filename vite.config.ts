@@ -63,6 +63,14 @@ const machineReadableDevFiles: Plugin = {
 
 export default defineConfig({
   plugins: [machineReadableDevFiles, react()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Bootstrap 5.3のSassが使う旧APIのみ、公式Viteガイドに従って抑制する。
+        silenceDeprecations: ['import', 'color-functions', 'global-builtin', 'if-function'],
+      },
+    },
+  },
   test: {
     environment: 'jsdom',
     css: true,

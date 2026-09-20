@@ -4,42 +4,10 @@
   align-items: center;
   justify-content: center;
   min-height: 3rem;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--color-line-strong);
-  border-radius: 999px;
-  color: var(--color-ink);
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform var(--motion-fast) var(--ease-out);
 }
 
 .action-link:hover {
-  background: var(--color-surface);
-  color: var(--color-flight);
   transform: translateY(-0.15rem);
-}
-
-.action-link--primary {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-surface);
-}
-
-.action-link--primary:hover {
-  background: var(--color-flight);
-  border-color: var(--color-flight);
-  color: var(--color-surface);
-}
-
-.action-link--disabled {
-  cursor: not-allowed;
-  opacity: 0.58;
-}
-
-.action-link--disabled:hover {
-  background: transparent;
-  color: var(--color-ink);
-  transform: none;
 }
 
 .section-split-heading {

@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap'
 import { categoryLabels, roleLabels } from '../app/presentation'
 import { ExternalLink } from '../components/ExternalLink'
 import { UiIcon } from '../components/UiIcon'
@@ -63,19 +64,24 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               {primaryLink ? (
                 <div className="work-detail__primary-action">
                   {primaryLink.disabled ? (
-                    <span
-                      className="action-link action-link--primary action-link--disabled"
-                      aria-disabled="true"
-                    >
+                    <span className="btn btn-primary action-link disabled" aria-disabled="true">
                       {primaryLink.label}
                     </span>
                   ) : (
-                    <ExternalLink
-                      className="action-link action-link--primary"
+                    <Button
+                      role="link"
+                      variant="primary"
+                      className="action-link"
                       href={primaryLink.url}
                     >
                       {primaryLink.label}
-                    </ExternalLink>
+                      <UiIcon
+                        className="external-mark"
+                        name="box-arrow-up-right"
+                        width="16"
+                        height="16"
+                      />
+                    </Button>
                   )}
                   {primaryLink.note ? (
                     <p className="work-detail__action-note">{primaryLink.note}</p>
@@ -85,16 +91,28 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
               {actionLinks.map((link) =>
                 link.disabled ? (
                   <span
-                    className="action-link action-link--disabled"
+                    className="btn btn-outline-primary action-link disabled"
                     aria-disabled="true"
                     key={link.url}
                   >
                     {link.label}
                   </span>
                 ) : (
-                  <ExternalLink className="action-link" href={link.url} key={link.url}>
+                  <Button
+                    role="link"
+                    variant="outline-primary"
+                    className="action-link"
+                    href={link.url}
+                    key={link.url}
+                  >
                     {link.label}
-                  </ExternalLink>
+                    <UiIcon
+                      className="external-mark"
+                      name="box-arrow-up-right"
+                      width="16"
+                      height="16"
+                    />
+                  </Button>
                 ),
               )}
             </div>
@@ -201,9 +219,20 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
             <section aria-labelledby="work-video-title">
               <p className="section-kicker">Video</p>
               <h2 id="work-video-title">紹介動画</h2>
-              <ExternalLink className="action-link" href={videoSource.url}>
+              <Button
+                role="link"
+                variant="outline-primary"
+                className="action-link"
+                href={videoSource.url}
+              >
                 YouTubeで紹介動画を見る
-              </ExternalLink>
+                <UiIcon
+                  className="external-mark"
+                  name="box-arrow-up-right"
+                  width="16"
+                  height="16"
+                />
+              </Button>
             </section>
           ) : null}
         </div>
