@@ -25,7 +25,6 @@ type WispStyle = CSSProperties & {
   '--wisp-delay': string
   '--wisp-hover-duration': string
   '--wisp-particle-offset': string
-  '--wisp-hue': string
   '--wisp-color': string
   '--wisp-particle-color': string
   '--wisp-glow-color': string
@@ -161,7 +160,6 @@ export function HeroWispParade() {
             '--wisp-delay': wisp.delay,
             '--wisp-hover-duration': wisp.hoverDuration,
             '--wisp-particle-offset': wisp.particleOffset,
-            '--wisp-hue': String(color.hue),
             '--wisp-color': `hsl(${color.hue} ${color.saturation}% ${color.lightness}%)`,
             '--wisp-particle-color': `hsl(${color.hue} ${color.saturation}% ${particleLightness}%)`,
             '--wisp-glow-color': `hsl(${color.hue} ${color.saturation}% ${color.lightness}% / 45%)`,

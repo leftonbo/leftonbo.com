@@ -605,10 +605,6 @@
   .work-index__heading {
     align-items: flex-start;
   }
-
-  .work-card-grid--featured {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 479.98px) {
@@ -634,9 +630,5 @@
     max-width: none;
     margin-top: var(--space-2);
     justify-content: flex-start;
-  }
-
-  .site-nav a {
-    min-height: 2.75rem;
   }
 }

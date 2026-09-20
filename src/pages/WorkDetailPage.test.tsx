@@ -139,6 +139,7 @@ describe('WorkDetailPage', () => {
       'href',
       'https://www.youtube.com/watch?v=L6p00Q4XVSM',
     )
+    expect(screen.getByText('2023年12月2日')).toHaveAttribute('datetime', '2023-12-02')
   })
 
   it('shows an unlinked pending world for Vket 2026 Summer', () => {

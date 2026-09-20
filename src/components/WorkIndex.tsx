@@ -64,37 +64,13 @@ export function WorkIndex({ works }: WorkIndexProps) {
     : []
 
   const selectCategory = (category: WorkFilter) => {
-    const nextUrl = new URL(window.location.href)
-    if (category === 'all') {
-      nextUrl.searchParams.delete('category')
-    } else {
-      nextUrl.searchParams.set('category', category)
-    }
-    nextUrl.hash = 'work-index'
-    const nextRelativeUrl = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`
-    const currentRelativeUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`
-
-    if (category === selectedCategory && nextRelativeUrl === currentRelativeUrl) return
-
     setSelectedCategory(category)
-    window.history.pushState({}, '', nextRelativeUrl)
+    updateIndexUrl('category', category === 'all' ? null : category)
   }
 
   const selectSort = (sort: WorkSort) => {
-    const nextUrl = new URL(window.location.href)
-    if (sort === 'featured') {
-      nextUrl.searchParams.delete('sort')
-    } else {
-      nextUrl.searchParams.set('sort', sort)
-    }
-    nextUrl.hash = 'work-index'
-    const nextRelativeUrl = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`
-    const currentRelativeUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`
-
-    if (sort === selectedSort && nextRelativeUrl === currentRelativeUrl) return
-
     setSelectedSort(sort)
-    window.history.pushState({}, '', nextRelativeUrl)
+    updateIndexUrl('sort', sort === 'featured' ? null : sort)
   }
 
   return (
@@ -187,6 +163,19 @@ export function WorkIndex({ works }: WorkIndexProps) {
       </div>
     </section>
   )
+}
+
+function updateIndexUrl(key: 'category' | 'sort', value: string | null) {
+  const nextUrl = new URL(window.location.href)
+  if (value === null) {
+    nextUrl.searchParams.delete(key)
+  } else {
+    nextUrl.searchParams.set(key, value)
+  }
+  nextUrl.hash = 'work-index'
+  if (nextUrl.href === window.location.href) return
+
+  window.history.pushState({}, '', `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`)
 }
 
 function sortWorks(works: readonly Work[], sort: WorkSort): Work[] {

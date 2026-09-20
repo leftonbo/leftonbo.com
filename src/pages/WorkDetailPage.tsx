@@ -5,6 +5,7 @@ import { UiIcon } from '../components/UiIcon'
 import { WorkMark } from '../components/WorkMark'
 import { XPostEmbed } from '../components/XPostEmbed'
 import type { Work } from '../content/types'
+import { formatJapaneseDate } from '../utils/date'
 
 interface WorkDetailPageProps {
   work: Work
@@ -145,7 +146,7 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
                   <dt>初公開日</dt>
                   <dd>
                     <time dateTime={work.firstPublishedAt}>
-                      {formatPublishedDate(work.firstPublishedAt)}
+                      {formatJapaneseDate(work.firstPublishedAt)}
                     </time>
                   </dd>
                 </div>
@@ -317,9 +318,4 @@ export function WorkDetailPage({ work, works }: WorkDetailPageProps) {
       </div>
     </article>
   )
-}
-
-function formatPublishedDate(value: string): string {
-  const [year, month, day] = value.split('-').map(Number)
-  return `${year}年${month}月${day}日`
 }

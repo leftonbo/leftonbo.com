@@ -7,13 +7,6 @@ export const categoryLabels: Record<WorkCategory, string> = {
   vket: 'Vket出展',
 }
 
-export const categoryShortLabels: Record<WorkCategory, string> = {
-  'vrchat-world': 'World',
-  'avatar-3d': 'Avatar / 3D',
-  game: 'Game',
-  vket: 'Vket',
-}
-
 export const roleLabels: Record<WorkRole, string> = {
   'self-produced': '自主制作',
   'model-creator': 'モデル制作',

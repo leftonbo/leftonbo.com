@@ -7,7 +7,6 @@ describe('font family tokens', () => {
       /--font-sans:\s*'Noto Sans JP Variable',\s*'Noto Sans JP',\s*sans-serif;/,
     )
     expect(tokensCss).toMatch(/--font-display:\s*var\(--font-sans\);/)
-    expect(tokensCss).toMatch(/--font-body:\s*var\(--font-sans\);/)
     expect(tokensCss).toMatch(/--font-data:\s*var\(--font-sans\);/)
   })
 

@@ -50,10 +50,6 @@ svg {
   min-height: 60vh;
 }
 
-.content-measure {
-  max-width: 44rem;
-}
-
 .section-shell {
   padding-block: var(--space-7);
 }

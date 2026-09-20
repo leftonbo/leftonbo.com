@@ -35,10 +35,6 @@
   transform: none;
 }
 
-.hero::after {
-  display: none;
-}
-
 .hero__foreground {
   position: relative;
   z-index: 3;
@@ -691,10 +687,6 @@
   .section-heading-row--compact {
     align-items: end;
     flex-direction: row;
-  }
-
-  .official-link-tiles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

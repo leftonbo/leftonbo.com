@@ -14,7 +14,6 @@ describe('home layout styles', () => {
     )
     expect(homeCss).toMatch(/\.hero h1 span,\s*\.hero h1 small\s*\{[^}]*display: block;/s)
     expect(homeCss).toMatch(/\.hero::before\s*\{[^}]*border: 0;/s)
-    expect(homeCss).toMatch(/\.hero::after\s*\{[^}]*display: none;/s)
   })
 
   it('keeps shared page introductions within the compact type scale', () => {
